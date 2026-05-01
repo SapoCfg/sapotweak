@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SapoTweak - Download</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: #fff;
+      background: #050507;
+      overflow-x: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 54% 28%, rgba(124, 58, 237, .36), transparent 26%),
+        radial-gradient(circle at 12% 84%, rgba(45, 212, 191, .10), transparent 28%),
+        linear-gradient(180deg, #07070d, #030305);
+      z-index: -2;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent);
+      z-index: -1;
+    }
+    .wrap { width: min(1120px, 100%); margin: 0 auto; padding: 30px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .14em; }
+    .brand img { width: 46px; height: 46px; object-fit: contain; }
+    .pill {
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.055);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #d6d3e8;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.06fr .94fr;
+      gap: 42px;
+      align-items: center;
+      padding: 78px 0 42px;
+    }
+    h1 {
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .9;
+      margin: 0;
+      letter-spacing: -.07em;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #fff, #7c3aed 56%, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .copy p {
+      max-width: 620px;
+      color: #c5c1d8;
+      font-size: 18px;
+      line-height: 1.62;
+      margin: 26px 0;
+    }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 900;
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+      box-shadow: 0 20px 60px rgba(124, 58, 237, .32);
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: none;
+      color: #e3e0f2;
+    }
+    .visual {
+      border: 1px solid rgba(255,255,255,.11);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 32px 90px rgba(0,0,0,.55);
+    }
+    .visual img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      filter: drop-shadow(0 28px 50px rgba(124,58,237,.18));
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .card {
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.045);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .card b { display: block; margin-bottom: 8px; font-size: 16px; }
+    .card span { color: #b4afc8; font-size: 14px; line-height: 1.5; }
+    .details {
+      margin-top: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      border-radius: 20px;
+      padding: 20px;
+      color: #bdb8d2;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .footer { padding: 42px 0; color: #8e899e; font-size: 13px; text-align: center; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; padding-top: 54px; }
+      .cards { grid-template-columns: 1fr; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .visual { order: -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <main class="wrap">
+    <nav class="nav">
+      <div class="brand">
+        <img src="sapotweak.png" alt="SapoTweak">
+        <span>SAPOTWEAK</span>
+      </div>
+      <div class="pill" id="versionPill">Windows x64 - Versione ...</div>
+    </nav>
+
+    <section class="hero">
+      <div class="copy">
+        <h1>Download <span>SapoCfg</span></h1>
+        <p>Utility Windows per ottimizzazione gaming, gestione servizi, debloat controllato e strumenti FiveM. Include preset guidati, ripristino e licenza collegata al PC.</p>
+        <div class="actions">
+          <a class="btn" id="downloadBtn" href="./SapoCfg-Setup-latest.exe">Scarica per Windows</a>
+          <a class="btn secondary" id="introVideoBtn" href="#" target="_blank" rel="noopener">Introductory video</a>
+        </div>
+      </div>
+      <div class="visual">
+        <img src="sapotweak.png" alt="Anteprima SapoCfg">
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card"><b>Preset gaming</b><span>Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.</span></div>
+      <div class="card"><b>Licenza protetta</b><span>Attivazione collegata al PC con controllo automatico all'avvio dell'app.</span></div>
+      <div class="card"><b>Aggiornamenti integrati</b><span>L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.</span></div>
+    </section>
+
+    <section class="details">
+      SapoCfg richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.
+    </section>
+
+    <footer class="footer">© SapoTweak - Distribuisci solo build ufficiali.</footer>
+  </main>
+  <script>
+    const fallback = {
+      version: '1.1.2',
+      platform: 'Windows x64',
+      downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoCfg-Setup-latest.exe',
+      introVideoUrl: '#'
+    };
+
+    function applySiteConfig(config) {
+      const data = { ...fallback, ...(config || {}) };
+      document.getElementById('versionPill').textContent = `${data.platform} - Versione ${data.version}`;
+      document.getElementById('downloadBtn').href = data.downloadUrl;
+      const intro = document.getElementById('introVideoBtn');
+      intro.href = data.introVideoUrl || '#';
+      intro.style.opacity = data.introVideoUrl && data.introVideoUrl !== '#' ? '1' : '.65';
+    }
+
+    fetch('./version.json', { cache: 'no-store' })
+      .then(response => response.ok ? response.json() : fallback)
+      .then(applySiteConfig)
+      .catch(() => applySiteConfig(fallback));
+  </script>
+</body>
+</html>
