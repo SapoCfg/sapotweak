@@ -60,6 +60,22 @@
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .14em; }
     .brand img { width: 46px; height: 46px; object-fit: contain; filter: drop-shadow(0 0 18px rgba(142, 68, 255, .42)); }
     .nav-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-link {
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(124,58,237,.28), rgba(255,255,255,.06));
+      color: #f6f1ff;
+      border-radius: 999px;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .nav-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(167,139,250,.55);
+      background: linear-gradient(135deg, rgba(124,58,237,.44), rgba(255,255,255,.09));
+    }
     .pill, .lang-select {
       border: 1px solid rgba(255,255,255,.11);
       background: #151522;
@@ -289,6 +305,7 @@
         <span>SAPOTWEAK</span>
       </div>
       <div class="nav-actions">
+        <a class="nav-link" href="reviews.html" target="_blank" rel="noopener">Review</a>
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
