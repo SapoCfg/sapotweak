@@ -192,8 +192,8 @@
       grid-column: 1 / -1;
       margin-top: 18px;
       padding: 18px;
-      border: 1px solid rgba(0, 112, 186, .38);
-      background: linear-gradient(180deg, #121a2a, #0d111c);
+      border: 1px solid rgba(167, 139, 250, .28);
+      background: linear-gradient(180deg, #151522, #0d0b18);
       border-radius: 20px;
     }
     .payment-title {
@@ -203,7 +203,7 @@
       font-weight: 900;
       margin-bottom: 10px;
     }
-    .paypal-chip {
+        .checkout-chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -211,21 +211,18 @@
       padding: 0 18px;
       margin-bottom: 12px;
       border-radius: 12px;
-      background: #fff;
-      color: #003087;
-      font-size: 19px;
+      background: linear-gradient(135deg, #7c5cff, #9b5cff);
+      color: #fff;
+      font-size: 15px;
       font-weight: 900;
-      letter-spacing: -.02em;
-      box-shadow: 0 14px 34px rgba(0, 112, 186, .16);
+      box-shadow: 0 14px 34px rgba(124, 92, 255, .22);
       text-decoration: none;
       transition: transform .18s ease, box-shadow .18s ease;
     }
-    .paypal-chip:hover {
+    .checkout-chip:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 42px rgba(0, 112, 186, .26);
+      box-shadow: 0 18px 42px rgba(124, 92, 255, .34);
     }
-    .paypal-chip span:first-child { color: #003087; }
-    .paypal-chip span:last-child { color: #009cde; }
     .payment-note {
       margin: 0;
       color: #b4afc8;
@@ -236,9 +233,9 @@
       margin: 12px 0 0;
       padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 184, 0, .34);
-      background: rgba(255, 184, 0, .12);
-      color: #ffd980;
+      border: 1px solid rgba(167, 139, 250, .28);
+      background: rgba(124, 58, 237, .12);
+      color: #dfd4ff;
       font-size: 12px;
       line-height: 1.5;
       font-weight: 800;
@@ -277,6 +274,20 @@
       font-size: 14px;
     }
     .footer { padding: 42px 0; color: #8e899e; font-size: 13px; text-align: center; }
+
+    /* SAPOTWEAK_LED_SURFACES */
+    .visual,
+    .feature-item,
+    .card,
+    .details,
+    .video-panel,
+    .payment-card {
+      border-color: rgba(167, 139, 250, .28);
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, .08),
+        0 0 24px rgba(124, 58, 237, .14),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
     @media (prefers-reduced-motion: reduce), (pointer: coarse) {
       .cursor-dot { display: none; }
       .btn, .btn::after { transition: none; }
@@ -309,7 +320,7 @@
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Espanol</option>
+          <option value="es">Español</option>
         </select>
         <div class="pill" id="versionPill">Windows x64 - Versione ...</div>
       </div>
@@ -320,7 +331,7 @@
         <h1><span data-i18n="headlineMain">Download</span> <span>SapoTweak</span></h1>
         <p data-i18n="heroText">Utility Windows per ottimizzazione gaming, gestione servizi, debloat controllato e strumenti FiveM. Include preset guidati, ripristino e licenza collegata al PC.</p>
         <div class="actions">
-          <a class="btn" id="downloadBtn" href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoCfg-Setup-latest.exe" data-i18n="downloadBtn">Scarica per Windows</a>
+          <a class="btn" id="downloadBtn" href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe" data-i18n="downloadBtn">Scarica per Windows</a>
           <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
         </div>
       </div>
@@ -350,23 +361,23 @@
     </section>
 
     <section class="details" data-i18n="detailsText">
-      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.
+      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.
     </section>
 
-    <section class="payment-card">
-      <span class="payment-title" data-i18n="paymentTitle">Metodi di pagamento:</span>
-      <a class="paypal-chip" href="https://paypal.me/SalvatoreCannata05?country.x=IT&locale.x=it_IT" target="_blank" rel="noopener" aria-label="PayPal"><span>Pay</span><span>Pal</span></a>
-      <p class="payment-note" data-i18n="paymentNote">Prodotto digitale non rimborsabile. I risultati dei tweak possono cambiare in base a componenti, stato hardware, pulizia software, spazio libero sui dischi, processi installati e altre condizioni del PC non controllabili da SapoTweak. Ogni tweak indica cosa modifica quando necessario; l'utente resta responsabile delle impostazioni applicate.</p>
-      <p class="payment-warning" data-i18n="paymentWarning">Avviso importante:Pagamento esclusivamente con AMICI E FAMILIARI, NON inserire alcuna nota nel pagamento. Pagamenti con note, incompleti, non riconducibili all'acquisto o inviati senza rispettare le istruzioni non garantiscono l'attivazione o il completamento dell'acquisto.</p>
+        <section class="payment-card">
+      <span class="payment-title" data-i18n="paymentTitle">Acquisto licenza:</span>
+      <a class="checkout-chip" href="https://sapotweak.lemonsqueezy.com/checkout/buy/fc4f9603-a906-49f5-9140-4f14ce3b5a22" target="_blank" rel="noopener" data-i18n="paymentButton">Acquista licenza</a>
+      <p class="payment-note" data-i18n="paymentNote">Dopo l'acquisto ricevi la license key via email. La licenza è mensile e viene collegata al PC al primo avvio dell'app.</p>
+      <p class="payment-warning" data-i18n="paymentWarning">L'abbonamento è gestito in modo automatico. Conserva l'email ricevuta per key, rinnovo e gestione dell'acquisto.</p>
     </section>
 
     <footer class="footer" data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</footer>
   </main>
   <script>
     const fallback = {
-      version: '1.1.2',
+      version: '1.2.1',
       platform: 'Windows x64',
-      downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoCfg-Setup-latest.exe',
+      downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe',
       introVideoUrl: 'https://www.youtube.com/@sxp0z'
     };
 
@@ -382,7 +393,7 @@
         card2Text: "Attivazione collegata al PC con controllo automatico all'avvio dell'app.",
         card3Title: 'Aggiornamenti integrati',
         card3Text: "L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.",
-        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.",
+        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.",
         footerText: '© SapoTweak - Distribuisci solo build ufficiali.',
         rail1Title: 'Preset guidati', rail1Text: 'Safe, Advanced ed Extreme con livelli separati per utenti diversi.',
         rail2Title: 'Ripristino', rail2Text: 'Backup e ritorno ai valori conservativi se un preset non convince.',
@@ -390,9 +401,10 @@
         rail4Title: 'Update integrati', rail4Text: "Controllo versione e download guidato direttamente dentro l'app.",
         rail5Title: 'PC rilevato', rail5Text: "L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.",
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
-        paymentTitle: 'Metodi di pagamento:',
-        paymentNote: "Prodotto digitale non rimborsabile. I risultati dei tweak possono cambiare in base a componenti, stato hardware, pulizia software, spazio libero sui dischi, processi installati e altre condizioni del PC non controllabili da SapoTweak. Ogni tweak indica cosa modifica quando necessario; l'utente resta responsabile delle impostazioni applicate.",
-        paymentWarning: "Avviso importante: Pagamento esclusivamente con AMICI E FAMILIARI, NON inserire alcuna nota nel pagamento. Pagamenti con note, incompleti, non riconducibili all'acquisto o inviati senza rispettare le istruzioni non garantiscono l'attivazione o il completamento dell'acquisto."
+        paymentTitle: 'Acquisto licenza:',
+        paymentButton: 'Acquista licenza',
+        paymentNote: "Dopo l'acquisto ricevi la license key via email. La licenza è mensile e viene collegata al PC al primo avvio dell'app.",
+        paymentWarning: "L'abbonamento è gestito in modo automatico. Conserva l'email ricevuta per key, rinnovo e gestione dell'acquisto."
       },
       en: {
         versionLabel: 'Version',
@@ -407,38 +419,40 @@
         card3Text: 'The app checks new versions and guides users through installer downloads.',
         detailsText: 'SapoTweak requires administrator launch to apply system changes. Presets are separated by risk level and include clear notes about what gets modified, so users can choose independently.',
         footerText: '© SapoTweak - Distribute official builds only.',
-        rail1Title: 'Guided presets', rail1Text: 'Safe, Advanced and Extreme with separated levels for different users.',
+        rail1Title: 'Guided presets', rail1Text: 'Safe, Advanced and Extreme with separate levels for different users.',
         rail2Title: 'Restore', rail2Text: 'Backup and conservative restore if a preset does not feel right.',
         rail3Title: 'Gaming focus', rail3Text: 'Targeted optimization for latency, services, input and Windows cleanup.',
         rail4Title: 'Integrated updates', rail4Text: 'Version checks and guided download directly inside the app.',
         rail5Title: 'Detected PC', rail5Text: 'The app filters tweaks based on RAM, GPU, CPU and Windows version.',
         rail6Title: 'Clean interface', rail6Text: 'Only useful actions are shown, avoiding out-of-context settings.',
-        paymentTitle: 'Payment methods:',
-        paymentNote: 'Digital product not refundable. Tweak results may vary depending on components, hardware condition, software cleanliness, free disk space, installed processes and other PC conditions outside SapoTweak control. Each tweak explains what it changes when needed; the user remains responsible for applied settings.',
-        paymentWarning: 'Important notice: do not include any note in the payment. Payments with notes, incomplete payments, payments that cannot be matched to the purchase, or payments sent without following the instructions do not guarantee activation or completion of the purchase.'
+        paymentTitle: 'License purchase:',
+        paymentButton: 'Buy license',
+        paymentNote: 'After purchase, the license key is sent by email. The license is monthly and is linked to the PC when the app is first opened.',
+        paymentWarning: 'The subscription is managed automatically. Keep the purchase email for the key, renewal and purchase management.'
       },
       es: {
         versionLabel: 'Version',
         headlineMain: 'Descargar',
-        heroText: 'Utilidad Windows para optimizacion gaming, gestion de servicios, debloat controlado y herramientas FiveM. Incluye presets guiados, restauracion y licencia vinculada al PC.',
+        heroText: 'Utilidad Windows para optimización gaming, gestión de servicios, debloat controlado y herramientas FiveM. Incluye presets guiados, restauración y licencia vinculada al PC.',
         downloadBtn: 'Descargar para Windows',
         card1Title: 'Presets gaming',
-        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios criticos.',
+        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios crÃ­ticos.',
         card2Title: 'Licencia protegida',
-        card2Text: 'Activacion vinculada al PC con control automatico al iniciar la app.',
+        card2Text: 'Activación vinculada al PC con control automático al iniciar la app.',
         card3Title: 'Actualizaciones integradas',
-        card3Text: 'La app comprueba nuevas versiones y guia al usuario durante la descarga del instalador.',
-        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets estan separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomia.',
+        card3Text: 'La app comprueba nuevas versiones y guÃ­a al usuario durante la descarga del instalador.',
+        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets están separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomÃ­a.',
         footerText: '© SapoTweak - Distribuye solo builds oficiales.',
         rail1Title: 'Presets guiados', rail1Text: 'Safe, Advanced y Extreme con niveles separados para usuarios distintos.',
-        rail2Title: 'Restauracion', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
+        rail2Title: 'Restauración', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
         rail3Title: 'Enfoque gaming', rail3Text: 'Optimizaciones enfocadas en latencia, servicios, input y limpieza Windows.',
-        rail4Title: 'Updates integrados', rail4Text: 'Control de version y descarga guiada directamente dentro de la app.',
-        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks segun RAM, GPU, CPU y version de Windows.',
-        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones utiles, evitando ajustes fuera de contexto.',
-        paymentTitle: 'Metodos de pago:',
-        paymentNote: 'Producto digital no reembolsable. Los resultados de los tweaks pueden variar segun componentes, estado del hardware, limpieza del software, espacio libre en discos, procesos instalados y otras condiciones del PC fuera del control de SapoTweak. Cada tweak indica lo que modifica cuando es necesario; el usuario sigue siendo responsable de los ajustes aplicados.',
-        paymentWarning: 'Aviso importante: no incluyas ninguna nota en el pago. Pagos con notas, incompletos, no vinculables a la compra o enviados sin seguir las instrucciones no garantizan la activacion ni la finalizacion de la compra.'
+        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la app.',
+        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks según RAM, GPU, CPU y versión de Windows.',
+        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones útiles, evitando ajustes fuera de contexto.',
+        paymentTitle: 'Compra de licencia:',
+        paymentButton: 'Comprar licencia',
+        paymentNote: 'Después de la compra recibes la license key por email. La licencia es mensual y se vincula al PC al abrir la app por primera vez.',
+        paymentWarning: 'La suscripción se gestiona automáticamente. Guarda el email recibido para la key, renovación y gestión de la compra.'
       }
     };
 

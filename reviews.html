@@ -72,11 +72,14 @@
       gap: 16px;
       margin: 34px 0;
     }
-    .stat, .review-card {
-      border: 1px solid rgba(255,255,255,.10);
-      background: #11111c;
+            .stat, .review-card {
+      border: 1px solid rgba(167,139,250,.24);
+      background: linear-gradient(180deg, #151522, #101018);
       border-radius: 18px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, .08),
+        0 0 24px rgba(124, 58, 237, .14),
+        inset 0 1px 0 rgba(255,255,255,.04);
     }
     .stat { padding: 20px; }
     .stat b { display: block; font-size: 30px; line-height: 1; }
@@ -84,7 +87,7 @@
     .marquee {
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(167,139,250,.24);
       background: #11111c;
       border-radius: 22px;
       padding: 16px;
@@ -115,9 +118,9 @@
       border-radius: 16px;
       overflow: hidden;
       background: #050507;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+      box-shadow: 0 0 0 1px rgba(167,139,250,.22), 0 0 22px rgba(124,58,237,.16);
       flex: 0 0 auto;
-      cursor: zoom-in;
+      cursor: default;
     }
     .shot img { width: 100%; height: 100%; object-fit: contain; display: block; background: #050507; }
     .hint {
@@ -134,17 +137,75 @@
     }
     .section-title h2 { margin: 0; font-size: 30px; letter-spacing: -.03em; }
     .section-title span { color: #9f99b0; font-size: 13px; }
+        .review-marquee {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.24);
+      background: linear-gradient(180deg, #11111c, #0d0b18);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, .08),
+        0 0 28px rgba(124, 58, 237, .15),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .review-marquee::before,
+    .review-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 110px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .review-marquee::before { left: 0; background: linear-gradient(90deg, #11111c, transparent); }
+    .review-marquee::after { right: 0; background: linear-gradient(270deg, #11111c, transparent); }
+        .review-marquee {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(167,139,250,.24);
+      background: linear-gradient(180deg, #11111c, #0d0b18);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow:
+        0 0 0 1px rgba(124, 58, 237, .08),
+        0 0 28px rgba(124, 58, 237, .15),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .review-marquee::before,
+    .review-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 110px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .review-marquee::before { left: 0; background: linear-gradient(90deg, #11111c, transparent); }
+    .review-marquee::after { right: 0; background: linear-gradient(270deg, #11111c, transparent); }
     .reviews {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
       gap: 14px;
+      width: max-content;
+      will-change: transform;
     }
     .review-card {
+      width: min(78vw, 360px);
+      flex: 0 0 auto;
       padding: 18px;
       min-height: 124px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+    .review-card:hover {
+      border-color: rgba(196,181,253,.44);
+      box-shadow:
+        0 0 0 1px rgba(167,139,250,.14),
+        0 0 32px rgba(124,58,237,.22),
+        inset 0 1px 0 rgba(255,255,255,.05);
     }
     .review-card p {
       margin: 0;
@@ -201,9 +262,10 @@
       .wrap { padding: 22px; }
       .nav { align-items: flex-start; flex-direction: column; }
       .hero { padding-top: 48px; }
-      .stats, .reviews { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
       .section-title { align-items: flex-start; flex-direction: column; }
-      .marquee::before, .marquee::after { width: 54px; }
+      .marquee::before, .marquee::after, .review-marquee::before, .review-marquee::after { width: 54px; }
+      .review-card { width: min(86vw, 340px); }
     }
   </style>
 </head>
@@ -226,7 +288,7 @@
 
     <section class="stats" aria-label="Risultati dichiarati dagli utenti">
       <div class="stat"><b>550+</b><span>FPS dichiarati in alcuni feedback</span></div>
-      <div class="stat"><b>+200</b><span>Customer e feedback raccolti</span></div>
+      <div class="stat"><b>+200</b><span>Clienti e feedback raccolti</span></div>
       <div class="stat"><b>0 delay</b><span>Feedback citato su Windows e FiveM</span></div>
     </section>
 
@@ -250,14 +312,15 @@
         <button class="shot" type="button"><img src="reviews/16.png" alt="Screenshot FiveM 563 fps"></button>
       </div>
     </section>
-    <p class="hint">Clicca uno screenshot per aprirlo grande. Passando sopra allo striscione, lo scorrimento si ferma.</p>
+    <p class="hint">Screenshot e commenti scorrono automaticamente.</p>
 
     <div class="section-title">
       <h2>Commenti positivi</h2>
       <span>Feedback raccolti dalla community</span>
     </div>
 
-    <section class="reviews">
+    <section class="review-marquee" aria-label="Commenti degli utenti">
+      <div class="reviews" id="commentTrack">
       <article class="review-card"><p>+rep 10/10 tweak 200+ fps</p><span>GXBBQ DAYTONA</span></article>
       <article class="review-card"><p>+rep top tweak 200+ fps</p><span>K</span></article>
       <article class="review-card"><p>very good tweak 100+fps</p><span>Community feedback</span></article>
@@ -265,12 +328,12 @@
       <article class="review-card"><p>+rep very good tweak from 130 to 250 fps</p><span>kekk</span></article>
       <article class="review-card"><p>+rep good tweak after the reset 10/10</p><span>Community feedback</span></article>
       <article class="review-card"><p>+rep hwid reset</p><span>savvu</span></article>
-      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che e di fascia media ma il tweak e good</p><span>ZyroxTv</span></article>
+      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che è di fascia media, ma il tweak è good</p><span>ZyroxTv</span></article>
       <article class="review-card"><p>+rep good tweak mov clean, i went from 120 to 210-240 fps with really bad pc</p><span>demonka</span></article>
       <article class="review-card"><p>+rep from 200fps to 300/400</p><span>life sentence</span></article>
       <article class="review-card"><p>+rep very good tweak +550 fps</p><span>Genio</span></article>
       <article class="review-card"><p>+rep from 130 fps to 290/380</p><span>krrkkkdj</span></article>
-      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che e di fascia bassa ma il tweak e good</p><span>alfaaaaaaaaaaa</span></article>
+      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che è di fascia bassa, ma il tweak è good</p><span>alfaaaaaaaaaaa</span></article>
       <article class="review-card"><p>+rep for SapoTweak v1.0</p><span>kasaltier1</span></article>
       <article class="review-card"><p>+rep for SapoTweak V1.0</p><span>Community feedback</span></article>
       <article class="review-card"><p>+rep for SapoTweak V1.0</p><span>nicucz</span></article>
@@ -287,7 +350,7 @@
       <article class="review-card"><p>+rep Best tweak 500+ fps Smooth game legit</p><span>Community feedback</span></article>
       <article class="review-card"><p>+rep ottimo tweak, affidabili.</p><span>Guido23</span></article>
       <article class="review-card"><p>+rep for SapoTweak velocissimo e ottimo tweak</p><span>tore</span></article>
-      <article class="review-card"><p>+100 fps con cuello de botella y soporte bilingue</p><span>z...</span></article>
+      <article class="review-card"><p>+100 fps con cuello de botella y supporto bilingue</p><span>z...</span></article>
       <article class="review-card"><p>+rep good opti</p><span>sivya</span></article>
       <article class="review-card"><p>+rep excellent optimization from 200 fps to 500 -100 processes</p><span>FERO</span></article>
       <article class="review-card"><p>+rep excellent optimization from 70fps to 200 -150 processes</p><span>K</span></article>
@@ -321,6 +384,7 @@
       <article class="review-card"><p>+rep god tweak 450+ fps</p><span>Yatklc</span></article>
       <article class="review-card"><p>+rep best tweak da 160 fps a +260 fps</p><span>Nokia_tv</span></article>
       <article class="review-card"><p>+rep 10/10 tweak 500+ fps</p><span>luxyfps</span></article>
+          </div>
     </section>
 
     <p class="note">Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.</p>
@@ -329,65 +393,62 @@
   </main>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="close" type="button" id="closeLightbox" aria-label="Chiudi">x</button>
+    <button class="close" type="button" id="closeLightbox" aria-label="Chiudi">&times;</button>
     <img id="lightboxImage" src="" alt="">
   </div>
 
-  <script>
-    const track = document.getElementById('reviewTrack');
-    const firstSet = Array.from(track.children);
-    firstSet.forEach(item => track.appendChild(item.cloneNode(true)));
-
-    let position = 0;
-    let lastTime = performance.now();
-    let paused = false;
-    const speed = 62;
-
-    track.parentElement.addEventListener('mouseenter', () => { paused = true; });
-    track.parentElement.addEventListener('mouseleave', () => { paused = false; });
-
-    function animate(now) {
-      const delta = (now - lastTime) / 1000;
-      lastTime = now;
-      if (!paused) {
-        const loopWidth = track.scrollWidth / 2;
-        position -= speed * delta;
-        if (Math.abs(position) >= loopWidth) position = 0;
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
+      <script>
+    (() => {
+      function onReady(callback) {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', callback);
+        } else {
+          callback();
+        }
       }
-      requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
 
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const closeLightbox = document.getElementById('closeLightbox');
+      onReady(() => {
+        const imageTrack = document.getElementById('reviewTrack');
+        const commentTrack = document.getElementById('commentTrack');
+        const speed = 71.3;
+        let lastTime = performance.now();
 
-    function openLightbox(img) {
-      lightboxImage.src = img.src;
-      lightboxImage.alt = img.alt;
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      paused = true;
-    }
+        function cloneForLoop(track) {
+          if (!track || track.dataset.loopReady === 'true') return;
+          Array.from(track.children).forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+          });
+          track.dataset.loopReady = 'true';
+        }
 
-    function closePreview() {
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      lightboxImage.src = '';
-      paused = false;
-    }
+        cloneForLoop(imageTrack);
+        cloneForLoop(commentTrack);
 
-    document.querySelectorAll('.shot').forEach(button => {
-      button.addEventListener('click', () => openLightbox(button.querySelector('img')));
-    });
-    closeLightbox.addEventListener('click', closePreview);
-    lightbox.addEventListener('click', event => {
-      if (event.target === lightbox) closePreview();
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && lightbox.classList.contains('open')) closePreview();
-    });
+        const movingTracks = [
+          { element: imageTrack, position: 0 },
+          { element: commentTrack, position: 0 }
+        ].filter(item => item.element);
+
+        function animate(now) {
+          const delta = (now - lastTime) / 1000;
+          lastTime = now;
+
+          movingTracks.forEach(item => {
+            const loopWidth = item.element.scrollWidth / 2;
+            if (loopWidth <= 0) return;
+            item.position -= speed * delta;
+            if (Math.abs(item.position) >= loopWidth) item.position = 0;
+            item.element.style.transform = `translate3d(${item.position}px, 0, 0)`;
+          });
+
+          requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+      });
+    })();
   </script>
 </body>
 </html>
