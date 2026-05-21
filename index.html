@@ -640,11 +640,7 @@
         </ul>
       `;
     }
-    let pendingDownloadUrl = '';
-
-    function hasAcceptedTos() {
-      return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
-    }
+    let pendingActionUrl = '';
 
     function applyLanguage() {
       document.documentElement.lang = currentLanguage;
@@ -663,13 +659,13 @@
 
     function dismissTosModal() {
       document.getElementById('tosModal').classList.remove('show');
+      pendingActionUrl = '';
     }
     function acceptTos() {
-      localStorage.setItem('sapotweak_site_tos_ack_v1', '1');
+      const targetUrl = pendingActionUrl;
+      pendingActionUrl = '';
       dismissTosModal();
-      if (pendingDownloadUrl) {
-        const targetUrl = pendingDownloadUrl;
-        pendingDownloadUrl = '';
+      if (targetUrl) {
         window.location.href = targetUrl;
       }
     }
@@ -717,9 +713,16 @@
 
     document.getElementById('downloadBtn').addEventListener('click', event => {
       const targetUrl = event.currentTarget.href;
-      if (!targetUrl || hasAcceptedTos()) return;
+      if (!targetUrl) return;
       event.preventDefault();
-      pendingDownloadUrl = targetUrl;
+      pendingActionUrl = targetUrl;
+      showTosModal();
+    });
+    document.querySelector('.checkout-chip').addEventListener('click', event => {
+      const targetUrl = event.currentTarget.href;
+      if (!targetUrl) return;
+      event.preventDefault();
+      pendingActionUrl = targetUrl;
       showTosModal();
     });
 
