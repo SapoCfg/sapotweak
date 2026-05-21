@@ -292,6 +292,24 @@
       text-transform: uppercase;
     }
     .footer-tos:hover { color: #efe9ff; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.72);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover {
+      color: #efe9ff;
+    }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -491,7 +509,12 @@
 
     <footer class="footer">
       <span id="footerText">&copy; SapoTweak - Review utenti</span>
-      <button class="footer-tos" type="button" id="tosLink" onclick="showTosModal()">TOS</button>
+      <div class="footer-links">
+        <button class="footer-tos" type="button" id="tosLink" onclick="showTosModal()">TOS</button>
+        <a href="terms.html" id="legalTerms">Terms</a>
+        <a href="privacy.html" id="legalPrivacy">Privacy</a>
+        <a href="refund.html" id="legalRefund">Refund</a>
+      </div>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">
@@ -522,6 +545,9 @@
           backLink: 'Torna al sito',
           footerText: '© SapoTweak - Review utenti',
           tosLink: 'TOS',
+          legalTerms: 'Termini',
+          legalPrivacy: 'Privacy',
+          legalRefund: 'Rimborsi',
           tosTitle: 'Termini di utilizzo',
           tosText: 'Condizioni rapide per l uso del software.',
           tosCloseBtn: 'Chiudi',
@@ -542,6 +568,9 @@
           backLink: 'Back to site',
           footerText: '© SapoTweak - User reviews',
           tosLink: 'TOS',
+          legalTerms: 'Terms',
+          legalPrivacy: 'Privacy',
+          legalRefund: 'Refund',
           tosTitle: 'Terms of Service',
           tosText: 'Short terms for using the software.',
           tosCloseBtn: 'Close',
@@ -562,6 +591,9 @@
           backLink: 'Volver al sitio',
           footerText: '© SapoTweak - Reviews de usuarios',
           tosLink: 'TOS',
+          legalTerms: 'Terminos',
+          legalPrivacy: 'Privacidad',
+          legalRefund: 'Reembolsos',
           tosTitle: 'Terminos de Uso',
           tosText: 'Condiciones breves para usar el software.',
           tosCloseBtn: 'Cerrar',
@@ -629,6 +661,9 @@
         document.getElementById('backLink').textContent = t('backLink');
         document.getElementById('footerText').textContent = t('footerText');
         document.getElementById('tosLink').textContent = t('tosLink');
+        document.getElementById('legalTerms').textContent = t('legalTerms');
+        document.getElementById('legalPrivacy').textContent = t('legalPrivacy');
+        document.getElementById('legalRefund').textContent = t('legalRefund');
         document.getElementById('tosTitle').textContent = t('tosTitle');
         document.getElementById('tosText').textContent = t('tosText');
         document.getElementById('tosCloseBtn').textContent = t('tosCloseBtn');

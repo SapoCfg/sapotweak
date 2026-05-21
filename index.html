@@ -294,6 +294,24 @@
       text-transform: uppercase;
     }
     .footer-tos:hover { color: #efe9ff; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.72);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover {
+      color: #efe9ff;
+    }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -451,7 +469,12 @@
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <button class="footer-tos" type="button" onclick="showTosModal()" data-i18n="tosLink">TOS</button>
+      <div class="footer-links">
+        <button class="footer-tos" type="button" onclick="showTosModal()" data-i18n="tosLink">TOS</button>
+        <a href="terms.html" data-i18n="legalTerms">Terms</a>
+        <a href="privacy.html" data-i18n="legalPrivacy">Privacy</a>
+        <a href="refund.html" data-i18n="legalRefund">Refund</a>
+      </div>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">
@@ -502,6 +525,9 @@
         paymentNote: "Dopo l'acquisto ricevi la license key via email. La licenza è mensile e viene collegata al PC al primo avvio dell'app.",
         paymentWarning: "L'abbonamento è gestito in modo automatico. Conserva l'email ricevuta per key, rinnovo e gestione dell'acquisto.",
         tosLink: 'TOS',
+        legalTerms: 'Termini',
+        legalPrivacy: 'Privacy',
+        legalRefund: 'Rimborsi',
         tosTitle: 'Termini di utilizzo',
         tosText: 'Condizioni rapide per l uso del software.',
         tosCloseBtn: 'Chiudi',
@@ -542,6 +568,9 @@
         paymentNote: 'After purchase, the license key is sent by email. The license is monthly and is linked to the PC when the app is first opened.',
         paymentWarning: 'The subscription is managed automatically. Keep the purchase email for the key, renewal and purchase management.',
         tosLink: 'TOS',
+        legalTerms: 'Terms',
+        legalPrivacy: 'Privacy',
+        legalRefund: 'Refund',
         tosTitle: 'Terms of Service',
         tosText: 'Short terms for using the software.',
         tosCloseBtn: 'Close',
@@ -582,6 +611,9 @@
         paymentNote: 'Después de la compra recibes la license key por email. La licencia es mensual y se vincula al PC al abrir la app por primera vez.',
         paymentWarning: 'La suscripción se gestiona automáticamente. Guarda el email recibido para la key, renovación y gestión de la compra.',
         tosLink: 'TOS',
+        legalTerms: 'Terminos',
+        legalPrivacy: 'Privacidad',
+        legalRefund: 'Reembolsos',
         tosTitle: 'Terminos de Uso',
         tosText: 'Condiciones breves para usar el software.',
         tosCloseBtn: 'Cerrar',
