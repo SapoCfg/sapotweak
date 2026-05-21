@@ -80,6 +80,39 @@
       padding-top: 18px;
       border-top: 1px solid var(--border);
     }
+    .continue-box {
+      margin-top: 28px;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(139,108,255,.24);
+      background: rgba(255,255,255,.03);
+    }
+    .continue-box h2 { margin-top: 0; }
+    .continue-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 16px 44px rgba(91,61,245,.22);
+    }
+    .cta.secondary {
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
   </style>
 </head>
 <body>
@@ -108,10 +141,9 @@
 
       <h2>4. License and activation</h2>
       <p>Access to SapoTweak is controlled through license keys. A license key may be limited to a specific number of activations or devices depending on the purchased plan.</p>
-      <p>If the main hardware remains the same, the license is intended to continue working after a PC reset, Windows reinstall, or Windows change. Major hardware changes may require a new activation or manual review.</p>
 
       <h2>5. Subscriptions</h2>
-      <p>If you purchase a subscription, access remains available while the subscription is active and paid. If a subscription is canceled, expires, or payment fails, access may be disabled at the end of the billing period or according to the payment processor’s rules.</p>
+      <p>If you purchase a subscription, access remains available while the subscription is active and paid. If a subscription is canceled, expires, or payment fails, access may be disabled at the end of the billing period or according to the payment processor's rules.</p>
 
       <h2>6. Prohibited actions</h2>
       <p>You may not copy, redistribute, resell, reverse engineer, modify, bypass licensing systems, share license keys, extract code or assets, or use SapoTweak for fraudulent, abusive, illegal, or unauthorized purposes.</p>
@@ -126,7 +158,38 @@
         <h2>9. Contact</h2>
         <p>For support, contact: <a href="mailto:sapotweak@gmail.com" style="color:#cbbdff;">sapotweak@gmail.com</a></p>
       </div>
+
+      <div class="continue-box" id="continueBox" hidden>
+        <h2 id="continueTitle">Accept and continue</h2>
+        <p id="continueText">If you want to proceed, continue with the action you selected after reviewing these terms.</p>
+        <div class="continue-actions">
+          <a class="cta" id="continueBtn" href="index.html">Continue</a>
+          <a class="cta secondary" href="index.html">Back to site</a>
+        </div>
+      </div>
     </div>
   </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get('action');
+    const continueBox = document.getElementById('continueBox');
+    const continueTitle = document.getElementById('continueTitle');
+    const continueText = document.getElementById('continueText');
+    const continueBtn = document.getElementById('continueBtn');
+
+    if (action === 'download') {
+      continueBox.hidden = false;
+      continueTitle.textContent = 'Accept and continue to download';
+      continueText.textContent = 'After reviewing these terms, continue to download the latest official SapoTweak installer.';
+      continueBtn.textContent = 'Download now';
+      continueBtn.href = 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe';
+    } else if (action === 'license') {
+      continueBox.hidden = false;
+      continueTitle.textContent = 'Accept and continue to checkout';
+      continueText.textContent = 'After reviewing these terms, continue to the official SapoTweak checkout page to purchase your license.';
+      continueBtn.textContent = 'Go to checkout';
+      continueBtn.href = 'https://sapotweak.lemonsqueezy.com/checkout/buy/fc4f9603-a906-49f5-9140-4f14ce3b5a22';
+    }
+  </script>
 </body>
 </html>

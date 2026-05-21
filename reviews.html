@@ -281,17 +281,6 @@
       align-items: center;
       gap: 10px;
     }
-    .footer-tos {
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,.72);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-    .footer-tos:hover { color: #efe9ff; }
     .footer-links {
       display: flex;
       align-items: center;
@@ -309,64 +298,6 @@
     }
     .footer-links a:hover {
       color: #efe9ff;
-    }
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0,0,0,.68);
-      z-index: 30;
-    }
-    .modal-backdrop.show { display: grid; }
-    .modal-box {
-      width: min(760px, 100%);
-      max-height: 82vh;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(180deg, #151522, #101018);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 22px;
-      box-shadow: 0 32px 90px rgba(0,0,0,.5);
-      padding: 20px;
-    }
-    .modal-box h2 { margin: 0 0 8px; font-size: 22px; }
-    .modal-box p { margin: 0 0 14px; color: #c7c2d8; font-size: 13px; line-height: 1.55; }
-    .tos-body {
-      margin: 0 0 14px;
-      padding: 14px 16px;
-      max-height: 54vh;
-      overflow: auto;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background: rgba(0,0,0,.18);
-      color: #f3f0ff;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .tos-body p { margin: 0 0 12px; color: #ddd7f0; }
-    .tos-body ul { margin: 0; padding-left: 18px; }
-    .tos-body li { margin-bottom: 10px; }
-    .tos-confirm {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 0 0 14px;
-      color: #ddd7f0;
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    .tos-confirm input { margin-top: 2px; }
-    .modal-actions { display: flex; justify-content: flex-end; }
-    .modal-close {
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 900;
-      cursor: pointer;
     }
     @media (max-width: 900px) {
       .wrap { padding: 22px; }
@@ -510,28 +441,12 @@
     <footer class="footer">
       <span id="footerText">&copy; SapoTweak - Review utenti</span>
       <div class="footer-links">
-        <button class="footer-tos" type="button" id="tosLink" onclick="showTosModal()">TOS</button>
         <a href="terms.html" id="legalTerms">Terms</a>
         <a href="privacy.html" id="legalPrivacy">Privacy</a>
         <a href="refund.html" id="legalRefund">Refund</a>
       </div>
     </footer>
   </main>
-  <div class="modal-backdrop" id="tosModal">
-    <div class="modal-box">
-      <h2 id="tosTitle">Termini di utilizzo</h2>
-      <p id="tosText">Condizioni rapide per l uso del software.</p>
-      <div class="tos-body" id="tosBody"></div>
-      <label class="tos-confirm">
-        <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
-        <span id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
-      </label>
-      <div class="modal-actions">
-        <button class="modal-close" type="button" id="tosCloseBtn" onclick="dismissTosModal()">Chiudi</button>
-        <button class="modal-close" type="button" id="tosAcceptBtn" onclick="acceptTos()">Accetta</button>
-      </div>
-    </div>
-  </div>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="close" type="button" id="closeLightbox" aria-label="Chiudi">&times;</button>
@@ -544,71 +459,23 @@
         it: {
           backLink: 'Torna al sito',
           footerText: '© SapoTweak - Review utenti',
-          tosLink: 'TOS',
           legalTerms: 'Termini',
           legalPrivacy: 'Privacy',
-          legalRefund: 'Rimborsi',
-          tosTitle: 'Termini di utilizzo',
-          tosText: 'Condizioni rapide per l uso del software.',
-          tosCloseBtn: 'Chiudi',
-          tosAcceptLabel: 'Ho letto e accetto le condizioni.',
-          tosAcceptBtn: 'Accetta',
-          tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
-          tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
-          tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
-          tosItem3: 'Si consiglia di creare un punto di ripristino o un backup prima dell uso, per evitare conflitti con tweak, script, servizi o modifiche gia applicate in precedenza dall utente o da software terzi.',
-          tosItem4: 'Ogni comando o tweak include una descrizione specifica per permettere all utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.',
-          tosItem5: 'Non ci assumiamo responsabilita per le scelte dell utente su cio che viene attivato, disattivato o modificato tramite il software, ne per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall utente.',
-          tosItem6: 'La key e pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi puo richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.',
-          tosItem7: 'SapoTweak e un prodotto digitale fornito immediatamente. Dopo attivazione o inizio della fornitura digitale richiesta dall utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.',
-          tosItem8: 'Sono vietati furto o estrazione di dati, codice o asset del programma, reverse engineering non autorizzato, bypass delle protezioni, condivisione di key, redistribuzione abusiva, modifica dei sistemi di licenza o update e qualsiasi uso fraudolento del software.',
-          tosItem9: 'Le violazioni possono comportare sospensione dell accesso, revoca della licenza e azioni civili o penali ove applicabili.'
+          legalRefund: 'Rimborsi'
         },
         en: {
           backLink: 'Back to site',
           footerText: '© SapoTweak - User reviews',
-          tosLink: 'TOS',
           legalTerms: 'Terms',
           legalPrivacy: 'Privacy',
-          legalRefund: 'Refund',
-          tosTitle: 'Terms of Service',
-          tosText: 'Short terms for using the software.',
-          tosCloseBtn: 'Close',
-          tosAcceptLabel: 'I have read and accept the terms.',
-          tosAcceptBtn: 'Accept',
-          tosIntro: 'By using or activating SapoTweak, you accept these core terms:',
-          tosItem1: 'Review, benchmark, FPS, process-count, latency and stability results will not necessarily match yours. Performance depends on hardware, PC cleanliness and cooling, disk health and free space, Windows version and install condition, drivers, BIOS, monitor, installed software, services, background apps, antivirus, overlays and game patches.',
-          tosItem2: 'Published screenshots, videos, reviews and examples are illustrative only and do not guarantee the same outcome on every device or Windows installation.',
-          tosItem3: 'Creating a restore point or backup before use is recommended to reduce conflicts with tweaks, scripts, services or changes previously applied by the user or by third-party software.',
-          tosItem4: 'Each command or tweak includes a specific description so users can decide for themselves what to enable or disable based on their own preferences and system.',
-          tosItem5: 'We do not accept responsibility for the user choices regarding what is enabled, disabled or modified through the software, nor for effects caused by previous configurations, misuse or combinations manually chosen by the user.',
-          tosItem6: 'The key is intended to keep working after a PC reset, Windows reset, reinstall or Windows switch as long as the main hardware stays the same. Replacing the motherboard, CPU or other identifying hardware can require a new activation; refunds are not provided for hardware changes except where mandatory applicable law requires otherwise.',
-          tosItem7: 'SapoTweak is a digital product supplied immediately. After activation or after the start of the digital supply requested by the user, refunds are generally not available except where mandatory applicable law requires otherwise.',
-          tosItem8: 'Theft or extraction of program data, code or assets, unauthorized reverse engineering, protection bypassing, key sharing, abusive redistribution, tampering with licensing or update systems, and any fraudulent use of the software are prohibited.',
-          tosItem9: 'Violations may lead to access suspension, license revocation and civil or criminal action where applicable.'
+          legalRefund: 'Refund'
         },
         es: {
           backLink: 'Volver al sitio',
           footerText: '© SapoTweak - Reviews de usuarios',
-          tosLink: 'TOS',
           legalTerms: 'Terminos',
           legalPrivacy: 'Privacidad',
-          legalRefund: 'Reembolsos',
-          tosTitle: 'Terminos de Uso',
-          tosText: 'Condiciones breves para usar el software.',
-          tosCloseBtn: 'Cerrar',
-          tosAcceptLabel: 'He leido y acepto las condiciones.',
-          tosAcceptBtn: 'Aceptar',
-          tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
-          tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
-          tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
-          tosItem3: 'Se recomienda crear un punto de restauracion o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
-          tosItem4: 'Cada comando o tweak incluye una descripcion especifica para que cada usuario pueda decidir por si mismo que activar o desactivar segun sus preferencias y su sistema.',
-          tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
-          tosItem6: 'La key esta pensada para seguir funcionando despues de un reinicio del PC, reset de Windows, reinstalacion o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activacion; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. Tras la activacion o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no estan disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem8: 'Se prohibe el robo o extraccion de datos, codigo o assets del programa, la ingenieria inversa no autorizada, el bypass de protecciones, compartir keys, la redistribucion abusiva, la manipulacion de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
-          tosItem9: 'Las infracciones pueden implicar suspension de acceso, revocacion de la licencia y acciones civiles o penales cuando corresponda.'
+          legalRefund: 'Reembolsos'
         }
       };
       let currentLanguage = localStorage.getItem('sapotweak_site_lang') || 'it';
@@ -625,70 +492,16 @@
         return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
       }
 
-      function updateTosBody() {
-        const body = document.getElementById('tosBody');
-        if (!body) return;
-        body.innerHTML = `
-          <p>${t('tosIntro')}</p>
-          <ul>
-            <li>${t('tosItem1')}</li>
-            <li>${t('tosItem2')}</li>
-            <li>${t('tosItem3')}</li>
-            <li>${t('tosItem4')}</li>
-            <li>${t('tosItem5')}</li>
-            <li>${t('tosItem6')}</li>
-            <li>${t('tosItem7')}</li>
-            <li>${t('tosItem8')}</li>
-            <li>${t('tosItem9')}</li>
-          </ul>
-        `;
-      }
-      function hasAcceptedTos() {
-        return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
-      }
-      function syncTosAcceptanceUi() {
-        const check = document.getElementById('tosAcceptCheck');
-        const btn = document.getElementById('tosAcceptBtn');
-        if (!check || !btn) return;
-        if (hasAcceptedTos()) check.checked = true;
-        btn.disabled = !check.checked;
-      }
-
       function applyLanguage() {
         document.documentElement.lang = currentLanguage;
         const select = document.getElementById('languageSelect');
         if (select) select.value = currentLanguage;
         document.getElementById('backLink').textContent = t('backLink');
         document.getElementById('footerText').textContent = t('footerText');
-        document.getElementById('tosLink').textContent = t('tosLink');
         document.getElementById('legalTerms').textContent = t('legalTerms');
         document.getElementById('legalPrivacy').textContent = t('legalPrivacy');
         document.getElementById('legalRefund').textContent = t('legalRefund');
-        document.getElementById('tosTitle').textContent = t('tosTitle');
-        document.getElementById('tosText').textContent = t('tosText');
-        document.getElementById('tosCloseBtn').textContent = t('tosCloseBtn');
-        document.getElementById('tosAcceptLabel').textContent = t('tosAcceptLabel');
-        document.getElementById('tosAcceptBtn').textContent = t('tosAcceptBtn');
-        updateTosBody();
-        syncTosAcceptanceUi();
       }
-
-      window.showTosModal = function showTosModal() {
-        updateTosBody();
-        syncTosAcceptanceUi();
-        document.getElementById('tosModal').classList.add('show');
-      };
-
-      window.dismissTosModal = function dismissTosModal() {
-        document.getElementById('tosModal').classList.remove('show');
-      };
-      window.acceptTos = function acceptTos() {
-        const check = document.getElementById('tosAcceptCheck');
-        if (!check || !check.checked) return;
-        localStorage.setItem('sapotweak_site_tos_ack_v1', '1');
-        syncTosAcceptanceUi();
-        dismissTosModal();
-      };
 
       onReady(() => {
         const select = document.getElementById('languageSelect');
