@@ -218,13 +218,14 @@
       font-weight: 900;
       margin-bottom: 10px;
     }
-        .checkout-chip {
+    .checkout-chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 42px;
       padding: 0 18px;
       margin-bottom: 12px;
+      border: 0;
       border-radius: 12px;
       background: linear-gradient(135deg, #7c5cff, #9b5cff);
       color: #fff;
@@ -232,6 +233,7 @@
       font-weight: 900;
       box-shadow: 0 14px 34px rgba(124, 92, 255, .22);
       text-decoration: none;
+      cursor: pointer;
       transition: transform .18s ease, box-shadow .18s ease;
     }
     .checkout-chip:hover {
@@ -287,6 +289,17 @@
       color: #bdb8d2;
       line-height: 1.55;
       font-size: 14px;
+    }
+    .details h2 {
+      margin: 0 0 14px;
+      color: #fff;
+      font-size: 24px;
+    }
+    .details h1 {
+      margin: 0 0 14px;
+      color: #fff;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.08;
     }
     .footer {
       padding: 42px 0;
@@ -423,12 +436,12 @@
         <h1><span data-i18n="headlineMain">Ottimizzazione</span> <span>SapoTweak</span></h1>
         <p data-i18n="heroText">SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
         <div class="actions">
-          <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
+          <a class="btn" id="downloadBtn" href="#plans" data-i18n="downloadBtn">Scegli il piano</a>
           <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
         </div>
         <div class="micro-steps">
           <div class="micro-step"><b data-i18n="step1Title">1. Scegli</b><span data-i18n="step1Text">Apri la pagina piani e seleziona mensile o trimestrale.</span></div>
-          <div class="micro-step"><b data-i18n="step2Title">2. Paga</b><span data-i18n="step2Text">Il checkout e gestito da Stripe con tasse calcolate in base al paese.</span></div>
+          <div class="micro-step"><b data-i18n="step2Title">2. Paga</b><span data-i18n="step2Text">Accetta i termini e procedi con il pagamento sicuro.</span></div>
           <div class="micro-step"><b data-i18n="step3Title">3. Ricevi</b><span data-i18n="step3Text">Dopo il pagamento trovi subito key e download ufficiale.</span></div>
           <div class="micro-step"><b data-i18n="step4Title">4. Attiva</b><span data-i18n="step4Text">La licenza viene collegata al PC e l'app continua a ricevere update.</span></div>
         </div>
@@ -459,41 +472,39 @@
     </section>
 
     <section class="details" data-i18n="detailsText">
-      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.
+      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.
     </section>
 
-        <section class="payment-card">
-      <span class="payment-title" data-i18n="paymentTitle">Checkout Stripe:</span>
-      <a class="checkout-chip" href="checkout.html" data-i18n="paymentButton">Apri pagina checkout</a>
-      <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.</p>
-      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Si consiglia l'uso su installazioni Windows pulite o ordinate, con driver grafici aggiornati e punto di ripristino creato prima delle modifiche.</p>
+    <section class="payment-card" id="plans">
+      <span class="payment-title" data-i18n="paymentTitle">Scegli il piano:</span>
+      <div class="actions">
+        <button class="checkout-chip" type="button" id="monthlyPlanBtn" data-i18n="monthlyPlanBtn">Mensile - 12,99 EUR</button>
+        <button class="checkout-chip" type="button" id="quarterlyPlanBtn" data-i18n="quarterlyPlanBtn">Trimestrale - 24,99 EUR</button>
+      </div>
+      <p class="payment-note" data-i18n="paymentNote">Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.</p>
+      <label class="tos-confirm">
+        <input type="checkbox" id="planTermsCheck">
+        <span data-i18n="planTermsLabel">Ho letto e accetto i termini completi riportati qui sotto.</span>
+      </label>
+      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima di procedere leggi e accetta i termini completi riportati qui sotto.</p>
+      <p class="payment-note" id="planError" hidden></p>
+    </section>
+
+    <section class="details" id="tos-section">
+      <h2 data-i18n="mainTosTitle">Termini completi</h2>
+      <div class="tos-body" id="tosSectionBody"></div>
     </section>
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <button class="footer-tos" type="button" onclick="showTosModal()" data-i18n="tosLink">TOS</button>
+      <a class="footer-tos" href="#tos-section" data-i18n="tosLink">TOS</a>
     </footer>
   </main>
-  <div class="modal-backdrop" id="tosModal">
-    <div class="modal-box">
-      <h2 data-i18n="tosTitle">Termini di utilizzo</h2>
-      <p data-i18n="tosText">Condizioni rapide per l uso del software.</p>
-      <div class="tos-body" id="tosBody"></div>
-      <label class="tos-confirm">
-        <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
-        <span data-i18n="tosAcceptLabel" id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
-      </label>
-      <div class="modal-actions">
-        <button class="modal-close" type="button" onclick="dismissTosModal()" data-i18n="tosCloseBtn">Chiudi</button>
-        <button class="modal-close" type="button" onclick="acceptTos()" data-i18n="tosAcceptBtn" id="tosAcceptBtn">Accetta</button>
-      </div>
-    </div>
-  </div>
   <script>
     const fallback = {
       version: '1.2.1',
       platform: 'Windows x64',
-      checkoutPageUrl: 'checkout.html',
+      checkoutPageUrl: '#plans',
       downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe',
       introVideoUrl: 'https://www.youtube.com/@sxp0z'
     };
@@ -504,11 +515,11 @@
         eyebrowText: 'Windows 10/11 - Licenza personale - Update automatici',
         headlineMain: 'Ottimizzazione',
         heroText: "SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
-        downloadBtn: 'Scegli il piano',
+        downloadBtn: 'Vedi i piani',
         step1Title: '1. Scegli',
         step1Text: 'Apri la pagina piani e seleziona mensile o trimestrale.',
         step2Title: '2. Paga',
-        step2Text: 'Il checkout e gestito da Stripe con tasse calcolate in base al paese.',
+        step2Text: 'Accetta i termini e procedi con il pagamento sicuro.',
         step3Title: '3. Ricevi',
         step3Text: 'Dopo il pagamento trovi subito key e download ufficiale.',
         step4Title: '4. Attiva',
@@ -520,23 +531,22 @@
         card3Title: 'Aggiornamenti integrati',
         card3Text: "L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.",
         detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.",
-        footerText: '© SapoTweak - Distribuisci solo build ufficiali.',
+        footerText: '(c) SapoTweak - Distribuisci solo build ufficiali.',
         rail1Title: 'Preset guidati', rail1Text: 'Safe, Advanced ed Extreme con livelli separati per utenti diversi.',
         rail2Title: 'Ripristino', rail2Text: 'Backup e ritorno ai valori conservativi se un preset non convince.',
         rail3Title: 'Gaming focus', rail3Text: 'Ottimizzazioni mirate su latenza, servizi, input e pulizia Windows.',
         rail4Title: 'Update integrati', rail4Text: "Controllo versione e download guidato direttamente dentro l'app.",
         rail5Title: 'PC rilevato', rail5Text: "L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.",
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
-        paymentTitle: 'Checkout Stripe:',
-        paymentButton: 'Apri pagina checkout',
-        paymentNote: "Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.",
-        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Si consiglia l'uso su installazioni Windows pulite o ordinate, con driver grafici aggiornati e punto di ripristino creato prima delle modifiche.",
+        paymentTitle: 'Scegli il piano:',
+        monthlyPlanBtn: 'Mensile - 12,99 EUR',
+        quarterlyPlanBtn: 'Trimestrale - 24,99 EUR',
+        paymentNote: "Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.",
+        planTermsLabel: 'Ho letto e accetto i termini completi riportati qui sotto.',
+        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima di procedere leggi e accetta i termini completi riportati qui sotto.",
+        planError: 'Per continuare devi accettare i termini completi.',
+        mainTosTitle: 'Termini completi',
         tosLink: 'TOS',
-        tosTitle: 'Termini di utilizzo',
-        tosText: 'Condizioni rapide per l uso del software.',
-        tosCloseBtn: 'Chiudi',
-        tosAcceptLabel: 'Ho letto e accetto le condizioni.',
-        tosAcceptBtn: 'Accetta',
         tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
         tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
         tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
@@ -553,11 +563,11 @@
         eyebrowText: 'Windows 10/11 - Personal license - Automatic updates',
         headlineMain: 'Optimization',
         heroText: 'SapoTweak brings together Windows gaming presets, PC-bound activation and integrated updates. Choose the plan, complete checkout and receive the key plus the official download on the confirmation page.',
-        downloadBtn: 'Choose plan',
+        downloadBtn: 'View plans',
         step1Title: '1. Choose',
         step1Text: 'Open the plans page and pick monthly or quarterly.',
         step2Title: '2. Pay',
-        step2Text: 'Checkout is handled by Stripe with taxes calculated by customer country.',
+        step2Text: 'Accept the terms and continue with secure payment.',
         step3Title: '3. Receive',
         step3Text: 'Right after payment you get the key and the official download.',
         step4Title: '4. Activate',
@@ -569,23 +579,22 @@
         card3Title: 'Integrated updates',
         card3Text: 'The app checks new versions and guides users through installer downloads.',
         detailsText: 'SapoTweak requires administrator launch to apply system changes. Presets are separated by risk level and include clear notes about what gets modified, so users can choose independently.',
-        footerText: '© SapoTweak - Distribute official builds only.',
+        footerText: '(c) SapoTweak - Distribute official builds only.',
         rail1Title: 'Guided presets', rail1Text: 'Safe, Advanced and Extreme with separate levels for different users.',
         rail2Title: 'Restore', rail2Text: 'Backup and conservative restore if a preset does not feel right.',
         rail3Title: 'Gaming focus', rail3Text: 'Targeted optimization for latency, services, input and Windows cleanup.',
         rail4Title: 'Integrated updates', rail4Text: 'Version checks and guided download directly inside the app.',
         rail5Title: 'Detected PC', rail5Text: 'The app filters tweaks based on RAM, GPU, CPU and Windows version.',
         rail6Title: 'Clean interface', rail6Text: 'Only useful actions are shown, avoiding out-of-context settings.',
-        paymentTitle: 'Stripe checkout:',
-        paymentButton: 'Open checkout page',
-        paymentNote: 'Customers can choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country.',
-        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. We recommend using the software on a clean or well-maintained Windows install, with updated graphics drivers and a restore point created before applying changes.',
+        paymentTitle: 'Choose your plan:',
+        monthlyPlanBtn: 'Monthly - 12.99 EUR',
+        quarterlyPlanBtn: 'Quarterly - 24.99 EUR',
+        paymentNote: 'Choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country.',
+        planTermsLabel: 'I have read and accept the full terms shown below.',
+        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Before proceeding, read and accept the full terms shown below.',
+        planError: 'You must accept the full terms before continuing.',
+        mainTosTitle: 'Full terms',
         tosLink: 'TOS',
-        tosTitle: 'Terms of Service',
-        tosText: 'Short terms for using the software.',
-        tosCloseBtn: 'Close',
-        tosAcceptLabel: 'I have read and accept the terms.',
-        tosAcceptBtn: 'Accept',
         tosIntro: 'By using or activating SapoTweak, you accept these core terms:',
         tosItem1: 'Review, benchmark, FPS, process-count, latency and stability results will not necessarily match yours. Performance depends on hardware, PC cleanliness and cooling, disk health and free space, Windows version and install condition, drivers, BIOS, monitor, installed software, services, background apps, antivirus, overlays and game patches.',
         tosItem2: 'Published screenshots, videos, reviews and examples are illustrative only and do not guarantee the same outcome on every device or Windows installation.',
@@ -602,11 +611,11 @@
         eyebrowText: 'Windows 10/11 - Licencia personal - Updates automaticos',
         headlineMain: 'Optimizacion',
         heroText: 'SapoTweak reune presets de optimizacion para Windows gaming, activacion vinculada al PC y updates integrados. Elige el plan, completa el pago y recibe la key y la descarga oficial en la pagina de confirmacion.',
-        downloadBtn: 'Elegir plan',
+        downloadBtn: 'Ver planes',
         step1Title: '1. Elige',
         step1Text: 'Abre la pagina de planes y selecciona mensual o trimestral.',
         step2Title: '2. Paga',
-        step2Text: 'Stripe gestiona el checkout con impuestos calculados segun el pais.',
+        step2Text: 'Acepta los terminos y continua con el pago seguro.',
         step3Title: '3. Recibe',
         step3Text: 'Despues del pago recibes la key y la descarga oficial.',
         step4Title: '4. Activa',
@@ -614,27 +623,26 @@
         card1Title: 'Presets gaming',
         card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios criticos.',
         card2Title: 'Licencia protegida',
-        card2Text: 'Activación vinculada al PC con control automático al iniciar la app.',
+        card2Text: 'Activacion vinculada al PC con control automatico al iniciar la app.',
         card3Title: 'Actualizaciones integradas',
         card3Text: 'La app comprueba nuevas versiones y guia al usuario durante la descarga del instalador.',
         detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets estan separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomia.',
-        footerText: '© SapoTweak - Distribuye solo builds oficiales.',
+        footerText: '(c) SapoTweak - Distribuye solo builds oficiales.',
         rail1Title: 'Presets guiados', rail1Text: 'Safe, Advanced y Extreme con niveles separados para usuarios distintos.',
-        rail2Title: 'Restauración', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
+        rail2Title: 'Restauracion', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
         rail3Title: 'Enfoque gaming', rail3Text: 'Optimizaciones enfocadas en latencia, servicios, input y limpieza Windows.',
-        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la app.',
-        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks según RAM, GPU, CPU y versión de Windows.',
-        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones útiles, evitando ajustes fuera de contexto.',
-        paymentTitle: 'Checkout Stripe:',
-        paymentButton: 'Abrir página checkout',
-        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país.',
-        paymentWarning: 'Después del pago la key aparece inmediatamente en la página de confirmación junto con la descarga oficial. Recomendamos usar el software sobre una instalación de Windows limpia o bien mantenida, con drivers gráficos actualizados y un punto de restauración creado antes de aplicar cambios.',
+        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de version y descarga guiada directamente dentro de la app.',
+        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks segun RAM, GPU, CPU y version de Windows.',
+        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones utiles, evitando ajustes fuera de contexto.',
+        paymentTitle: 'Elige tu plan:',
+        monthlyPlanBtn: 'Mensual - 12,99 EUR',
+        quarterlyPlanBtn: 'Trimestral - 24,99 EUR',
+        paymentNote: 'Elige mensual o trimestral. Los impuestos no estan incluidos en el precio y se anaden segun el pais.',
+        planTermsLabel: 'He leido y acepto los terminos completos mostrados abajo.',
+        paymentWarning: 'Despues del pago la key aparece inmediatamente en la pagina de confirmacion junto con la descarga oficial. Antes de continuar, lee y acepta los terminos completos mostrados abajo.',
+        planError: 'Debes aceptar los terminos completos antes de continuar.',
+        mainTosTitle: 'Terminos completos',
         tosLink: 'TOS',
-        tosTitle: 'Terminos de Uso',
-        tosText: 'Condiciones breves para usar el software.',
-        tosCloseBtn: 'Cerrar',
-        tosAcceptLabel: 'He leido y acepto las condiciones.',
-        tosAcceptBtn: 'Aceptar',
         tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
         tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
         tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
@@ -655,9 +663,22 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
-    function updateTosBody() {
-      const body = document.getElementById('tosBody');
+    async function updateTosBody() {
+      const body = document.getElementById('tosSectionBody');
       if (!body) return;
+      try {
+        const response = await fetch('./terms.html', { cache: 'no-store' });
+        if (!response.ok) throw new Error('terms_fetch_failed');
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const card = doc.querySelector('.card');
+        const continueBox = card?.querySelector('#continueBox');
+        if (continueBox) continueBox.remove();
+        if (card) {
+          body.innerHTML = card.innerHTML;
+          return;
+        }
+      } catch (_) {}
       body.innerHTML = `
         <p>${t('tosIntro')}</p>
         <ul>
@@ -677,39 +698,28 @@
       return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
     }
     function syncTosAcceptanceUi() {
-      const check = document.getElementById('tosAcceptCheck');
-      const btn = document.getElementById('tosAcceptBtn');
-      if (!check || !btn) return;
-      if (hasAcceptedTos()) check.checked = true;
-      btn.disabled = !check.checked;
+      const check = document.getElementById('planTermsCheck');
+      if (!check) return;
+      check.checked = hasAcceptedTos();
     }
 
-    function applyLanguage() {
+    async function applyLanguage() {
       document.documentElement.lang = currentLanguage;
       document.getElementById('languageSelect').value = currentLanguage;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         el.textContent = t(el.dataset.i18n);
       });
-      updateTosBody();
+      const monthlyBtn = document.getElementById('monthlyPlanBtn');
+      const quarterlyBtn = document.getElementById('quarterlyPlanBtn');
+      const planTermsLabel = document.querySelector('[data-i18n="planTermsLabel"]');
+      const mainTosTitle = document.querySelector('[data-i18n="mainTosTitle"]');
+      if (monthlyBtn) monthlyBtn.textContent = t('monthlyPlanBtn');
+      if (quarterlyBtn) quarterlyBtn.textContent = t('quarterlyPlanBtn');
+      if (planTermsLabel) planTermsLabel.textContent = t('planTermsLabel');
+      if (mainTosTitle) mainTosTitle.textContent = t('mainTosTitle');
+      await updateTosBody();
       syncTosAcceptanceUi();
       applySiteConfig(siteConfig);
-    }
-
-    function showTosModal() {
-      updateTosBody();
-      syncTosAcceptanceUi();
-      document.getElementById('tosModal').classList.add('show');
-    }
-
-    function dismissTosModal() {
-      document.getElementById('tosModal').classList.remove('show');
-    }
-    function acceptTos() {
-      const check = document.getElementById('tosAcceptCheck');
-      if (!check || !check.checked) return;
-      localStorage.setItem('sapotweak_site_tos_ack_v1', '1');
-      syncTosAcceptanceUi();
-      dismissTosModal();
     }
 
     function applySiteConfig(config) {
@@ -720,11 +730,48 @@
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
     }
 
+    function setTosAccepted(value) {
+      localStorage.setItem('sapotweak_site_tos_ack_v1', value ? '1' : '0');
+      syncTosAcceptanceUi();
+    }
+
+    function openPlan(plan) {
+      const error = document.getElementById('planError');
+      if (!hasAcceptedTos()) {
+        if (error) {
+          error.hidden = false;
+          error.textContent = t('planError');
+        }
+        document.getElementById('tos-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (error) {
+        error.hidden = true;
+        error.textContent = '';
+      }
+      const links = {
+        monthly: atob('aHR0cHM6Ly9idXkuc3RyaXBlLmNvbS80Z01kUmExTFA4em82c0IyVXcxVkswMQ=='),
+        quarterly: atob('aHR0cHM6Ly9idXkuc3RyaXBlLmNvbS82b1UzY3cyUFQ5RHNiTVZmSGkxVkswMg==')
+      };
+      const url = links[plan];
+      if (url) window.location.href = url;
+    }
+
     document.getElementById('languageSelect').addEventListener('change', event => {
       currentLanguage = ['it', 'en', 'es'].includes(event.target.value) ? event.target.value : 'it';
       localStorage.setItem('sapotweak_site_lang', currentLanguage);
       applyLanguage();
     });
+    document.getElementById('planTermsCheck')?.addEventListener('change', event => {
+      setTosAccepted(Boolean(event.target.checked));
+      const error = document.getElementById('planError');
+      if (error) {
+        error.hidden = true;
+        error.textContent = '';
+      }
+    });
+    document.getElementById('monthlyPlanBtn')?.addEventListener('click', () => openPlan('monthly'));
+    document.getElementById('quarterlyPlanBtn')?.addEventListener('click', () => openPlan('quarterly'));
 
     applyLanguage();
     fetch('./version.json', { cache: 'no-store' })
