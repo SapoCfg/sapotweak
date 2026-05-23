@@ -295,12 +295,6 @@
       color: #fff;
       font-size: 24px;
     }
-    .details h1 {
-      margin: 0 0 14px;
-      color: #fff;
-      font-size: clamp(28px, 4vw, 40px);
-      line-height: 1.08;
-    }
     .footer {
       padding: 42px 0;
       color: #8e899e;
@@ -311,6 +305,13 @@
       align-items: center;
       gap: 10px;
     }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
     .footer-tos {
       border: 0;
       background: transparent;
@@ -320,6 +321,7 @@
       letter-spacing: .08em;
       cursor: pointer;
       text-transform: uppercase;
+      text-decoration: none;
     }
     .footer-tos:hover { color: #efe9ff; }
     .modal-backdrop {
@@ -370,7 +372,7 @@
       line-height: 1.45;
     }
     .tos-confirm input { margin-top: 2px; }
-    .modal-actions { display: flex; justify-content: flex-end; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
     .modal-close {
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
@@ -436,7 +438,7 @@
         <h1><span data-i18n="headlineMain">Ottimizzazione</span> <span>SapoTweak</span></h1>
         <p data-i18n="heroText">SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
         <div class="actions">
-          <a class="btn" id="downloadBtn" href="#plans" data-i18n="downloadBtn">Scegli il piano</a>
+          <a class="btn" id="downloadBtn" href="#plans" data-i18n="downloadBtn">Acquista licenza</a>
           <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
         </div>
         <div class="micro-steps">
@@ -482,24 +484,34 @@
         <button class="checkout-chip" type="button" id="quarterlyPlanBtn" data-i18n="quarterlyPlanBtn">Trimestrale - 24,99 EUR</button>
       </div>
       <p class="payment-note" data-i18n="paymentNote">Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.</p>
-      <label class="tos-confirm">
-        <input type="checkbox" id="planTermsCheck">
-        <span data-i18n="planTermsLabel">Ho letto e accetto i termini completi riportati qui sotto.</span>
-      </label>
-      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima di procedere leggi e accetta i termini completi riportati qui sotto.</p>
+      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima del reindirizzamento ai piani viene richiesto di leggere e accettare i termini.</p>
       <p class="payment-note" id="planError" hidden></p>
-    </section>
-
-    <section class="details" id="tos-section">
-      <h2 data-i18n="mainTosTitle">Termini completi</h2>
-      <div class="tos-body" id="tosSectionBody"></div>
     </section>
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <a class="footer-tos" href="#tos-section" data-i18n="tosLink">TOS</a>
+      <div class="footer-links">
+        <button class="footer-tos" type="button" id="footerTermsBtn" data-i18n="tosLink">Termini</button>
+        <a class="footer-tos" href="privacy.html" data-i18n="privacyLink">Privacy</a>
+        <a class="footer-tos" href="refund.html" data-i18n="refundLink">Rimborsi</a>
+      </div>
     </footer>
   </main>
+  <div class="modal-backdrop" id="tosModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="tosModalTitle">
+      <h2 id="tosModalTitle" data-i18n="modalTosTitle">Termini di utilizzo</h2>
+      <p data-i18n="modalTosText">Condizioni rapide per l'uso del software.</p>
+      <div class="tos-body" id="tosModalBody"></div>
+      <label class="tos-confirm">
+        <input type="checkbox" id="tosModalCheck">
+        <span data-i18n="modalTosCheck">Ho letto e accetto le condizioni.</span>
+      </label>
+      <div class="modal-actions">
+        <button class="modal-close" type="button" id="tosModalClose" data-i18n="modalClose">Chiudi</button>
+        <button class="modal-close" type="button" id="tosModalAccept" data-i18n="modalAccept">Accetta</button>
+      </div>
+    </div>
+  </div>
   <script>
     const fallback = {
       version: '1.2.1',
@@ -515,7 +527,7 @@
         eyebrowText: 'Windows 10/11 - Licenza personale - Update automatici',
         headlineMain: 'Ottimizzazione',
         heroText: "SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
-        downloadBtn: 'Vedi i piani',
+        downloadBtn: 'Acquista licenza',
         step1Title: '1. Scegli',
         step1Text: 'Apri la pagina piani e seleziona mensile o trimestrale.',
         step2Title: '2. Paga',
@@ -542,11 +554,16 @@
         monthlyPlanBtn: 'Mensile - 12,99 EUR',
         quarterlyPlanBtn: 'Trimestrale - 24,99 EUR',
         paymentNote: "Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.",
-        planTermsLabel: 'Ho letto e accetto i termini completi riportati qui sotto.',
-        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima di procedere leggi e accetta i termini completi riportati qui sotto.",
+        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima del reindirizzamento ai piani viene richiesto di leggere e accettare i termini.",
         planError: 'Per continuare devi accettare i termini completi.',
-        mainTosTitle: 'Termini completi',
-        tosLink: 'TOS',
+        tosLink: 'Termini',
+        privacyLink: 'Privacy',
+        refundLink: 'Rimborsi',
+        modalTosTitle: 'Termini di utilizzo',
+        modalTosText: 'Condizioni rapide per l uso del software.',
+        modalTosCheck: 'Ho letto e accetto le condizioni.',
+        modalClose: 'Chiudi',
+        modalAccept: 'Accetta',
         tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
         tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
         tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
@@ -563,7 +580,7 @@
         eyebrowText: 'Windows 10/11 - Personal license - Automatic updates',
         headlineMain: 'Optimization',
         heroText: 'SapoTweak brings together Windows gaming presets, PC-bound activation and integrated updates. Choose the plan, complete checkout and receive the key plus the official download on the confirmation page.',
-        downloadBtn: 'View plans',
+        downloadBtn: 'Buy license',
         step1Title: '1. Choose',
         step1Text: 'Open the plans page and pick monthly or quarterly.',
         step2Title: '2. Pay',
@@ -590,11 +607,16 @@
         monthlyPlanBtn: 'Monthly - 12.99 EUR',
         quarterlyPlanBtn: 'Quarterly - 24.99 EUR',
         paymentNote: 'Choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country.',
-        planTermsLabel: 'I have read and accept the full terms shown below.',
-        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Before proceeding, read and accept the full terms shown below.',
+        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Before continuing to the plans, the terms must be read and accepted.',
         planError: 'You must accept the full terms before continuing.',
-        mainTosTitle: 'Full terms',
-        tosLink: 'TOS',
+        tosLink: 'Terms',
+        privacyLink: 'Privacy',
+        refundLink: 'Refunds',
+        modalTosTitle: 'Terms of use',
+        modalTosText: 'Quick conditions for using the software.',
+        modalTosCheck: 'I have read and accept the terms.',
+        modalClose: 'Close',
+        modalAccept: 'Accept',
         tosIntro: 'By using or activating SapoTweak, you accept these core terms:',
         tosItem1: 'Review, benchmark, FPS, process-count, latency and stability results will not necessarily match yours. Performance depends on hardware, PC cleanliness and cooling, disk health and free space, Windows version and install condition, drivers, BIOS, monitor, installed software, services, background apps, antivirus, overlays and game patches.',
         tosItem2: 'Published screenshots, videos, reviews and examples are illustrative only and do not guarantee the same outcome on every device or Windows installation.',
@@ -611,7 +633,7 @@
         eyebrowText: 'Windows 10/11 - Licencia personal - Updates automaticos',
         headlineMain: 'Optimizacion',
         heroText: 'SapoTweak reune presets de optimizacion para Windows gaming, activacion vinculada al PC y updates integrados. Elige el plan, completa el pago y recibe la key y la descarga oficial en la pagina de confirmacion.',
-        downloadBtn: 'Ver planes',
+        downloadBtn: 'Comprar licencia',
         step1Title: '1. Elige',
         step1Text: 'Abre la pagina de planes y selecciona mensual o trimestral.',
         step2Title: '2. Paga',
@@ -638,11 +660,16 @@
         monthlyPlanBtn: 'Mensual - 12,99 EUR',
         quarterlyPlanBtn: 'Trimestral - 24,99 EUR',
         paymentNote: 'Elige mensual o trimestral. Los impuestos no estan incluidos en el precio y se anaden segun el pais.',
-        planTermsLabel: 'He leido y acepto los terminos completos mostrados abajo.',
-        paymentWarning: 'Despues del pago la key aparece inmediatamente en la pagina de confirmacion junto con la descarga oficial. Antes de continuar, lee y acepta los terminos completos mostrados abajo.',
+        paymentWarning: 'Despues del pago la key aparece inmediatamente en la pagina de confirmacion junto con la descarga oficial. Antes de continuar hacia los planes, se requiere leer y aceptar los terminos.',
         planError: 'Debes aceptar los terminos completos antes de continuar.',
-        mainTosTitle: 'Terminos completos',
-        tosLink: 'TOS',
+        tosLink: 'Terminos',
+        privacyLink: 'Privacidad',
+        refundLink: 'Reembolsos',
+        modalTosTitle: 'Terminos de uso',
+        modalTosText: 'Condiciones rapidas para usar el software.',
+        modalTosCheck: 'He leido y acepto las condiciones.',
+        modalClose: 'Cerrar',
+        modalAccept: 'Aceptar',
         tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
         tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
         tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
@@ -663,8 +690,10 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
+    let pendingPlanAction = null;
+
     async function updateTosBody() {
-      const body = document.getElementById('tosSectionBody');
+      const body = document.getElementById('tosModalBody');
       if (!body) return;
       try {
         const response = await fetch('./terms.html', { cache: 'no-store' });
@@ -698,9 +727,38 @@
       return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
     }
     function syncTosAcceptanceUi() {
-      const check = document.getElementById('planTermsCheck');
+      const check = document.getElementById('tosModalCheck');
       if (!check) return;
       check.checked = hasAcceptedTos();
+    }
+
+    function dismissTosModal() {
+      const modal = document.getElementById('tosModal');
+      if (!modal) return;
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function runPendingAction() {
+      const next = pendingPlanAction;
+      pendingPlanAction = null;
+      if (next === 'plans') {
+        document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (next === 'monthly' || next === 'quarterly') {
+        openPlan(next, true);
+      }
+    }
+
+    async function showTosModal(nextAction = null) {
+      if (nextAction) pendingPlanAction = nextAction;
+      await updateTosBody();
+      syncTosAcceptanceUi();
+      const modal = document.getElementById('tosModal');
+      if (!modal) return;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
     }
 
     async function applyLanguage() {
@@ -711,12 +769,8 @@
       });
       const monthlyBtn = document.getElementById('monthlyPlanBtn');
       const quarterlyBtn = document.getElementById('quarterlyPlanBtn');
-      const planTermsLabel = document.querySelector('[data-i18n="planTermsLabel"]');
-      const mainTosTitle = document.querySelector('[data-i18n="mainTosTitle"]');
       if (monthlyBtn) monthlyBtn.textContent = t('monthlyPlanBtn');
       if (quarterlyBtn) quarterlyBtn.textContent = t('quarterlyPlanBtn');
-      if (planTermsLabel) planTermsLabel.textContent = t('planTermsLabel');
-      if (mainTosTitle) mainTosTitle.textContent = t('mainTosTitle');
       await updateTosBody();
       syncTosAcceptanceUi();
       applySiteConfig(siteConfig);
@@ -725,7 +779,7 @@
     function applySiteConfig(config) {
       siteConfig = { ...fallback, ...(config || {}) };
       document.getElementById('versionPill').textContent = `${siteConfig.platform} - ${t('versionLabel')} ${siteConfig.version}`;
-      document.getElementById('downloadBtn').href = siteConfig.checkoutPageUrl || fallback.checkoutPageUrl;
+      document.getElementById('downloadBtn').href = '#plans';
       const intro = document.getElementById('introVideoBtn');
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
     }
@@ -735,14 +789,14 @@
       syncTosAcceptanceUi();
     }
 
-    function openPlan(plan) {
+    function openPlan(plan, skipTermsCheck = false) {
       const error = document.getElementById('planError');
-      if (!hasAcceptedTos()) {
+      if (!skipTermsCheck && !hasAcceptedTos()) {
         if (error) {
           error.hidden = false;
           error.textContent = t('planError');
         }
-        document.getElementById('tos-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showTosModal(plan);
         return;
       }
       if (error) {
@@ -762,13 +816,44 @@
       localStorage.setItem('sapotweak_site_lang', currentLanguage);
       applyLanguage();
     });
-    document.getElementById('planTermsCheck')?.addEventListener('change', event => {
+    document.getElementById('downloadBtn')?.addEventListener('click', event => {
+      event.preventDefault();
+      if (hasAcceptedTos()) {
+        document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      showTosModal('plans');
+    });
+    document.getElementById('footerTermsBtn')?.addEventListener('click', () => showTosModal());
+    document.getElementById('tosModalClose')?.addEventListener('click', () => {
+      pendingPlanAction = null;
+      dismissTosModal();
+    });
+    document.getElementById('tosModal')?.addEventListener('click', event => {
+      if (event.target.id === 'tosModal') {
+        pendingPlanAction = null;
+        dismissTosModal();
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.getElementById('tosModal')?.classList.contains('show')) {
+        pendingPlanAction = null;
+        dismissTosModal();
+      }
+    });
+    document.getElementById('tosModalCheck')?.addEventListener('change', event => {
       setTosAccepted(Boolean(event.target.checked));
       const error = document.getElementById('planError');
       if (error) {
         error.hidden = true;
         error.textContent = '';
       }
+    });
+    document.getElementById('tosModalAccept')?.addEventListener('click', () => {
+      if (!document.getElementById('tosModalCheck')?.checked) return;
+      setTosAccepted(true);
+      dismissTosModal();
+      runPendingAction();
     });
     document.getElementById('monthlyPlanBtn')?.addEventListener('click', () => openPlan('monthly'));
     document.getElementById('quarterlyPlanBtn')?.addEventListener('click', () => openPlan('quarterly'));
