@@ -16,27 +16,6 @@
       overflow-x: hidden;
       cursor: default;
     }
-    .cursor-dot {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      transform: translate3d(-50%, -50%, 0);
-      background: rgba(139, 92, 246, .18);
-      border: 1px solid rgba(255,255,255,.28);
-      transition: width .18s ease, height .18s ease, opacity .2s ease, background .18s ease;
-    }
-    body.cursor-active .cursor-dot { opacity: 1; }
-    body.cursor-hover .cursor-dot {
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,.10);
-    }
     .bg {
       position: fixed;
       inset: 0;
@@ -367,7 +346,6 @@
         inset 0 1px 0 rgba(255,255,255,.04);
     }
     @media (prefers-reduced-motion: reduce), (pointer: coarse) {
-      .cursor-dot { display: none; }
       .btn, .btn::after { transition: none; }
     }
     @media (max-width: 1000px) {
@@ -384,7 +362,6 @@
   </style>
 </head>
 <body>
-  <div class="cursor-dot" aria-hidden="true"></div>
   <div class="bg"></div>
   <div class="grid"></div>
   <main class="wrap">
@@ -490,7 +467,7 @@
         card2Text: "Attivazione collegata al PC con controllo automatico all'avvio dell'app.",
         card3Title: 'Aggiornamenti integrati',
         card3Text: "L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.",
-        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.",
+        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.",
         footerText: '© SapoTweak - Distribuisci solo build ufficiali.',
         rail1Title: 'Preset guidati', rail1Text: 'Safe, Advanced ed Extreme con livelli separati per utenti diversi.',
         rail2Title: 'Ripristino', rail2Text: 'Backup e ritorno ai valori conservativi se un preset non convince.',
@@ -565,12 +542,12 @@
         heroText: 'SapoTweak se desbloquea mediante una licencia personal. Elige el plan, completa el pago y recibe la key y la descarga oficial en la página de confirmación.',
         downloadBtn: 'Elegir plan',
         card1Title: 'Presets gaming',
-        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios crÃ­ticos.',
+        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios criticos.',
         card2Title: 'Licencia protegida',
         card2Text: 'Activación vinculada al PC con control automático al iniciar la app.',
         card3Title: 'Actualizaciones integradas',
-        card3Text: 'La app comprueba nuevas versiones y guÃ­a al usuario durante la descarga del instalador.',
-        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets están separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomÃ­a.',
+        card3Text: 'La app comprueba nuevas versiones y guia al usuario durante la descarga del instalador.',
+        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets estan separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomia.',
         footerText: '© SapoTweak - Distribuye solo builds oficiales.',
         rail1Title: 'Presets guiados', rail1Text: 'Safe, Advanced y Extreme con niveles separados para usuarios distintos.',
         rail2Title: 'Restauración', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
@@ -673,40 +650,12 @@
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
     }
 
-    function setupCursor() {
-      const dot = document.querySelector('.cursor-dot');
-      if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
-      let x = 0;
-      let y = 0;
-      let tx = 0;
-      let ty = 0;
-      function move() {
-        x += (tx - x) * 0.18;
-        y += (ty - y) * 0.18;
-        dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-        requestAnimationFrame(move);
-      }
-      window.addEventListener('mousemove', event => {
-        tx = event.clientX;
-        ty = event.clientY;
-        document.body.classList.add('cursor-active');
-      });
-      document.addEventListener('mouseover', event => {
-        document.body.classList.toggle('cursor-hover', Boolean(event.target.closest('a, button, select')));
-      });
-      document.addEventListener('mouseout', event => {
-        if (event.target.closest('a, button, select')) document.body.classList.remove('cursor-hover');
-      });
-      move();
-    }
-
     document.getElementById('languageSelect').addEventListener('change', event => {
       currentLanguage = ['it', 'en', 'es'].includes(event.target.value) ? event.target.value : 'it';
       localStorage.setItem('sapotweak_site_lang', currentLanguage);
       applyLanguage();
     });
 
-    setupCursor();
     applyLanguage();
     fetch('./version.json', { cache: 'no-store' })
       .then(response => response.ok ? response.json() : fallback)
