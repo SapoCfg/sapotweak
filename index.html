@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SapoTweak - Download</title>
+  <title>SapoTweak - Licenza</title>
   <style>
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -283,24 +283,76 @@
       align-items: center;
       gap: 10px;
     }
-    .footer-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
+    .footer-tos {
+      border: 0;
+      background: transparent;
       color: rgba(255,255,255,.72);
-      text-decoration: none;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .08em;
+      cursor: pointer;
       text-transform: uppercase;
     }
-    .footer-links a:hover {
-      color: #efe9ff;
+    .footer-tos:hover { color: #efe9ff; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.68);
+      z-index: 30;
     }
+    .modal-backdrop.show { display: grid; }
+    .modal-box {
+      width: min(760px, 100%);
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, #151522, #101018);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      box-shadow: 0 32px 90px rgba(0,0,0,.5);
+      padding: 20px;
+    }
+    .modal-box h2 { margin: 0 0 8px; font-size: 22px; }
+    .modal-box p { margin: 0 0 14px; color: #c7c2d8; font-size: 13px; line-height: 1.55; }
+    .tos-body {
+      margin: 0 0 14px;
+      padding: 14px 16px;
+      max-height: 54vh;
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: rgba(0,0,0,.18);
+      color: #f3f0ff;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .tos-body p { margin: 0 0 12px; color: #ddd7f0; }
+    .tos-body ul { margin: 0; padding-left: 18px; }
+    .tos-body li { margin-bottom: 10px; }
+    .tos-confirm {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: #ddd7f0;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .tos-confirm input { margin-top: 2px; }
+    .modal-actions { display: flex; justify-content: flex-end; }
+    .modal-close {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
     /* SAPOTWEAK_LED_SURFACES */
     .visual,
     .feature-item,
@@ -354,10 +406,10 @@
 
     <section class="hero">
       <div class="copy">
-        <h1><span data-i18n="headlineMain">Download</span> <span>SapoTweak</span></h1>
-        <p data-i18n="heroText">Utility Windows per ottimizzazione gaming, gestione servizi, debloat controllato e strumenti FiveM. Include preset guidati, ripristino e licenza collegata al PC.</p>
+        <h1><span data-i18n="headlineMain">Licenza</span> <span>SapoTweak</span></h1>
+        <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
         <div class="actions">
-          <a class="btn" id="downloadBtn" href="terms.html?action=download" data-i18n="downloadBtn">Scarica per Windows</a>
+          <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
           <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
         </div>
       </div>
@@ -391,25 +443,37 @@
     </section>
 
         <section class="payment-card">
-      <span class="payment-title" data-i18n="paymentTitle">Acquisto licenza:</span>
-      <a class="checkout-chip" href="terms.html?action=license" data-i18n="paymentButton">Acquista licenza</a>
-      <p class="payment-note" data-i18n="paymentNote">Dopo l'acquisto ricevi la license key via email. La licenza è mensile e viene collegata al PC al primo avvio dell'app.</p>
-      <p class="payment-warning" data-i18n="paymentWarning">L'abbonamento è gestito in modo automatico. Conserva l'email ricevuta per key, rinnovo e gestione dell'acquisto.</p>
+      <span class="payment-title" data-i18n="paymentTitle">Checkout Stripe:</span>
+      <a class="checkout-chip" href="checkout.html" data-i18n="paymentButton">Apri pagina checkout</a>
+      <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.</p>
+      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon.</p>
     </section>
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <div class="footer-links">
-        <a href="terms.html" data-i18n="legalTerms">Terms</a>
-        <a href="privacy.html" data-i18n="legalPrivacy">Privacy</a>
-        <a href="refund.html" data-i18n="legalRefund">Refund</a>
-      </div>
+      <button class="footer-tos" type="button" onclick="showTosModal()" data-i18n="tosLink">TOS</button>
     </footer>
   </main>
+  <div class="modal-backdrop" id="tosModal">
+    <div class="modal-box">
+      <h2 data-i18n="tosTitle">Termini di utilizzo</h2>
+      <p data-i18n="tosText">Condizioni rapide per l uso del software.</p>
+      <div class="tos-body" id="tosBody"></div>
+      <label class="tos-confirm">
+        <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
+        <span data-i18n="tosAcceptLabel" id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
+      </label>
+      <div class="modal-actions">
+        <button class="modal-close" type="button" onclick="dismissTosModal()" data-i18n="tosCloseBtn">Chiudi</button>
+        <button class="modal-close" type="button" onclick="acceptTos()" data-i18n="tosAcceptBtn" id="tosAcceptBtn">Accetta</button>
+      </div>
+    </div>
+  </div>
   <script>
     const fallback = {
       version: '1.2.1',
       platform: 'Windows x64',
+      checkoutPageUrl: 'checkout.html',
       downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe',
       introVideoUrl: 'https://www.youtube.com/@sxp0z'
     };
@@ -417,9 +481,9 @@
     const translations = {
       it: {
         versionLabel: 'Versione',
-        headlineMain: 'Download',
-        heroText: "Utility Windows per ottimizzazione gaming, gestione servizi, debloat controllato e strumenti FiveM. Include preset guidati, ripristino e licenza collegata al PC.",
-        downloadBtn: 'Scarica per Windows',
+        headlineMain: 'Licenza',
+        heroText: "SapoTweak viene sbloccato tramite licenza personale. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
+        downloadBtn: 'Scegli il piano',
         card1Title: 'Preset gaming',
         card1Text: 'Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.',
         card2Title: 'Licenza protetta',
@@ -434,19 +498,32 @@
         rail4Title: 'Update integrati', rail4Text: "Controllo versione e download guidato direttamente dentro l'app.",
         rail5Title: 'PC rilevato', rail5Text: "L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.",
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
-        paymentTitle: 'Acquisto licenza:',
-        paymentButton: 'Acquista licenza',
-        paymentNote: "Dopo l'acquisto ricevi la license key via email. La licenza è mensile e viene collegata al PC al primo avvio dell'app.",
-        paymentWarning: "L'abbonamento è gestito in modo automatico. Conserva l'email ricevuta per key, rinnovo e gestione dell'acquisto.",
-        legalTerms: 'Termini',
-        legalPrivacy: 'Privacy',
-        legalRefund: 'Rimborsi'
+        paymentTitle: 'Checkout Stripe:',
+        paymentButton: 'Apri pagina checkout',
+        paymentNote: "Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.",
+        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon.",
+        tosLink: 'TOS',
+        tosTitle: 'Termini di utilizzo',
+        tosText: 'Condizioni rapide per l uso del software.',
+        tosCloseBtn: 'Chiudi',
+        tosAcceptLabel: 'Ho letto e accetto le condizioni.',
+        tosAcceptBtn: 'Accetta',
+        tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
+        tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
+        tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
+        tosItem3: 'Si consiglia di creare un punto di ripristino o un backup prima dell uso, per evitare conflitti con tweak, script, servizi o modifiche gia applicate in precedenza dall utente o da software terzi.',
+        tosItem4: 'Ogni comando o tweak include una descrizione specifica per permettere all utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.',
+        tosItem5: 'Non ci assumiamo responsabilita per le scelte dell utente su cio che viene attivato, disattivato o modificato tramite il software, ne per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall utente.',
+        tosItem6: 'La key e pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi puo richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.',
+        tosItem7: 'SapoTweak e un prodotto digitale fornito immediatamente. Dopo attivazione o inizio della fornitura digitale richiesta dall utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.',
+        tosItem8: 'Sono vietati furto o estrazione di dati, codice o asset del programma, reverse engineering non autorizzato, bypass delle protezioni, condivisione di key, redistribuzione abusiva, modifica dei sistemi di licenza o update e qualsiasi uso fraudolento del software.',
+        tosItem9: 'Le violazioni possono comportare sospensione dell accesso, revoca della licenza e azioni civili o penali ove applicabili.'
       },
       en: {
         versionLabel: 'Version',
-        headlineMain: 'Download',
-        heroText: 'Windows utility for gaming optimization, service management, controlled debloat and FiveM tools. Includes guided presets, restore options and a PC-bound license.',
-        downloadBtn: 'Download for Windows',
+        headlineMain: 'License',
+        heroText: 'SapoTweak is unlocked through a personal license. Choose the plan, complete checkout and receive the key plus the official download on the confirmation page.',
+        downloadBtn: 'Choose plan',
         card1Title: 'Gaming presets',
         card1Text: 'Safe, Advanced and Extreme profiles to lighten Windows without touching critical services.',
         card2Title: 'Protected license',
@@ -461,19 +538,32 @@
         rail4Title: 'Integrated updates', rail4Text: 'Version checks and guided download directly inside the app.',
         rail5Title: 'Detected PC', rail5Text: 'The app filters tweaks based on RAM, GPU, CPU and Windows version.',
         rail6Title: 'Clean interface', rail6Text: 'Only useful actions are shown, avoiding out-of-context settings.',
-        paymentTitle: 'License purchase:',
-        paymentButton: 'Buy license',
-        paymentNote: 'After purchase, the license key is sent by email. The license is monthly and is linked to the PC when the app is first opened.',
-        paymentWarning: 'The subscription is managed automatically. Keep the purchase email for the key, renewal and purchase management.',
-        legalTerms: 'Terms',
-        legalPrivacy: 'Privacy',
-        legalRefund: 'Refund'
+        paymentTitle: 'Stripe checkout:',
+        paymentButton: 'Open checkout page',
+        paymentNote: 'Customers can choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country.',
+        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Lemon is no longer used.',
+        tosLink: 'TOS',
+        tosTitle: 'Terms of Service',
+        tosText: 'Short terms for using the software.',
+        tosCloseBtn: 'Close',
+        tosAcceptLabel: 'I have read and accept the terms.',
+        tosAcceptBtn: 'Accept',
+        tosIntro: 'By using or activating SapoTweak, you accept these core terms:',
+        tosItem1: 'Review, benchmark, FPS, process-count, latency and stability results will not necessarily match yours. Performance depends on hardware, PC cleanliness and cooling, disk health and free space, Windows version and install condition, drivers, BIOS, monitor, installed software, services, background apps, antivirus, overlays and game patches.',
+        tosItem2: 'Published screenshots, videos, reviews and examples are illustrative only and do not guarantee the same outcome on every device or Windows installation.',
+        tosItem3: 'Creating a restore point or backup before use is recommended to reduce conflicts with tweaks, scripts, services or changes previously applied by the user or by third-party software.',
+        tosItem4: 'Each command or tweak includes a specific description so users can decide for themselves what to enable or disable based on their own preferences and system.',
+        tosItem5: 'We do not accept responsibility for the user choices regarding what is enabled, disabled or modified through the software, nor for effects caused by previous configurations, misuse or combinations manually chosen by the user.',
+        tosItem6: 'The key is intended to keep working after a PC reset, Windows reset, reinstall or Windows switch as long as the main hardware stays the same. Replacing the motherboard, CPU or other identifying hardware can require a new activation; refunds are not provided for hardware changes except where mandatory applicable law requires otherwise.',
+        tosItem7: 'SapoTweak is a digital product supplied immediately. After activation or after the start of the digital supply requested by the user, refunds are generally not available except where mandatory applicable law requires otherwise.',
+        tosItem8: 'Theft or extraction of program data, code or assets, unauthorized reverse engineering, protection bypassing, key sharing, abusive redistribution, tampering with licensing or update systems, and any fraudulent use of the software are prohibited.',
+        tosItem9: 'Violations may lead to access suspension, license revocation and civil or criminal action where applicable.'
       },
       es: {
         versionLabel: 'Version',
-        headlineMain: 'Descargar',
-        heroText: 'Utilidad Windows para optimización gaming, gestión de servicios, debloat controlado y herramientas FiveM. Incluye presets guiados, restauración y licencia vinculada al PC.',
-        downloadBtn: 'Descargar para Windows',
+        headlineMain: 'Licencia',
+        heroText: 'SapoTweak se desbloquea mediante una licencia personal. Elige el plan, completa el pago y recibe la key y la descarga oficial en la página de confirmación.',
+        downloadBtn: 'Elegir plan',
         card1Title: 'Presets gaming',
         card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios crÃ­ticos.',
         card2Title: 'Licencia protegida',
@@ -488,13 +578,26 @@
         rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la app.',
         rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks según RAM, GPU, CPU y versión de Windows.',
         rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones útiles, evitando ajustes fuera de contexto.',
-        paymentTitle: 'Compra de licencia:',
-        paymentButton: 'Comprar licencia',
-        paymentNote: 'Después de la compra recibes la license key por email. La licencia es mensual y se vincula al PC al abrir la app por primera vez.',
-        paymentWarning: 'La suscripción se gestiona automáticamente. Guarda el email recibido para la key, renovación y gestión de la compra.',
-        legalTerms: 'Terminos',
-        legalPrivacy: 'Privacidad',
-        legalRefund: 'Reembolsos'
+        paymentTitle: 'Checkout Stripe:',
+        paymentButton: 'Abrir página checkout',
+        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país.',
+        paymentWarning: 'Después del pago la key aparece inmediatamente en la página de confirmación junto con la descarga oficial. Lemon ya no se usa.',
+        tosLink: 'TOS',
+        tosTitle: 'Terminos de Uso',
+        tosText: 'Condiciones breves para usar el software.',
+        tosCloseBtn: 'Cerrar',
+        tosAcceptLabel: 'He leido y acepto las condiciones.',
+        tosAcceptBtn: 'Aceptar',
+        tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
+        tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
+        tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
+        tosItem3: 'Se recomienda crear un punto de restauracion o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
+        tosItem4: 'Cada comando o tweak incluye una descripcion especifica para que cada usuario pueda decidir por si mismo que activar o desactivar segun sus preferencias y su sistema.',
+        tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
+        tosItem6: 'La key esta pensada para seguir funcionando despues de un reinicio del PC, reset de Windows, reinstalacion o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activacion; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
+        tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. Tras la activacion o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no estan disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
+        tosItem8: 'Se prohibe el robo o extraccion de datos, codigo o assets del programa, la ingenieria inversa no autorizada, el bypass de protecciones, compartir keys, la redistribucion abusiva, la manipulacion de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
+        tosItem9: 'Las infracciones pueden implicar suspension de acceso, revocacion de la licencia y acciones civiles o penales cuando corresponda.'
       }
     };
 
@@ -505,18 +608,67 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
+    function updateTosBody() {
+      const body = document.getElementById('tosBody');
+      if (!body) return;
+      body.innerHTML = `
+        <p>${t('tosIntro')}</p>
+        <ul>
+          <li>${t('tosItem1')}</li>
+          <li>${t('tosItem2')}</li>
+          <li>${t('tosItem3')}</li>
+          <li>${t('tosItem4')}</li>
+          <li>${t('tosItem5')}</li>
+          <li>${t('tosItem6')}</li>
+          <li>${t('tosItem7')}</li>
+          <li>${t('tosItem8')}</li>
+          <li>${t('tosItem9')}</li>
+        </ul>
+      `;
+    }
+    function hasAcceptedTos() {
+      return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
+    }
+    function syncTosAcceptanceUi() {
+      const check = document.getElementById('tosAcceptCheck');
+      const btn = document.getElementById('tosAcceptBtn');
+      if (!check || !btn) return;
+      if (hasAcceptedTos()) check.checked = true;
+      btn.disabled = !check.checked;
+    }
+
     function applyLanguage() {
       document.documentElement.lang = currentLanguage;
       document.getElementById('languageSelect').value = currentLanguage;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         el.textContent = t(el.dataset.i18n);
       });
+      updateTosBody();
+      syncTosAcceptanceUi();
       applySiteConfig(siteConfig);
+    }
+
+    function showTosModal() {
+      updateTosBody();
+      syncTosAcceptanceUi();
+      document.getElementById('tosModal').classList.add('show');
+    }
+
+    function dismissTosModal() {
+      document.getElementById('tosModal').classList.remove('show');
+    }
+    function acceptTos() {
+      const check = document.getElementById('tosAcceptCheck');
+      if (!check || !check.checked) return;
+      localStorage.setItem('sapotweak_site_tos_ack_v1', '1');
+      syncTosAcceptanceUi();
+      dismissTosModal();
     }
 
     function applySiteConfig(config) {
       siteConfig = { ...fallback, ...(config || {}) };
       document.getElementById('versionPill').textContent = `${siteConfig.platform} - ${t('versionLabel')} ${siteConfig.version}`;
+      document.getElementById('downloadBtn').href = siteConfig.checkoutPageUrl || fallback.checkoutPageUrl;
       const intro = document.getElementById('introVideoBtn');
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
     }

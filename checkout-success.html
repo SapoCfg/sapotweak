@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SapoTweak - Licenza</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090814;
+      --panel: rgba(18, 16, 34, 0.94);
+      --border: rgba(255,255,255,.10);
+      --text: #f7f4ff;
+      --muted: #beb8d5;
+      --accent: #8b5cf6;
+      --accent-2: #5b3df5;
+      --success: #3ea6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(139,92,246,.28), transparent 34%),
+        linear-gradient(180deg, #090814 0%, #05040b 100%);
+    }
+    .shell {
+      width: min(640px, 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--panel);
+      padding: 30px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.34);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .brand img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 999px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 6vw, 50px);
+      line-height: .94;
+    }
+    p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    .key-box {
+      display: none;
+      margin: 24px 0 16px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(139,92,246,.28);
+      background: rgba(255,255,255,.04);
+      text-align: center;
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 900;
+      letter-spacing: .06em;
+      overflow-wrap: anywhere;
+      user-select: all;
+    }
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 16px 44px rgba(91,61,245,.24);
+    }
+    .btn.secondary {
+      display: none;
+      background: linear-gradient(135deg, #2a84ff, var(--success));
+      box-shadow: 0 16px 44px rgba(42,132,255,.24);
+    }
+    .status {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .status.error { color: #ffb7b7; }
+    .meta {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: #a9a2c0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="brand" href="index.html">
+      <img src="sapotweak.png" alt="SapoTweak">
+      <span>SapoTweak</span>
+    </a>
+    <h1>Pagamento completato</h1>
+    <p>La tua licenza viene preparata automaticamente. Tieni aperta questa pagina finche compare la key, poi scarica l'app e attivala al primo avvio.</p>
+
+    <div id="keyBox" class="key-box"></div>
+
+    <div class="actions">
+      <button id="copyBtn" class="btn" type="button" style="display:none;">Copia key</button>
+      <a id="downloadBtn" class="btn secondary" href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe">Scarica SapoTweak per Windows</a>
+    </div>
+
+    <div id="status" class="status">Recupero della licenza in corso...</div>
+
+    <div class="meta">
+      Se la key non compare entro un minuto, scrivi a
+      <a href="mailto:support@sapotweak.org" style="color:#d6c8ff;">support@sapotweak.org</a>
+      indicando l'email usata nel pagamento.
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id") || "";
+    const workerBase = "https://license.salvocan05.workers.dev";
+    const keyBox = document.getElementById("keyBox");
+    const copyBtn = document.getElementById("copyBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const statusEl = document.getElementById("status");
+    let attempts = 0;
+
+    if (!sessionId) {
+      statusEl.textContent = "Sessione di pagamento non trovata. Torna al sito e riprova il checkout.";
+      statusEl.classList.add("error");
+    } else {
+      loadLicense();
+    }
+
+    async function loadLicense() {
+      attempts += 1;
+      try {
+        const response = await fetch(workerBase + "/license/session?session_id=" + encodeURIComponent(sessionId), {
+          cache: "no-store"
+        });
+        const data = await response.json();
+        if (data && data.license && data.license.licenseKey) {
+          keyBox.textContent = data.license.licenseKey;
+          keyBox.style.display = "block";
+          copyBtn.style.display = "inline-flex";
+          downloadBtn.style.display = "inline-flex";
+          statusEl.textContent = "Key pronta. Copiala, scarica l'app e inseriscila al primo avvio.";
+          return;
+        }
+        if (attempts < 30) {
+          statusEl.textContent = "Licenza in preparazione...";
+          setTimeout(loadLicense, 2000);
+          return;
+        }
+        statusEl.textContent = "La licenza non e ancora disponibile. Contatta support@sapotweak.org.";
+        statusEl.classList.add("error");
+      } catch (error) {
+        if (attempts < 30) {
+          statusEl.textContent = "Riprovo a recuperare la licenza...";
+          setTimeout(loadLicense, 2000);
+          return;
+        }
+        statusEl.textContent = "Errore nel recupero della licenza. Contatta support@sapotweak.org.";
+        statusEl.classList.add("error");
+      }
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(keyBox.textContent);
+      copyBtn.textContent = "Key copiata";
+    });
+  </script>
+</body>
+</html>
