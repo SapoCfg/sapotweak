@@ -73,6 +73,21 @@
       align-items: center;
       padding: 76px 0 36px;
     }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border: 1px solid rgba(167, 139, 250, .26);
+      border-radius: 999px;
+      background: rgba(124, 58, 237, .12);
+      color: #ddd7f0;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
     h1 {
       font-size: clamp(48px, 8vw, 94px);
       line-height: .9;
@@ -129,6 +144,27 @@
     }
     .btn.youtube:hover {
       box-shadow: 0 24px 70px rgba(255, 0, 0, .30);
+    }
+    .micro-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .micro-step {
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(21,21,34,.88), rgba(12,12,20,.88));
+      color: #cbc4df;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .micro-step b {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 13px;
     }
     .visual {
       border: 1px solid rgba(255,255,255,.11);
@@ -354,7 +390,7 @@
     }
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; padding-top: 54px; }
-      .cards, .feature-list { grid-template-columns: 1fr; }
+      .cards, .feature-list, .micro-steps { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; }
       .nav-actions { justify-content: flex-start; }
       .visual { order: -1; }
@@ -375,7 +411,7 @@
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Español</option>
+          <option value="es">Espanol</option>
         </select>
         <div class="pill" id="versionPill">Windows x64 - Versione ...</div>
       </div>
@@ -383,11 +419,18 @@
 
     <section class="hero">
       <div class="copy">
-        <h1><span data-i18n="headlineMain">Licenza</span> <span>SapoTweak</span></h1>
-        <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
+        <div class="eyebrow" data-i18n="eyebrowText">Windows 10/11 - Licenza personale - Update automatici</div>
+        <h1><span data-i18n="headlineMain">Ottimizzazione</span> <span>SapoTweak</span></h1>
+        <p data-i18n="heroText">SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
         <div class="actions">
           <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
           <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
+        </div>
+        <div class="micro-steps">
+          <div class="micro-step"><b data-i18n="step1Title">1. Scegli</b><span data-i18n="step1Text">Apri la pagina piani e seleziona mensile o trimestrale.</span></div>
+          <div class="micro-step"><b data-i18n="step2Title">2. Paga</b><span data-i18n="step2Text">Il checkout e gestito da Stripe con tasse calcolate in base al paese.</span></div>
+          <div class="micro-step"><b data-i18n="step3Title">3. Ricevi</b><span data-i18n="step3Text">Dopo il pagamento trovi subito key e download ufficiale.</span></div>
+          <div class="micro-step"><b data-i18n="step4Title">4. Attiva</b><span data-i18n="step4Text">La licenza viene collegata al PC e l'app continua a ricevere update.</span></div>
         </div>
       </div>
       <div class="visual">
@@ -458,9 +501,18 @@
     const translations = {
       it: {
         versionLabel: 'Versione',
-        headlineMain: 'Licenza',
-        heroText: "SapoTweak viene sbloccato tramite licenza personale. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
+        eyebrowText: 'Windows 10/11 - Licenza personale - Update automatici',
+        headlineMain: 'Ottimizzazione',
+        heroText: "SapoTweak raccoglie preset di ottimizzazione per Windows gaming, attivazione legata al PC e aggiornamenti integrati. Scegli il piano, completa il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
         downloadBtn: 'Scegli il piano',
+        step1Title: '1. Scegli',
+        step1Text: 'Apri la pagina piani e seleziona mensile o trimestrale.',
+        step2Title: '2. Paga',
+        step2Text: 'Il checkout e gestito da Stripe con tasse calcolate in base al paese.',
+        step3Title: '3. Ricevi',
+        step3Text: 'Dopo il pagamento trovi subito key e download ufficiale.',
+        step4Title: '4. Attiva',
+        step4Text: "La licenza viene collegata al PC e l'app continua a ricevere update.",
         card1Title: 'Preset gaming',
         card1Text: 'Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.',
         card2Title: 'Licenza protetta',
@@ -498,9 +550,18 @@
       },
       en: {
         versionLabel: 'Version',
-        headlineMain: 'License',
-        heroText: 'SapoTweak is unlocked through a personal license. Choose the plan, complete checkout and receive the key plus the official download on the confirmation page.',
+        eyebrowText: 'Windows 10/11 - Personal license - Automatic updates',
+        headlineMain: 'Optimization',
+        heroText: 'SapoTweak brings together Windows gaming presets, PC-bound activation and integrated updates. Choose the plan, complete checkout and receive the key plus the official download on the confirmation page.',
         downloadBtn: 'Choose plan',
+        step1Title: '1. Choose',
+        step1Text: 'Open the plans page and pick monthly or quarterly.',
+        step2Title: '2. Pay',
+        step2Text: 'Checkout is handled by Stripe with taxes calculated by customer country.',
+        step3Title: '3. Receive',
+        step3Text: 'Right after payment you get the key and the official download.',
+        step4Title: '4. Activate',
+        step4Text: 'The license is linked to the PC and the app keeps receiving updates.',
         card1Title: 'Gaming presets',
         card1Text: 'Safe, Advanced and Extreme profiles to lighten Windows without touching critical services.',
         card2Title: 'Protected license',
@@ -538,9 +599,18 @@
       },
       es: {
         versionLabel: 'Version',
-        headlineMain: 'Licencia',
-        heroText: 'SapoTweak se desbloquea mediante una licencia personal. Elige el plan, completa el pago y recibe la key y la descarga oficial en la página de confirmación.',
+        eyebrowText: 'Windows 10/11 - Licencia personal - Updates automaticos',
+        headlineMain: 'Optimizacion',
+        heroText: 'SapoTweak reune presets de optimizacion para Windows gaming, activacion vinculada al PC y updates integrados. Elige el plan, completa el pago y recibe la key y la descarga oficial en la pagina de confirmacion.',
         downloadBtn: 'Elegir plan',
+        step1Title: '1. Elige',
+        step1Text: 'Abre la pagina de planes y selecciona mensual o trimestral.',
+        step2Title: '2. Paga',
+        step2Text: 'Stripe gestiona el checkout con impuestos calculados segun el pais.',
+        step3Title: '3. Recibe',
+        step3Text: 'Despues del pago recibes la key y la descarga oficial.',
+        step4Title: '4. Activa',
+        step4Text: 'La licencia queda vinculada al PC y la app sigue recibiendo updates.',
         card1Title: 'Presets gaming',
         card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios criticos.',
         card2Title: 'Licencia protegida',

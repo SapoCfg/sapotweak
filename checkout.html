@@ -78,6 +78,15 @@
       line-height: 1.7;
       font-size: 17px;
     }
+    .section-kicker {
+      width: min(100%, 760px);
+      margin: 4px 0 -4px;
+      color: #6d28d9;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
     .plans {
       width: min(100%, 760px);
       display: grid;
@@ -121,6 +130,19 @@
       border-radius: 999px;
       background: #7c5cff;
     }
+    .plan-kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(124, 92, 255, .10);
+      color: #6d28d9;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
     .plan-title {
       font-size: 21px;
       font-weight: 900;
@@ -137,6 +159,30 @@
       font-weight: 900;
       color: #111827;
     }
+    .steps {
+      width: min(100%, 760px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .step {
+      background: #fff;
+      border: 1px solid rgba(17,24,39,.08);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, .05);
+    }
+    .step b {
+      display: block;
+      margin-bottom: 6px;
+      color: #111827;
+      font-size: 14px;
+    }
+    .step span {
+      color: #4b5563;
+      font-size: 13px;
+      line-height: 1.55;
+    }
     .note {
       width: min(100%, 760px);
       background: #fff;
@@ -151,6 +197,7 @@
       .plan { grid-template-columns: auto 1fr; }
       .price { grid-column: 2; text-align: left; font-size: 24px; }
       .copy { font-size: 16px; }
+      .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -164,7 +211,7 @@
       <select id="languageSelect" class="lang-select" aria-label="Language">
         <option value="it">Italiano</option>
         <option value="en">English</option>
-        <option value="es">Español</option>
+        <option value="es">Espanol</option>
       </select>
     </div>
 
@@ -176,33 +223,42 @@
       </div>
 
       <div class="copy">
-        <div id="lead1">SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.</div>
+        <div id="lead1">SapoTweak e uno strumento Windows per gamer competitivi che vogliono un sistema piu pulito, rapido e reattivo.</div>
         <div id="lead2">Include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.</div>
         <div id="lead3">Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app.</div>
       </div>
 
+      <div class="section-kicker" id="plansKicker">Piani disponibili</div>
       <div class="plans">
         <a class="plan primary" href="https://buy.stripe.com/4gMdRa1LP8zo6sB2Uw1VK01" target="_blank" rel="noopener">
           <span class="radio" aria-hidden="true"></span>
           <div>
+            <div class="plan-kicker" id="monthlyKicker">Rinnovo mensile</div>
             <div class="plan-title" id="monthlyTitle">Mensile</div>
             <div class="plan-subtitle" id="monthlyText">12,99 EUR fatturati ogni mese, tasse escluse</div>
           </div>
-          <div class="price">12,99 €</div>
+          <div class="price">12,99 EUR</div>
         </a>
 
         <a class="plan" href="https://buy.stripe.com/6oU3cw2PT9DsbMVfHi1VK02" target="_blank" rel="noopener">
           <span class="radio" aria-hidden="true"></span>
           <div>
+            <div class="plan-kicker" id="quarterlyKicker">Ciclo piu lungo</div>
             <div class="plan-title" id="quarterlyTitle">Trimestrale</div>
             <div class="plan-subtitle" id="quarterlyText">24,99 EUR fatturati ogni 3 mesi, tasse escluse</div>
           </div>
-          <div class="price">24,99 €</div>
+          <div class="price">24,99 EUR</div>
         </a>
       </div>
 
+      <div class="steps">
+        <div class="step"><b id="step1Title">Checkout Stripe</b><span id="step1Text">Scegli il piano e completa il pagamento in modo guidato.</span></div>
+        <div class="step"><b id="step2Title">Key immediata</b><span id="step2Text">La pagina finale mostra subito la chiave licenza insieme al download ufficiale.</span></div>
+        <div class="step"><b id="step3Title">Attivazione PC</b><span id="step3Text">Inserisci la chiave nell'app e continua a ricevere aggiornamenti automatici.</span></div>
+      </div>
+
       <div class="note" id="note">
-        Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici. I risultati dipendono da hardware, stato di Windows, driver e software già presenti. Si consiglia l'uso dopo driver grafici aggiornati e con un punto di ripristino già creato.
+        Il checkout e gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici. I risultati dipendono da hardware, stato di Windows, driver e software gia presenti. Si consiglia l'uso dopo driver grafici aggiornati e con un punto di ripristino gia creato.
       </div>
     </div>
   </div>
@@ -211,36 +267,63 @@
     const translations = {
       it: {
         title: 'Scegli il piano SapoTweak',
-        lead1: 'SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.',
+        lead1: 'SapoTweak e uno strumento Windows per gamer competitivi che vogliono un sistema piu pulito, rapido e reattivo.',
         lead2: 'Include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.',
         lead3: "Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app.",
+        plansKicker: 'Piani disponibili',
+        monthlyKicker: 'Rinnovo mensile',
         monthlyTitle: 'Mensile',
         monthlyText: '12,99 EUR fatturati ogni mese, tasse escluse',
+        quarterlyKicker: 'Ciclo piu lungo',
         quarterlyTitle: 'Trimestrale',
         quarterlyText: '24,99 EUR fatturati ogni 3 mesi, tasse escluse',
-        note: "Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici. I risultati dipendono da hardware, stato di Windows, driver e software già presenti. Si consiglia l'uso dopo driver grafici aggiornati e con un punto di ripristino già creato."
+        step1Title: 'Checkout Stripe',
+        step1Text: 'Scegli il piano e completa il pagamento in modo guidato.',
+        step2Title: 'Key immediata',
+        step2Text: 'La pagina finale mostra subito la chiave licenza insieme al download ufficiale.',
+        step3Title: 'Attivazione PC',
+        step3Text: "Inserisci la chiave nell'app e continua a ricevere aggiornamenti automatici.",
+        note: "Il checkout e gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici. I risultati dipendono da hardware, stato di Windows, driver e software gia presenti. Si consiglia l'uso dopo driver grafici aggiornati e con un punto di ripristino gia creato."
       },
       en: {
         title: 'Choose your SapoTweak plan',
         lead1: 'SapoTweak is a Windows tool for competitive gamers who want a cleaner, faster and more responsive system.',
         lead2: 'It includes guided optimization presets, FPS and latency tweaks, dedicated profiles for Fortnite, Valorant, FiveM and Rainbow Six Siege, plus personal license activation.',
         lead3: 'After payment you are redirected to the confirmation page where the key and the official app download are shown immediately.',
+        plansKicker: 'Available plans',
+        monthlyKicker: 'Monthly renewal',
         monthlyTitle: 'Monthly',
         monthlyText: '12.99 EUR billed every month, taxes excluded',
+        quarterlyKicker: 'Longer cycle',
         quarterlyTitle: 'Quarterly',
         quarterlyText: '24.99 EUR billed every 3 months, taxes excluded',
+        step1Title: 'Stripe checkout',
+        step1Text: 'Choose the plan and complete payment through a guided flow.',
+        step2Title: 'Instant key',
+        step2Text: 'The final page shows the license key together with the official download.',
+        step3Title: 'PC activation',
+        step3Text: 'Enter the key in the app and keep receiving automatic updates.',
         note: 'Checkout is handled by Stripe. Taxes are calculated separately based on the customer country. The license remains bound to the PC and the app keeps receiving automatic updates. Results depend on hardware, Windows condition, drivers and previously installed software. We recommend updated graphics drivers and a restore point before applying changes.'
       },
       es: {
         title: 'Elige tu plan de SapoTweak',
-        lead1: 'SapoTweak es una herramienta para Windows pensada para jugadores competitivos que quieren un sistema más limpio, rápido y reactivo.',
-        lead2: 'Incluye presets guiados de optimización, tweaks para FPS y latencia, perfiles dedicados para Fortnite, Valorant, FiveM y Rainbow Six Siege, y activación personal de licencia.',
-        lead3: 'Después del pago se abre la página de confirmación donde aparecen inmediatamente la key y la descarga oficial de la app.',
+        lead1: 'SapoTweak es una herramienta para Windows pensada para jugadores competitivos que quieren un sistema mas limpio, rapido y reactivo.',
+        lead2: 'Incluye presets guiados de optimizacion, tweaks para FPS y latencia, perfiles dedicados para Fortnite, Valorant, FiveM y Rainbow Six Siege, y activacion personal de licencia.',
+        lead3: 'Despues del pago se abre la pagina de confirmacion donde aparecen inmediatamente la key y la descarga oficial de la app.',
+        plansKicker: 'Planes disponibles',
+        monthlyKicker: 'Renovacion mensual',
         monthlyTitle: 'Mensual',
         monthlyText: '12,99 EUR cobrados cada mes, impuestos no incluidos',
+        quarterlyKicker: 'Ciclo mas largo',
         quarterlyTitle: 'Trimestral',
         quarterlyText: '24,99 EUR cobrados cada 3 meses, impuestos no incluidos',
-        note: 'El checkout lo gestiona Stripe. Los impuestos se calculan por separado según el país del cliente. La licencia queda vinculada al PC y la app sigue recibiendo actualizaciones automáticas. Los resultados dependen del hardware, del estado de Windows, de los drivers y del software ya instalado. Recomendamos drivers gráficos actualizados y un punto de restauración antes de aplicar cambios.'
+        step1Title: 'Checkout Stripe',
+        step1Text: 'Elige el plan y completa el pago en un flujo guiado.',
+        step2Title: 'Key inmediata',
+        step2Text: 'La pagina final muestra enseguida la clave licencia junto con la descarga oficial.',
+        step3Title: 'Activacion PC',
+        step3Text: 'Introduce la clave en la app y sigue recibiendo actualizaciones automaticas.',
+        note: 'El checkout lo gestiona Stripe. Los impuestos se calculan por separado segun el pais del cliente. La licencia queda vinculada al PC y la app sigue recibiendo actualizaciones automaticas. Los resultados dependen del hardware, del estado de Windows, de los drivers y del software ya instalado. Recomendamos drivers graficos actualizados y un punto de restauracion antes de aplicar cambios.'
       }
     };
 
@@ -255,10 +338,19 @@
       document.getElementById('lead1').textContent = t.lead1;
       document.getElementById('lead2').textContent = t.lead2;
       document.getElementById('lead3').textContent = t.lead3;
+      document.getElementById('plansKicker').textContent = t.plansKicker;
+      document.getElementById('monthlyKicker').textContent = t.monthlyKicker;
       document.getElementById('monthlyTitle').textContent = t.monthlyTitle;
       document.getElementById('monthlyText').textContent = t.monthlyText;
+      document.getElementById('quarterlyKicker').textContent = t.quarterlyKicker;
       document.getElementById('quarterlyTitle').textContent = t.quarterlyTitle;
       document.getElementById('quarterlyText').textContent = t.quarterlyText;
+      document.getElementById('step1Title').textContent = t.step1Title;
+      document.getElementById('step1Text').textContent = t.step1Text;
+      document.getElementById('step2Title').textContent = t.step2Title;
+      document.getElementById('step2Text').textContent = t.step2Text;
+      document.getElementById('step3Title').textContent = t.step3Title;
+      document.getElementById('step3Text').textContent = t.step3Text;
       document.getElementById('note').textContent = t.note;
       localStorage.setItem('sapotweak_site_lang', lang);
     }
