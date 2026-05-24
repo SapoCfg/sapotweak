@@ -480,8 +480,8 @@
     <section class="payment-card" id="plans">
       <span class="payment-title" data-i18n="paymentTitle">Scegli il piano:</span>
       <div class="actions">
-        <button class="checkout-chip" type="button" id="monthlyPlanBtn" data-i18n="monthlyPlanBtn">Mensile - 12,99 EUR</button>
-        <button class="checkout-chip" type="button" id="quarterlyPlanBtn" data-i18n="quarterlyPlanBtn">Trimestrale - 24,99 EUR</button>
+        <button class="checkout-chip" type="button" id="monthlyPlanBtn" data-i18n="monthlyPlanBtn">Mensile - 14,99 EUR</button>
+        <button class="checkout-chip" type="button" id="quarterlyPlanBtn" data-i18n="quarterlyPlanBtn">Trimestrale - 29,99 EUR</button>
       </div>
       <p class="payment-note" data-i18n="paymentNote">Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.</p>
       <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima del reindirizzamento ai piani viene richiesto di leggere e accettare i termini.</p>
@@ -551,8 +551,8 @@
         rail5Title: 'PC rilevato', rail5Text: "L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.",
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
         paymentTitle: 'Scegli il piano:',
-        monthlyPlanBtn: 'Mensile - 12,99 EUR',
-        quarterlyPlanBtn: 'Trimestrale - 24,99 EUR',
+        monthlyPlanBtn: 'Mensile - 14,99 EUR',
+        quarterlyPlanBtn: 'Trimestrale - 29,99 EUR',
         paymentNote: "Scegli mensile o trimestrale. Le imposte non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente.",
         paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Prima del reindirizzamento ai piani viene richiesto di leggere e accettare i termini.",
         planError: 'Per continuare devi accettare i termini completi.',
@@ -604,8 +604,8 @@
         rail5Title: 'Detected PC', rail5Text: 'The app filters tweaks based on RAM, GPU, CPU and Windows version.',
         rail6Title: 'Clean interface', rail6Text: 'Only useful actions are shown, avoiding out-of-context settings.',
         paymentTitle: 'Choose your plan:',
-        monthlyPlanBtn: 'Monthly - 12.99 EUR',
-        quarterlyPlanBtn: 'Quarterly - 24.99 EUR',
+        monthlyPlanBtn: 'Monthly - 14.99 EUR',
+        quarterlyPlanBtn: 'Quarterly - 29.99 EUR',
         paymentNote: 'Choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country.',
         paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Before continuing to the plans, the terms must be read and accepted.',
         planError: 'You must accept the full terms before continuing.',
@@ -657,8 +657,8 @@
         rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks segun RAM, GPU, CPU y version de Windows.',
         rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones utiles, evitando ajustes fuera de contexto.',
         paymentTitle: 'Elige tu plan:',
-        monthlyPlanBtn: 'Mensual - 12,99 EUR',
-        quarterlyPlanBtn: 'Trimestral - 24,99 EUR',
+        monthlyPlanBtn: 'Mensual - 14,99 EUR',
+        quarterlyPlanBtn: 'Trimestral - 29,99 EUR',
         paymentNote: 'Elige mensual o trimestral. Los impuestos no estan incluidos en el precio y se anaden segun el pais.',
         paymentWarning: 'Despues del pago la key aparece inmediatamente en la pagina de confirmacion junto con la descarga oficial. Antes de continuar hacia los planes, se requiere leer y aceptar los terminos.',
         planError: 'Debes aceptar los terminos completos antes de continuar.',
@@ -859,6 +859,10 @@
     document.getElementById('quarterlyPlanBtn')?.addEventListener('click', () => openPlan('quarterly'));
 
     applyLanguage();
+    const requestedPlan = new URLSearchParams(window.location.search).get('plan');
+    if (requestedPlan === 'monthly' || requestedPlan === 'quarterly') {
+      setTimeout(() => openPlan(requestedPlan), 120);
+    }
     fetch('./version.json', { cache: 'no-store' })
       .then(response => response.ok ? response.json() : fallback)
       .then(applySiteConfig)

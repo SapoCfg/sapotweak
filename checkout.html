@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SapoTweak - Piani</title>
-  <meta http-equiv="refresh" content="0; url=index.html#plans">
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan');
+    const next = plan === 'monthly' || plan === 'quarterly'
+      ? `index.html?plan=${encodeURIComponent(plan)}#plans`
+      : 'index.html#plans';
+    window.location.replace(next);
+  </script>
   <style>
     body {
       margin: 0;
