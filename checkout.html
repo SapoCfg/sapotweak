@@ -83,8 +83,6 @@
       display: grid;
       gap: 14px;
     }
-    .test-only { display: none; }
-    .test-only.show { display: grid; }
     .plan {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -201,15 +199,6 @@
           </div>
           <div class="price">29,99 €</div>
         </a>
-
-        <a class="plan test-only" id="testPlan" href="#" target="_blank" rel="noopener">
-          <span class="radio" aria-hidden="true"></span>
-          <div>
-            <div class="plan-title" id="testTitle">Test pagamento</div>
-            <div class="plan-subtitle" id="testText">Link temporaneo per test Stripe e consegna key</div>
-          </div>
-          <div class="price">0,10 €</div>
-        </a>
       </div>
 
       <div class="note" id="note">
@@ -229,8 +218,6 @@
         monthlyText: '14,99 EUR fatturati ogni mese, tasse escluse',
         quarterlyTitle: 'Trimestrale',
         quarterlyText: '29,99 EUR fatturati ogni 3 mesi, tasse escluse',
-        testTitle: 'Test pagamento',
-        testText: 'Link temporaneo per test Stripe e consegna key',
         note: "Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici."
       },
       en: {
@@ -242,8 +229,6 @@
         monthlyText: '14.99 EUR billed every month, taxes excluded',
         quarterlyTitle: 'Quarterly',
         quarterlyText: '29.99 EUR billed every 3 months, taxes excluded',
-        testTitle: 'Payment test',
-        testText: 'Temporary link for Stripe and key-delivery testing',
         note: 'Checkout is handled by Stripe. Taxes are calculated separately based on the customer country. The license remains bound to the PC and the app keeps receiving automatic updates.'
       },
       es: {
@@ -255,8 +240,6 @@
         monthlyText: '14,99 EUR cobrados cada mes, impuestos no incluidos',
         quarterlyTitle: 'Trimestral',
         quarterlyText: '29,99 EUR cobrados cada 3 meses, impuestos no incluidos',
-        testTitle: 'Prueba de pago',
-        testText: 'Link temporal para probar Stripe y la entrega de la key',
         note: 'El checkout lo gestiona Stripe. Los impuestos se calculan por separado según el país del cliente. La licencia queda vinculada al PC y la app sigue recibiendo actualizaciones automáticas.'
       }
     };
@@ -265,10 +248,7 @@
     const saved = localStorage.getItem('sapotweak_site_lang') || 'it';
     const monthlyPlan = document.getElementById('monthlyPlan');
     const quarterlyPlan = document.getElementById('quarterlyPlan');
-    const testPlan = document.getElementById('testPlan');
     const params = new URLSearchParams(window.location.search);
-    const siteFallback = { testCheckoutUrl: '' };
-    let siteConfig = { ...siteFallback };
 
     function applyLanguage(lang) {
       const t = translations[lang] || translations.it;
@@ -282,8 +262,6 @@
       document.getElementById('monthlyText').textContent = t.monthlyText;
       document.getElementById('quarterlyTitle').textContent = t.quarterlyTitle;
       document.getElementById('quarterlyText').textContent = t.quarterlyText;
-      document.getElementById('testTitle').textContent = t.testTitle;
-      document.getElementById('testText').textContent = t.testText;
       document.getElementById('note').textContent = t.note;
       localStorage.setItem('sapotweak_site_lang', lang);
     }
@@ -294,26 +272,9 @@
       quarterlyPlan.classList.toggle('primary', normalized === 'quarterly');
     }
 
-    function applySiteConfig(config) {
-      siteConfig = { ...siteFallback, ...(config || {}) };
-      const wantsTest = params.get('test') === '1';
-      const testUrl = String(siteConfig.testCheckoutUrl || '').trim();
-      const showTest = wantsTest && testUrl;
-      testPlan.href = testUrl || '#';
-      testPlan.classList.toggle('show', !!showTest);
-      if (showTest) {
-        monthlyPlan.classList.remove('primary');
-        quarterlyPlan.classList.remove('primary');
-      }
-    }
-
     languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
     selectPlan(params.get('plan'));
     applyLanguage(saved);
-    fetch('./version.json', { cache: 'no-store' })
-      .then(response => response.ok ? response.json() : siteFallback)
-      .then(applySiteConfig)
-      .catch(() => applySiteConfig(siteFallback));
   </script>
 </body>
 </html>
