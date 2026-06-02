@@ -265,10 +265,14 @@
       border: 0;
       background: transparent;
       color: rgba(255,255,255,.72);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 11px;
       font-weight: 900;
       letter-spacing: .08em;
       cursor: pointer;
+      text-decoration: none;
       text-transform: uppercase;
     }
     .footer-tos:hover { color: #efe9ff; }
@@ -329,6 +333,8 @@
     }
     .checkmark {
       position: relative;
+      display: grid;
+      place-items: center;
       flex: 0 0 auto;
       width: 20px;
       height: 20px;
@@ -341,15 +347,12 @@
     }
     .checkmark::after {
       content: "";
-      position: absolute;
-      left: 7px;
-      top: 3px;
-      width: 5px;
+      width: 6px;
       height: 10px;
       border: solid #fff;
       border-width: 0 2px 2px 0;
       opacity: 0;
-      transform: rotate(45deg) scale(.65);
+      transform: translateY(-1px) rotate(45deg) scale(.65);
       transition: opacity .16s ease, transform .16s ease;
     }
     .tos-confirm input:checked + .checkmark {
@@ -359,7 +362,7 @@
     }
     .tos-confirm input:checked + .checkmark::after {
       opacity: 1;
-      transform: rotate(45deg) scale(1);
+      transform: translateY(-1px) rotate(45deg) scale(1);
     }
     .tos-confirm input:focus-visible + .checkmark {
       outline: 2px solid rgba(255,255,255,.82);
@@ -476,7 +479,7 @@
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <button class="footer-tos" type="button" onclick="showTosModal()" data-i18n="tosLink">TOS</button>
+      <a class="footer-tos" href="terms.html" data-i18n="tosLink">TOS</a>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">

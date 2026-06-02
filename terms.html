@@ -93,17 +93,16 @@
     }
     .lang-select option { background: #151522; color: #f3f0ff; }
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
-      gap: 28px;
-      align-items: stretch;
-      margin-bottom: 24px;
+      width: min(880px, 100%);
+      margin: 0 auto 24px;
+      text-align: center;
     }
     .hero-copy {
       display: grid;
       align-content: center;
+      justify-items: center;
       gap: 18px;
-      min-height: 330px;
+      padding: 30px 0 8px;
     }
     .kicker {
       width: fit-content;
@@ -136,64 +135,9 @@
       font-size: 17px;
       line-height: 1.68;
     }
-    .summary-panel {
-      display: grid;
-      align-content: center;
-      gap: 14px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: linear-gradient(180deg, var(--panel-soft), #0d0c16);
-      box-shadow:
-        0 0 0 1px rgba(124,58,237,.08),
-        0 0 28px rgba(124,58,237,.14),
-        inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    .summary-item {
-      padding: 14px;
-      border: 1px solid var(--line-soft);
-      border-radius: 14px;
-      background: rgba(0,0,0,.16);
-    }
-    .summary-item b {
-      display: block;
-      margin-bottom: 6px;
-      color: #fff;
-      font-size: 14px;
-    }
-    .summary-item span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.52;
-    }
     .terms-shell {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 22px;
-      align-items: start;
-    }
-    .toc {
-      position: sticky;
-      top: 18px;
-      display: grid;
-      gap: 8px;
-      padding: 16px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: rgba(18,17,29,.72);
-      backdrop-filter: blur(16px);
-    }
-    .toc a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 8px 10px;
-      border-radius: 10px;
-    }
-    .toc a:hover {
-      color: #fff;
-      background: rgba(255,255,255,.06);
+      width: min(880px, 100%);
+      margin: 0 auto;
     }
     .terms-card {
       display: grid;
@@ -247,6 +191,8 @@
     }
     .checkmark {
       position: relative;
+      display: grid;
+      place-items: center;
       flex: 0 0 auto;
       width: 22px;
       height: 22px;
@@ -259,15 +205,12 @@
     }
     .checkmark::after {
       content: "";
-      position: absolute;
-      left: 8px;
-      top: 4px;
-      width: 5px;
+      width: 6px;
       height: 10px;
       border: solid #fff;
       border-width: 0 2px 2px 0;
       opacity: 0;
-      transform: rotate(45deg) scale(.65);
+      transform: translateY(-1px) rotate(45deg) scale(.65);
       transition: opacity .16s ease, transform .16s ease;
     }
     .accept-row input:checked + .checkmark {
@@ -277,7 +220,7 @@
     }
     .accept-row input:checked + .checkmark::after {
       opacity: 1;
-      transform: rotate(45deg) scale(1);
+      transform: translateY(-1px) rotate(45deg) scale(1);
     }
     .accept-row input:focus-visible + .checkmark {
       outline: 2px solid rgba(255,255,255,.86);
@@ -329,10 +272,8 @@
       .wrap { padding: 22px; }
       .nav { align-items: flex-start; flex-direction: column; }
       .nav-actions { justify-content: flex-start; }
-      .hero { grid-template-columns: 1fr; margin-bottom: 18px; }
-      .hero-copy { min-height: auto; }
-      .terms-shell { grid-template-columns: 1fr; }
-      .toc { position: static; }
+      .hero { margin-bottom: 18px; }
+      .hero-copy { padding-top: 18px; }
     }
   </style>
 </head>
@@ -361,34 +302,9 @@
         <h1 data-i18n-html="title">Termini di utilizzo <span>SapoTweak</span></h1>
         <p class="lead" data-i18n="lead">Questa pagina riassume le condizioni essenziali per acquistare, attivare e usare SapoTweak durante la fase paid beta.</p>
       </div>
-      <aside class="summary-panel" aria-label="Riepilogo">
-        <div class="summary-item">
-          <b data-i18n="summary1Title">Paid beta</b>
-          <span data-i18n="summary1Text">Il prodotto e acquistabile come accesso anticipato con fix e cambi rapidi.</span>
-        </div>
-        <div class="summary-item">
-          <b data-i18n="summary2Title">Prodotto digitale</b>
-          <span data-i18n="summary2Text">Key e download vengono forniti in modo digitale dopo il pagamento.</span>
-        </div>
-        <div class="summary-item">
-          <b data-i18n="summary3Title">Uso personale</b>
-          <span data-i18n="summary3Text">Key, codice, asset e sistemi di licenza non possono essere copiati o aggirati.</span>
-        </div>
-      </aside>
     </div>
 
     <div class="terms-shell">
-      <aside class="toc" aria-label="Indice">
-        <a href="#scope" data-i18n="toc1">1. Prodotto</a>
-        <a href="#beta" data-i18n="toc2">2. Paid beta</a>
-        <a href="#performance" data-i18n="toc3">3. Risultati</a>
-        <a href="#license" data-i18n="toc4">4. Licenza</a>
-        <a href="#payments" data-i18n="toc5">5. Pagamenti</a>
-        <a href="#prohibited" data-i18n="toc6">6. Divieti</a>
-        <a href="#liability" data-i18n="toc7">7. Responsabilita</a>
-        <a href="#contact" data-i18n="toc8">8. Contatto</a>
-      </aside>
-
       <div class="terms-card">
         <section id="scope">
           <h2 data-i18n="scopeTitle">1. Prodotto</h2>

@@ -153,6 +153,8 @@
     }
     .checkmark {
       position: relative;
+      display: grid;
+      place-items: center;
       flex: 0 0 auto;
       width: 22px;
       height: 22px;
@@ -165,15 +167,12 @@
     }
     .checkmark::after {
       content: "";
-      position: absolute;
-      left: 8px;
-      top: 4px;
-      width: 5px;
+      width: 6px;
       height: 10px;
       border: solid #fff;
       border-width: 0 2px 2px 0;
       opacity: 0;
-      transform: rotate(45deg) scale(.65);
+      transform: translateY(-1px) rotate(45deg) scale(.65);
       transition: opacity .16s ease, transform .16s ease;
     }
     .consent-row input:checked + .checkmark {
@@ -183,7 +182,7 @@
     }
     .consent-row input:checked + .checkmark::after {
       opacity: 1;
-      transform: rotate(45deg) scale(1);
+      transform: translateY(-1px) rotate(45deg) scale(1);
     }
     .consent-row input:focus-visible + .checkmark {
       outline: 2px solid rgba(17,24,39,.72);
