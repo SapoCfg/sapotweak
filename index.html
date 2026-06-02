@@ -422,11 +422,11 @@
         <span>SAPOTWEAK</span>
       </div>
       <div class="nav-actions">
-        <a class="nav-link" href="reviews.html" target="_blank" rel="noopener">Review</a>
+        <a class="nav-link" href="reviews.html" target="_blank" rel="noopener" data-i18n="reviewsLink">Recensioni</a>
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Espanol</option>
+          <option value="es">Español</option>
         </select>
         <div class="pill" id="versionPill">Windows x64 - Versione ...</div>
       </div>
@@ -435,10 +435,10 @@
     <section class="hero">
       <div class="copy">
         <h1><span data-i18n="headlineMain">Licenza</span> <span>SapoTweak</span></h1>
-        <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. In questa fase paid beta scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
+        <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. In questa fase beta a pagamento scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
         <div class="actions">
           <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
-          <a class="btn youtube" id="introVideoBtn" href="#intro-video">Introductory video</a>
+          <a class="btn youtube" id="introVideoBtn" href="#intro-video" data-i18n="introVideoBtn">Video introduttivo</a>
         </div>
       </div>
       <div class="visual">
@@ -467,14 +467,14 @@
     </section>
 
         <section class="details" data-i18n="detailsText">
-      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.
+      SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.
     </section>
 
         <section class="payment-card">
       <span class="payment-title" data-i18n="paymentTitle">Checkout Stripe:</span>
-      <a class="checkout-chip" href="checkout.html" data-i18n="paymentButton">Apri pagina checkout</a>
+      <a class="checkout-chip" href="checkout.html" data-i18n="paymentButton">Apri il checkout</a>
       <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.</p>
-      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon. Durante la beta alcune aree possono ricevere fix rapidi o cambiare piu spesso.</p>
+      <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.</p>
     </section>
 
     <footer class="footer">
@@ -485,7 +485,7 @@
   <div class="modal-backdrop" id="tosModal">
     <div class="modal-box">
       <h2 data-i18n="tosTitle">Termini di utilizzo</h2>
-      <p data-i18n="tosText">Condizioni rapide per l uso del software.</p>
+      <p data-i18n="tosText">Condizioni rapide per l'uso del software.</p>
       <div class="tos-body" id="tosBody"></div>
       <label class="tos-confirm">
         <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
@@ -509,17 +509,20 @@
 
     const translations = {
       it: {
+        pageTitle: 'SapoTweak - Licenza',
         versionLabel: 'Versione',
+        reviewsLink: 'Recensioni',
         headlineMain: 'Licenza',
-        heroText: "SapoTweak viene sbloccato tramite licenza personale. In questa fase paid beta scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
+        heroText: "SapoTweak viene sbloccato tramite licenza personale. In questa fase beta a pagamento scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
         downloadBtn: 'Scegli il piano',
+        introVideoBtn: 'Video introduttivo',
         card1Title: 'Preset gaming',
         card1Text: 'Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.',
         card2Title: 'Licenza protetta',
         card2Text: "Attivazione collegata al PC con controllo automatico all'avvio dell'app.",
         card3Title: 'Aggiornamenti integrati',
         card3Text: "L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.",
-        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.",
+        detailsText: "SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.",
         footerText: 'SapoTweak - Distribuisci solo build ufficiali.',
         rail1Title: 'Preset guidati', rail1Text: 'Safe, Advanced ed Extreme con livelli separati per utenti diversi.',
         rail2Title: 'Ripristino', rail2Text: 'Backup e ritorno ai valori conservativi se un preset non convince.',
@@ -528,31 +531,34 @@
         rail5Title: 'PC rilevato', rail5Text: "L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.",
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
         paymentTitle: 'Checkout Stripe:',
-        paymentButton: 'Apri pagina checkout',
+        paymentButton: 'Apri il checkout',
         paymentNote: "Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.",
-        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon. Durante la beta alcune aree possono ricevere fix rapidi o cambiare piu spesso.",
+        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.",
         tosLink: 'TOS',
         tosTitle: 'Termini di utilizzo',
-        tosText: 'Condizioni rapide per l uso del software.',
+        tosText: "Condizioni rapide per l'uso del software.",
         tosCloseBtn: 'Chiudi',
         tosAcceptLabel: 'Ho letto e accetto le condizioni.',
         tosAcceptBtn: 'Accetta',
         tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
-        tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
+        tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilità non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
         tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
-        tosItem3: 'Si consiglia di creare un punto di ripristino o un backup prima dell uso, per evitare conflitti con tweak, script, servizi o modifiche gia applicate in precedenza dall utente o da software terzi.',
-        tosItem4: 'Ogni comando o tweak include una descrizione specifica per permettere all utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.',
-        tosItem5: 'Non ci assumiamo responsabilita per le scelte dell utente su cio che viene attivato, disattivato o modificato tramite il software, ne per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall utente.',
-        tosItem6: 'La key e pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi puo richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.',
-        tosItem7: 'SapoTweak e un prodotto digitale fornito immediatamente. In questa fase puo essere distribuito come beta a pagamento con funzionalita ancora in evoluzione. Dopo attivazione o inizio della fornitura digitale richiesta dall utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.',
+        tosItem3: "Si consiglia di creare un punto di ripristino o un backup prima dell'uso, per evitare conflitti con tweak, script, servizi o modifiche già applicate in precedenza dall'utente o da software terzi.",
+        tosItem4: "Ogni comando o tweak include una descrizione specifica per permettere all'utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.",
+        tosItem5: "Non ci assumiamo responsabilità per le scelte dell'utente su ciò che viene attivato, disattivato o modificato tramite il software, né per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall'utente.",
+        tosItem6: "La key è pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l'hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi può richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.",
+        tosItem7: "SapoTweak è un prodotto digitale fornito immediatamente. In questa fase può essere distribuito come beta a pagamento con funzionalità ancora in evoluzione. Dopo attivazione o inizio della fornitura digitale richiesta dall'utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.",
         tosItem8: 'Sono vietati furto o estrazione di dati, codice o asset del programma, reverse engineering non autorizzato, bypass delle protezioni, condivisione di key, redistribuzione abusiva, modifica dei sistemi di licenza o update e qualsiasi uso fraudolento del software.',
-        tosItem9: 'Le violazioni possono comportare sospensione dell accesso, revoca della licenza e azioni civili o penali ove applicabili.'
+        tosItem9: "Le violazioni possono comportare sospensione dell'accesso, revoca della licenza e azioni civili o penali ove applicabili."
       },
       en: {
+        pageTitle: 'SapoTweak - License',
         versionLabel: 'Version',
+        reviewsLink: 'Reviews',
         headlineMain: 'License',
         heroText: 'SapoTweak is unlocked through a personal license. During this paid beta phase you choose a plan, complete checkout and receive the key plus the official download on the confirmation page.',
         downloadBtn: 'Choose plan',
+        introVideoBtn: 'Introductory video',
         card1Title: 'Gaming presets',
         card1Text: 'Safe, Advanced and Extreme profiles to lighten Windows without touching critical services.',
         card2Title: 'Protected license',
@@ -589,44 +595,47 @@
         tosItem9: 'Violations may lead to access suspension, license revocation and civil or criminal action where applicable.'
       },
       es: {
-        versionLabel: 'Version',
+        pageTitle: 'SapoTweak - Licencia',
+        versionLabel: 'Versión',
+        reviewsLink: 'Reseñas',
         headlineMain: 'Licencia',
-        heroText: 'SapoTweak se desbloquea mediante una licencia personal. En esta fase de beta de pago eliges el plan, completas el pago y recibes la key y la descarga oficial en la pagina de confirmacion.',
+        heroText: 'SapoTweak se desbloquea mediante una licencia personal. En esta fase de beta de pago eliges el plan, completas el pago y recibes la key y la descarga oficial en la página de confirmación.',
         downloadBtn: 'Elegir plan',
+        introVideoBtn: 'Vídeo introductorio',
         card1Title: 'Presets gaming',
-        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios criticos.',
+        card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios críticos.',
         card2Title: 'Licencia protegida',
-        card2Text: 'Activacion vinculada al PC con control automatico al iniciar la app.',
+        card2Text: 'Activación vinculada al PC con control automático al iniciar la app.',
         card3Title: 'Actualizaciones integradas',
-        card3Text: 'La app comprueba nuevas versiones y guia al usuario durante la descarga del instalador.',
-        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets estan separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomia.',
+        card3Text: 'La app comprueba nuevas versiones y guía al usuario durante la descarga del instalador.',
+        detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets están separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomía.',
         footerText: 'SapoTweak - Distribuye solo builds oficiales.',
         rail1Title: 'Presets guiados', rail1Text: 'Safe, Advanced y Extreme con niveles separados para usuarios distintos.',
-        rail2Title: 'Restauracion', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
+        rail2Title: 'Restauración', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
         rail3Title: 'Enfoque gaming', rail3Text: 'Optimizaciones enfocadas en latencia, servicios, input y limpieza Windows.',
-        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de version y descarga guiada directamente dentro de la app.',
-        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks segun RAM, GPU, CPU y version de Windows.',
-        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones utiles, evitando ajustes fuera de contexto.',
+        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la app.',
+        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks según RAM, GPU, CPU y versión de Windows.',
+        rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones útiles, evitando ajustes fuera de contexto.',
         paymentTitle: 'Checkout Stripe:',
-        paymentButton: 'Abrir pagina checkout',
-        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no estan incluidos en el precio y se anaden segun el pais. Antes del checkout se pide una confirmacion explicita para la beta y el suministro digital inmediato.',
-        paymentWarning: 'Despues del pago la key aparece inmediatamente en la pagina de confirmacion junto con la descarga oficial. Lemon ya no se usa. Durante la beta algunas areas pueden recibir correcciones rapidas o cambiar con mas frecuencia.',
+        paymentButton: 'Abrir página de checkout',
+        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país. Antes del checkout se pide una confirmación explícita para la beta y el suministro digital inmediato.',
+        paymentWarning: 'Después del pago la key aparece inmediatamente en la página de confirmación junto con la descarga oficial. Lemon ya no se usa. Durante la beta algunas áreas pueden recibir correcciones rápidas o cambiar con más frecuencia.',
         tosLink: 'TOS',
-        tosTitle: 'Terminos de Uso',
+        tosTitle: 'Términos de uso',
         tosText: 'Condiciones breves para usar el software.',
         tosCloseBtn: 'Cerrar',
-        tosAcceptLabel: 'He leido y acepto las condiciones.',
+        tosAcceptLabel: 'He leído y acepto las condiciones.',
         tosAcceptBtn: 'Aceptar',
         tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
-        tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
-        tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
-        tosItem3: 'Se recomienda crear un punto de restauracion o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
-        tosItem4: 'Cada comando o tweak incluye una descripcion especifica para que cada usuario pueda decidir por si mismo que activar o desactivar segun sus preferencias y su sistema.',
+        tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no serán necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeración del PC, salud y espacio libre de los discos, versión y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
+        tosItem2: 'Las capturas, vídeos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
+        tosItem3: 'Se recomienda crear un punto de restauración o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
+        tosItem4: 'Cada comando o tweak incluye una descripción específica para que cada usuario pueda decidir por sí mismo qué activar o desactivar según sus preferencias y su sistema.',
         tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
-        tosItem6: 'La key esta pensada para seguir funcionando despues de un reinicio del PC, reset de Windows, reinstalacion o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activacion; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
-        tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. En esta fase puede distribuirse como beta de pago con funciones todavia en evolucion. Tras la activacion o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no estan disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
-        tosItem8: 'Se prohibe el robo o extraccion de datos, codigo o assets del programa, la ingenieria inversa no autorizada, el bypass de protecciones, compartir keys, la redistribucion abusiva, la manipulacion de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
-        tosItem9: 'Las infracciones pueden implicar suspension de acceso, revocacion de la licencia y acciones civiles o penales cuando corresponda.'
+        tosItem6: 'La key está pensada para seguir funcionando después de un reinicio del PC, reset de Windows, reinstalación o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activación; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
+        tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. En esta fase puede distribuirse como beta de pago con funciones todavía en evolución. Tras la activación o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no están disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
+        tosItem8: 'Se prohíbe el robo o extracción de datos, código o assets del programa, la ingeniería inversa no autorizada, el bypass de protecciones, compartir keys, la redistribución abusiva, la manipulación de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
+        tosItem9: 'Las infracciones pueden implicar suspensión de acceso, revocación de la licencia y acciones civiles o penales cuando corresponda.'
       }
     };
 
@@ -668,6 +677,7 @@
 
     function applyLanguage() {
       document.documentElement.lang = currentLanguage;
+      document.title = t('pageTitle');
       document.getElementById('languageSelect').value = currentLanguage;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         el.textContent = t(el.dataset.i18n);

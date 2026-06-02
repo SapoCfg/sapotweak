@@ -126,8 +126,8 @@
       <img src="sapotweak.png" alt="SapoTweak">
       <span>SapoTweak</span>
     </a>
-    <h1>Pagamento completato</h1>
-    <p>La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finche compare la key, poi scarica l'app e attivala al primo avvio.</p>
+    <h1 id="successTitle">Pagamento completato</h1>
+    <p id="successLead">La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finché compare la key, poi scarica l'app e attivala al primo avvio.</p>
 
     <div id="keyBox" class="key-box"></div>
 
@@ -139,10 +139,10 @@
     <div id="status" class="status">Recupero della licenza in corso...</div>
 
     <div class="meta">
-      Durante la beta alcune parti dell'app possono ricevere fix rapidi.
-      Se la key non compare entro un minuto, scrivi a
+      <span id="metaLine1">Durante la beta alcune parti dell'app possono ricevere fix rapidi.</span>
+      <span id="metaLine2">Se la key non compare entro un minuto, scrivi a</span>
       <a href="mailto:support@sapotweak.org" style="color:#d6c8ff;">support@sapotweak.org</a>
-      indicando l'email usata nel pagamento.
+      <span id="metaLine3">indicando l'email usata nel pagamento.</span>
     </div>
   </main>
 
@@ -150,14 +150,92 @@
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get("session_id") || "";
     const workerBase = "https://license.salvocan05.workers.dev";
+    const translations = {
+      it: {
+        pageTitle: "SapoTweak - Licenza",
+        successTitle: "Pagamento completato",
+        successLead: "La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finché compare la key, poi scarica l'app e attivala al primo avvio.",
+        copyBtn: "Copia key",
+        copiedBtn: "Key copiata",
+        downloadBtn: "Scarica SapoTweak per Windows",
+        loadingStatus: "Recupero della licenza in corso...",
+        missingSession: "Sessione di pagamento non trovata. Torna al sito e riprova il checkout.",
+        readyStatus: "Key beta pronta. Copiala, scarica l'app e inseriscila al primo avvio.",
+        preparingStatus: "Licenza in preparazione...",
+        unavailableStatus: "La licenza non è ancora disponibile. Contatta support@sapotweak.org.",
+        retryStatus: "Riprovo a recuperare la licenza...",
+        errorStatus: "Errore nel recupero della licenza. Contatta support@sapotweak.org.",
+        metaLine1: "Durante la beta alcune parti dell'app possono ricevere fix rapidi.",
+        metaLine2: "Se la key non compare entro un minuto, scrivi a",
+        metaLine3: "indicando l'email usata nel pagamento."
+      },
+      en: {
+        pageTitle: "SapoTweak - License",
+        successTitle: "Payment completed",
+        successLead: "Your beta license is prepared automatically. Keep this page open until the key appears, then download the app and activate it on first launch.",
+        copyBtn: "Copy key",
+        copiedBtn: "Key copied",
+        downloadBtn: "Download SapoTweak for Windows",
+        loadingStatus: "Retrieving your license...",
+        missingSession: "Payment session not found. Go back to the site and try checkout again.",
+        readyStatus: "Beta key ready. Copy it, download the app and enter it on first launch.",
+        preparingStatus: "License is being prepared...",
+        unavailableStatus: "The license is not available yet. Contact support@sapotweak.org.",
+        retryStatus: "Trying to retrieve the license again...",
+        errorStatus: "Error retrieving the license. Contact support@sapotweak.org.",
+        metaLine1: "During beta, some parts of the app may receive fast fixes.",
+        metaLine2: "If the key does not appear within one minute, write to",
+        metaLine3: "using the email address used for payment."
+      },
+      es: {
+        pageTitle: "SapoTweak - Licencia",
+        successTitle: "Pago completado",
+        successLead: "Tu licencia beta se prepara automáticamente. Mantén esta página abierta hasta que aparezca la key, después descarga la app y actívala en el primer inicio.",
+        copyBtn: "Copiar key",
+        copiedBtn: "Key copiada",
+        downloadBtn: "Descargar SapoTweak para Windows",
+        loadingStatus: "Recuperando la licencia...",
+        missingSession: "No se encontró la sesión de pago. Vuelve al sitio e intenta el checkout de nuevo.",
+        readyStatus: "Key beta lista. Cópiala, descarga la app e introdúcela en el primer inicio.",
+        preparingStatus: "Licencia en preparación...",
+        unavailableStatus: "La licencia aún no está disponible. Contacta con support@sapotweak.org.",
+        retryStatus: "Vuelvo a intentar recuperar la licencia...",
+        errorStatus: "Error al recuperar la licencia. Contacta con support@sapotweak.org.",
+        metaLine1: "Durante la beta, algunas partes de la app pueden recibir correcciones rápidas.",
+        metaLine2: "Si la key no aparece en un minuto, escribe a",
+        metaLine3: "indicando el email usado en el pago."
+      }
+    };
+    const currentLanguage = ["it", "en", "es"].includes(localStorage.getItem("sapotweak_site_lang"))
+      ? localStorage.getItem("sapotweak_site_lang")
+      : "it";
     const keyBox = document.getElementById("keyBox");
     const copyBtn = document.getElementById("copyBtn");
     const downloadBtn = document.getElementById("downloadBtn");
     const statusEl = document.getElementById("status");
     let attempts = 0;
 
+    function t(key) {
+      return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = currentLanguage;
+      document.title = t("pageTitle");
+      document.getElementById("successTitle").textContent = t("successTitle");
+      document.getElementById("successLead").textContent = t("successLead");
+      copyBtn.textContent = t("copyBtn");
+      downloadBtn.textContent = t("downloadBtn");
+      statusEl.textContent = t("loadingStatus");
+      document.getElementById("metaLine1").textContent = t("metaLine1");
+      document.getElementById("metaLine2").textContent = t("metaLine2");
+      document.getElementById("metaLine3").textContent = t("metaLine3");
+    }
+
+    applyLanguage();
+
     if (!sessionId) {
-      statusEl.textContent = "Sessione di pagamento non trovata. Torna al sito e riprova il checkout.";
+      statusEl.textContent = t("missingSession");
       statusEl.classList.add("error");
     } else {
       loadLicense();
@@ -175,30 +253,30 @@
           keyBox.style.display = "block";
           copyBtn.style.display = "inline-flex";
           downloadBtn.style.display = "inline-flex";
-          statusEl.textContent = "Key beta pronta. Copiala, scarica l'app e inseriscila al primo avvio.";
+          statusEl.textContent = t("readyStatus");
           return;
         }
         if (attempts < 30) {
-          statusEl.textContent = "Licenza in preparazione...";
+          statusEl.textContent = t("preparingStatus");
           setTimeout(loadLicense, 2000);
           return;
         }
-        statusEl.textContent = "La licenza non e ancora disponibile. Contatta support@sapotweak.org.";
+        statusEl.textContent = t("unavailableStatus");
         statusEl.classList.add("error");
       } catch (error) {
         if (attempts < 30) {
-          statusEl.textContent = "Riprovo a recuperare la licenza...";
+          statusEl.textContent = t("retryStatus");
           setTimeout(loadLicense, 2000);
           return;
         }
-        statusEl.textContent = "Errore nel recupero della licenza. Contatta support@sapotweak.org.";
+        statusEl.textContent = t("errorStatus");
         statusEl.classList.add("error");
       }
     }
 
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(keyBox.textContent);
-      copyBtn.textContent = "Key copiata";
+      copyBtn.textContent = t("copiedBtn");
     });
   </script>
 </body>

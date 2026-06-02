@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SapoTweak - Review</title>
+  <title>SapoTweak - Recensioni</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -434,14 +434,14 @@
     </nav>
 
     <section class="hero">
-      <h1>Review <span>SapoTweak</span></h1>
-      <p>Screenshot e feedback reali condivisi dagli utenti dopo l'ottimizzazione. Le immagini scorrono in automatico e si possono aprire a schermo grande per leggere meglio gli FPS.</p>
+      <h1 id="reviewTitle">Recensioni <span>SapoTweak</span></h1>
+      <p id="reviewHeroText">Screenshot e feedback reali condivisi dagli utenti dopo l'ottimizzazione. Le immagini scorrono in automatico e si possono aprire a schermo grande per leggere meglio gli FPS.</p>
     </section>
 
     <section class="stats" aria-label="Risultati dichiarati dagli utenti">
-      <div class="stat"><b>550+</b><span>FPS dichiarati in alcuni feedback</span></div>
-      <div class="stat"><b>+200</b><span>Clienti e feedback raccolti</span></div>
-      <div class="stat"><b>0 delay</b><span>Feedback citato su Windows e FiveM</span></div>
+      <div class="stat"><b>550+</b><span id="statFpsText">FPS dichiarati in alcuni feedback</span></div>
+      <div class="stat"><b>+200</b><span id="statClientsText">Clienti e feedback raccolti</span></div>
+      <div class="stat"><b>0 delay</b><span id="statDelayText">Feedback citato su Windows e FiveM</span></div>
     </section>
 
     <section class="marquee" aria-label="Screenshot automatici">
@@ -464,11 +464,11 @@
         <button class="shot" type="button"><img src="reviews/16.png" alt="Screenshot FiveM 563 fps"></button>
       </div>
     </section>
-    <p class="hint">Screenshot e commenti scorrono automaticamente.</p>
+    <p class="hint" id="marqueeHint">Screenshot e commenti scorrono automaticamente.</p>
 
     <div class="section-title">
-      <h2>Commenti positivi</h2>
-      <span>Feedback raccolti dalla community</span>
+      <h2 id="commentsTitle">Commenti positivi</h2>
+      <span id="commentsSubtitle">Feedback raccolti dalla community</span>
     </div>
 
     <section class="review-marquee" aria-label="Commenti degli utenti">
@@ -539,17 +539,17 @@
           </div>
     </section>
 
-    <p class="note">Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.</p>
+    <p class="note" id="reviewsNote">Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.</p>
 
     <footer class="footer">
-      <span id="footerText">&copy; SapoTweak - Review utenti</span>
+      <span id="footerText">&copy; SapoTweak - Recensioni utenti</span>
       <a class="footer-tos" href="terms.html" id="tosLink">TOS</a>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">
     <div class="modal-box">
       <h2 id="tosTitle">Termini di utilizzo</h2>
-      <p id="tosText">Condizioni rapide per l uso del software.</p>
+      <p id="tosText">Condizioni rapide per l'uso del software.</p>
       <div class="tos-body" id="tosBody"></div>
       <label class="tos-confirm">
         <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
@@ -572,27 +572,47 @@
     (() => {
       const translations = {
         it: {
+          pageTitle: 'SapoTweak - Recensioni',
           backLink: 'Torna al sito',
-          footerText: '© SapoTweak - Review utenti',
+          reviewTitle: 'Recensioni <span>SapoTweak</span>',
+          reviewHeroText: "Screenshot e feedback reali condivisi dagli utenti dopo l'ottimizzazione. Le immagini scorrono in automatico e si possono aprire a schermo grande per leggere meglio gli FPS.",
+          statFpsText: 'FPS dichiarati in alcuni feedback',
+          statClientsText: 'Clienti e feedback raccolti',
+          statDelayText: 'Feedback citato su Windows e FiveM',
+          marqueeHint: 'Screenshot e commenti scorrono automaticamente.',
+          commentsTitle: 'Commenti positivi',
+          commentsSubtitle: 'Feedback raccolti dalla community',
+          reviewsNote: 'Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.',
+          footerText: '© SapoTweak - Recensioni utenti',
           tosLink: 'TOS',
           tosTitle: 'Termini di utilizzo',
-          tosText: 'Condizioni rapide per l uso del software.',
+          tosText: "Condizioni rapide per l'uso del software.",
           tosCloseBtn: 'Chiudi',
           tosAcceptLabel: 'Ho letto e accetto le condizioni.',
           tosAcceptBtn: 'Accetta',
           tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
-          tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilita non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
+          tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilità non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
           tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
-          tosItem3: 'Si consiglia di creare un punto di ripristino o un backup prima dell uso, per evitare conflitti con tweak, script, servizi o modifiche gia applicate in precedenza dall utente o da software terzi.',
-          tosItem4: 'Ogni comando o tweak include una descrizione specifica per permettere all utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.',
-          tosItem5: 'Non ci assumiamo responsabilita per le scelte dell utente su cio che viene attivato, disattivato o modificato tramite il software, ne per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall utente.',
-          tosItem6: 'La key e pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi puo richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.',
-          tosItem7: 'SapoTweak e un prodotto digitale fornito immediatamente. Dopo attivazione o inizio della fornitura digitale richiesta dall utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.',
+          tosItem3: "Si consiglia di creare un punto di ripristino o un backup prima dell'uso, per evitare conflitti con tweak, script, servizi o modifiche già applicate in precedenza dall'utente o da software terzi.",
+          tosItem4: "Ogni comando o tweak include una descrizione specifica per permettere all'utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.",
+          tosItem5: "Non ci assumiamo responsabilità per le scelte dell'utente su ciò che viene attivato, disattivato o modificato tramite il software, né per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall'utente.",
+          tosItem6: "La key è pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l'hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi può richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.",
+          tosItem7: "SapoTweak è un prodotto digitale fornito immediatamente. Dopo attivazione o inizio della fornitura digitale richiesta dall'utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.",
           tosItem8: 'Sono vietati furto o estrazione di dati, codice o asset del programma, reverse engineering non autorizzato, bypass delle protezioni, condivisione di key, redistribuzione abusiva, modifica dei sistemi di licenza o update e qualsiasi uso fraudolento del software.',
-          tosItem9: 'Le violazioni possono comportare sospensione dell accesso, revoca della licenza e azioni civili o penali ove applicabili.'
+          tosItem9: "Le violazioni possono comportare sospensione dell'accesso, revoca della licenza e azioni civili o penali ove applicabili."
         },
         en: {
+          pageTitle: 'SapoTweak - Reviews',
           backLink: 'Back to site',
+          reviewTitle: 'Reviews <span>SapoTweak</span>',
+          reviewHeroText: 'Real screenshots and feedback shared by users after optimization. Images scroll automatically and can be opened full-screen to read FPS values more clearly.',
+          statFpsText: 'FPS reported in some feedback',
+          statClientsText: 'Customers and feedback collected',
+          statDelayText: 'Feedback mentioning Windows and FiveM delay',
+          marqueeHint: 'Screenshots and comments scroll automatically.',
+          commentsTitle: 'Positive comments',
+          commentsSubtitle: 'Feedback collected from the community',
+          reviewsNote: 'Reviews show experiences shared by users and do not guarantee the same result on every PC. Performance depends on hardware, software, game settings, temperatures, free space and installed processes.',
           footerText: '© SapoTweak - User reviews',
           tosLink: 'TOS',
           tosTitle: 'Terms of Service',
@@ -612,24 +632,34 @@
           tosItem9: 'Violations may lead to access suspension, license revocation and civil or criminal action where applicable.'
         },
         es: {
+          pageTitle: 'SapoTweak - Reseñas',
           backLink: 'Volver al sitio',
-          footerText: '© SapoTweak - Reviews de usuarios',
+          reviewTitle: 'Reseñas <span>SapoTweak</span>',
+          reviewHeroText: 'Capturas y feedback reales compartidos por usuarios después de la optimización. Las imágenes se desplazan automáticamente y se pueden abrir a pantalla completa para leer mejor los FPS.',
+          statFpsText: 'FPS declarados en algunos feedbacks',
+          statClientsText: 'Clientes y feedback recopilado',
+          statDelayText: 'Feedback citado sobre Windows y FiveM',
+          marqueeHint: 'Las capturas y los comentarios se desplazan automáticamente.',
+          commentsTitle: 'Comentarios positivos',
+          commentsSubtitle: 'Feedback recopilado de la comunidad',
+          reviewsNote: 'Las reseñas muestran experiencias compartidas por usuarios y no garantizan el mismo resultado en todos los PC. El rendimiento depende de hardware, software, ajustes del juego, temperaturas, espacio libre y procesos instalados.',
+          footerText: '© SapoTweak - Reseñas de usuarios',
           tosLink: 'TOS',
-          tosTitle: 'Terminos de Uso',
+          tosTitle: 'Términos de uso',
           tosText: 'Condiciones breves para usar el software.',
           tosCloseBtn: 'Cerrar',
-          tosAcceptLabel: 'He leido y acepto las condiciones.',
+          tosAcceptLabel: 'He leído y acepto las condiciones.',
           tosAcceptBtn: 'Aceptar',
           tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
-          tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no seran necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeracion del PC, salud y espacio libre de los discos, version y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
-          tosItem2: 'Las capturas, videos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
-          tosItem3: 'Se recomienda crear un punto de restauracion o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
-          tosItem4: 'Cada comando o tweak incluye una descripcion especifica para que cada usuario pueda decidir por si mismo que activar o desactivar segun sus preferencias y su sistema.',
+          tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no serán necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeración del PC, salud y espacio libre de los discos, versión y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
+          tosItem2: 'Las capturas, vídeos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
+          tosItem3: 'Se recomienda crear un punto de restauración o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
+          tosItem4: 'Cada comando o tweak incluye una descripción específica para que cada usuario pueda decidir por sí mismo qué activar o desactivar según sus preferencias y su sistema.',
           tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
-          tosItem6: 'La key esta pensada para seguir funcionando despues de un reinicio del PC, reset de Windows, reinstalacion o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activacion; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. Tras la activacion o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no estan disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem8: 'Se prohibe el robo o extraccion de datos, codigo o assets del programa, la ingenieria inversa no autorizada, el bypass de protecciones, compartir keys, la redistribucion abusiva, la manipulacion de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
-          tosItem9: 'Las infracciones pueden implicar suspension de acceso, revocacion de la licencia y acciones civiles o penales cuando corresponda.'
+          tosItem6: 'La key está pensada para seguir funcionando después de un reinicio del PC, reset de Windows, reinstalación o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activación; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
+          tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. Tras la activación o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no están disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
+          tosItem8: 'Se prohíbe el robo o extracción de datos, código o assets del programa, la ingeniería inversa no autorizada, el bypass de protecciones, compartir keys, la redistribución abusiva, la manipulación de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
+          tosItem9: 'Las infracciones pueden implicar suspensión de acceso, revocación de la licencia y acciones civiles o penales cuando corresponda.'
         }
       };
       let currentLanguage = localStorage.getItem('sapotweak_site_lang') || 'it';
@@ -677,9 +707,19 @@
 
       function applyLanguage() {
         document.documentElement.lang = currentLanguage;
+        document.title = t('pageTitle');
         const select = document.getElementById('languageSelect');
         if (select) select.value = currentLanguage;
         document.getElementById('backLink').textContent = t('backLink');
+        document.getElementById('reviewTitle').innerHTML = t('reviewTitle');
+        document.getElementById('reviewHeroText').textContent = t('reviewHeroText');
+        document.getElementById('statFpsText').textContent = t('statFpsText');
+        document.getElementById('statClientsText').textContent = t('statClientsText');
+        document.getElementById('statDelayText').textContent = t('statDelayText');
+        document.getElementById('marqueeHint').textContent = t('marqueeHint');
+        document.getElementById('commentsTitle').textContent = t('commentsTitle');
+        document.getElementById('commentsSubtitle').textContent = t('commentsSubtitle');
+        document.getElementById('reviewsNote').textContent = t('reviewsNote');
         document.getElementById('footerText').textContent = t('footerText');
         document.getElementById('tosLink').textContent = t('tosLink');
         document.getElementById('tosTitle').textContent = t('tosTitle');
