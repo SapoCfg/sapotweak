@@ -49,7 +49,7 @@
     }
     .content {
       display: grid;
-      gap: 26px;
+      gap: 24px;
       justify-items: center;
     }
     h1 {
@@ -57,8 +57,47 @@
       font-size: clamp(34px, 6vw, 54px);
       text-align: center;
     }
-    .hero {
+    .beta-banner,
+    .hero,
+    .copy,
+    .consent-box,
+    .plans,
+    .note {
       width: min(100%, 760px);
+    }
+    .beta-banner {
+      display: grid;
+      gap: 8px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(124,92,255,.24);
+      background: linear-gradient(180deg, rgba(124,92,255,.08), rgba(255,255,255,.88));
+    }
+    .beta-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      width: fit-content;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #111827;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .beta-banner strong {
+      font-size: 18px;
+      color: #111827;
+    }
+    .beta-banner p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .hero {
       background: #fff;
       border: 1px solid rgba(124,92,255,.16);
       border-radius: 24px;
@@ -71,15 +110,46 @@
       border-radius: 18px;
     }
     .copy {
-      width: min(100%, 760px);
       display: grid;
       gap: 14px;
       color: #374151;
       line-height: 1.7;
       font-size: 17px;
     }
+    .consent-box {
+      display: grid;
+      gap: 10px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(17,24,39,.12);
+      background: #fff;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, .06);
+    }
+    .consent-box strong {
+      color: #111827;
+      font-size: 16px;
+    }
+    .consent-box p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #111827;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .consent-row input {
+      margin-top: 2px;
+      width: 16px;
+      height: 16px;
+      accent-color: #7c5cff;
+    }
     .plans {
-      width: min(100%, 760px);
       display: grid;
       gap: 14px;
     }
@@ -105,6 +175,12 @@
     .plan.primary {
       border-color: #7c5cff;
       box-shadow: 0 20px 52px rgba(124, 92, 255, .16);
+    }
+    .plan.is-disabled {
+      opacity: .48;
+      pointer-events: none;
+      transform: none;
+      box-shadow: 0 18px 44px rgba(15, 23, 42, .04);
     }
     .radio {
       width: 18px;
@@ -138,7 +214,6 @@
       color: #111827;
     }
     .note {
-      width: min(100%, 760px);
       background: #fff;
       border: 1px solid rgba(17,24,39,.08);
       border-radius: 18px;
@@ -164,45 +239,60 @@
       <select id="languageSelect" class="lang-select" aria-label="Language">
         <option value="it">Italiano</option>
         <option value="en">English</option>
-        <option value="es">Español</option>
+        <option value="es">Espanol</option>
       </select>
     </div>
 
     <div class="content">
       <h1 id="title">Scegli il piano SapoTweak</h1>
 
+      <div class="beta-banner">
+        <span class="beta-kicker" id="betaKicker">PAID BETA</span>
+        <strong id="betaTitle">Accesso anticipato a pagamento</strong>
+        <p id="betaText">Questa versione e in beta: il core dell app e funzionante, ma alcune aree possono cambiare velocemente, ricevere fix frequenti o avere piccoli bug residui. Comprando ora stai entrando nella fase di test reale del prodotto.</p>
+      </div>
+
       <div class="hero">
         <img src="checkout-preview.png" alt="Anteprima SapoTweak">
       </div>
 
       <div class="copy">
-        <div id="lead1">SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.</div>
-        <div id="lead2">Include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.</div>
-        <div id="lead3">Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app.</div>
+        <div id="lead1">SapoTweak e uno strumento Windows per gamer competitivi che vogliono un sistema piu pulito, rapido e reattivo.</div>
+        <div id="lead2">Questa fase beta include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.</div>
+        <div id="lead3">Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell app, insieme all accesso immediato al contenuto digitale beta.</div>
+      </div>
+
+      <div class="consent-box">
+        <strong id="consentTitle">Conferma beta e fornitura immediata</strong>
+        <p id="consentHelp">Prima di aprire Stripe devi confermare che stai acquistando accesso anticipato beta, con fornitura digitale immediata dopo il pagamento.</p>
+        <label class="consent-row">
+          <input id="betaConsentCheck" type="checkbox">
+          <span id="consentLabel">Confermo che SapoTweak e una beta a pagamento, che alcune funzioni possono cambiare o avere bug residui, e chiedo l avvio immediato della fornitura digitale dopo il pagamento.</span>
+        </label>
       </div>
 
       <div class="plans">
-        <a class="plan primary" id="monthlyPlan" href="https://buy.stripe.com/bJe28sdux7vk7wFamY1VK04" target="_blank" rel="noopener">
+        <a class="plan primary is-disabled" id="monthlyPlan" data-href="https://buy.stripe.com/bJe28sdux7vk7wFamY1VK04" href="#" aria-disabled="true" target="_blank" rel="noopener">
           <span class="radio" aria-hidden="true"></span>
           <div>
             <div class="plan-title" id="monthlyTitle">Mensile</div>
-            <div class="plan-subtitle" id="monthlyText">14,99 EUR fatturati ogni mese, tasse escluse</div>
+            <div class="plan-subtitle" id="monthlyText">14,99 EUR al mese, accesso beta, tasse escluse</div>
           </div>
-          <div class="price">14,99 €</div>
+          <div class="price">14,99 EUR</div>
         </a>
 
-        <a class="plan" id="quarterlyPlan" href="https://buy.stripe.com/8x2bJ24Y19Ds2cl2Uw1VK03" target="_blank" rel="noopener">
+        <a class="plan is-disabled" id="quarterlyPlan" data-href="https://buy.stripe.com/8x2bJ24Y19Ds2cl2Uw1VK03" href="#" aria-disabled="true" target="_blank" rel="noopener">
           <span class="radio" aria-hidden="true"></span>
           <div>
             <div class="plan-title" id="quarterlyTitle">Trimestrale</div>
-            <div class="plan-subtitle" id="quarterlyText">29,99 EUR fatturati ogni 3 mesi, tasse escluse</div>
+            <div class="plan-subtitle" id="quarterlyText">29,99 EUR ogni 3 mesi, accesso beta, tasse escluse</div>
           </div>
-          <div class="price">29,99 €</div>
+          <div class="price">29,99 EUR</div>
         </a>
       </div>
 
       <div class="note" id="note">
-        Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici.
+        Il checkout e gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC. Durante la beta il prodotto riceve fix e cambi rapidi, quindi alcune parti dell esperienza possono evolvere piu velocemente della versione finale.
       </div>
     </div>
   </div>
@@ -210,71 +300,108 @@
   <script>
     const translations = {
       it: {
-        title: 'Scegli il piano SapoTweak',
-        lead1: 'SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.',
-        lead2: 'Include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.',
-        lead3: "Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app.",
-        monthlyTitle: 'Mensile',
-        monthlyText: '14,99 EUR fatturati ogni mese, tasse escluse',
-        quarterlyTitle: 'Trimestrale',
-        quarterlyText: '29,99 EUR fatturati ogni 3 mesi, tasse escluse',
-        note: "Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e l'app continua a ricevere aggiornamenti automatici."
+        title: "Scegli il piano SapoTweak",
+        betaKicker: "PAID BETA",
+        betaTitle: "Accesso anticipato a pagamento",
+        betaText: "Questa versione e in beta: il core dell app e funzionante, ma alcune aree possono cambiare velocemente, ricevere fix frequenti o avere piccoli bug residui. Comprando ora stai entrando nella fase di test reale del prodotto.",
+        lead1: "SapoTweak e uno strumento Windows per gamer competitivi che vogliono un sistema piu pulito, rapido e reattivo.",
+        lead2: "Questa fase beta include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.",
+        lead3: "Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell app, insieme all accesso immediato al contenuto digitale beta.",
+        consentTitle: "Conferma beta e fornitura immediata",
+        consentHelp: "Prima di aprire Stripe devi confermare che stai acquistando accesso anticipato beta, con fornitura digitale immediata dopo il pagamento.",
+        consentLabel: "Confermo che SapoTweak e una beta a pagamento, che alcune funzioni possono cambiare o avere bug residui, e chiedo l avvio immediato della fornitura digitale dopo il pagamento.",
+        monthlyTitle: "Mensile",
+        monthlyText: "14,99 EUR al mese, accesso beta, tasse escluse",
+        quarterlyTitle: "Trimestrale",
+        quarterlyText: "29,99 EUR ogni 3 mesi, accesso beta, tasse escluse",
+        note: "Il checkout e gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC. Durante la beta il prodotto riceve fix e cambi rapidi, quindi alcune parti dell esperienza possono evolvere piu velocemente della versione finale."
       },
       en: {
-        title: 'Choose your SapoTweak plan',
-        lead1: 'SapoTweak is a Windows tool for competitive gamers who want a cleaner, faster and more responsive system.',
-        lead2: 'It includes guided optimization presets, FPS and latency tweaks, dedicated profiles for Fortnite, Valorant, FiveM and Rainbow Six Siege, plus personal license activation.',
-        lead3: 'After payment you are redirected to the confirmation page where the key and the official app download are shown immediately.',
-        monthlyTitle: 'Monthly',
-        monthlyText: '14.99 EUR billed every month, taxes excluded',
-        quarterlyTitle: 'Quarterly',
-        quarterlyText: '29.99 EUR billed every 3 months, taxes excluded',
-        note: 'Checkout is handled by Stripe. Taxes are calculated separately based on the customer country. The license remains bound to the PC and the app keeps receiving automatic updates.'
+        title: "Choose your SapoTweak plan",
+        betaKicker: "PAID BETA",
+        betaTitle: "Paid early access",
+        betaText: "This build is a beta: the core app works, but some areas may change quickly, receive frequent fixes, or still contain minor bugs. Buying now means joining the real-world testing phase of the product.",
+        lead1: "SapoTweak is a Windows tool for competitive gamers who want a cleaner, faster and more responsive system.",
+        lead2: "This beta phase includes guided optimization presets, FPS and latency tweaks, dedicated profiles for Fortnite, Valorant, FiveM and Rainbow Six Siege, plus personal license activation.",
+        lead3: "After payment you are redirected to the confirmation page where the key and the official app download are shown immediately, together with instant access to the beta digital content.",
+        consentTitle: "Confirm beta and immediate digital supply",
+        consentHelp: "Before opening Stripe you need to confirm that you are buying paid beta access with immediate digital delivery after payment.",
+        consentLabel: "I confirm that SapoTweak is a paid beta, that some features may change or still contain minor bugs, and that I request the immediate start of the digital supply after payment.",
+        monthlyTitle: "Monthly",
+        monthlyText: "14.99 EUR per month, beta access, taxes excluded",
+        quarterlyTitle: "Quarterly",
+        quarterlyText: "29.99 EUR every 3 months, beta access, taxes excluded",
+        note: "Checkout is handled by Stripe. Taxes are calculated separately based on the customer country. The license remains bound to the PC. During beta the product receives fast fixes and changes, so some parts of the experience may evolve faster than the final release."
       },
       es: {
-        title: 'Elige tu plan de SapoTweak',
-        lead1: 'SapoTweak es una herramienta para Windows pensada para jugadores competitivos que quieren un sistema más limpio, rápido y reactivo.',
-        lead2: 'Incluye presets guiados de optimización, tweaks para FPS y latencia, perfiles dedicados para Fortnite, Valorant, FiveM y Rainbow Six Siege, y activación personal de licencia.',
-        lead3: 'Después del pago se abre la página de confirmación donde aparecen inmediatamente la key y la descarga oficial de la app.',
-        monthlyTitle: 'Mensual',
-        monthlyText: '14,99 EUR cobrados cada mes, impuestos no incluidos',
-        quarterlyTitle: 'Trimestral',
-        quarterlyText: '29,99 EUR cobrados cada 3 meses, impuestos no incluidos',
-        note: 'El checkout lo gestiona Stripe. Los impuestos se calculan por separado según el país del cliente. La licencia queda vinculada al PC y la app sigue recibiendo actualizaciones automáticas.'
+        title: "Elige tu plan de SapoTweak",
+        betaKicker: "BETA DE PAGO",
+        betaTitle: "Acceso anticipado de pago",
+        betaText: "Esta version esta en beta: el nucleo de la app funciona, pero algunas areas pueden cambiar rapido, recibir correcciones frecuentes o seguir teniendo pequenos fallos. Comprar ahora significa entrar en la fase real de pruebas del producto.",
+        lead1: "SapoTweak es una herramienta para Windows pensada para jugadores competitivos que quieren un sistema mas limpio, rapido y reactivo.",
+        lead2: "Esta fase beta incluye presets guiados de optimizacion, tweaks para FPS y latencia, perfiles dedicados para Fortnite, Valorant, FiveM y Rainbow Six Siege, y activacion personal de licencia.",
+        lead3: "Despues del pago se abre la pagina de confirmacion donde aparecen de inmediato la key y la descarga oficial de la app, junto con el acceso inmediato al contenido digital beta.",
+        consentTitle: "Confirmar beta y suministro digital inmediato",
+        consentHelp: "Antes de abrir Stripe debes confirmar que compras acceso beta de pago con suministro digital inmediato despues del pago.",
+        consentLabel: "Confirmo que SapoTweak es una beta de pago, que algunas funciones pueden cambiar o seguir teniendo pequenos fallos, y que solicito el inicio inmediato del suministro digital despues del pago.",
+        monthlyTitle: "Mensual",
+        monthlyText: "14,99 EUR al mes, acceso beta, impuestos no incluidos",
+        quarterlyTitle: "Trimestral",
+        quarterlyText: "29,99 EUR cada 3 meses, acceso beta, impuestos no incluidos",
+        note: "Stripe gestiona el checkout. Los impuestos se calculan por separado segun el pais del cliente. La licencia queda vinculada al PC. Durante la beta el producto recibe cambios y correcciones rapidas, por lo que algunas partes de la experiencia pueden evolucionar mas deprisa que en la version final."
       }
     };
 
-    const languageSelect = document.getElementById('languageSelect');
-    const saved = localStorage.getItem('sapotweak_site_lang') || 'it';
-    const monthlyPlan = document.getElementById('monthlyPlan');
-    const quarterlyPlan = document.getElementById('quarterlyPlan');
+    const languageSelect = document.getElementById("languageSelect");
+    const saved = localStorage.getItem("sapotweak_site_lang") || "it";
+    const monthlyPlan = document.getElementById("monthlyPlan");
+    const quarterlyPlan = document.getElementById("quarterlyPlan");
+    const betaConsentCheck = document.getElementById("betaConsentCheck");
     const params = new URLSearchParams(window.location.search);
 
     function applyLanguage(lang) {
       const t = translations[lang] || translations.it;
       document.documentElement.lang = lang;
       languageSelect.value = lang;
-      document.getElementById('title').textContent = t.title;
-      document.getElementById('lead1').textContent = t.lead1;
-      document.getElementById('lead2').textContent = t.lead2;
-      document.getElementById('lead3').textContent = t.lead3;
-      document.getElementById('monthlyTitle').textContent = t.monthlyTitle;
-      document.getElementById('monthlyText').textContent = t.monthlyText;
-      document.getElementById('quarterlyTitle').textContent = t.quarterlyTitle;
-      document.getElementById('quarterlyText').textContent = t.quarterlyText;
-      document.getElementById('note').textContent = t.note;
-      localStorage.setItem('sapotweak_site_lang', lang);
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("betaKicker").textContent = t.betaKicker;
+      document.getElementById("betaTitle").textContent = t.betaTitle;
+      document.getElementById("betaText").textContent = t.betaText;
+      document.getElementById("lead1").textContent = t.lead1;
+      document.getElementById("lead2").textContent = t.lead2;
+      document.getElementById("lead3").textContent = t.lead3;
+      document.getElementById("consentTitle").textContent = t.consentTitle;
+      document.getElementById("consentHelp").textContent = t.consentHelp;
+      document.getElementById("consentLabel").textContent = t.consentLabel;
+      document.getElementById("monthlyTitle").textContent = t.monthlyTitle;
+      document.getElementById("monthlyText").textContent = t.monthlyText;
+      document.getElementById("quarterlyTitle").textContent = t.quarterlyTitle;
+      document.getElementById("quarterlyText").textContent = t.quarterlyText;
+      document.getElementById("note").textContent = t.note;
+      localStorage.setItem("sapotweak_site_lang", lang);
+    }
+
+    function syncConsentState() {
+      const enabled = !!betaConsentCheck.checked;
+      for (const plan of [monthlyPlan, quarterlyPlan]) {
+        const directHref = plan.dataset.href || "#";
+        plan.classList.toggle("is-disabled", !enabled);
+        plan.setAttribute("aria-disabled", enabled ? "false" : "true");
+        plan.href = enabled ? directHref : "#";
+      }
     }
 
     function selectPlan(plan) {
-      const normalized = plan === 'quarterly' ? 'quarterly' : 'monthly';
-      monthlyPlan.classList.toggle('primary', normalized === 'monthly');
-      quarterlyPlan.classList.toggle('primary', normalized === 'quarterly');
+      const normalized = plan === "quarterly" ? "quarterly" : "monthly";
+      monthlyPlan.classList.toggle("primary", normalized === "monthly");
+      quarterlyPlan.classList.toggle("primary", normalized === "quarterly");
     }
 
-    languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
-    selectPlan(params.get('plan'));
+    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    betaConsentCheck.addEventListener("change", syncConsentState);
+    selectPlan(params.get("plan"));
     applyLanguage(saved);
+    syncConsentState();
   </script>
 </body>
 </html>

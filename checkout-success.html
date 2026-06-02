@@ -127,7 +127,7 @@
       <span>SapoTweak</span>
     </a>
     <h1>Pagamento completato</h1>
-    <p>La tua licenza viene preparata automaticamente. Tieni aperta questa pagina finche compare la key, poi scarica l'app e attivala al primo avvio.</p>
+    <p>La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finche compare la key, poi scarica l'app e attivala al primo avvio.</p>
 
     <div id="keyBox" class="key-box"></div>
 
@@ -139,6 +139,7 @@
     <div id="status" class="status">Recupero della licenza in corso...</div>
 
     <div class="meta">
+      Durante la beta alcune parti dell'app possono ricevere fix rapidi.
       Se la key non compare entro un minuto, scrivi a
       <a href="mailto:support@sapotweak.org" style="color:#d6c8ff;">support@sapotweak.org</a>
       indicando l'email usata nel pagamento.
@@ -174,7 +175,7 @@
           keyBox.style.display = "block";
           copyBtn.style.display = "inline-flex";
           downloadBtn.style.display = "inline-flex";
-          statusEl.textContent = "Key pronta. Copiala, scarica l'app e inseriscila al primo avvio.";
+          statusEl.textContent = "Key beta pronta. Copiala, scarica l'app e inseriscila al primo avvio.";
           return;
         }
         if (attempts < 30) {
