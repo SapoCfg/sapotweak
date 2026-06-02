@@ -1,197 +1,648 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SapoTweak - Terms of Service</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SapoTweak - Termini di utilizzo</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #090814;
-      --panel: rgba(22, 20, 40, 0.9);
-      --border: rgba(255,255,255,.08);
-      --text: #f5f1ff;
-      --muted: #c7c2d8;
-      --accent: #8b6cff;
-      --accent-2: #5b3df5;
+      --bg: #050507;
+      --panel: #12111d;
+      --panel-soft: #171426;
+      --line: rgba(167,139,250,.22);
+      --line-soft: rgba(255,255,255,.09);
+      --text: #f7f3ff;
+      --muted: #c4bfd5;
+      --soft: #948da8;
+      --accent: #8b5cf6;
+      --accent-strong: #6d28d9;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(139,108,255,.18), transparent 30%),
-        linear-gradient(180deg, #0b0917 0%, #090814 100%);
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
       color: var(--text);
-      line-height: 1.65;
+      background:
+        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
+        linear-gradient(180deg, #08070d, var(--bg));
+      overflow-x: hidden;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
     }
     .wrap {
-      width: min(920px, calc(100% - 32px));
+      width: min(1120px, 100%);
       margin: 0 auto;
-      padding: 48px 0 72px;
+      padding: 30px;
     }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 34px 28px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.28);
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: clamp(30px, 4vw, 44px); }
-    h2 {
-      margin-top: 28px;
-      font-size: 20px;
-      color: #efe9ff;
-    }
-    p, li { color: var(--muted); font-size: 15px; }
-    ul { padding-left: 20px; }
-    .topbar {
+    .nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 56px;
     }
     .brand {
-      font-weight: 900;
-      font-size: 24px;
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       color: var(--text);
-    }
-    .brand span { color: var(--accent); }
-    .back {
       text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-link,
+    .lang-select {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 999px;
-      padding: 11px 16px;
-      font-weight: 800;
+      background: rgba(255,255,255,.06);
+      color: #f4efff;
+      padding: 0 15px;
       font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
     }
-    .meta {
-      color: #a79fc3;
-      font-size: 14px;
-      margin-bottom: 20px;
+    .lang-select {
+      outline: none;
+      color-scheme: dark;
+      cursor: pointer;
     }
-    .contact {
-      margin-top: 30px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
+    .lang-select option { background: #151522; color: #f3f0ff; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 24px;
     }
-    .continue-box {
-      margin-top: 28px;
-      padding: 20px;
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      min-height: 330px;
+    }
+    .kicker {
+      width: fit-content;
+      border: 1px solid rgba(167,139,250,.38);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #dfd4ff;
+      background: rgba(124,58,237,.14);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.68;
+    }
+    .summary-panel {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 22px;
+      border: 1px solid var(--line);
       border-radius: 20px;
-      border: 1px solid rgba(139,108,255,.24);
-      background: rgba(255,255,255,.03);
+      background: linear-gradient(180deg, var(--panel-soft), #0d0c16);
+      box-shadow:
+        0 0 0 1px rgba(124,58,237,.08),
+        0 0 28px rgba(124,58,237,.14),
+        inset 0 1px 0 rgba(255,255,255,.04);
     }
-    .continue-box h2 { margin-top: 0; }
-    .continue-actions {
+    .summary-item {
+      padding: 14px;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      background: rgba(0,0,0,.16);
+    }
+    .summary-item b {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+    .summary-item span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.52;
+    }
+    .terms-shell {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 18px;
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background: rgba(18,17,29,.72);
+      backdrop-filter: blur(16px);
+    }
+    .toc a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .toc a:hover {
+      color: #fff;
+      background: rgba(255,255,255,.06);
+    }
+    .terms-card {
+      display: grid;
+      gap: 14px;
+    }
+    section {
+      padding: 22px;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+    }
+    section h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    section p,
+    section li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.72;
+    }
+    section p { margin: 0 0 12px; }
+    section p:last-child { margin-bottom: 0; }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 9px; }
+    .accept-panel {
+      padding: 22px;
+      border: 1px solid rgba(167,139,250,.3);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(124,58,237,.14), rgba(255,255,255,.04));
+    }
+    .accept-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #e5dcff;
+      font-size: 14px;
+      line-height: 1.55;
+      cursor: pointer;
+    }
+    .accept-row input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .checkmark {
+      position: relative;
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      margin-top: 1px;
+      border-radius: 8px;
+      border: 1px solid rgba(167,139,250,.66);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 4px rgba(124,58,237,.1);
+      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .checkmark::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      opacity: 0;
+      transform: rotate(45deg) scale(.65);
+      transition: opacity .16s ease, transform .16s ease;
+    }
+    .accept-row input:checked + .checkmark {
+      border-color: rgba(196,181,253,.92);
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 0 0 4px rgba(124,58,237,.18), 0 14px 30px rgba(124,58,237,.26);
+    }
+    .accept-row input:checked + .checkmark::after {
+      opacity: 1;
+      transform: rotate(45deg) scale(1);
+    }
+    .accept-row input:focus-visible + .checkmark {
+      outline: 2px solid rgba(255,255,255,.86);
+      outline-offset: 3px;
+    }
+    .accept-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      margin-top: 18px;
     }
-    .cta {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
+      min-height: 48px;
       padding: 0 18px;
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
+      color: #fff;
+      text-decoration: none;
       font-size: 14px;
       font-weight: 900;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 16px 44px rgba(91,61,245,.22);
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 18px 44px rgba(124,58,237,.25);
+      transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
     }
-    .cta.secondary {
+    .btn.secondary {
       background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
       box-shadow: none;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 54px rgba(124,58,237,.32);
+    }
+    .btn.is-disabled {
+      opacity: .48;
+      pointer-events: none;
+      transform: none;
+      box-shadow: none;
+    }
+    .footer {
+      padding: 34px 0 8px;
+      color: var(--soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .wrap { padding: 22px; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-actions { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; margin-bottom: 18px; }
+      .hero-copy { min-height: auto; }
+      .terms-shell { grid-template-columns: 1fr; }
+      .toc { position: static; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="index.html">Sapo<span>Tweak</span></a>
-      <a class="back" href="index.html">Back to site</a>
-    </div>
-    <div class="card">
-      <h1>SapoTweak Terms of Service</h1>
-      <p class="meta"><strong>Effective date:</strong> May 21, 2026</p>
-
-      <p>By purchasing, downloading, activating, or using SapoTweak, you agree to these Terms of Service. If you do not agree, do not use the software.</p>
-
-      <h2>1. Product description</h2>
-      <p>SapoTweak is a Windows optimization software for gamers. It provides guided local system optimization presets, cleanup tools, performance settings, diagnostics, and license-key based access.</p>
-      <p>SapoTweak does not include cheats, game exploits, anti-cheat bypasses, spyware, credential collection, remote access tools, malware, or anything designed to bypass third-party software or game security systems.</p>
-
-      <h2>2. Performance disclaimer</h2>
-      <p>Performance results, benchmarks, FPS, latency, responsiveness, process count, and stability may vary. Results depend on hardware, cooling, disk health and free space, Windows version and condition, drivers, BIOS, monitor configuration, installed software, antivirus software, overlays, game patches, and previous system modifications.</p>
-      <p>Screenshots, videos, reviews, examples, and benchmark results are illustrative only and do not guarantee identical results on every system.</p>
-
-      <h2>3. User responsibility</h2>
-      <p>Users are responsible for choosing which tweaks, presets, and settings to apply. Each command or tweak includes a description so users can decide whether to enable or disable it according to their own preferences and system requirements.</p>
-      <p>We strongly recommend creating a restore point or backup before using SapoTweak in order to reduce conflicts with previous tweaks, scripts, services, or third-party software.</p>
-      <p>For more predictable results, we recommend using SapoTweak on a clean or well-maintained Windows installation, after the correct graphics drivers are installed and after the system is in a stable state.</p>
-
-      <h2>4. License and activation</h2>
-      <p>Access to SapoTweak is controlled through license keys. A license key may be limited to a specific number of activations or devices depending on the purchased plan.</p>
-
-      <h2>5. Subscriptions</h2>
-      <p>If you purchase a subscription, access remains available while the subscription is active and paid. If a subscription is canceled, expires, or payment fails, access may be disabled at the end of the billing period or according to the payment processor's rules.</p>
-
-      <h2>6. Prohibited actions</h2>
-      <p>You may not copy, redistribute, resell, reverse engineer, modify, bypass licensing systems, share license keys, extract code or assets, or use SapoTweak for fraudulent, abusive, illegal, or unauthorized purposes.</p>
-
-      <h2>7. Refunds</h2>
-      <p>Refunds are handled according to our Refund Policy. Because SapoTweak is a digital product provided immediately after purchase, refunds are generally not provided after access, download, license delivery, or activation has started, except where required by applicable law.</p>
-
-      <h2>8. Limitation of liability</h2>
-      <p>SapoTweak is provided as-is. We are not responsible for user decisions, improper use, pre-existing system issues, third-party software conflicts, game updates, driver issues, Windows updates, or manual changes made by the user.</p>
-      <p>SapoTweak is not a miracle tool and does not guarantee FPS gains, latency reduction, benchmark improvements, or identical results on every PC. Some systems improve clearly, others only partially, and some may not improve in a measurable way depending on hardware, drivers, cooling, software load, and prior configuration.</p>
-
-      <div class="contact">
-        <h2>9. Contact</h2>
-        <p>For support, contact: <a href="mailto:support@sapotweak.org" style="color:#cbbdff;">support@sapotweak.org</a></p>
+  <div class="grid"></div>
+  <main class="wrap">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+        <span>SAPOTWEAK</span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
+        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
+        <select class="lang-select" id="languageSelect" aria-label="Language">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+        </select>
       </div>
+    </nav>
 
-      <div class="continue-box" id="continueBox" hidden>
-        <h2 id="continueTitle">Accept and continue</h2>
-        <p id="continueText">If you want to proceed, continue with the action you selected after reviewing these terms.</p>
-        <div class="continue-actions">
-          <a class="cta" id="continueBtn" href="index.html">Continue</a>
-          <a class="cta secondary" href="index.html">Back to site</a>
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="kicker" data-i18n="kicker">Termini ufficiali</span>
+        <h1 data-i18n-html="title">Termini di utilizzo <span>SapoTweak</span></h1>
+        <p class="lead" data-i18n="lead">Questa pagina riassume le condizioni essenziali per acquistare, attivare e usare SapoTweak durante la fase paid beta.</p>
+      </div>
+      <aside class="summary-panel" aria-label="Riepilogo">
+        <div class="summary-item">
+          <b data-i18n="summary1Title">Paid beta</b>
+          <span data-i18n="summary1Text">Il prodotto e acquistabile come accesso anticipato con fix e cambi rapidi.</span>
+        </div>
+        <div class="summary-item">
+          <b data-i18n="summary2Title">Prodotto digitale</b>
+          <span data-i18n="summary2Text">Key e download vengono forniti in modo digitale dopo il pagamento.</span>
+        </div>
+        <div class="summary-item">
+          <b data-i18n="summary3Title">Uso personale</b>
+          <span data-i18n="summary3Text">Key, codice, asset e sistemi di licenza non possono essere copiati o aggirati.</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="terms-shell">
+      <aside class="toc" aria-label="Indice">
+        <a href="#scope" data-i18n="toc1">1. Prodotto</a>
+        <a href="#beta" data-i18n="toc2">2. Paid beta</a>
+        <a href="#performance" data-i18n="toc3">3. Risultati</a>
+        <a href="#license" data-i18n="toc4">4. Licenza</a>
+        <a href="#payments" data-i18n="toc5">5. Pagamenti</a>
+        <a href="#prohibited" data-i18n="toc6">6. Divieti</a>
+        <a href="#liability" data-i18n="toc7">7. Responsabilita</a>
+        <a href="#contact" data-i18n="toc8">8. Contatto</a>
+      </aside>
+
+      <div class="terms-card">
+        <section id="scope">
+          <h2 data-i18n="scopeTitle">1. Prodotto</h2>
+          <p data-i18n="scopeText1">SapoTweak e un software Windows per ottimizzazione locale, pensato per utenti gaming che vogliono preset guidati, pulizia del sistema, impostazioni di performance e accesso tramite licenza.</p>
+          <p data-i18n="scopeText2">SapoTweak non include cheat, exploit, bypass anti-cheat, spyware, malware, strumenti di accesso remoto o funzioni progettate per aggirare sistemi di sicurezza di giochi o software terzi.</p>
+        </section>
+
+        <section id="beta">
+          <h2 data-i18n="betaTitle">2. Paid beta e fornitura digitale</h2>
+          <p data-i18n="betaText1">In questa fase SapoTweak puo essere distribuito come paid beta. Il core dell'app e funzionante, ma alcune funzioni possono cambiare, ricevere fix rapidi o avere bug residui.</p>
+          <p data-i18n="betaText2">Acquistando accetti l'accesso anticipato e richiedi la fornitura digitale immediata della key e del download dopo il pagamento.</p>
+        </section>
+
+        <section id="performance">
+          <h2 data-i18n="performanceTitle">3. Risultati e prestazioni</h2>
+          <p data-i18n="performanceText">FPS, latenza, processi, benchmark, stabilita e reattivita possono variare. I risultati dipendono da hardware, temperature, driver, BIOS, versione e stato di Windows, software installato, antivirus, overlay, patch dei giochi e modifiche gia presenti sul PC.</p>
+          <ul>
+            <li data-i18n="performanceItem1">Screenshot, video, review ed esempi pubblicati sono illustrativi e non garantiscono risultati identici.</li>
+            <li data-i18n="performanceItem2">Prima dell'uso consigliamo un punto di ripristino o backup.</li>
+            <li data-i18n="performanceItem3">Ogni tweak va scelto dall'utente in base al proprio sistema e alle proprie preferenze.</li>
+          </ul>
+        </section>
+
+        <section id="license">
+          <h2 data-i18n="licenseTitle">4. Licenza e attivazione</h2>
+          <p data-i18n="licenseText1">L'accesso a SapoTweak avviene tramite key personale. La licenza puo essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.</p>
+          <p data-i18n="licenseText2">La key e pensata per restare valida dopo reset o reinstallazione quando l'hardware principale rimane lo stesso. Cambi importanti come scheda madre, CPU o altri componenti identificativi possono richiedere una nuova attivazione.</p>
+        </section>
+
+        <section id="payments">
+          <h2 data-i18n="paymentsTitle">5. Pagamenti, abbonamenti e rimborsi</h2>
+          <p data-i18n="paymentsText1">Il checkout e gestito da Stripe. Le imposte possono essere calcolate separatamente in base al paese del cliente.</p>
+          <p data-i18n="paymentsText2">Se acquisti un abbonamento, l'accesso resta disponibile finche il piano e attivo e pagato. Se il pagamento fallisce, scade o viene annullato, l'accesso puo essere sospeso secondo le regole del piano e del processore di pagamento.</p>
+          <p data-i18n="paymentsText3">Essendo un prodotto digitale fornito immediatamente, i rimborsi in genere non sono previsti dopo consegna key, download, attivazione o inizio della fornitura digitale, salvo dove richiesto dalla legge obbligatoria applicabile.</p>
+        </section>
+
+        <section id="prohibited">
+          <h2 data-i18n="prohibitedTitle">6. Azioni vietate</h2>
+          <p data-i18n="prohibitedText">Sono vietati copia abusiva, redistribuzione, rivendita non autorizzata, condivisione di key, modifica dei sistemi di licenza o update, bypass delle protezioni, estrazione di codice o asset, reverse engineering non autorizzato e qualsiasi uso fraudolento, illegale o abusivo del software.</p>
+        </section>
+
+        <section id="liability">
+          <h2 data-i18n="liabilityTitle">7. Responsabilita</h2>
+          <p data-i18n="liabilityText">SapoTweak viene fornito nello stato in cui si trova. Non siamo responsabili per scelte manuali dell'utente, uso improprio, conflitti con software terzi, problemi preesistenti del sistema, update Windows, driver, patch dei giochi o configurazioni gia modificate in precedenza.</p>
+        </section>
+
+        <section id="contact">
+          <h2 data-i18n="contactTitle">8. Contatto</h2>
+          <p><span data-i18n="contactText">Per supporto o domande sui termini:</span> <a href="mailto:support@sapotweak.org" style="color:#cdbdff;">support@sapotweak.org</a></p>
+        </section>
+
+        <div class="accept-panel">
+          <label class="accept-row">
+            <input id="acceptCheck" type="checkbox">
+            <span class="checkmark" aria-hidden="true"></span>
+            <span data-i18n="acceptLabel">Ho letto e accetto i termini di utilizzo di SapoTweak.</span>
+          </label>
+          <div class="accept-actions">
+            <a class="btn is-disabled" id="continueBtn" href="checkout.html" aria-disabled="true" data-i18n="continueBtn">Continua al checkout</a>
+            <a class="btn secondary" href="index.html" data-i18n="homeBtn">Torna al sito</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const action = params.get('action');
-    const continueBox = document.getElementById('continueBox');
-    const continueTitle = document.getElementById('continueTitle');
-    const continueText = document.getElementById('continueText');
-    const continueBtn = document.getElementById('continueBtn');
 
-    if (action === 'download') {
-      continueBox.hidden = false;
-      continueTitle.textContent = 'Accept and continue to plans';
-      continueText.textContent = 'Direct download is delivered after payment together with your license key. Continue to the main plans section to choose your plan.';
-      continueBtn.textContent = 'View plans';
-      continueBtn.href = 'index.html#plans';
-    } else if (action === 'license') {
-      continueBox.hidden = false;
-      continueTitle.textContent = 'Accept and continue to plans';
-      continueText.textContent = 'After reviewing these terms, continue to the main SapoTweak plans section to purchase your license.';
-      continueBtn.textContent = 'Go to plans';
-      continueBtn.href = 'index.html#plans';
+    <footer class="footer" data-i18n="footer">SapoTweak - Termini aggiornati al 2 giugno 2026.</footer>
+  </main>
+
+  <script>
+    const translations = {
+      it: {
+        back: "Torna al sito",
+        plans: "Piani",
+        kicker: "Termini ufficiali",
+        title: "Termini di utilizzo <span>SapoTweak</span>",
+        lead: "Questa pagina riassume le condizioni essenziali per acquistare, attivare e usare SapoTweak durante la fase paid beta.",
+        summary1Title: "Paid beta",
+        summary1Text: "Il prodotto e acquistabile come accesso anticipato con fix e cambi rapidi.",
+        summary2Title: "Prodotto digitale",
+        summary2Text: "Key e download vengono forniti in modo digitale dopo il pagamento.",
+        summary3Title: "Uso personale",
+        summary3Text: "Key, codice, asset e sistemi di licenza non possono essere copiati o aggirati.",
+        toc1: "1. Prodotto",
+        toc2: "2. Paid beta",
+        toc3: "3. Risultati",
+        toc4: "4. Licenza",
+        toc5: "5. Pagamenti",
+        toc6: "6. Divieti",
+        toc7: "7. Responsabilita",
+        toc8: "8. Contatto",
+        scopeTitle: "1. Prodotto",
+        scopeText1: "SapoTweak e un software Windows per ottimizzazione locale, pensato per utenti gaming che vogliono preset guidati, pulizia del sistema, impostazioni di performance e accesso tramite licenza.",
+        scopeText2: "SapoTweak non include cheat, exploit, bypass anti-cheat, spyware, malware, strumenti di accesso remoto o funzioni progettate per aggirare sistemi di sicurezza di giochi o software terzi.",
+        betaTitle: "2. Paid beta e fornitura digitale",
+        betaText1: "In questa fase SapoTweak puo essere distribuito come paid beta. Il core dell'app e funzionante, ma alcune funzioni possono cambiare, ricevere fix rapidi o avere bug residui.",
+        betaText2: "Acquistando accetti l'accesso anticipato e richiedi la fornitura digitale immediata della key e del download dopo il pagamento.",
+        performanceTitle: "3. Risultati e prestazioni",
+        performanceText: "FPS, latenza, processi, benchmark, stabilita e reattivita possono variare. I risultati dipendono da hardware, temperature, driver, BIOS, versione e stato di Windows, software installato, antivirus, overlay, patch dei giochi e modifiche gia presenti sul PC.",
+        performanceItem1: "Screenshot, video, review ed esempi pubblicati sono illustrativi e non garantiscono risultati identici.",
+        performanceItem2: "Prima dell'uso consigliamo un punto di ripristino o backup.",
+        performanceItem3: "Ogni tweak va scelto dall'utente in base al proprio sistema e alle proprie preferenze.",
+        licenseTitle: "4. Licenza e attivazione",
+        licenseText1: "L'accesso a SapoTweak avviene tramite key personale. La licenza puo essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.",
+        licenseText2: "La key e pensata per restare valida dopo reset o reinstallazione quando l'hardware principale rimane lo stesso. Cambi importanti come scheda madre, CPU o altri componenti identificativi possono richiedere una nuova attivazione.",
+        paymentsTitle: "5. Pagamenti, abbonamenti e rimborsi",
+        paymentsText1: "Il checkout e gestito da Stripe. Le imposte possono essere calcolate separatamente in base al paese del cliente.",
+        paymentsText2: "Se acquisti un abbonamento, l'accesso resta disponibile finche il piano e attivo e pagato. Se il pagamento fallisce, scade o viene annullato, l'accesso puo essere sospeso secondo le regole del piano e del processore di pagamento.",
+        paymentsText3: "Essendo un prodotto digitale fornito immediatamente, i rimborsi in genere non sono previsti dopo consegna key, download, attivazione o inizio della fornitura digitale, salvo dove richiesto dalla legge obbligatoria applicabile.",
+        prohibitedTitle: "6. Azioni vietate",
+        prohibitedText: "Sono vietati copia abusiva, redistribuzione, rivendita non autorizzata, condivisione di key, modifica dei sistemi di licenza o update, bypass delle protezioni, estrazione di codice o asset, reverse engineering non autorizzato e qualsiasi uso fraudolento, illegale o abusivo del software.",
+        liabilityTitle: "7. Responsabilita",
+        liabilityText: "SapoTweak viene fornito nello stato in cui si trova. Non siamo responsabili per scelte manuali dell'utente, uso improprio, conflitti con software terzi, problemi preesistenti del sistema, update Windows, driver, patch dei giochi o configurazioni gia modificate in precedenza.",
+        contactTitle: "8. Contatto",
+        contactText: "Per supporto o domande sui termini:",
+        acceptLabel: "Ho letto e accetto i termini di utilizzo di SapoTweak.",
+        continueBtn: "Continua al checkout",
+        homeBtn: "Torna al sito",
+        footer: "SapoTweak - Termini aggiornati al 2 giugno 2026."
+      },
+      en: {
+        back: "Back to site",
+        plans: "Plans",
+        kicker: "Official terms",
+        title: "Terms of Service <span>SapoTweak</span>",
+        lead: "This page summarizes the core conditions for buying, activating and using SapoTweak during the paid beta phase.",
+        summary1Title: "Paid beta",
+        summary1Text: "The product is available as early access with fast fixes and frequent changes.",
+        summary2Title: "Digital product",
+        summary2Text: "The key and download are delivered digitally after payment.",
+        summary3Title: "Personal use",
+        summary3Text: "Keys, code, assets and licensing systems may not be copied or bypassed.",
+        toc1: "1. Product",
+        toc2: "2. Paid beta",
+        toc3: "3. Results",
+        toc4: "4. License",
+        toc5: "5. Payments",
+        toc6: "6. Prohibited",
+        toc7: "7. Liability",
+        toc8: "8. Contact",
+        scopeTitle: "1. Product",
+        scopeText1: "SapoTweak is local Windows optimization software for gaming users who want guided presets, system cleanup, performance settings and license-based access.",
+        scopeText2: "SapoTweak does not include cheats, exploits, anti-cheat bypasses, spyware, malware, remote access tools, or features designed to bypass third-party game or software security systems.",
+        betaTitle: "2. Paid beta and digital supply",
+        betaText1: "At this stage SapoTweak may be distributed as a paid beta. The core app works, but some features may change, receive fast fixes, or still contain minor bugs.",
+        betaText2: "By purchasing, you accept early access and request immediate digital supply of the key and download after payment.",
+        performanceTitle: "3. Results and performance",
+        performanceText: "FPS, latency, process count, benchmarks, stability and responsiveness may vary. Results depend on hardware, temperatures, drivers, BIOS, Windows version and condition, installed software, antivirus, overlays, game patches and previous PC modifications.",
+        performanceItem1: "Published screenshots, videos, reviews and examples are illustrative and do not guarantee identical results.",
+        performanceItem2: "Before use, we recommend creating a restore point or backup.",
+        performanceItem3: "Each tweak should be chosen by the user based on their own system and preferences.",
+        licenseTitle: "4. License and activation",
+        licenseText1: "Access to SapoTweak is provided through a personal key. The license may be limited to a specific device, activation count or purchased plan.",
+        licenseText2: "The key is intended to remain valid after reset or reinstall when the main hardware remains the same. Major changes such as motherboard, CPU or other identifying components may require new activation.",
+        paymentsTitle: "5. Payments, subscriptions and refunds",
+        paymentsText1: "Checkout is handled by Stripe. Taxes may be calculated separately based on the customer country.",
+        paymentsText2: "If you buy a subscription, access remains available while the plan is active and paid. If payment fails, expires or is canceled, access may be suspended according to the plan and payment processor rules.",
+        paymentsText3: "Because this is a digital product supplied immediately, refunds are generally not available after key delivery, download, activation or start of digital supply, except where mandatory applicable law requires otherwise.",
+        prohibitedTitle: "6. Prohibited actions",
+        prohibitedText: "Abusive copying, redistribution, unauthorized resale, key sharing, licensing or update system tampering, protection bypassing, code or asset extraction, unauthorized reverse engineering and any fraudulent, illegal or abusive use of the software are prohibited.",
+        liabilityTitle: "7. Liability",
+        liabilityText: "SapoTweak is provided as-is. We are not responsible for manual user choices, misuse, conflicts with third-party software, pre-existing system issues, Windows updates, drivers, game patches or configurations previously modified.",
+        contactTitle: "8. Contact",
+        contactText: "For support or questions about these terms:",
+        acceptLabel: "I have read and accept the SapoTweak Terms of Service.",
+        continueBtn: "Continue to checkout",
+        homeBtn: "Back to site",
+        footer: "SapoTweak - Terms updated on June 2, 2026."
+      },
+      es: {
+        back: "Volver al sitio",
+        plans: "Planes",
+        kicker: "Terminos oficiales",
+        title: "Terminos de uso <span>SapoTweak</span>",
+        lead: "Esta pagina resume las condiciones esenciales para comprar, activar y usar SapoTweak durante la fase de beta de pago.",
+        summary1Title: "Beta de pago",
+        summary1Text: "El producto esta disponible como acceso anticipado con correcciones y cambios rapidos.",
+        summary2Title: "Producto digital",
+        summary2Text: "La key y la descarga se entregan digitalmente despues del pago.",
+        summary3Title: "Uso personal",
+        summary3Text: "Keys, codigo, assets y sistemas de licencia no pueden copiarse ni saltarse.",
+        toc1: "1. Producto",
+        toc2: "2. Beta de pago",
+        toc3: "3. Resultados",
+        toc4: "4. Licencia",
+        toc5: "5. Pagos",
+        toc6: "6. Prohibido",
+        toc7: "7. Responsabilidad",
+        toc8: "8. Contacto",
+        scopeTitle: "1. Producto",
+        scopeText1: "SapoTweak es un software local de optimizacion Windows para usuarios gaming que quieren presets guiados, limpieza del sistema, ajustes de rendimiento y acceso mediante licencia.",
+        scopeText2: "SapoTweak no incluye cheats, exploits, bypass anti-cheat, spyware, malware, herramientas de acceso remoto ni funciones disenadas para saltarse sistemas de seguridad de juegos o software de terceros.",
+        betaTitle: "2. Beta de pago y suministro digital",
+        betaText1: "En esta fase SapoTweak puede distribuirse como beta de pago. El nucleo de la app funciona, pero algunas funciones pueden cambiar, recibir correcciones rapidas o seguir teniendo pequenos fallos.",
+        betaText2: "Al comprar aceptas el acceso anticipado y solicitas el suministro digital inmediato de la key y la descarga despues del pago.",
+        performanceTitle: "3. Resultados y rendimiento",
+        performanceText: "FPS, latencia, procesos, benchmarks, estabilidad y reactividad pueden variar. Los resultados dependen de hardware, temperaturas, drivers, BIOS, version y estado de Windows, software instalado, antivirus, overlays, parches de juegos y modificaciones previas del PC.",
+        performanceItem1: "Capturas, videos, reviews y ejemplos publicados son ilustrativos y no garantizan resultados identicos.",
+        performanceItem2: "Antes de usarlo recomendamos crear un punto de restauracion o backup.",
+        performanceItem3: "Cada tweak debe ser elegido por el usuario segun su sistema y preferencias.",
+        licenseTitle: "4. Licencia y activacion",
+        licenseText1: "El acceso a SapoTweak se proporciona mediante una key personal. La licencia puede estar limitada a un dispositivo, numero de activaciones o plan comprado.",
+        licenseText2: "La key esta pensada para seguir siendo valida tras reset o reinstalacion si el hardware principal sigue igual. Cambios grandes como placa base, CPU u otros componentes identificativos pueden requerir nueva activacion.",
+        paymentsTitle: "5. Pagos, suscripciones y reembolsos",
+        paymentsText1: "Stripe gestiona el checkout. Los impuestos pueden calcularse por separado segun el pais del cliente.",
+        paymentsText2: "Si compras una suscripcion, el acceso permanece disponible mientras el plan este activo y pagado. Si el pago falla, caduca o se cancela, el acceso puede suspenderse segun las reglas del plan y del procesador de pago.",
+        paymentsText3: "Como es un producto digital suministrado inmediatamente, los reembolsos generalmente no estan disponibles tras entrega de key, descarga, activacion o inicio del suministro digital, salvo cuando la ley obligatoria aplicable exija lo contrario.",
+        prohibitedTitle: "6. Acciones prohibidas",
+        prohibitedText: "Se prohiben copia abusiva, redistribucion, reventa no autorizada, compartir keys, modificar sistemas de licencia o updates, saltarse protecciones, extraer codigo o assets, ingenieria inversa no autorizada y cualquier uso fraudulento, ilegal o abusivo del software.",
+        liabilityTitle: "7. Responsabilidad",
+        liabilityText: "SapoTweak se proporciona tal como esta. No somos responsables de decisiones manuales del usuario, uso indebido, conflictos con software de terceros, problemas previos del sistema, updates de Windows, drivers, parches de juegos o configuraciones modificadas anteriormente.",
+        contactTitle: "8. Contacto",
+        contactText: "Para soporte o preguntas sobre estos terminos:",
+        acceptLabel: "He leido y acepto los terminos de uso de SapoTweak.",
+        continueBtn: "Continuar al checkout",
+        homeBtn: "Volver al sitio",
+        footer: "SapoTweak - Terminos actualizados el 2 de junio de 2026."
+      }
+    };
+
+    const languageSelect = document.getElementById("languageSelect");
+    const acceptCheck = document.getElementById("acceptCheck");
+    const continueBtn = document.getElementById("continueBtn");
+    let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
+
+    function applyLanguage(lang) {
+      const safeLang = ["it", "en", "es"].includes(lang) ? lang : "it";
+      const t = translations[safeLang] || translations.it;
+      currentLanguage = safeLang;
+      document.documentElement.lang = safeLang;
+      languageSelect.value = safeLang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t[el.dataset.i18n] || el.dataset.i18n;
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+        el.innerHTML = t[el.dataset.i18nHtml] || el.dataset.i18nHtml;
+      });
+      localStorage.setItem("sapotweak_site_lang", safeLang);
     }
+
+    function syncAcceptance() {
+      const enabled = acceptCheck.checked;
+      continueBtn.classList.toggle("is-disabled", !enabled);
+      continueBtn.setAttribute("aria-disabled", enabled ? "false" : "true");
+      if (enabled) localStorage.setItem("sapotweak_site_tos_ack_v1", "1");
+    }
+
+    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    acceptCheck.addEventListener("change", syncAcceptance);
+
+    if (localStorage.getItem("sapotweak_site_tos_ack_v1") === "1") {
+      acceptCheck.checked = true;
+    }
+    applyLanguage(currentLanguage);
+    syncAcceptance();
   </script>
 </body>
 </html>

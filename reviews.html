@@ -338,8 +338,53 @@
       color: #ddd7f0;
       font-size: 12px;
       line-height: 1.45;
+      cursor: pointer;
     }
-    .tos-confirm input { margin-top: 2px; }
+    .tos-confirm input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .checkmark {
+      position: relative;
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      border-radius: 7px;
+      border: 1px solid rgba(167,139,250,.62);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 3px rgba(124,58,237,.08);
+      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .checkmark::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      opacity: 0;
+      transform: rotate(45deg) scale(.65);
+      transition: opacity .16s ease, transform .16s ease;
+    }
+    .tos-confirm input:checked + .checkmark {
+      border-color: rgba(196,181,253,.92);
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(124,58,237,.16), 0 12px 26px rgba(124,58,237,.22);
+    }
+    .tos-confirm input:checked + .checkmark::after {
+      opacity: 1;
+      transform: rotate(45deg) scale(1);
+    }
+    .tos-confirm input:focus-visible + .checkmark {
+      outline: 2px solid rgba(255,255,255,.82);
+      outline-offset: 3px;
+    }
     .modal-actions { display: flex; justify-content: flex-end; }
     .modal-close {
       border: 1px solid rgba(255,255,255,.12);
@@ -349,6 +394,10 @@
       padding: 10px 14px;
       font-weight: 900;
       cursor: pointer;
+    }
+    .modal-close:disabled {
+      opacity: .45;
+      cursor: not-allowed;
     }
     @media (max-width: 900px) {
       .wrap { padding: 22px; }
@@ -501,6 +550,7 @@
       <div class="tos-body" id="tosBody"></div>
       <label class="tos-confirm">
         <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
+        <span class="checkmark" aria-hidden="true"></span>
         <span id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
       </label>
       <div class="modal-actions">

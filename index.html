@@ -14,28 +14,6 @@
       color: #fff;
       background: #050507;
       overflow-x: hidden;
-      cursor: default;
-    }
-    .cursor-dot {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      transform: translate3d(-50%, -50%, 0);
-      background: rgba(139, 92, 246, .18);
-      border: 1px solid rgba(255,255,255,.28);
-      transition: width .18s ease, height .18s ease, opacity .2s ease, background .18s ease;
-    }
-    body.cursor-active .cursor-dot { opacity: 1; }
-    body.cursor-hover .cursor-dot {
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,.10);
     }
     .bg {
       position: fixed;
@@ -340,8 +318,53 @@
       color: #ddd7f0;
       font-size: 12px;
       line-height: 1.45;
+      cursor: pointer;
     }
-    .tos-confirm input { margin-top: 2px; }
+    .tos-confirm input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .checkmark {
+      position: relative;
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      border-radius: 7px;
+      border: 1px solid rgba(167,139,250,.62);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 3px rgba(124,58,237,.08);
+      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .checkmark::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      opacity: 0;
+      transform: rotate(45deg) scale(.65);
+      transition: opacity .16s ease, transform .16s ease;
+    }
+    .tos-confirm input:checked + .checkmark {
+      border-color: rgba(196,181,253,.92);
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+      box-shadow: 0 0 0 4px rgba(124,58,237,.16), 0 12px 26px rgba(124,58,237,.22);
+    }
+    .tos-confirm input:checked + .checkmark::after {
+      opacity: 1;
+      transform: rotate(45deg) scale(1);
+    }
+    .tos-confirm input:focus-visible + .checkmark {
+      outline: 2px solid rgba(255,255,255,.82);
+      outline-offset: 3px;
+    }
     .modal-actions { display: flex; justify-content: flex-end; }
     .modal-close {
       border: 1px solid rgba(255,255,255,.12);
@@ -351,6 +374,10 @@
       padding: 10px 14px;
       font-weight: 900;
       cursor: pointer;
+    }
+    .modal-close:disabled {
+      opacity: .45;
+      cursor: not-allowed;
     }
 
     /* SAPOTWEAK_LED_SURFACES */
@@ -367,7 +394,6 @@
         inset 0 1px 0 rgba(255,255,255,.04);
     }
     @media (prefers-reduced-motion: reduce), (pointer: coarse) {
-      .cursor-dot { display: none; }
       .btn, .btn::after { transition: none; }
     }
     @media (max-width: 1000px) {
@@ -384,7 +410,6 @@
   </style>
 </head>
 <body>
-  <div class="cursor-dot" aria-hidden="true"></div>
   <div class="bg"></div>
   <div class="grid"></div>
   <main class="wrap">
@@ -461,6 +486,7 @@
       <div class="tos-body" id="tosBody"></div>
       <label class="tos-confirm">
         <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
+        <span class="checkmark" aria-hidden="true"></span>
         <span data-i18n="tosAcceptLabel" id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
       </label>
       <div class="modal-actions">
@@ -471,7 +497,7 @@
   </div>
   <script>
     const fallback = {
-      version: '1.2.23',
+      version: '1.2.24',
       platform: 'Windows x64',
       checkoutPageUrl: 'checkout.html',
       downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe',
@@ -673,33 +699,6 @@
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
     }
 
-    function setupCursor() {
-      const dot = document.querySelector('.cursor-dot');
-      if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
-      let x = 0;
-      let y = 0;
-      let tx = 0;
-      let ty = 0;
-      function move() {
-        x += (tx - x) * 0.18;
-        y += (ty - y) * 0.18;
-        dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-        requestAnimationFrame(move);
-      }
-      window.addEventListener('mousemove', event => {
-        tx = event.clientX;
-        ty = event.clientY;
-        document.body.classList.add('cursor-active');
-      });
-      document.addEventListener('mouseover', event => {
-        document.body.classList.toggle('cursor-hover', Boolean(event.target.closest('a, button, select')));
-      });
-      document.addEventListener('mouseout', event => {
-        if (event.target.closest('a, button, select')) document.body.classList.remove('cursor-hover');
-      });
-      move();
-    }
-
     document.getElementById('languageSelect').addEventListener('change', event => {
       currentLanguage = ['it', 'en', 'es'].includes(event.target.value) ? event.target.value : 'it';
       localStorage.setItem('sapotweak_site_lang', currentLanguage);
@@ -712,7 +711,6 @@
       window.location.replace('checkout.html?plan=' + encodeURIComponent(incomingPlan));
     }
 
-    setupCursor();
     applyLanguage();
     fetch('./version.json', { cache: 'no-store' })
       .then(response => response.ok ? response.json() : fallback)
