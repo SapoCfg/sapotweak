@@ -261,7 +261,14 @@
       align-items: center;
       gap: 10px;
     }
-    .footer-tos {
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-link {
       border: 0;
       background: transparent;
       color: rgba(255,255,255,.72);
@@ -275,7 +282,7 @@
       text-decoration: none;
       text-transform: uppercase;
     }
-    .footer-tos:hover { color: #efe9ff; }
+    .footer-link:hover { color: #efe9ff; }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -479,7 +486,11 @@
 
     <footer class="footer">
       <span data-i18n="footerText">&copy; SapoTweak - Distribuisci solo build ufficiali.</span>
-      <a class="footer-tos" href="terms.html" data-i18n="tosLink">TOS</a>
+      <div class="footer-links">
+        <a class="footer-link" href="terms.html" data-i18n="termsLink">Termini</a>
+        <a class="footer-link" href="privacy.html" data-i18n="privacyLink">Privacy</a>
+        <a class="footer-link" href="support.html" data-i18n="supportLink">Supporto</a>
+      </div>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">
@@ -534,7 +545,9 @@
         paymentButton: 'Apri il checkout',
         paymentNote: "Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.",
         paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Nessun passaggio Lemon. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.",
-        tosLink: 'TOS',
+        termsLink: 'Termini',
+        privacyLink: 'Privacy',
+        supportLink: 'Supporto',
         tosTitle: 'Termini di utilizzo',
         tosText: "Condizioni rapide per l'uso del software.",
         tosCloseBtn: 'Chiudi',
@@ -577,7 +590,9 @@
         paymentButton: 'Open checkout page',
         paymentNote: 'Customers can choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country. Before checkout there is an explicit confirmation for beta access and immediate digital supply.',
         paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. Lemon is no longer used. During beta some areas may receive fast fixes or change more often.',
-        tosLink: 'TOS',
+        termsLink: 'Terms',
+        privacyLink: 'Privacy',
+        supportLink: 'Support',
         tosTitle: 'Terms of Service',
         tosText: 'Short terms for using the software.',
         tosCloseBtn: 'Close',
@@ -620,7 +635,9 @@
         paymentButton: 'Abrir página de checkout',
         paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país. Antes del checkout se pide una confirmación explícita para la beta y el suministro digital inmediato.',
         paymentWarning: 'Después del pago la key aparece inmediatamente en la página de confirmación junto con la descarga oficial. Lemon ya no se usa. Durante la beta algunas áreas pueden recibir correcciones rápidas o cambiar con más frecuencia.',
-        tosLink: 'TOS',
+        termsLink: 'Terminos',
+        privacyLink: 'Privacidad',
+        supportLink: 'Soporte',
         tosTitle: 'Términos de uso',
         tosText: 'Condiciones breves para usar el software.',
         tosCloseBtn: 'Cerrar',
