@@ -103,6 +103,12 @@
       background: linear-gradient(135deg, #2a84ff, var(--success));
       box-shadow: 0 16px 44px rgba(42,132,255,.24);
     }
+    .btn.ghost {
+      display: inline-flex;
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,.12);
+    }
     .status {
       margin-top: 18px;
       color: var(--muted);
@@ -134,6 +140,7 @@
     <div class="actions">
       <button id="copyBtn" class="btn" type="button" style="display:none;">Copia key</button>
       <a id="downloadBtn" class="btn secondary" href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe">Scarica SapoTweak per Windows</a>
+      <a id="supportBtn" class="btn ghost" href="support.html">Supporto e recupero key</a>
     </div>
 
     <div id="status" class="status">Recupero della licenza in corso...</div>
@@ -158,6 +165,7 @@
         copyBtn: "Copia key",
         copiedBtn: "Key copiata",
         downloadBtn: "Scarica SapoTweak per Windows",
+        supportBtn: "Supporto e recupero key",
         loadingStatus: "Recupero della licenza in corso...",
         missingSession: "Sessione di pagamento non trovata. Torna al sito e riprova il checkout.",
         readyStatus: "Key beta pronta. Copiala, scarica l'app e inseriscila al primo avvio.",
@@ -176,6 +184,7 @@
         copyBtn: "Copy key",
         copiedBtn: "Key copied",
         downloadBtn: "Download SapoTweak for Windows",
+        supportBtn: "Support and key recovery",
         loadingStatus: "Retrieving your license...",
         missingSession: "Payment session not found. Go back to the site and try checkout again.",
         readyStatus: "Beta key ready. Copy it, download the app and enter it on first launch.",
@@ -194,6 +203,7 @@
         copyBtn: "Copiar key",
         copiedBtn: "Key copiada",
         downloadBtn: "Descargar SapoTweak para Windows",
+        supportBtn: "Soporte y recupero de key",
         loadingStatus: "Recuperando la licencia...",
         missingSession: "No se encontró la sesión de pago. Vuelve al sitio e intenta el checkout de nuevo.",
         readyStatus: "Key beta lista. Cópiala, descarga la app e introdúcela en el primer inicio.",
@@ -212,6 +222,7 @@
     const keyBox = document.getElementById("keyBox");
     const copyBtn = document.getElementById("copyBtn");
     const downloadBtn = document.getElementById("downloadBtn");
+    const supportBtn = document.getElementById("supportBtn");
     const statusEl = document.getElementById("status");
     let attempts = 0;
 
@@ -226,6 +237,7 @@
       document.getElementById("successLead").textContent = t("successLead");
       copyBtn.textContent = t("copyBtn");
       downloadBtn.textContent = t("downloadBtn");
+      supportBtn.textContent = t("supportBtn");
       statusEl.textContent = t("loadingStatus");
       document.getElementById("metaLine1").textContent = t("metaLine1");
       document.getElementById("metaLine2").textContent = t("metaLine2");
@@ -253,6 +265,10 @@
           keyBox.style.display = "block";
           copyBtn.style.display = "inline-flex";
           downloadBtn.style.display = "inline-flex";
+          supportBtn.href =
+            "support.html?session_id=" + encodeURIComponent(sessionId) +
+            "&licenseKey=" + encodeURIComponent(data.license.licenseKey) +
+            "&email=" + encodeURIComponent(data.license.customerEmail || "");
           statusEl.textContent = t("readyStatus");
           return;
         }
