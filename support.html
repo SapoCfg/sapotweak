@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SapoTweak - Supporto</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050507;
+      --panel: #12111d;
+      --text: #f7f3ff;
+      --muted: #c4bfd5;
+      --soft: #948da8;
+      --line-soft: rgba(255,255,255,.09);
+      --accent: #8b5cf6;
+      --accent-strong: #6d28d9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
+        linear-gradient(180deg, #08070d, var(--bg));
+      overflow-x: hidden;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
+    }
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 30px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 56px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-link,
+    .lang-select {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: #f4efff;
+      padding: 0 15px;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .lang-select {
+      outline: none;
+      color-scheme: dark;
+      cursor: pointer;
+    }
+    .lang-select option { background: #151522; color: #f3f0ff; }
+    .hero {
+      width: min(920px, 100%);
+      margin: 0 auto 26px;
+      text-align: center;
+    }
+    .kicker {
+      display: inline-flex;
+      border: 1px solid rgba(167,139,250,.38);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #dfd4ff;
+      background: rgba(124,58,237,.14);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      margin: 0 auto;
+      max-width: 740px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.68;
+    }
+    .grid-cards {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card,
+    .mailbox {
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+      padding: 22px;
+    }
+    .card h2,
+    .mailbox h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+    .card p,
+    .card li,
+    .mailbox p,
+    .mailbox li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.68;
+    }
+    .card p,
+    .mailbox p { margin: 0 0 12px; }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 8px; }
+    .mailbox {
+      width: min(920px, 100%);
+      margin: 14px auto 0;
+    }
+    .toolbox {
+      width: min(920px, 100%);
+      margin: 14px auto 0;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+      padding: 22px;
+    }
+    .tool-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .tool-copy {
+      max-width: 620px;
+    }
+    .tool-copy h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .tool-copy p,
+    .tool-note,
+    .reset-status {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.68;
+    }
+    .tool-copy p,
+    .tool-note { margin: 0; }
+    .toggle-btn {
+      min-height: 46px;
+      padding: 0 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .reset-panel {
+      display: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+    .field label {
+      color: #f3efff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    .field input {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      color: #fff;
+      padding: 0 14px;
+      font-size: 14px;
+      outline: none;
+    }
+    .field input::placeholder { color: #958fa8; }
+    .tool-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .reset-status {
+      min-height: 22px;
+      margin-top: 12px;
+    }
+    .reset-status.error { color: #ffb3b3; }
+    .reset-status.success { color: #cfc2ff; }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      box-shadow: 0 18px 44px rgba(124,58,237,.25);
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+    }
+    .footer {
+      padding: 34px 0 8px;
+      color: var(--soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .wrap { padding: 22px; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-actions { justify-content: flex-start; }
+      .grid-cards { grid-template-columns: 1fr; }
+      .field-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <main class="wrap">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+        <span>SAPOTWEAK</span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
+        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
+        <a class="nav-link" href="privacy.html" data-i18n="privacy">Privacy</a>
+        <select class="lang-select" id="languageSelect" aria-label="Language">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+        </select>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <span class="kicker" data-i18n="kicker">Supporto ufficiale</span>
+      <h1 data-i18n-html="title">Supporto <span>SapoTweak</span></h1>
+      <p class="lead" data-i18n="lead">Questa pagina serve per recupero key, attivazione, cambio hardware e problemi di download. Niente testo inutile: qui trovi cosa mandare e dove scrivere.</p>
+    </section>
+
+    <section class="grid-cards">
+      <article class="card">
+        <h2 data-i18n="card1Title">1. Ho pagato ma non vedo la key</h2>
+        <p data-i18n="card1Text">Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, manda email e sessione checkout o email usata nel pagamento.</p>
+      </article>
+      <article class="card">
+        <h2 data-i18n="card2Title">2. Ho resettato Windows sullo stesso PC</h2>
+        <p data-i18n="card2Text">In genere la key continua a funzionare se l'hardware principale e' lo stesso. Se non va, invia key, errore mostrato e conferma che il PC e' identico.</p>
+      </article>
+      <article class="card">
+        <h2 data-i18n="card3Title">3. Ho cambiato hardware</h2>
+        <p data-i18n="card3Text">Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale. Indica cosa hai cambiato prima di chiedere reset licenza.</p>
+      </article>
+      <article class="card">
+        <h2 data-i18n="card4Title">4. Download o update non vanno</h2>
+        <p data-i18n="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p>
+      </article>
+    </section>
+
+    <section class="mailbox">
+      <h2 data-i18n="mailTitle">Cosa inviare al supporto</h2>
+      <ul>
+        <li data-i18n="mailItem1">email usata nel pagamento</li>
+        <li data-i18n="mailItem2">key, se gia disponibile</li>
+        <li data-i18n="mailItem3">errore mostrato o screenshot</li>
+        <li data-i18n="mailItem4">se il PC e' lo stesso oppure se hai cambiato hardware</li>
+        <li data-i18n="mailItem5">eventuale session_id della pagina checkout-success</li>
+      </ul>
+      <div class="actions">
+        <a class="btn" href="mailto:support@sapotweak.org?subject=SapoTweak%20Support" data-i18n="emailBtn">Scrivi al supporto</a>
+        <a class="btn secondary" href="checkout-success.html" data-i18n="successBtn">Apri pagina post-checkout</a>
+      </div>
+    </section>
+
+    <section class="toolbox">
+      <div class="tool-head">
+        <div class="tool-copy">
+          <h2 data-i18n="resetTitle">Reset attivazione sullo stesso PC</h2>
+          <p data-i18n="resetLead">Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.</p>
+        </div>
+        <button id="toggleResetBtn" class="toggle-btn" type="button" data-i18n="resetToggleClosed">Apri reset automatico</button>
+      </div>
+      <div id="resetPanel" class="reset-panel">
+        <p class="tool-note" data-i18n="resetNote">Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo.</p>
+        <div class="field-grid">
+          <div class="field">
+            <label for="resetEmail" data-i18n="resetEmailLabel">Email pagamento</label>
+            <input id="resetEmail" type="email" autocomplete="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="resetLicenseKey" data-i18n="resetKeyLabel">License key</label>
+            <input id="resetLicenseKey" type="text" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX">
+          </div>
+          <div class="field">
+            <label for="resetSessionId" data-i18n="resetSessionLabel">Session ID opzionale</label>
+            <input id="resetSessionId" type="text" autocomplete="off" placeholder="cs_...">
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button id="submitResetBtn" class="btn" type="button" data-i18n="resetSubmit">Esegui reset</button>
+        </div>
+        <div id="resetStatus" class="reset-status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer class="footer" data-i18n="footer">SapoTweak - Supporto licenza e download.</footer>
+  </main>
+
+  <script>
+    const translations = {
+      it: {
+        pageTitle: "SapoTweak - Supporto",
+        back: "Torna al sito",
+        plans: "Piani",
+        privacy: "Privacy",
+        kicker: "Supporto ufficiale",
+        title: "Supporto <span>SapoTweak</span>",
+        lead: "Questa pagina serve per recupero key, attivazione, cambio hardware e problemi di download. Niente testo inutile: qui trovi cosa mandare e dove scrivere.",
+        card1Title: "1. Ho pagato ma non vedo la key",
+        card1Text: "Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, manda email e sessione checkout o email usata nel pagamento.",
+        card2Title: "2. Ho resettato Windows sullo stesso PC",
+        card2Text: "In genere la key continua a funzionare se l'hardware principale e' lo stesso. Se non va, invia key, errore mostrato e conferma che il PC e' identico.",
+        card3Title: "3. Ho cambiato hardware",
+        card3Text: "Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale. Indica cosa hai cambiato prima di chiedere reset licenza.",
+        card4Title: "4. Download o update non vanno",
+        card4Text: "Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.",
+        mailTitle: "Cosa inviare al supporto",
+        mailItem1: "email usata nel pagamento",
+        mailItem2: "key, se gia disponibile",
+        mailItem3: "errore mostrato o screenshot",
+        mailItem4: "se il PC e' lo stesso oppure se hai cambiato hardware",
+        mailItem5: "eventuale session_id della pagina checkout-success",
+        emailBtn: "Scrivi al supporto",
+        successBtn: "Apri pagina post-checkout",
+        resetTitle: "Reset attivazione sullo stesso PC",
+        resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.",
+        resetToggleClosed: "Apri reset automatico",
+        resetToggleOpen: "Chiudi reset automatico",
+        resetNote: "Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo.",
+        resetEmailLabel: "Email pagamento",
+        resetKeyLabel: "License key",
+        resetSessionLabel: "Session ID opzionale",
+        resetSubmit: "Esegui reset",
+        resetLoading: "Controllo licenza e reset attivazioni in corso...",
+        resetSuccess: "Reset completato. Riapri SapoTweak e reinserisci la key sullo stesso PC.",
+        resetManual: "Questo caso richiede controllo manuale. Scrivi al supporto con email, key ed eventuale session_id.",
+        resetCooldown: "Hai gia usato il reset di recente. Scrivi al supporto se serve una verifica manuale.",
+        resetError: "Reset non riuscito. Controlla i dati inseriti o scrivi al supporto.",
+        footer: "SapoTweak - Supporto licenza e download."
+      },
+      en: {
+        pageTitle: "SapoTweak - Support",
+        back: "Back to site",
+        plans: "Plans",
+        privacy: "Privacy",
+        kicker: "Official support",
+        title: "Support <span>SapoTweak</span>",
+        lead: "This page is for key recovery, activation, hardware changes and download issues. No filler text: here you get what to send and where to write.",
+        card1Title: "1. I paid but I do not see the key",
+        card1Text: "Wait about one minute on the confirmation page. If the key does not arrive, send the payment email and checkout session if available.",
+        card2Title: "2. I reset Windows on the same PC",
+        card2Text: "The key should usually keep working if the main hardware is the same. If it fails, send the key, the shown error and confirm the PC is unchanged.",
+        card3Title: "3. I changed hardware",
+        card3Text: "Motherboard, CPU or other identifying components may require manual review. Specify what changed before requesting a license reset.",
+        card4Title: "4. Download or update is failing",
+        card4Text: "If site or in-app download fails, attach the error screenshot and the version you are using.",
+        mailTitle: "What to send to support",
+        mailItem1: "payment email",
+        mailItem2: "key, if already available",
+        mailItem3: "shown error or screenshot",
+        mailItem4: "whether the PC is the same or hardware changed",
+        mailItem5: "checkout-success session_id if available",
+        emailBtn: "Write to support",
+        successBtn: "Open post-checkout page",
+        resetTitle: "Activation reset on the same PC",
+        resetLead: "Use this only if you reset Windows or reinstalled the app on the same main hardware. Motherboard or CPU changes still need manual review.",
+        resetToggleClosed: "Open automatic reset",
+        resetToggleOpen: "Close automatic reset",
+        resetNote: "Enter the payment email and key. If you come from the post-checkout page, the session_id is filled automatically.",
+        resetEmailLabel: "Payment email",
+        resetKeyLabel: "License key",
+        resetSessionLabel: "Optional session ID",
+        resetSubmit: "Run reset",
+        resetLoading: "Checking license and resetting activations...",
+        resetSuccess: "Reset completed. Reopen SapoTweak and enter the key again on the same PC.",
+        resetManual: "This case needs manual review. Write to support with email, key and session_id if available.",
+        resetCooldown: "You already used a reset recently. Write to support if you need manual verification.",
+        resetError: "Reset failed. Check the entered details or write to support.",
+        footer: "SapoTweak - License and download support."
+      },
+      es: {
+        pageTitle: "SapoTweak - Soporte",
+        back: "Volver al sitio",
+        plans: "Planes",
+        privacy: "Privacidad",
+        kicker: "Soporte oficial",
+        title: "Soporte <span>SapoTweak</span>",
+        lead: "Esta pagina sirve para recupero de key, activacion, cambio de hardware y problemas de descarga. Sin relleno: aqui encuentras que enviar y donde escribir.",
+        card1Title: "1. He pagado pero no veo la key",
+        card1Text: "Espera alrededor de un minuto en la pagina de confirmacion. Si la key no llega, envia el email del pago y la sesion checkout si existe.",
+        card2Title: "2. He reseteado Windows en el mismo PC",
+        card2Text: "La key normalmente sigue funcionando si el hardware principal es el mismo. Si falla, envia la key, el error mostrado y confirma que el PC no cambio.",
+        card3Title: "3. He cambiado hardware",
+        card3Text: "Placa base, CPU u otros componentes identificativos pueden requerir revision manual. Indica que cambiaste antes de pedir reset de licencia.",
+        card4Title: "4. La descarga o el update fallan",
+        card4Text: "Si la descarga desde el sitio o la app falla, adjunta captura del error y la version que estas usando.",
+        mailTitle: "Que enviar al soporte",
+        mailItem1: "email usado en el pago",
+        mailItem2: "key, si ya esta disponible",
+        mailItem3: "error mostrado o captura",
+        mailItem4: "si el PC es el mismo o si cambiaste hardware",
+        mailItem5: "session_id de checkout-success si existe",
+        emailBtn: "Escribir al soporte",
+        successBtn: "Abrir pagina post-checkout",
+        resetTitle: "Reset de activacion en el mismo PC",
+        resetLead: "Usalo solo si reseteaste Windows o reinstalaste la app en el mismo hardware principal. Cambios de placa base o CPU siguen con revision manual.",
+        resetToggleClosed: "Abrir reset automatico",
+        resetToggleOpen: "Cerrar reset automatico",
+        resetNote: "Introduce el email del pago y la key. Si vienes desde la pagina post-checkout, el session_id se rellena solo.",
+        resetEmailLabel: "Email del pago",
+        resetKeyLabel: "License key",
+        resetSessionLabel: "Session ID opcional",
+        resetSubmit: "Ejecutar reset",
+        resetLoading: "Comprobando licencia y reseteando activaciones...",
+        resetSuccess: "Reset completado. Abre SapoTweak otra vez e introduce la key en el mismo PC.",
+        resetManual: "Este caso necesita revision manual. Escribe al soporte con email, key y session_id si existe.",
+        resetCooldown: "Ya usaste un reset hace poco. Escribe al soporte si necesitas verificacion manual.",
+        resetError: "El reset fallo. Revisa los datos introducidos o escribe al soporte.",
+        footer: "SapoTweak - Soporte de licencia y descarga."
+      }
+    };
+
+    const languageSelect = document.getElementById("languageSelect");
+    const toggleResetBtn = document.getElementById("toggleResetBtn");
+    const resetPanel = document.getElementById("resetPanel");
+    const resetEmail = document.getElementById("resetEmail");
+    const resetLicenseKey = document.getElementById("resetLicenseKey");
+    const resetSessionId = document.getElementById("resetSessionId");
+    const submitResetBtn = document.getElementById("submitResetBtn");
+    const resetStatus = document.getElementById("resetStatus");
+    const workerBase = "https://license.salvocan05.workers.dev";
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
+    let resetOpen = false;
+
+    function applyLanguage(lang) {
+      const safeLang = ["it", "en", "es"].includes(lang) ? lang : "it";
+      const t = translations[safeLang] || translations.it;
+      currentLanguage = safeLang;
+      document.documentElement.lang = safeLang;
+      document.title = t.pageTitle || translations.it.pageTitle;
+      languageSelect.value = safeLang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t[el.dataset.i18n] || el.dataset.i18n;
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+        el.innerHTML = t[el.dataset.i18nHtml] || el.dataset.i18nHtml;
+      });
+      toggleResetBtn.textContent = resetOpen ? t.resetToggleOpen : t.resetToggleClosed;
+      if (!resetStatus.dataset.lockedText) {
+        resetStatus.textContent = "";
+      }
+      localStorage.setItem("sapotweak_site_lang", safeLang);
+    }
+
+    function currentText(key) {
+      return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
+    }
+
+    function setResetOpen(nextValue) {
+      resetOpen = !!nextValue;
+      resetPanel.style.display = resetOpen ? "block" : "none";
+      toggleResetBtn.textContent = currentText(resetOpen ? "resetToggleOpen" : "resetToggleClosed");
+    }
+
+    async function submitReset() {
+      resetStatus.dataset.lockedText = "1";
+      resetStatus.className = "reset-status";
+      resetStatus.textContent = currentText("resetLoading");
+
+      try {
+        const response = await fetch(workerBase + "/license/reset", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            email: resetEmail.value.trim(),
+            licenseKey: resetLicenseKey.value.trim(),
+            sessionId: resetSessionId.value.trim()
+          })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.ok) {
+          resetStatus.classList.add("success");
+          resetStatus.textContent = data.message || currentText("resetSuccess");
+          return;
+        }
+
+        if (response.status === 429) {
+          resetStatus.classList.add("error");
+          resetStatus.textContent = data.error || currentText("resetCooldown");
+          return;
+        }
+
+        if (data && data.manualReview) {
+          resetStatus.classList.add("error");
+          resetStatus.textContent = data.error || currentText("resetManual");
+          return;
+        }
+
+        resetStatus.classList.add("error");
+        resetStatus.textContent = (data && data.error) || currentText("resetError");
+      } catch {
+        resetStatus.classList.add("error");
+        resetStatus.textContent = currentText("resetError");
+      }
+    }
+
+    toggleResetBtn.addEventListener("click", () => setResetOpen(!resetOpen));
+    submitResetBtn.addEventListener("click", submitReset);
+    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    resetEmail.value = urlParams.get("email") || "";
+    resetLicenseKey.value = urlParams.get("licenseKey") || "";
+    resetSessionId.value = urlParams.get("session_id") || "";
+    applyLanguage(currentLanguage);
+  </script>
+</body>
+</html>
