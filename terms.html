@@ -268,6 +268,22 @@
       font-size: 13px;
       text-align: center;
     }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.78);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover { color: #efe9ff; }
     @media (max-width: 900px) {
       .wrap { padding: 22px; }
       .nav { align-items: flex-start; flex-direction: column; }
@@ -354,6 +370,7 @@
         <section id="contact">
           <h2 data-i18n="contactTitle">8. Contatto</h2>
           <p><span data-i18n="contactText">Per supporto o domande sui termini:</span> <a href="mailto:support@sapotweak.org" style="color:#cdbdff;">support@sapotweak.org</a></p>
+          <p><a href="support.html" style="color:#cdbdff;">Apri la pagina supporto licenza</a></p>
         </section>
 
         <div class="accept-panel">
@@ -370,7 +387,13 @@
       </div>
     </div>
 
-    <footer class="footer" data-i18n="footer">SapoTweak - Termini aggiornati al 2 giugno 2026.</footer>
+    <footer class="footer">
+      <div data-i18n="footer">SapoTweak - Termini aggiornati al 2 giugno 2026.</div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Supporto</a>
+      </div>
+    </footer>
   </main>
 
   <script>
