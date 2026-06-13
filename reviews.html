@@ -281,6 +281,13 @@
       align-items: center;
       gap: 10px;
     }
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
     .footer-tos {
       border: 0;
       background: transparent;
@@ -543,7 +550,11 @@
 
     <footer class="footer">
       <span id="footerText">&copy; SapoTweak - Recensioni utenti</span>
-      <a class="footer-tos" href="terms.html" id="tosLink">TOS</a>
+      <div class="footer-links">
+        <a class="footer-tos" href="terms.html" id="tosLink">TOS</a>
+        <a class="footer-tos" href="privacy.html">Privacy</a>
+        <a class="footer-tos" href="support.html">Supporto</a>
+      </div>
     </footer>
   </main>
   <div class="modal-backdrop" id="tosModal">
