@@ -1,133 +1,390 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SapoTweak - Privacy Policy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SapoTweak - Privacy</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #090814;
-      --panel: rgba(22, 20, 40, 0.9);
-      --border: rgba(255,255,255,.08);
-      --text: #f5f1ff;
-      --muted: #c7c2d8;
-      --accent: #8b6cff;
-      --accent-2: #5b3df5;
+      --bg: #050507;
+      --panel: #12111d;
+      --panel-soft: #171426;
+      --line: rgba(167,139,250,.22);
+      --line-soft: rgba(255,255,255,.09);
+      --text: #f7f3ff;
+      --muted: #c4bfd5;
+      --soft: #948da8;
+      --accent: #8b5cf6;
+      --accent-strong: #6d28d9;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(139,108,255,.18), transparent 30%),
-        linear-gradient(180deg, #0b0917 0%, #090814 100%);
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
       color: var(--text);
-      line-height: 1.65;
+      background:
+        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
+        linear-gradient(180deg, #08070d, var(--bg));
+      overflow-x: hidden;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
     }
     .wrap {
-      width: min(920px, calc(100% - 32px));
+      width: min(1120px, 100%);
       margin: 0 auto;
-      padding: 48px 0 72px;
+      padding: 30px;
     }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 34px 28px;
-      box-shadow: 0 24px 80px rgba(0,0,0,.28);
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: clamp(30px, 4vw, 44px); }
-    h2 { margin-top: 28px; font-size: 20px; color: #efe9ff; }
-    p, li { color: var(--muted); font-size: 15px; }
-    ul { padding-left: 20px; }
-    .topbar {
+    .nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 56px;
     }
     .brand {
-      font-weight: 900;
-      font-size: 24px;
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       color: var(--text);
-    }
-    .brand span { color: var(--accent); }
-    .back {
       text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-radius: 999px;
-      padding: 11px 16px;
-      font-weight: 800;
-      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .14em;
     }
-    .meta {
-      color: #a79fc3;
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-link,
+    .lang-select {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: #f4efff;
+      padding: 0 15px;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .lang-select {
+      outline: none;
+      color-scheme: dark;
+      cursor: pointer;
+    }
+    .lang-select option { background: #151522; color: #f3f0ff; }
+    .hero {
+      width: min(880px, 100%);
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 18px;
+      padding: 30px 0 8px;
+    }
+    .kicker {
+      width: fit-content;
+      border: 1px solid rgba(167,139,250,.38);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #dfd4ff;
+      background: rgba(124,58,237,.14);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.68;
+    }
+    .policy-shell {
+      width: min(880px, 100%);
+      margin: 0 auto;
+    }
+    .policy-card {
+      display: grid;
+      gap: 14px;
+    }
+    section {
+      padding: 22px;
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+    }
+    section h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    section p,
+    section li {
+      color: var(--muted);
       font-size: 14px;
-      margin-bottom: 20px;
+      line-height: 1.72;
+    }
+    section p { margin: 0 0 12px; }
+    section p:last-child { margin-bottom: 0; }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 9px; }
+    .footer {
+      padding: 34px 0 8px;
+      color: var(--soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .wrap { padding: 22px; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-actions { justify-content: flex-start; }
+      .hero { margin-bottom: 18px; }
+      .hero-copy { padding-top: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="index.html">Sapo<span>Tweak</span></a>
-      <a class="back" href="index.html">Back to site</a>
+  <div class="grid"></div>
+  <main class="wrap">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+        <span>SAPOTWEAK</span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
+        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
+        <a class="nav-link" href="support.html" data-i18n="support">Supporto</a>
+        <select class="lang-select" id="languageSelect" aria-label="Language">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+        </select>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="kicker" data-i18n="kicker">Privacy ufficiale</span>
+        <h1 data-i18n-html="title">Privacy <span>SapoTweak</span></h1>
+        <p class="lead" data-i18n="lead">Questa pagina riassume in modo pratico quali dati passano tra sito, app, Stripe, Worker licenze e supporto.</p>
+      </div>
     </div>
-    <div class="card">
-      <h1>SapoTweak Privacy Policy</h1>
-      <p class="meta"><strong>Effective date:</strong> May 21, 2026</p>
 
-      <p>This Privacy Policy explains how SapoTweak collects, uses, and protects information related to the use and purchase of our software.</p>
+    <div class="policy-shell">
+      <div class="policy-card">
+        <section>
+          <h2 data-i18n="whoTitle">1. Chi tratta cosa</h2>
+          <p data-i18n="whoText1">SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, GitHub Releases per il download dell'installer e un Worker Cloudflare per la validazione della licenza.</p>
+          <p data-i18n="whoText2">Il supporto viene gestito via email all'indirizzo support@sapotweak.org.</p>
+        </section>
 
-      <h2>1. Information we collect</h2>
-      <p>SapoTweak may collect or process limited information necessary to provide the product, activate licenses, provide support, and prevent abuse.</p>
-      <p>This may include:</p>
-      <ul>
-        <li>Email address used for purchase or support</li>
-        <li>License key status and activation information</li>
-        <li>Basic device or activation identifiers needed for license validation</li>
-        <li>Support messages sent by the customer</li>
-        <li>Order, subscription, and payment status provided by our payment and billing providers</li>
-      </ul>
+        <section>
+          <h2 data-i18n="dataTitle">2. Dati che possono essere trattati</h2>
+          <ul>
+            <li data-i18n="dataItem1">email usata nel pagamento</li>
+            <li data-i18n="dataItem2">identificativi di sessione checkout e abbonamento</li>
+            <li data-i18n="dataItem3">chiave licenza e stato del piano</li>
+            <li data-i18n="dataItem4">fingerprint macchina usato per l'attivazione sul PC</li>
+            <li data-i18n="dataItem5">log tecnici inviati volontariamente al supporto</li>
+          </ul>
+        </section>
 
-      <h2>2. Payment information</h2>
-      <p>Payments, subscriptions, taxes, invoices, and order processing are handled by third-party payment and billing providers. We do not directly store full credit card numbers or payment card details.</p>
+        <section>
+          <h2 data-i18n="appTitle">3. Dati locali nell'app</h2>
+          <p data-i18n="appText1">L'app salva localmente file di licenza e device per mantenere l'attivazione e controllare la validita' del piano. Questi file restano sul PC dell'utente e non vengono pubblicati sul sito.</p>
+          <p data-i18n="appText2">Se l'utente contatta il supporto, puo' allegare volontariamente errori, screenshot o log tecnici per risolvere problemi di attivazione, update o installazione.</p>
+        </section>
 
-      <h2>3. How we use information</h2>
-      <p>We use information to:</p>
-      <ul>
-        <li>Provide access to SapoTweak</li>
-        <li>Validate and manage software licenses</li>
-        <li>Provide customer support</li>
-        <li>Prevent abuse, fraud, license sharing, or unauthorized access</li>
-        <li>Improve the software and user experience</li>
-        <li>Comply with legal, tax, and platform requirements</li>
-      </ul>
+        <section>
+          <h2 data-i18n="useTitle">4. Perche' vengono usati</h2>
+          <ul>
+            <li data-i18n="useItem1">consegnare la key dopo il pagamento</li>
+            <li data-i18n="useItem2">attivare e ri-validare la licenza sul PC corretto</li>
+            <li data-i18n="useItem3">gestire rinnovi, scadenze, pagamenti falliti e revoche</li>
+            <li data-i18n="useItem4">fornire supporto su recupero key, reset e download</li>
+          </ul>
+        </section>
 
-      <h2>4. What we do not collect</h2>
-      <p>SapoTweak is not designed to collect passwords, browser history, private files, personal documents, game accounts, payment card numbers, or login credentials.</p>
+        <section>
+          <h2 data-i18n="shareTitle">5. Condivisione con terzi</h2>
+          <p data-i18n="shareText1">I pagamenti sono gestiti da Stripe. Il download dell'installer puo' passare da GitHub Releases. La validazione licenza passa dal Worker Cloudflare configurato per SapoTweak.</p>
+          <p data-i18n="shareText2">SapoTweak non vende i dati personali come prodotto separato.</p>
+        </section>
 
-      <h2>5. Third-party services</h2>
-      <p>We may use third-party services for payments, subscriptions, taxes, billing, fraud prevention, activation, and order delivery. These providers may process personal data according to their own privacy policies.</p>
-
-      <h2>6. Data retention</h2>
-      <p>We keep information only for as long as needed to provide the product, manage licenses, process support requests, prevent abuse, and comply with legal or tax obligations.</p>
-
-      <h2>7. Data security</h2>
-      <p>We take reasonable steps to protect user information. However, no online service or software system can be guaranteed to be completely secure.</p>
-
-      <h2>8. User rights</h2>
-      <p>Depending on your location, you may have rights to access, correct, delete, or request a copy of your personal information. To request assistance, contact us using the email below.</p>
-
-      <h2>9. Contact</h2>
-      <p>For privacy questions or data requests, contact: <a href="mailto:support@sapotweak.org" style="color:#cbbdff;">support@sapotweak.org</a></p>
+        <section>
+          <h2 data-i18n="rightsTitle">6. Supporto e richieste</h2>
+          <p data-i18n="rightsText1">Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a support@sapotweak.org.</p>
+          <p data-i18n="rightsText2">Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e se il PC e' lo stesso o ha subito cambi hardware.</p>
+        </section>
+      </div>
     </div>
-  </div>
+
+    <footer class="footer" data-i18n="footer">SapoTweak - Privacy aggiornata al 13 giugno 2026.</footer>
+  </main>
+
+  <script>
+    const translations = {
+      it: {
+        pageTitle: "SapoTweak - Privacy",
+        back: "Torna al sito",
+        plans: "Piani",
+        support: "Supporto",
+        kicker: "Privacy ufficiale",
+        title: "Privacy <span>SapoTweak</span>",
+        lead: "Questa pagina riassume in modo pratico quali dati passano tra sito, app, Stripe, Worker licenze e supporto.",
+        whoTitle: "1. Chi tratta cosa",
+        whoText1: "SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, GitHub Releases per il download dell'installer e un Worker Cloudflare per la validazione della licenza.",
+        whoText2: "Il supporto viene gestito via email all'indirizzo support@sapotweak.org.",
+        dataTitle: "2. Dati che possono essere trattati",
+        dataItem1: "email usata nel pagamento",
+        dataItem2: "identificativi di sessione checkout e abbonamento",
+        dataItem3: "chiave licenza e stato del piano",
+        dataItem4: "fingerprint macchina usato per l'attivazione sul PC",
+        dataItem5: "log tecnici inviati volontariamente al supporto",
+        appTitle: "3. Dati locali nell'app",
+        appText1: "L'app salva localmente file di licenza e device per mantenere l'attivazione e controllare la validita' del piano. Questi file restano sul PC dell'utente e non vengono pubblicati sul sito.",
+        appText2: "Se l'utente contatta il supporto, puo' allegare volontariamente errori, screenshot o log tecnici per risolvere problemi di attivazione, update o installazione.",
+        useTitle: "4. Perche' vengono usati",
+        useItem1: "consegnare la key dopo il pagamento",
+        useItem2: "attivare e ri-validare la licenza sul PC corretto",
+        useItem3: "gestire rinnovi, scadenze, pagamenti falliti e revoche",
+        useItem4: "fornire supporto su recupero key, reset e download",
+        shareTitle: "5. Condivisione con terzi",
+        shareText1: "I pagamenti sono gestiti da Stripe. Il download dell'installer puo' passare da GitHub Releases. La validazione licenza passa dal Worker Cloudflare configurato per SapoTweak.",
+        shareText2: "SapoTweak non vende i dati personali come prodotto separato.",
+        rightsTitle: "6. Supporto e richieste",
+        rightsText1: "Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a support@sapotweak.org.",
+        rightsText2: "Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e se il PC e' lo stesso o ha subito cambi hardware.",
+        footer: "SapoTweak - Privacy aggiornata al 13 giugno 2026."
+      },
+      en: {
+        pageTitle: "SapoTweak - Privacy",
+        back: "Back to site",
+        plans: "Plans",
+        support: "Support",
+        kicker: "Official privacy",
+        title: "Privacy <span>SapoTweak</span>",
+        lead: "This page summarizes in a practical way which data flows across the site, app, Stripe, the licensing Worker and support.",
+        whoTitle: "1. Who handles what",
+        whoText1: "SapoTweak uses separate components for sales, download and activation: the public site, Stripe for payments, GitHub Releases for installer delivery and a Cloudflare Worker for license validation.",
+        whoText2: "Support is handled by email at support@sapotweak.org.",
+        dataTitle: "2. Data that may be processed",
+        dataItem1: "email used for payment",
+        dataItem2: "checkout and subscription session identifiers",
+        dataItem3: "license key and plan status",
+        dataItem4: "machine fingerprint used for PC activation",
+        dataItem5: "technical logs voluntarily sent to support",
+        appTitle: "3. Local app data",
+        appText1: "The app stores local license and device files to keep activation and check plan validity. These files stay on the user's PC and are not published on the site.",
+        appText2: "If the user contacts support, they may voluntarily attach errors, screenshots or technical logs to resolve activation, update or installation issues.",
+        useTitle: "4. Why data is used",
+        useItem1: "deliver the key after payment",
+        useItem2: "activate and re-validate the license on the correct PC",
+        useItem3: "handle renewals, expirations, failed payments and revocations",
+        useItem4: "provide support for key recovery, reset and downloads",
+        shareTitle: "5. Sharing with third parties",
+        shareText1: "Payments are handled by Stripe. Installer delivery may use GitHub Releases. License validation passes through the Cloudflare Worker configured for SapoTweak.",
+        shareText2: "SapoTweak does not sell personal data as a separate product.",
+        rightsTitle: "6. Support and requests",
+        rightsText1: "For corrections, key recovery, activation issues or requests about purchase-related data, write to support@sapotweak.org.",
+        rightsText2: "To speed up support, include the payment email, the key if available, the shown error and whether the PC is the same or changed hardware.",
+        footer: "SapoTweak - Privacy updated on June 13, 2026."
+      },
+      es: {
+        pageTitle: "SapoTweak - Privacidad",
+        back: "Volver al sitio",
+        plans: "Planes",
+        support: "Soporte",
+        kicker: "Privacidad oficial",
+        title: "Privacidad <span>SapoTweak</span>",
+        lead: "Esta pagina resume de forma practica que datos pasan entre el sitio, la app, Stripe, el Worker de licencias y el soporte.",
+        whoTitle: "1. Quien trata que",
+        whoText1: "SapoTweak usa componentes separados para venta, descarga y activacion: sitio publico, Stripe para pagos, GitHub Releases para la descarga del instalador y un Worker Cloudflare para la validacion de licencias.",
+        whoText2: "El soporte se gestiona por email en support@sapotweak.org.",
+        dataTitle: "2. Datos que pueden tratarse",
+        dataItem1: "email usado en el pago",
+        dataItem2: "identificadores de sesion checkout y suscripcion",
+        dataItem3: "key de licencia y estado del plan",
+        dataItem4: "fingerprint de maquina usado para la activacion en el PC",
+        dataItem5: "logs tecnicos enviados voluntariamente al soporte",
+        appTitle: "3. Datos locales de la app",
+        appText1: "La app guarda archivos locales de licencia y dispositivo para mantener la activacion y comprobar la validez del plan. Estos archivos permanecen en el PC del usuario y no se publican en el sitio.",
+        appText2: "Si el usuario contacta al soporte, puede adjuntar voluntariamente errores, capturas o logs tecnicos para resolver problemas de activacion, update o instalacion.",
+        useTitle: "4. Por que se usan",
+        useItem1: "entregar la key despues del pago",
+        useItem2: "activar y revalidar la licencia en el PC correcto",
+        useItem3: "gestionar renovaciones, vencimientos, pagos fallidos y revocaciones",
+        useItem4: "dar soporte para recupero de key, reset y descargas",
+        shareTitle: "5. Comparticion con terceros",
+        shareText1: "Los pagos se gestionan con Stripe. La descarga del instalador puede pasar por GitHub Releases. La validacion de licencia pasa por el Worker Cloudflare configurado para SapoTweak.",
+        shareText2: "SapoTweak no vende datos personales como producto separado.",
+        rightsTitle: "6. Soporte y solicitudes",
+        rightsText1: "Para correcciones, recupero de key, problemas de activacion o solicitudes sobre datos vinculados a la compra, escribe a support@sapotweak.org.",
+        rightsText2: "Para acelerar el soporte conviene incluir el email del pago, la key si existe, el error mostrado y si el PC es el mismo o cambio hardware.",
+        footer: "SapoTweak - Privacidad actualizada el 13 de junio de 2026."
+      }
+    };
+
+    const languageSelect = document.getElementById("languageSelect");
+    let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
+
+    function applyLanguage(lang) {
+      const safeLang = ["it", "en", "es"].includes(lang) ? lang : "it";
+      const t = translations[safeLang] || translations.it;
+      currentLanguage = safeLang;
+      document.documentElement.lang = safeLang;
+      document.title = t.pageTitle || translations.it.pageTitle;
+      languageSelect.value = safeLang;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t[el.dataset.i18n] || el.dataset.i18n;
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+        el.innerHTML = t[el.dataset.i18nHtml] || el.dataset.i18nHtml;
+      });
+      localStorage.setItem("sapotweak_site_lang", safeLang);
+    }
+
+    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    applyLanguage(currentLanguage);
+  </script>
 </body>
 </html>
