@@ -325,11 +325,11 @@
       </article>
       <article class="card">
         <h2 data-i18n="card2Title">2. Ho resettato Windows sullo stesso PC</h2>
-        <p data-i18n="card2Text">In genere la key continua a funzionare se l'hardware principale e' lo stesso. Se non va, invia key, errore mostrato e conferma che il PC e' identico.</p>
+        <p data-i18n="card2Text">Se l'hardware principale e' lo stesso, la key dovrebbe continuare a funzionare. Se non succede, usa prima il reset automatico qui sotto; se ancora non basta, invia key, errore mostrato e conferma che il PC e' identico.</p>
       </article>
       <article class="card">
         <h2 data-i18n="card3Title">3. Ho cambiato hardware</h2>
-        <p data-i18n="card3Text">Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale. Indica cosa hai cambiato prima di chiedere reset licenza.</p>
+        <p data-i18n="card3Text">Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale prima di riattivare la licenza. Indica cosa hai cambiato prima di chiedere reset licenza.</p>
       </article>
       <article class="card">
         <h2 data-i18n="card4Title">4. Download o update non vanno</h2>
@@ -356,12 +356,12 @@
       <div class="tool-head">
         <div class="tool-copy">
           <h2 data-i18n="resetTitle">Reset attivazione sullo stesso PC</h2>
-          <p data-i18n="resetLead">Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.</p>
+          <p data-i18n="resetLead">Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Non serve per spostare la licenza su un PC diverso. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.</p>
         </div>
         <button id="toggleResetBtn" class="toggle-btn" type="button" data-i18n="resetToggleClosed">Apri reset automatico</button>
       </div>
       <div id="resetPanel" class="reset-panel">
-        <p class="tool-note" data-i18n="resetNote">Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo.</p>
+        <p class="tool-note" data-i18n="resetNote">Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo. Il reset automatico e' pensato solo per lo stesso PC.</p>
         <div class="field-grid">
           <div class="field">
             <label for="resetEmail" data-i18n="resetEmailLabel">Email pagamento</label>
@@ -399,9 +399,9 @@
         card1Title: "1. Ho pagato ma non vedo la key",
         card1Text: "Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, manda email e sessione checkout o email usata nel pagamento.",
         card2Title: "2. Ho resettato Windows sullo stesso PC",
-        card2Text: "In genere la key continua a funzionare se l'hardware principale e' lo stesso. Se non va, invia key, errore mostrato e conferma che il PC e' identico.",
+        card2Text: "Se l'hardware principale e' lo stesso, la key dovrebbe continuare a funzionare. Se non succede, usa prima il reset automatico qui sotto; se ancora non basta, invia key, errore mostrato e conferma che il PC e' identico.",
         card3Title: "3. Ho cambiato hardware",
-        card3Text: "Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale. Indica cosa hai cambiato prima di chiedere reset licenza.",
+        card3Text: "Scheda madre, CPU o altri componenti identificativi possono richiedere controllo manuale prima di riattivare la licenza. Indica cosa hai cambiato prima di chiedere reset licenza.",
         card4Title: "4. Download o update non vanno",
         card4Text: "Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.",
         mailTitle: "Cosa inviare al supporto",
@@ -413,10 +413,10 @@
         emailBtn: "Scrivi al supporto",
         successBtn: "Apri pagina post-checkout",
         resetTitle: "Reset attivazione sullo stesso PC",
-        resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.",
+        resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Non serve per spostare la licenza su un PC diverso. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.",
         resetToggleClosed: "Apri reset automatico",
         resetToggleOpen: "Chiudi reset automatico",
-        resetNote: "Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo.",
+        resetNote: "Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo. Il reset automatico e' pensato solo per lo stesso PC.",
         resetEmailLabel: "Email pagamento",
         resetKeyLabel: "License key",
         resetSessionLabel: "Session ID opzionale",
@@ -439,9 +439,9 @@
         card1Title: "1. I paid but I do not see the key",
         card1Text: "Wait about one minute on the confirmation page. If the key does not arrive, send the payment email and checkout session if available.",
         card2Title: "2. I reset Windows on the same PC",
-        card2Text: "The key should usually keep working if the main hardware is the same. If it fails, send the key, the shown error and confirm the PC is unchanged.",
+        card2Text: "If the main hardware is the same, the key should usually keep working. If it does not, use the automatic reset below first; if that still does not solve it, send the key, the shown error and confirm the PC is unchanged.",
         card3Title: "3. I changed hardware",
-        card3Text: "Motherboard, CPU or other identifying components may require manual review. Specify what changed before requesting a license reset.",
+        card3Text: "Motherboard, CPU or other identifying components may require manual review before the license can be activated again. Specify what changed before requesting a license reset.",
         card4Title: "4. Download or update is failing",
         card4Text: "If site or in-app download fails, attach the error screenshot and the version you are using.",
         mailTitle: "What to send to support",
@@ -453,10 +453,10 @@
         emailBtn: "Write to support",
         successBtn: "Open post-checkout page",
         resetTitle: "Activation reset on the same PC",
-        resetLead: "Use this only if you reset Windows or reinstalled the app on the same main hardware. Motherboard or CPU changes still need manual review.",
+        resetLead: "Use this only if you reset Windows or reinstalled the app on the same main hardware. It is not meant to move the license to a different PC. Motherboard or CPU changes still need manual review.",
         resetToggleClosed: "Open automatic reset",
         resetToggleOpen: "Close automatic reset",
-        resetNote: "Enter the payment email and key. If you come from the post-checkout page, the session_id is filled automatically.",
+        resetNote: "Enter the payment email and key. If you come from the post-checkout page, the session_id is filled automatically. The automatic reset is intended only for the same PC.",
         resetEmailLabel: "Payment email",
         resetKeyLabel: "License key",
         resetSessionLabel: "Optional session ID",
@@ -479,9 +479,9 @@
         card1Title: "1. He pagado pero no veo la key",
         card1Text: "Espera alrededor de un minuto en la pagina de confirmacion. Si la key no llega, envia el email del pago y la sesion checkout si existe.",
         card2Title: "2. He reseteado Windows en el mismo PC",
-        card2Text: "La key normalmente sigue funcionando si el hardware principal es el mismo. Si falla, envia la key, el error mostrado y confirma que el PC no cambio.",
+        card2Text: "Si el hardware principal es el mismo, la key deberia seguir funcionando. Si no ocurre, usa primero el reset automatico de abajo; si aun asi no basta, envia la key, el error mostrado y confirma que el PC no cambio.",
         card3Title: "3. He cambiado hardware",
-        card3Text: "Placa base, CPU u otros componentes identificativos pueden requerir revision manual. Indica que cambiaste antes de pedir reset de licencia.",
+        card3Text: "Placa base, CPU u otros componentes identificativos pueden requerir revision manual antes de reactivar la licencia. Indica que cambiaste antes de pedir reset de licencia.",
         card4Title: "4. La descarga o el update fallan",
         card4Text: "Si la descarga desde el sitio o la app falla, adjunta captura del error y la version que estas usando.",
         mailTitle: "Que enviar al soporte",
@@ -493,10 +493,10 @@
         emailBtn: "Escribir al soporte",
         successBtn: "Abrir pagina post-checkout",
         resetTitle: "Reset de activacion en el mismo PC",
-        resetLead: "Usalo solo si reseteaste Windows o reinstalaste la app en el mismo hardware principal. Cambios de placa base o CPU siguen con revision manual.",
+        resetLead: "Usalo solo si reseteaste Windows o reinstalaste la app en el mismo hardware principal. No sirve para mover la licencia a un PC distinto. Cambios de placa base o CPU siguen con revision manual.",
         resetToggleClosed: "Abrir reset automatico",
         resetToggleOpen: "Cerrar reset automatico",
-        resetNote: "Introduce el email del pago y la key. Si vienes desde la pagina post-checkout, el session_id se rellena solo.",
+        resetNote: "Introduce el email del pago y la key. Si vienes desde la pagina post-checkout, el session_id se rellena solo. El reset automatico esta pensado solo para el mismo PC.",
         resetEmailLabel: "Email del pago",
         resetKeyLabel: "License key",
         resetSessionLabel: "Session ID opcional",
