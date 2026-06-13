@@ -261,6 +261,23 @@
       line-height: 1.6;
       font-size: 14px;
     }
+    .legal-links {
+      width: min(100%, 760px);
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: -4px;
+    }
+    .legal-links a {
+      color: #4b5563;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .legal-links a:hover { color: #111827; }
     @media (max-width: 700px) {
       .plan { grid-template-columns: auto 1fr; }
       .price { grid-column: 2; text-align: left; font-size: 24px; }
@@ -333,6 +350,11 @@
 
       <div class="note" id="note">
         Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC. Durante la beta il prodotto riceve fix e cambi rapidi, quindi alcune parti dell'esperienza possono evolvere più velocemente della versione finale.
+      </div>
+      <div class="legal-links">
+        <a href="terms.html" id="termsLink">Termini</a>
+        <a href="privacy.html" id="privacyLink">Privacy</a>
+        <a href="support.html" id="supportLink">Supporto</a>
       </div>
     </div>
   </div>
