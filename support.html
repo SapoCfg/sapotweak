@@ -258,6 +258,109 @@
       flex-wrap: wrap;
       margin-top: 18px;
     }
+    .support-template {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+    }
+    .support-template h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .support-template p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .support-template textarea {
+      width: 100%;
+      min-height: 190px;
+      resize: vertical;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(7,7,12,.78);
+      color: #fff;
+      padding: 14px;
+      font: 13px/1.65 "Cascadia Code", Consolas, monospace;
+      outline: none;
+    }
+    .support-template-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .mini-note {
+      color: var(--soft);
+      font-size: 12px;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(2,2,6,.78);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .support-modal {
+      width: min(620px, 100%);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(23,20,38,.98), rgba(10,10,18,.98));
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+      padding: 22px;
+    }
+    .support-modal h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+    .support-modal p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .support-choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .support-choice {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      color: #fff;
+      text-decoration: none;
+    }
+    .support-choice strong {
+      font-size: 17px;
+    }
+    .support-choice span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -289,6 +392,7 @@
       .nav-actions { justify-content: flex-start; }
       .grid-cards { grid-template-columns: 1fr; }
       .field-grid { grid-template-columns: 1fr; }
+      .support-choices { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -347,8 +451,17 @@
         <li data-i18n="mailItem5">eventuale session_id della pagina checkout-success</li>
       </ul>
       <div class="actions">
-      <a class="btn" href="mailto:sapotweak@gmail.com?subject=SapoTweak%20Support" data-i18n="emailBtn">Scrivi al supporto</a>
+        <button id="openSupportModalBtn" class="btn" type="button" data-i18n="emailBtn">Scrivi al supporto</button>
         <a class="btn secondary" href="checkout-success.html" data-i18n="successBtn">Apri pagina post-checkout</a>
+      </div>
+      <div class="support-template">
+        <h3 data-i18n="templateTitle">Messaggio pronto da copiare</h3>
+        <p data-i18n="templateLead">Compila o lascia i campi vuoti, poi copia questo testo e incollalo su Gmail o nel ticket Discord.</p>
+        <textarea id="supportTemplate" readonly></textarea>
+        <div class="support-template-actions">
+          <button id="copySupportTemplateBtn" class="btn secondary" type="button" data-i18n="copyTemplateBtn">Copia testo supporto</button>
+          <span id="copySupportTemplateStatus" class="mini-note" data-i18n="copyTemplateHint">Ti conviene allegare anche screenshot o errore completo.</span>
+        </div>
       </div>
     </section>
 
@@ -386,6 +499,26 @@
     <footer class="footer" data-i18n="footer">SapoTweak - Supporto licenza e download.</footer>
   </main>
 
+  <div id="supportModal" class="modal-backdrop" aria-hidden="true">
+    <div class="support-modal" role="dialog" aria-modal="true" aria-labelledby="supportModalTitle">
+      <h3 id="supportModalTitle" data-i18n="modalTitle">Dove vuoi aprire il supporto?</h3>
+      <p data-i18n="modalLead">Scegli Gmail se vuoi inviare una mail a `sapotweak@gmail.com`, oppure apri direttamente il ticket Discord ufficiale.</p>
+      <div class="support-choices">
+        <a id="gmailSupportLink" class="support-choice" href="mailto:sapotweak@gmail.com?subject=SapoTweak%20Support">
+          <strong data-i18n="modalEmailTitle">Gmail supporto</strong>
+          <span data-i18n="modalEmailText">Apre la tua app email con destinatario `sapotweak@gmail.com` e oggetto gia pronto.</span>
+        </a>
+        <a id="discordSupportLink" class="support-choice" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer">
+          <strong data-i18n="modalDiscordTitle">Discord ticket</strong>
+          <span data-i18n="modalDiscordText">Apre il canale ticket ufficiale Discord dove puoi incollare il testo copiato qui sopra.</span>
+        </a>
+      </div>
+      <div class="modal-actions">
+        <button id="closeSupportModalBtn" class="btn secondary" type="button" data-i18n="modalClose">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const translations = {
       it: {
@@ -412,6 +545,18 @@
         mailItem5: "eventuale session_id della pagina checkout-success",
         emailBtn: "Scrivi al supporto",
         successBtn: "Apri pagina post-checkout",
+        templateTitle: "Messaggio pronto da copiare",
+        templateLead: "Compila o lascia i campi vuoti, poi copia questo testo e incollalo su Gmail o nel ticket Discord.",
+        copyTemplateBtn: "Copia testo supporto",
+        copyTemplateHint: "Ti conviene allegare anche screenshot o errore completo.",
+        copyTemplateDone: "Testo copiato. Ora apri Gmail o Discord.",
+        modalTitle: "Dove vuoi aprire il supporto?",
+        modalLead: "Scegli Gmail se vuoi inviare una mail a `sapotweak@gmail.com`, oppure apri direttamente il ticket Discord ufficiale.",
+        modalEmailTitle: "Gmail supporto",
+        modalEmailText: "Apre la tua app email con destinatario `sapotweak@gmail.com` e oggetto gia pronto.",
+        modalDiscordTitle: "Discord ticket",
+        modalDiscordText: "Apre il canale ticket ufficiale Discord dove puoi incollare il testo copiato qui sopra.",
+        modalClose: "Chiudi",
         resetTitle: "Reset attivazione sullo stesso PC",
         resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Non serve per spostare la licenza su un PC diverso. Per cambio scheda madre, CPU o dubbi resta il controllo manuale.",
         resetToggleClosed: "Apri reset automatico",
@@ -452,6 +597,18 @@
         mailItem5: "checkout-success session_id if available",
         emailBtn: "Write to support",
         successBtn: "Open post-checkout page",
+        templateTitle: "Ready-to-copy message",
+        templateLead: "Fill it in or leave fields empty, then copy this text and paste it into Gmail or your Discord ticket.",
+        copyTemplateBtn: "Copy support text",
+        copyTemplateHint: "It is best to attach the screenshot or full error too.",
+        copyTemplateDone: "Text copied. Now open Gmail or Discord.",
+        modalTitle: "Where do you want to open support?",
+        modalLead: "Choose Gmail if you want to send an email to `sapotweak@gmail.com`, or open the official Discord ticket directly.",
+        modalEmailTitle: "Support Gmail",
+        modalEmailText: "Opens your email app with `sapotweak@gmail.com` already filled in.",
+        modalDiscordTitle: "Discord ticket",
+        modalDiscordText: "Opens the official Discord ticket channel where you can paste the copied text above.",
+        modalClose: "Close",
         resetTitle: "Activation reset on the same PC",
         resetLead: "Use this only if you reset Windows or reinstalled the app on the same main hardware. It is not meant to move the license to a different PC. Motherboard or CPU changes still need manual review.",
         resetToggleClosed: "Open automatic reset",
@@ -492,6 +649,18 @@
         mailItem5: "session_id de checkout-success si existe",
         emailBtn: "Escribir al soporte",
         successBtn: "Abrir pagina post-checkout",
+        templateTitle: "Mensaje listo para copiar",
+        templateLead: "Completa o deja vacios los campos, luego copia este texto y pegalo en Gmail o en el ticket de Discord.",
+        copyTemplateBtn: "Copiar texto soporte",
+        copyTemplateHint: "Tambien conviene adjuntar captura o error completo.",
+        copyTemplateDone: "Texto copiado. Ahora abre Gmail o Discord.",
+        modalTitle: "Donde quieres abrir el soporte?",
+        modalLead: "Elige Gmail si quieres enviar un correo a `sapotweak@gmail.com`, o abre directamente el ticket oficial de Discord.",
+        modalEmailTitle: "Gmail soporte",
+        modalEmailText: "Abre tu app de correo con `sapotweak@gmail.com` ya preparado.",
+        modalDiscordTitle: "Ticket Discord",
+        modalDiscordText: "Abre el canal oficial de ticket en Discord donde puedes pegar el texto copiado arriba.",
+        modalClose: "Cerrar",
         resetTitle: "Reset de activacion en el mismo PC",
         resetLead: "Usalo solo si reseteaste Windows o reinstalaste la app en el mismo hardware principal. No sirve para mover la licencia a un PC distinto. Cambios de placa base o CPU siguen con revision manual.",
         resetToggleClosed: "Abrir reset automatico",
@@ -518,6 +687,13 @@
     const resetSessionId = document.getElementById("resetSessionId");
     const submitResetBtn = document.getElementById("submitResetBtn");
     const resetStatus = document.getElementById("resetStatus");
+    const openSupportModalBtn = document.getElementById("openSupportModalBtn");
+    const closeSupportModalBtn = document.getElementById("closeSupportModalBtn");
+    const supportModal = document.getElementById("supportModal");
+    const gmailSupportLink = document.getElementById("gmailSupportLink");
+    const supportTemplate = document.getElementById("supportTemplate");
+    const copySupportTemplateBtn = document.getElementById("copySupportTemplateBtn");
+    const copySupportTemplateStatus = document.getElementById("copySupportTemplateStatus");
     const workerBase = "https://license.salvocan05.workers.dev";
     const urlParams = new URLSearchParams(window.location.search);
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
@@ -540,6 +716,8 @@
       if (!resetStatus.dataset.lockedText) {
         resetStatus.textContent = "";
       }
+      copySupportTemplateStatus.textContent = currentText("copyTemplateHint");
+      rebuildSupportTemplate();
       localStorage.setItem("sapotweak_site_lang", safeLang);
     }
 
@@ -551,6 +729,49 @@
       resetOpen = !!nextValue;
       resetPanel.style.display = resetOpen ? "block" : "none";
       toggleResetBtn.textContent = currentText(resetOpen ? "resetToggleOpen" : "resetToggleClosed");
+    }
+
+    function supportTemplateText() {
+      const sessionId = resetSessionId.value.trim() || urlParams.get("session_id") || "";
+      const email = resetEmail.value.trim() || urlParams.get("email") || "";
+      const key = resetLicenseKey.value.trim() || urlParams.get("licenseKey") || "";
+      return [
+        "Email usata: " + (email || ""),
+        "Problema: ",
+        "Key: " + key,
+        "Session ID: " + sessionId,
+        "PC stesso o hardware cambiato: ",
+        "Versione app: ",
+        "Errore mostrato: ",
+        "Screenshot allegato: si/no",
+        "Dettagli extra: "
+      ].join("\\n");
+    }
+
+    function rebuildSupportTemplate() {
+      supportTemplate.value = supportTemplateText();
+      gmailSupportLink.href =
+        "mailto:sapotweak@gmail.com?subject=" +
+        encodeURIComponent("SapoTweak Support") +
+        "&body=" +
+        encodeURIComponent(supportTemplate.value);
+    }
+
+    function setSupportModalOpen(nextValue) {
+      supportModal.classList.toggle("show", !!nextValue);
+      supportModal.setAttribute("aria-hidden", nextValue ? "false" : "true");
+    }
+
+    async function copySupportTemplate() {
+      rebuildSupportTemplate();
+      try {
+        await navigator.clipboard.writeText(supportTemplate.value);
+        copySupportTemplateStatus.textContent = currentText("copyTemplateDone");
+      } catch {
+        supportTemplate.focus();
+        supportTemplate.select();
+        copySupportTemplateStatus.textContent = currentText("copyTemplateDone");
+      }
     }
 
     async function submitReset() {
@@ -599,9 +820,22 @@
     toggleResetBtn.addEventListener("click", () => setResetOpen(!resetOpen));
     submitResetBtn.addEventListener("click", submitReset);
     languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    openSupportModalBtn.addEventListener("click", () => {
+      rebuildSupportTemplate();
+      setSupportModalOpen(true);
+    });
+    closeSupportModalBtn.addEventListener("click", () => setSupportModalOpen(false));
+    supportModal.addEventListener("click", (event) => {
+      if (event.target === supportModal) setSupportModalOpen(false);
+    });
+    copySupportTemplateBtn.addEventListener("click", copySupportTemplate);
+    [resetEmail, resetLicenseKey, resetSessionId].forEach((input) => {
+      input.addEventListener("input", rebuildSupportTemplate);
+    });
     resetEmail.value = urlParams.get("email") || "";
     resetLicenseKey.value = urlParams.get("licenseKey") || "";
     resetSessionId.value = urlParams.get("session_id") || "";
+    rebuildSupportTemplate();
     applyLanguage(currentLanguage);
   </script>
 </body>
