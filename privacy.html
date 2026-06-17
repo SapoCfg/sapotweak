@@ -22,33 +22,60 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
+      font-family: "Sora", Inter, Arial, sans-serif;
       color: var(--text);
-      background:
-        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
-        linear-gradient(180deg, #08070d, var(--bg));
+      background: linear-gradient(180deg, #05050a, #030305);
       overflow-x: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(137, 79, 255, .20), transparent 0 22%),
+        radial-gradient(circle at 82% 18%, rgba(109, 46, 232, .14), transparent 0 24%),
+        linear-gradient(180deg, #040308, #090611);
+      z-index: -4;
+    }
+    .mesh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: .96;
+      pointer-events: none;
     }
     .grid {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.96), rgba(0,0,0,.24));
     }
     .wrap {
       width: min(1120px, 100%);
       margin: 0 auto;
       padding: 30px;
+      position: relative;
+      z-index: 1;
     }
     .nav {
+      position: sticky;
+      top: 18px;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(10, 9, 17, .72);
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
       margin-bottom: 56px;
     }
     .brand {
@@ -61,10 +88,10 @@
       letter-spacing: .14em;
     }
     .brand img {
-      width: 46px;
-      height: 46px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+      filter: drop-shadow(0 0 18px rgba(157, 92, 255, .42));
     }
     .nav-actions {
       display: flex;
@@ -78,11 +105,13 @@
       min-height: 42px;
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.045);
       color: #f4efff;
       padding: 0 15px;
-      font-size: 13px;
-      font-weight: 900;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
       text-decoration: none;
     }
     .lang-select {
@@ -105,15 +134,26 @@
     }
     .kicker {
       width: fit-content;
-      border: 1px solid rgba(167,139,250,.38);
+      border: 1px solid rgba(184,150,255,.28);
       border-radius: 999px;
-      padding: 8px 12px;
-      color: #dfd4ff;
-      background: rgba(124,58,237,.14);
-      font-size: 12px;
+      padding: 10px 16px;
+      color: #ebe0ff;
+      background: rgba(127, 66, 255, .12);
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: .08em;
+      letter-spacing: .16em;
       text-transform: uppercase;
+    }
+    .kicker::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      border-radius: 999px;
+      background: #b46cff;
+      box-shadow: 0 0 18px rgba(180,108,255,.85);
+      vertical-align: middle;
     }
     h1 {
       margin: 0;
@@ -145,8 +185,10 @@
     section {
       padding: 22px;
       border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(17,13,30,.84), rgba(9,8,16,.90));
+      box-shadow: 0 26px 90px rgba(0,0,0,.24);
+      backdrop-filter: blur(12px);
     }
     section h2 {
       margin: 0 0 10px;
@@ -182,6 +224,8 @@
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
   <div class="grid"></div>
   <main class="wrap">
     <nav class="nav">
@@ -253,7 +297,7 @@
         <section>
           <h2 data-i18n="rightsTitle">6. Supporto e richieste</h2>
         <p data-i18n="rightsText1">Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a sapotweak@gmail.com.</p>
-          <p data-i18n="rightsText2">Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e se il PC e' lo stesso, e' stato reinstallato o ha subito cambi hardware.</p>
+          <p data-i18n="rightsText2">Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e ogni dettaglio utile sul problema di attivazione, installazione o download.</p>
         </section>
       </div>
     </div>
@@ -293,7 +337,7 @@
         shareText2: "SapoTweak non vende i dati personali come prodotto separato.",
         rightsTitle: "6. Supporto e richieste",
         rightsText1: "Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a sapotweak@gmail.com.",
-        rightsText2: "Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e se il PC e' lo stesso, e' stato reinstallato o ha subito cambi hardware.",
+        rightsText2: "Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e ogni dettaglio utile sul problema di attivazione, installazione o download.",
         footer: "SapoTweak - Privacy aggiornata al 13 giugno 2026."
       },
       en: {
@@ -326,7 +370,7 @@
         shareText2: "SapoTweak does not sell personal data as a separate product.",
         rightsTitle: "6. Support and requests",
         rightsText1: "For corrections, key recovery, activation issues or requests about purchase-related data, write to sapotweak@gmail.com.",
-        rightsText2: "To speed up support, include the payment email, the key if available, the shown error and whether the PC is the same, was reinstalled or changed hardware.",
+        rightsText2: "To speed up support, include the payment email, the key if available, the shown error, and any useful detail about the activation, installation, or download issue.",
         footer: "SapoTweak - Privacy updated on June 13, 2026."
       },
       es: {
@@ -359,7 +403,7 @@
         shareText2: "SapoTweak no vende datos personales como producto separado.",
         rightsTitle: "6. Soporte y solicitudes",
         rightsText1: "Para correcciones, recupero de key, problemas de activacion o solicitudes sobre datos vinculados a la compra, escribe a sapotweak@gmail.com.",
-        rightsText2: "Para acelerar el soporte conviene incluir el email del pago, la key si existe, el error mostrado y si el PC es el mismo, fue reinstalado o cambio hardware.",
+        rightsText2: "Para acelerar el soporte conviene incluir el email del pago, la key si existe, el error mostrado y cualquier detalle util sobre el problema de activacion, instalacion o descarga.",
         footer: "SapoTweak - Privacidad actualizada el 13 de junio de 2026."
       }
     };
@@ -383,8 +427,87 @@
       localStorage.setItem("sapotweak_site_lang", safeLang);
     }
 
+    function initMeshBackground() {
+      const canvas = document.getElementById("meshCanvas");
+      if (!canvas) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      let animationFrame = 0;
+      let width = 0;
+      let height = 0;
+      let points = [];
+      const maxDistance = 180;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.6);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const density = width < 900 ? 34 : 48;
+        const count = Math.max(28, Math.floor((width * height) / (density * density * 10)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          vy: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          r: Math.random() * 1.8 + 0.4
+        }));
+      }
+
+      function step() {
+        context.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i += 1) {
+          const point = points[i];
+          point.x += point.vx;
+          point.y += point.vy;
+
+          if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+          if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+
+          for (let j = i + 1; j < points.length; j += 1) {
+            const other = points[j];
+            const dx = point.x - other.x;
+            const dy = point.y - other.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > maxDistance) continue;
+
+            const alpha = 1 - distance / maxDistance;
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.strokeStyle = `rgba(182, 146, 255, ${alpha * 0.12})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
+        }
+
+        for (const point of points) {
+          context.beginPath();
+          context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+          context.fillStyle = "rgba(218, 201, 255, 0.22)";
+          context.fill();
+        }
+
+        animationFrame = window.requestAnimationFrame(step);
+      }
+
+      resize();
+      step();
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
+    }
+
     languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
     applyLanguage(currentLanguage);
+    initMeshBackground();
   </script>
 </body>
 </html>
