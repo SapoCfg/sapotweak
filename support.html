@@ -5,298 +5,394 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Supporto</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
     :root {
       color-scheme: dark;
-      --bg: #050507;
-      --panel: #12111d;
-      --text: #f7f3ff;
-      --muted: #c4bfd5;
-      --soft: #948da8;
-      --line-soft: rgba(255,255,255,.09);
-      --accent: #8b5cf6;
-      --accent-strong: #6d28d9;
+      --bg-0: #040308;
+      --bg-1: #090611;
+      --surface-0: rgba(14, 11, 24, 0.82);
+      --surface-1: rgba(18, 14, 32, 0.92);
+      --text-0: #faf7ff;
+      --text-1: #d8d1ea;
+      --text-2: #aba3c3;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --accent-0: #7e3cff;
+      --accent-1: #b86cff;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
-      background:
-        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
-        linear-gradient(180deg, #08070d, var(--bg));
+      font-family: "Sora", "Segoe UI", sans-serif;
+      color: var(--text-0);
+      background: linear-gradient(180deg, #05050a, #030305);
       overflow-x: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(137, 79, 255, 0.20), transparent 0 22%),
+        radial-gradient(circle at 82% 18%, rgba(109, 46, 232, 0.14), transparent 0 24%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      z-index: -4;
+    }
+    .mesh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.96;
+      pointer-events: none;
     }
     .grid {
       position: fixed;
       inset: 0;
-      z-index: -1;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.24));
+      z-index: -2;
+      pointer-events: none;
     }
     .wrap {
-      width: min(1120px, 100%);
+      width: min(1180px, 100%);
       margin: 0 auto;
-      padding: 30px;
+      padding: 28px;
+      position: relative;
+      z-index: 1;
     }
     .nav {
+      position: sticky;
+      top: 18px;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 56px;
+      padding: 14px 18px;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      background: rgba(10, 9, 17, 0.72);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+      backdrop-filter: blur(18px);
     }
     .brand {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      color: var(--text);
+      color: var(--text-0);
       text-decoration: none;
       font-weight: 900;
-      letter-spacing: .14em;
+      letter-spacing: 0.08em;
     }
     .brand img {
-      width: 46px;
-      height: 46px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+      filter: drop-shadow(0 0 18px rgba(157, 92, 255, 0.42));
     }
-    .nav-actions {
+    .nav-right {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
     .nav-link,
     .lang-select {
-      min-height: 42px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      color: #f4efff;
-      padding: 0 15px;
-      font-size: 13px;
-      font-weight: 900;
-      text-decoration: none;
-    }
-    .lang-select {
-      outline: none;
-      color-scheme: dark;
-      cursor: pointer;
-    }
-    .lang-select option { background: #151522; color: #f3f0ff; }
-    .hero {
-      width: min(920px, 100%);
-      margin: 0 auto 26px;
-      text-align: center;
-    }
-    .kicker {
       display: inline-flex;
-      border: 1px solid rgba(167,139,250,.38);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 42px;
+      border: 1px solid var(--line-soft);
       border-radius: 999px;
-      padding: 8px 12px;
-      color: #dfd4ff;
-      background: rgba(124,58,237,.14);
+      background: rgba(255,255,255,0.045);
+      color: var(--text-0);
+      padding: 0 18px;
       font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .08em;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
+    .lang-select {
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      color-scheme: dark;
+    }
+    .lang-select option {
+      background: #151522;
+      color: #f3f0ff;
+    }
+    .hero {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      padding: 76px 0 24px;
+      text-align: center;
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 150, 255, 0.28);
+      background: rgba(127, 66, 255, 0.12);
+      color: #ebe0ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #b46cff;
+      box-shadow: 0 0 18px rgba(180, 108, 255, 0.85);
+    }
     h1 {
-      margin: 16px 0 10px;
-      font-size: clamp(44px, 7vw, 84px);
-      line-height: .92;
-      letter-spacing: 0;
+      margin: 0;
+      max-width: 980px;
+      font-size: clamp(52px, 8vw, 104px);
+      line-height: 0.90;
+      letter-spacing: -0.07em;
     }
     h1 span {
-      background: linear-gradient(90deg, #fff, #a78bfa);
+      background: linear-gradient(180deg, #ffffff 0%, #e9dcff 38%, #b56cff 100%);
       -webkit-background-clip: text;
       color: transparent;
     }
-    .lead {
-      margin: 0 auto;
-      max-width: 740px;
-      color: var(--muted);
+    .hero p {
+      margin: 0;
+      max-width: 780px;
+      color: var(--text-1);
       font-size: 17px;
-      line-height: 1.68;
+      line-height: 1.78;
     }
-    .grid-cards {
-      width: min(920px, 100%);
-      margin: 0 auto;
+    .cards,
+    .support-shell,
+    .reset-shell,
+    .support-modal {
+      border: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, rgba(17, 13, 30, 0.84), rgba(9, 8, 16, 0.90));
+      border-radius: 28px;
+      box-shadow: 0 28px 110px rgba(0,0,0,0.30);
+      backdrop-filter: blur(14px);
+    }
+    .cards {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 16px;
+      padding: 18px;
+      margin-top: 10px;
     }
-    .card,
-    .mailbox {
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
-      padding: 22px;
+    .card {
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
     }
-    .card h2,
-    .mailbox h2 {
+    .card h2 {
       margin: 0 0 10px;
-      font-size: 20px;
+      font-size: 26px;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
     }
-    .card p,
-    .card li,
-    .mailbox p,
-    .mailbox li {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.68;
-    }
-    .card p,
-    .mailbox p { margin: 0 0 12px; }
-    ul {
+    .card p {
       margin: 0;
-      padding-left: 18px;
-    }
-    li { margin-bottom: 8px; }
-    .mailbox {
-      width: min(920px, 100%);
-      margin: 14px auto 0;
-    }
-    .toolbox {
-      width: min(920px, 100%);
-      margin: 14px auto 0;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
-      padding: 22px;
-    }
-    .tool-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .tool-copy {
-      max-width: 620px;
-    }
-    .tool-copy h2 {
-      margin: 0 0 8px;
-      font-size: 20px;
-    }
-    .tool-copy p,
-    .tool-note,
-    .reset-status {
-      color: var(--muted);
+      color: var(--text-1);
       font-size: 14px;
-      line-height: 1.68;
+      line-height: 1.75;
     }
-    .tool-copy p,
-    .tool-note { margin: 0; }
-    .toggle-btn {
-      min-height: 46px;
-      padding: 0 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: rgba(255,255,255,.06);
+    .support-shell,
+    .reset-shell {
+      margin-top: 22px;
+      padding: 28px;
+    }
+    .section-head {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .section-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 150, 255, 0.22);
+      background: rgba(127, 66, 255, 0.10);
+      color: #e6dcff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .section-head h2 {
+      margin: 0;
+      max-width: 880px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+    .section-head p {
+      margin: 0;
+      max-width: 820px;
+      color: var(--text-1);
+      font-size: 15px;
+      line-height: 1.74;
+    }
+    .support-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.10);
       color: #fff;
+      font-family: inherit;
       font-size: 14px;
       font-weight: 900;
       cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 18px 45px rgba(55, 34, 94, 0.26);
     }
-    .reset-panel {
-      display: none;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.08);
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-0), var(--accent-1) 65%, #cf97ff);
+      box-shadow: 0 22px 60px rgba(113, 55, 224, 0.34);
     }
-    .field-grid {
+    .btn:hover { transform: translateY(-2px); }
+    .support-template-shell {
+      display: grid;
+      gap: 12px;
+    }
+    .support-template-shell h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .support-template-shell p {
+      margin: 0;
+      color: var(--text-1);
+      font-size: 14px;
+      line-height: 1.72;
+      text-align: center;
+    }
+    .support-template-shell textarea {
+      width: 100%;
+      min-height: 230px;
+      resize: vertical;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(5, 5, 10, 0.84);
+      color: #fff;
+      padding: 16px 18px;
+      font: 13px/1.7 "Cascadia Code", Consolas, monospace;
+      outline: none;
+    }
+    .template-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .template-status {
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .reset-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 14px;
+      gap: 14px;
+      margin-top: 18px;
     }
     .field {
       display: grid;
-      gap: 7px;
+      gap: 8px;
     }
     .field label {
-      color: #f3efff;
+      color: #f4efff;
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: .03em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
     .field input {
       width: 100%;
-      min-height: 46px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: rgba(255,255,255,.05);
+      min-height: 50px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
       color: #fff;
-      padding: 0 14px;
+      padding: 0 16px;
+      font-family: inherit;
       font-size: 14px;
       outline: none;
     }
-    .field input::placeholder { color: #958fa8; }
-    .tool-actions {
+    .reset-actions {
       display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      margin-top: 18px;
     }
     .reset-status {
-      min-height: 22px;
-      margin-top: 12px;
-    }
-    .reset-status.error { color: #ffb3b3; }
-    .reset-status.success { color: #cfc2ff; }
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-    .support-template {
-      margin-top: 18px;
-      padding: 16px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background: rgba(255,255,255,.04);
-    }
-    .support-template h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-    }
-    .support-template p {
-      margin: 0 0 10px;
-      color: var(--muted);
+      margin-top: 14px;
+      color: var(--text-2);
       font-size: 13px;
-      line-height: 1.6;
+      line-height: 1.7;
+      text-align: center;
+      min-height: 24px;
     }
-    .support-template textarea {
-      width: 100%;
-      min-height: 190px;
-      resize: vertical;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: rgba(7,7,12,.78);
-      color: #fff;
-      padding: 14px;
-      font: 13px/1.65 "Cascadia Code", Consolas, monospace;
-      outline: none;
-    }
-    .support-template-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .mini-note {
-      color: var(--soft);
+    .reset-status.error { color: #ffc0c0; }
+    .reset-status.success { color: #d8c1ff; }
+    .footer {
+      padding: 36px 0 12px;
+      color: var(--text-2);
       font-size: 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links {
+      display: inline-flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .modal-backdrop {
       position: fixed;
@@ -305,216 +401,220 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(2,2,6,.78);
-      backdrop-filter: blur(10px);
-      z-index: 50;
+      background: rgba(2, 2, 6, 0.82);
+      backdrop-filter: blur(12px);
+      z-index: 40;
     }
     .modal-backdrop.show {
       display: flex;
     }
     .support-modal {
-      width: min(620px, 100%);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(23,20,38,.98), rgba(10,10,18,.98));
-      box-shadow: 0 30px 80px rgba(0,0,0,.45);
-      padding: 22px;
+      width: min(760px, 100%);
+      padding: 26px;
     }
     .support-modal h3 {
-      margin: 0 0 8px;
-      font-size: 24px;
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-align: center;
     }
-    .support-modal p {
-      margin: 0;
-      color: var(--muted);
+    .support-modal > p {
+      margin: 0 auto 18px;
+      max-width: 620px;
+      color: var(--text-1);
       font-size: 14px;
       line-height: 1.7;
+      text-align: center;
     }
-    .support-choices {
+    .support-choice-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
+      gap: 14px;
+      margin-bottom: 18px;
     }
     .support-choice {
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 8px;
-      min-height: 132px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 18px;
-      background: rgba(255,255,255,.05);
+      min-height: 150px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
       color: #fff;
       text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .support-choice:hover {
+      transform: translateY(-2px);
+      border-color: rgba(184, 150, 255, 0.24);
     }
     .support-choice strong {
-      font-size: 17px;
+      font-size: 20px;
     }
     .support-choice span {
-      color: var(--muted);
+      color: var(--text-1);
       font-size: 13px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .modal-actions {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       margin-top: 16px;
     }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
-      box-shadow: 0 18px 44px rgba(124,58,237,.25);
+    @media (max-width: 960px) {
+      .cards,
+      .reset-grid,
+      .support-choice-grid { grid-template-columns: 1fr; }
     }
-    .btn.secondary {
-      background: rgba(255,255,255,.06);
-      box-shadow: none;
+    @media (max-width: 720px) {
+      .wrap { padding: 18px; }
+      .nav {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 26px;
+      }
+      .nav-right { justify-content: flex-start; }
+      .cards,
+      .support-shell,
+      .reset-shell,
+      .support-modal { border-radius: 24px; }
+      .cards,
+      .support-shell,
+      .reset-shell,
+      .support-modal { padding: 22px; }
+      .hero { padding-top: 42px; }
+      .card h2 { font-size: 22px; }
     }
-    .footer {
-      padding: 34px 0 8px;
-      color: var(--soft);
-      font-size: 13px;
-      text-align: center;
-    }
-    @media (max-width: 900px) {
-      .wrap { padding: 22px; }
-      .nav { align-items: flex-start; flex-direction: column; }
-      .nav-actions { justify-content: flex-start; }
-      .grid-cards { grid-template-columns: 1fr; }
-      .field-grid { grid-template-columns: 1fr; }
-      .support-choices { grid-template-columns: 1fr; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
   <div class="grid"></div>
+
   <main class="wrap">
     <nav class="nav">
       <a class="brand" href="index.html">
         <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
         <span>SAPOTWEAK</span>
       </a>
-      <div class="nav-actions">
-        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
-        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
-        <a class="nav-link" href="privacy.html" data-i18n="privacy">Privacy</a>
+      <div class="nav-right">
+        <a class="nav-link" href="index.html" id="backLink">Sito</a>
+        <a class="nav-link" href="checkout.html" id="plansLink">Piani</a>
+        <a class="nav-link" href="reviews.html" id="reviewsLink">Recensioni</a>
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Espanol</option>
+          <option value="es">Español</option>
         </select>
       </div>
     </nav>
 
     <section class="hero">
-      <span class="kicker" data-i18n="kicker">Supporto ufficiale</span>
-      <h1 data-i18n-html="title">Supporto <span>SapoTweak</span></h1>
-      <p class="lead" data-i18n="lead">Questa pagina serve per recupero key, riattivazione sullo stesso PC e problemi di download. Niente testo inutile: qui trovi cosa mandare e dove scrivere.</p>
+      <span class="eyebrow" id="eyebrow">Supporto ufficiale</span>
+      <h1 id="title">Supporto <span>SapoTweak</span></h1>
+      <p id="lead">Questa pagina serve per recupero key, riattivazione sullo stesso PC, problemi di download e invio dati al supporto. Tutto è centrato nello stesso stile premium della home.</p>
     </section>
 
-    <section class="grid-cards">
+    <section class="cards">
       <article class="card">
-        <h2 data-i18n="card1Title">1. Ho pagato ma non vedo la key</h2>
-        <p data-i18n="card1Text">Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, manda email e sessione checkout o email usata nel pagamento.</p>
+        <h2 id="card1Title">1. Ho pagato ma non vedo la key</h2>
+        <p id="card1Text">Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, invia email pagamento e session ID checkout se disponibile.</p>
       </article>
       <article class="card">
-        <h2 data-i18n="card2Title">2. Ho resettato Windows sullo stesso PC</h2>
-        <p data-i18n="card2Text">Se l'hardware principale e' lo stesso, la key dovrebbe continuare a funzionare. Se non succede, usa prima il reset automatico qui sotto; se ancora non basta, invia key, errore mostrato e conferma che il PC e' identico.</p>
+        <h2 id="card2Title">2. Ho resettato Windows sullo stesso PC</h2>
+        <p id="card2Text">Se l'hardware principale è lo stesso, usa prima il reset automatico qui sotto. Se non basta, manda key, errore mostrato e conferma che il PC è identico.</p>
       </article>
       <article class="card">
-        <h2 data-i18n="card3Title">3. La key non si attiva</h2>
-        <p data-i18n="card3Text">Se la key viene rifiutata o resta bloccata, invia email usata, key, errore mostrato e screenshot. Se hai reinstallato Windows sullo stesso PC, specificalo.</p>
+        <h2 id="card3Title">3. La key non si attiva</h2>
+        <p id="card3Text">Se la key viene rifiutata o resta bloccata, invia email usata, key, errore mostrato e screenshot. Se hai reinstallato Windows sullo stesso PC, specificalo.</p>
       </article>
       <article class="card">
-        <h2 data-i18n="card4Title">4. Download o update non vanno</h2>
-        <p data-i18n="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p>
+        <h2 id="card4Title">4. Download o update non vanno</h2>
+        <p id="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p>
       </article>
     </section>
 
-    <section class="mailbox">
-      <h2 data-i18n="mailTitle">Cosa inviare al supporto</h2>
-      <ul>
-        <li data-i18n="mailItem1">email usata nel pagamento</li>
-        <li data-i18n="mailItem2">key, se gia disponibile</li>
-        <li data-i18n="mailItem3">errore mostrato o screenshot</li>
-        <li data-i18n="mailItem4">se hai resettato Windows o reinstallato l'app sullo stesso PC</li>
-        <li data-i18n="mailItem5">eventuale session_id della pagina checkout-success</li>
-      </ul>
-      <div class="actions">
-        <button id="openSupportModalBtn" class="btn" type="button" data-i18n="emailBtn">Scrivi al supporto</button>
-        <a class="btn secondary" href="checkout-success.html" data-i18n="successBtn">Apri pagina post-checkout</a>
+    <section class="support-shell">
+      <div class="section-head">
+        <span class="section-tag" id="supportTag">Support flow</span>
+        <h2 id="supportTitle">Apri Gmail o Discord con testo già pronto</h2>
+        <p id="supportLead">Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con destinatario `sapotweak@gmail.com` già inserito.</p>
       </div>
-      <div class="support-template">
-        <h3 data-i18n="templateTitle">Messaggio pronto da copiare</h3>
-        <p data-i18n="templateLead">Compila o lascia i campi vuoti, poi copia questo testo e incollalo su Gmail o nel ticket Discord.</p>
+      <div class="support-actions">
+        <button class="btn primary" id="openSupportModalBtn" type="button">Apri supporto</button>
+        <button class="btn" id="copySupportTemplateBtn" type="button">Copia testo</button>
+      </div>
+      <div class="support-template-shell">
+        <h3 id="templateTitle">Testo pronto da copiare</h3>
+        <p id="templateLead">Compila questo elenco e incollalo su Gmail o Discord per velocizzare il supporto.</p>
         <textarea id="supportTemplate" readonly></textarea>
-        <div class="support-template-actions">
-          <button id="copySupportTemplateBtn" class="btn secondary" type="button" data-i18n="copyTemplateBtn">Copia testo supporto</button>
-          <span id="copySupportTemplateStatus" class="mini-note" data-i18n="copyTemplateHint">Ti conviene allegare anche screenshot o errore completo.</span>
+        <div class="template-actions">
+          <span class="template-status" id="templateStatus">Aggiungi anche screenshot, errore e versione app se li hai.</span>
         </div>
       </div>
     </section>
 
-    <section class="toolbox">
-      <div class="tool-head">
-        <div class="tool-copy">
-          <h2 data-i18n="resetTitle">Reset attivazione sullo stesso PC</h2>
-          <p data-i18n="resetLead">Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso PC principale. Non serve per spostare la licenza su un PC diverso.</p>
-        </div>
-        <button id="toggleResetBtn" class="toggle-btn" type="button" data-i18n="resetToggleClosed">Apri reset automatico</button>
+    <section class="reset-shell">
+      <div class="section-head">
+        <span class="section-tag" id="resetTag">Same PC reset</span>
+        <h2 id="resetTitle">Reset attivazione sullo stesso PC</h2>
+        <p id="resetLead">Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Non serve per spostare la licenza su un altro PC.</p>
       </div>
-      <div id="resetPanel" class="reset-panel">
-        <p class="tool-note" data-i18n="resetNote">Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo. Il reset automatico e' pensato solo per lo stesso PC.</p>
-        <div class="field-grid">
-          <div class="field">
-            <label for="resetEmail" data-i18n="resetEmailLabel">Email pagamento</label>
-            <input id="resetEmail" type="email" autocomplete="email" placeholder="you@example.com">
-          </div>
-          <div class="field">
-            <label for="resetLicenseKey" data-i18n="resetKeyLabel">License key</label>
-            <input id="resetLicenseKey" type="text" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX">
-          </div>
-          <div class="field">
-            <label for="resetSessionId" data-i18n="resetSessionLabel">Session ID opzionale</label>
-            <input id="resetSessionId" type="text" autocomplete="off" placeholder="cs_...">
-          </div>
+      <div class="reset-grid">
+        <div class="field">
+          <label for="resetEmail" id="resetEmailLabel">Email pagamento</label>
+          <input id="resetEmail" type="email" placeholder="you@example.com" />
         </div>
-        <div class="tool-actions">
-          <button id="submitResetBtn" class="btn" type="button" data-i18n="resetSubmit">Esegui reset</button>
+        <div class="field">
+          <label for="resetLicenseKey" id="resetKeyLabel">License key</label>
+          <input id="resetLicenseKey" type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
         </div>
-        <div id="resetStatus" class="reset-status" aria-live="polite"></div>
+        <div class="field">
+          <label for="resetSessionId" id="resetSessionLabel">Session ID opzionale</label>
+          <input id="resetSessionId" type="text" placeholder="cs_..." />
+        </div>
       </div>
+      <div class="reset-actions">
+        <button class="btn primary" id="submitResetBtn" type="button">Esegui reset</button>
+      </div>
+      <div class="reset-status" id="resetStatus"></div>
     </section>
 
-    <footer class="footer" data-i18n="footer">SapoTweak - Supporto licenza e download.</footer>
+    <footer class="footer">
+      <span id="footerText">SapoTweak - Distribuisci solo build ufficiali.</span>
+      <div class="footer-links">
+        <a href="terms.html" id="termsLink">Termini</a>
+        <a href="privacy.html" id="privacyLink">Privacy</a>
+        <a href="reviews.html" id="reviewsFooterLink">Recensioni</a>
+      </div>
+    </footer>
   </main>
 
-  <div id="supportModal" class="modal-backdrop" aria-hidden="true">
+  <div class="modal-backdrop" id="supportModal">
     <div class="support-modal" role="dialog" aria-modal="true" aria-labelledby="supportModalTitle">
-      <h3 id="supportModalTitle" data-i18n="modalTitle">Dove vuoi aprire il supporto?</h3>
-      <p data-i18n="modalLead">Scegli Gmail se vuoi inviare una mail a `sapotweak@gmail.com`, oppure apri direttamente il ticket Discord ufficiale.</p>
-      <div class="support-choices">
-        <a id="gmailSupportLink" class="support-choice" href="mailto:sapotweak@gmail.com?subject=SapoTweak%20Support">
-          <strong data-i18n="modalEmailTitle">Gmail supporto</strong>
-          <span data-i18n="modalEmailText">Apre la tua app email con destinatario `sapotweak@gmail.com` e oggetto gia pronto.</span>
+      <h3 id="supportModalTitle">Supporto SapoTweak</h3>
+      <p id="supportModalLead">Scegli dove aprire il supporto e sotto trovi il testo pronto da copiare nella lingua selezionata.</p>
+      <div class="support-choice-grid">
+        <a id="gmailSupportLink" class="support-choice" href="https://mail.google.com/mail/?view=cm&fs=1&to=sapotweak@gmail.com" target="_blank" rel="noopener noreferrer">
+          <strong id="gmailTitle">Gmail</strong>
+          <span id="gmailText">Apre Gmail web con destinatario `sapotweak@gmail.com`, oggetto e corpo già pronti.</span>
         </a>
-        <a id="discordSupportLink" class="support-choice" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer">
-          <strong data-i18n="modalDiscordTitle">Discord ticket</strong>
-          <span data-i18n="modalDiscordText">Apre il canale ticket ufficiale Discord dove puoi incollare il testo copiato qui sopra.</span>
+        <a class="support-choice" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer">
+          <strong id="discordTitle">Discord</strong>
+          <span id="discordText">Apre direttamente la sezione ticket Discord ufficiale di SapoTweak.</span>
         </a>
       </div>
       <div class="modal-actions">
-        <button id="closeSupportModalBtn" class="btn secondary" type="button" data-i18n="modalClose">Chiudi</button>
+        <button class="btn" id="closeSupportModalBtn" type="button">Chiudi</button>
       </div>
     </div>
   </div>
@@ -523,261 +623,304 @@
     const translations = {
       it: {
         pageTitle: "SapoTweak - Supporto",
-        back: "Torna al sito",
-        plans: "Piani",
-        privacy: "Privacy",
-        kicker: "Supporto ufficiale",
+        backLink: "Sito",
+        plansLink: "Piani",
+        reviewsLink: "Recensioni",
+        eyebrow: "Supporto ufficiale",
         title: "Supporto <span>SapoTweak</span>",
-        lead: "Questa pagina serve per recupero key, riattivazione sullo stesso PC e problemi di download. Niente testo inutile: qui trovi cosa mandare e dove scrivere.",
+        lead: "Questa pagina serve per recupero key, riattivazione sullo stesso PC, problemi di download e invio dati al supporto. Tutto è centrato nello stesso stile premium della home.",
         card1Title: "1. Ho pagato ma non vedo la key",
-        card1Text: "Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, manda email e sessione checkout o email usata nel pagamento.",
+        card1Text: "Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, invia email pagamento e session ID checkout se disponibile.",
         card2Title: "2. Ho resettato Windows sullo stesso PC",
-        card2Text: "Se l'hardware principale e' lo stesso, la key dovrebbe continuare a funzionare. Se non succede, usa prima il reset automatico qui sotto; se ancora non basta, invia key, errore mostrato e conferma che il PC e' identico.",
+        card2Text: "Se l'hardware principale è lo stesso, usa prima il reset automatico qui sotto. Se non basta, manda key, errore mostrato e conferma che il PC è identico.",
         card3Title: "3. La key non si attiva",
         card3Text: "Se la key viene rifiutata o resta bloccata, invia email usata, key, errore mostrato e screenshot. Se hai reinstallato Windows sullo stesso PC, specificalo.",
         card4Title: "4. Download o update non vanno",
         card4Text: "Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.",
-        mailTitle: "Cosa inviare al supporto",
-        mailItem1: "email usata nel pagamento",
-        mailItem2: "key, se gia disponibile",
-        mailItem3: "errore mostrato o screenshot",
-        mailItem4: "se hai resettato Windows o reinstallato l'app sullo stesso PC",
-        mailItem5: "eventuale session_id della pagina checkout-success",
-        emailBtn: "Scrivi al supporto",
-        successBtn: "Apri pagina post-checkout",
-        templateTitle: "Messaggio pronto da copiare",
-        templateLead: "Compila o lascia i campi vuoti, poi copia questo testo e incollalo su Gmail o nel ticket Discord.",
-        copyTemplateBtn: "Copia testo supporto",
-        copyTemplateHint: "Ti conviene allegare anche screenshot o errore completo.",
-        copyTemplateDone: "Testo copiato. Ora apri Gmail o Discord.",
-        modalTitle: "Dove vuoi aprire il supporto?",
-        modalLead: "Scegli Gmail se vuoi inviare una mail a `sapotweak@gmail.com`, oppure apri direttamente il ticket Discord ufficiale.",
-        modalEmailTitle: "Gmail supporto",
-        modalEmailText: "Apre la tua app email con destinatario `sapotweak@gmail.com` e oggetto gia pronto.",
-        modalDiscordTitle: "Discord ticket",
-        modalDiscordText: "Apre il canale ticket ufficiale Discord dove puoi incollare il testo copiato qui sopra.",
-        modalClose: "Chiudi",
+        supportTag: "Support flow",
+        supportTitle: "Apri Gmail o Discord con testo già pronto",
+        supportLead: "Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con destinatario `sapotweak@gmail.com` già inserito.",
+        openSupportModalBtn: "Apri supporto",
+        copySupportTemplateBtn: "Copia testo",
+        templateTitle: "Testo pronto da copiare",
+        templateLead: "Compila questo elenco e incollalo su Gmail o Discord per velocizzare il supporto.",
+        templateStatus: "Aggiungi anche screenshot, errore e versione app se li hai.",
+        templateCopied: "Testo copiato. Ora apri Gmail o Discord.",
+        resetTag: "Same PC reset",
         resetTitle: "Reset attivazione sullo stesso PC",
-        resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso PC principale. Non serve per spostare la licenza su un PC diverso.",
-        resetToggleClosed: "Apri reset automatico",
-        resetToggleOpen: "Chiudi reset automatico",
-        resetNote: "Inserisci email del pagamento e key. Se arrivi dalla pagina post-checkout il session_id viene compilato da solo. Il reset automatico e' pensato solo per lo stesso PC.",
+        resetLead: "Usalo solo se hai resettato Windows o reinstallato l'app sullo stesso hardware principale. Non serve per spostare la licenza su un altro PC.",
         resetEmailLabel: "Email pagamento",
         resetKeyLabel: "License key",
         resetSessionLabel: "Session ID opzionale",
-        resetSubmit: "Esegui reset",
+        submitResetBtn: "Esegui reset",
         resetLoading: "Controllo licenza e reset attivazioni in corso...",
         resetSuccess: "Reset completato. Riapri SapoTweak e reinserisci la key sullo stesso PC.",
-        resetManual: "Questo caso richiede controllo manuale. Scrivi al supporto con email, key ed eventuale session_id.",
-        resetCooldown: "Hai gia usato il reset di recente. Scrivi al supporto se serve una verifica manuale.",
+        resetManual: "Questo caso richiede controllo manuale. Scrivi al supporto con email, key ed eventuale session ID.",
+        resetCooldown: "Hai già usato un reset di recente. Scrivi al supporto se serve una verifica manuale.",
         resetError: "Reset non riuscito. Controlla i dati inseriti o scrivi al supporto.",
-        footer: "SapoTweak - Supporto licenza e download."
+        footerText: "SapoTweak - Distribuisci solo build ufficiali.",
+        termsLink: "Termini",
+        privacyLink: "Privacy",
+        reviewsFooterLink: "Recensioni",
+        supportModalTitle: "Supporto SapoTweak",
+        supportModalLead: "Scegli dove aprire il supporto e sotto trovi il testo pronto da copiare nella lingua selezionata.",
+        gmailTitle: "Gmail",
+        gmailText: "Apre Gmail web con destinatario `sapotweak@gmail.com`, oggetto e corpo già pronti.",
+        discordTitle: "Discord",
+        discordText: "Apre direttamente la sezione ticket Discord ufficiale di SapoTweak.",
+        closeSupportModalBtn: "Chiudi",
+        supportSubject: "SapoTweak Support"
       },
       en: {
         pageTitle: "SapoTweak - Support",
-        back: "Back to site",
-        plans: "Plans",
-        privacy: "Privacy",
-        kicker: "Official support",
+        backLink: "Site",
+        plansLink: "Plans",
+        reviewsLink: "Reviews",
+        eyebrow: "Official support",
         title: "Support <span>SapoTweak</span>",
-        lead: "This page is for key recovery, same-PC reactivation and download issues. No filler text: here you get what to send and where to write.",
-        card1Title: "1. I paid but I do not see the key",
-        card1Text: "Wait about one minute on the confirmation page. If the key does not arrive, send the payment email and checkout session if available.",
+        lead: "This page is for key recovery, same-PC reactivation, download issues, and sending the right details to support. Everything is centered in the same premium style as the homepage.",
+        card1Title: "1. I paid but do not see the key",
+        card1Text: "Wait about one minute on the confirmation page. If the key does not arrive, send the payment email and checkout session ID if available.",
         card2Title: "2. I reset Windows on the same PC",
-        card2Text: "If the main hardware is the same, the key should usually keep working. If it does not, use the automatic reset below first; if that still does not solve it, send the key, the shown error and confirm the PC is unchanged.",
+        card2Text: "If the main hardware is the same, use the automatic reset below first. If that still does not solve it, send the key, the shown error, and confirm the PC is unchanged.",
         card3Title: "3. The key does not activate",
-        card3Text: "If the key is rejected or stays blocked, send your payment email, key, shown error and a screenshot. If you reinstalled Windows on the same PC, say that clearly.",
+        card3Text: "If the key is rejected or stays blocked, send your payment email, key, shown error, and screenshot. If you reinstalled Windows on the same PC, say that clearly.",
         card4Title: "4. Download or update is failing",
         card4Text: "If site or in-app download fails, attach the error screenshot and the version you are using.",
-        mailTitle: "What to send to support",
-        mailItem1: "payment email",
-        mailItem2: "key, if already available",
-        mailItem3: "shown error or screenshot",
-        mailItem4: "whether you reset Windows or reinstalled the app on the same PC",
-        mailItem5: "checkout-success session_id if available",
-        emailBtn: "Write to support",
-        successBtn: "Open post-checkout page",
-        templateTitle: "Ready-to-copy message",
-        templateLead: "Fill it in or leave fields empty, then copy this text and paste it into Gmail or your Discord ticket.",
-        copyTemplateBtn: "Copy support text",
-        copyTemplateHint: "It is best to attach the screenshot or full error too.",
-        copyTemplateDone: "Text copied. Now open Gmail or Discord.",
-        modalTitle: "Where do you want to open support?",
-        modalLead: "Choose Gmail if you want to send an email to `sapotweak@gmail.com`, or open the official Discord ticket directly.",
-        modalEmailTitle: "Support Gmail",
-        modalEmailText: "Opens your email app with `sapotweak@gmail.com` already filled in.",
-        modalDiscordTitle: "Discord ticket",
-        modalDiscordText: "Opens the official Discord ticket channel where you can paste the copied text above.",
-        modalClose: "Close",
+        supportTag: "Support flow",
+        supportTitle: "Open Gmail or Discord with ready text",
+        supportLead: "The copy template changes with the selected language. Gmail opens the web compose page with `sapotweak@gmail.com` already filled in.",
+        openSupportModalBtn: "Open support",
+        copySupportTemplateBtn: "Copy text",
+        templateTitle: "Ready-to-copy text",
+        templateLead: "Fill out this list and paste it into Gmail or Discord to speed up support.",
+        templateStatus: "Add screenshot, error, and app version too if you have them.",
+        templateCopied: "Text copied. Now open Gmail or Discord.",
+        resetTag: "Same PC reset",
         resetTitle: "Activation reset on the same PC",
-        resetLead: "Use this only if you reset Windows or reinstalled the app on the same main PC. It is not meant to move the license to a different PC.",
-        resetToggleClosed: "Open automatic reset",
-        resetToggleOpen: "Close automatic reset",
-        resetNote: "Enter the payment email and key. If you come from the post-checkout page, the session_id is filled automatically. The automatic reset is intended only for the same PC.",
+        resetLead: "Use this only if you reset Windows or reinstalled the app on the same main hardware. It is not meant to move the license to another PC.",
         resetEmailLabel: "Payment email",
         resetKeyLabel: "License key",
         resetSessionLabel: "Optional session ID",
-        resetSubmit: "Run reset",
+        submitResetBtn: "Run reset",
         resetLoading: "Checking license and resetting activations...",
         resetSuccess: "Reset completed. Reopen SapoTweak and enter the key again on the same PC.",
-        resetManual: "This case needs manual review. Write to support with email, key and session_id if available.",
+        resetManual: "This case needs manual review. Write to support with email, key, and session ID if available.",
         resetCooldown: "You already used a reset recently. Write to support if you need manual verification.",
         resetError: "Reset failed. Check the entered details or write to support.",
-        footer: "SapoTweak - License and download support."
+        footerText: "SapoTweak - Distribute official builds only.",
+        termsLink: "Terms",
+        privacyLink: "Privacy",
+        reviewsFooterLink: "Reviews",
+        supportModalTitle: "SapoTweak Support",
+        supportModalLead: "Choose where to open support and below you will find a ready-to-copy message in the selected language.",
+        gmailTitle: "Gmail",
+        gmailText: "Opens Gmail web with `sapotweak@gmail.com`, ready subject, and prefilled body.",
+        discordTitle: "Discord",
+        discordText: "Opens the official SapoTweak Discord ticket section directly.",
+        closeSupportModalBtn: "Close",
+        supportSubject: "SapoTweak Support"
       },
       es: {
         pageTitle: "SapoTweak - Soporte",
-        back: "Volver al sitio",
-        plans: "Planes",
-        privacy: "Privacidad",
-        kicker: "Soporte oficial",
+        backLink: "Sitio",
+        plansLink: "Planes",
+        reviewsLink: "Reseñas",
+        eyebrow: "Soporte oficial",
         title: "Soporte <span>SapoTweak</span>",
-        lead: "Esta pagina sirve para recupero de key, reactivacion en el mismo PC y problemas de descarga. Sin relleno: aqui encuentras que enviar y donde escribir.",
+        lead: "Esta página sirve para recuperar keys, reactivar en el mismo PC, resolver descargas y enviar al soporte los datos correctos. Todo sigue el mismo estilo premium de la home.",
         card1Title: "1. He pagado pero no veo la key",
-        card1Text: "Espera alrededor de un minuto en la pagina de confirmacion. Si la key no llega, envia el email del pago y la sesion checkout si existe.",
+        card1Text: "Espera alrededor de un minuto en la página de confirmación. Si la key no llega, envía el email del pago y el session ID del checkout si existe.",
         card2Title: "2. He reseteado Windows en el mismo PC",
-        card2Text: "Si el hardware principal es el mismo, la key deberia seguir funcionando. Si no ocurre, usa primero el reset automatico de abajo; si aun asi no basta, envia la key, el error mostrado y confirma que el PC no cambio.",
+        card2Text: "Si el hardware principal es el mismo, usa primero el reset automático de abajo. Si no basta, envía la key, el error mostrado y confirma que el PC no cambió.",
         card3Title: "3. La key no se activa",
-        card3Text: "Si la key es rechazada o queda bloqueada, envia el email del pago, la key, el error mostrado y una captura. Si reinstalaste Windows en el mismo PC, indicalo.",
+        card3Text: "Si la key es rechazada o queda bloqueada, envía el email usado, la key, el error mostrado y una captura. Si reinstalaste Windows en el mismo PC, indícalo.",
         card4Title: "4. La descarga o el update fallan",
-        card4Text: "Si la descarga desde el sitio o la app falla, adjunta captura del error y la version que estas usando.",
-        mailTitle: "Que enviar al soporte",
-        mailItem1: "email usado en el pago",
-        mailItem2: "key, si ya esta disponible",
-        mailItem3: "error mostrado o captura",
-        mailItem4: "si reseteaste Windows o reinstalaste la app en el mismo PC",
-        mailItem5: "session_id de checkout-success si existe",
-        emailBtn: "Escribir al soporte",
-        successBtn: "Abrir pagina post-checkout",
-        templateTitle: "Mensaje listo para copiar",
-        templateLead: "Completa o deja vacios los campos, luego copia este texto y pegalo en Gmail o en el ticket de Discord.",
-        copyTemplateBtn: "Copiar texto soporte",
-        copyTemplateHint: "Tambien conviene adjuntar captura o error completo.",
-        copyTemplateDone: "Texto copiado. Ahora abre Gmail o Discord.",
-        modalTitle: "Donde quieres abrir el soporte?",
-        modalLead: "Elige Gmail si quieres enviar un correo a `sapotweak@gmail.com`, o abre directamente el ticket oficial de Discord.",
-        modalEmailTitle: "Gmail soporte",
-        modalEmailText: "Abre tu app de correo con `sapotweak@gmail.com` ya preparado.",
-        modalDiscordTitle: "Ticket Discord",
-        modalDiscordText: "Abre el canal oficial de ticket en Discord donde puedes pegar el texto copiado arriba.",
-        modalClose: "Cerrar",
-        resetTitle: "Reset de activacion en el mismo PC",
-        resetLead: "Usalo solo si reseteaste Windows o reinstalaste la app en el mismo PC principal. No sirve para mover la licencia a un PC distinto.",
-        resetToggleClosed: "Abrir reset automatico",
-        resetToggleOpen: "Cerrar reset automatico",
-        resetNote: "Introduce el email del pago y la key. Si vienes desde la pagina post-checkout, el session_id se rellena solo. El reset automatico esta pensado solo para el mismo PC.",
+        card4Text: "Si la descarga desde el sitio o la app falla, adjunta captura del error y la versión que estás usando.",
+        supportTag: "Support flow",
+        supportTitle: "Abre Gmail o Discord con texto listo",
+        supportLead: "El texto para copiar cambia con el idioma seleccionado. Gmail abre la composición web con `sapotweak@gmail.com` ya insertado.",
+        openSupportModalBtn: "Abrir soporte",
+        copySupportTemplateBtn: "Copiar texto",
+        templateTitle: "Texto listo para copiar",
+        templateLead: "Completa esta lista y pégala en Gmail o Discord para acelerar el soporte.",
+        templateStatus: "Agrega también captura, error y versión de la app si los tienes.",
+        templateCopied: "Texto copiado. Ahora abre Gmail o Discord.",
+        resetTag: "Same PC reset",
+        resetTitle: "Reset de activación en el mismo PC",
+        resetLead: "Úsalo solo si reseteaste Windows o reinstalaste la app en el mismo hardware principal. No sirve para mover la licencia a otro PC.",
         resetEmailLabel: "Email del pago",
         resetKeyLabel: "License key",
         resetSessionLabel: "Session ID opcional",
-        resetSubmit: "Ejecutar reset",
+        submitResetBtn: "Ejecutar reset",
         resetLoading: "Comprobando licencia y reseteando activaciones...",
         resetSuccess: "Reset completado. Abre SapoTweak otra vez e introduce la key en el mismo PC.",
-        resetManual: "Este caso necesita revision manual. Escribe al soporte con email, key y session_id si existe.",
-        resetCooldown: "Ya usaste un reset hace poco. Escribe al soporte si necesitas verificacion manual.",
-        resetError: "El reset fallo. Revisa los datos introducidos o escribe al soporte.",
-        footer: "SapoTweak - Soporte de licencia y descarga."
+        resetManual: "Este caso necesita revisión manual. Escribe al soporte con email, key y session ID si existe.",
+        resetCooldown: "Ya usaste un reset hace poco. Escribe al soporte si necesitas verificación manual.",
+        resetError: "El reset falló. Revisa los datos introducidos o escribe al soporte.",
+        footerText: "SapoTweak - Distribuye solo builds oficiales.",
+        termsLink: "Términos",
+        privacyLink: "Privacidad",
+        reviewsFooterLink: "Reseñas",
+        supportModalTitle: "Soporte SapoTweak",
+        supportModalLead: "Elige dónde abrir el soporte y abajo tienes un texto listo para copiar en el idioma seleccionado.",
+        gmailTitle: "Gmail",
+        gmailText: "Abre Gmail web con `sapotweak@gmail.com`, asunto listo y cuerpo ya preparado.",
+        discordTitle: "Discord",
+        discordText: "Abre directamente la sección oficial de tickets de SapoTweak en Discord.",
+        closeSupportModalBtn: "Cerrar",
+        supportSubject: "SapoTweak Support"
       }
     };
 
     const languageSelect = document.getElementById("languageSelect");
-    const toggleResetBtn = document.getElementById("toggleResetBtn");
-    const resetPanel = document.getElementById("resetPanel");
+    const supportTemplate = document.getElementById("supportTemplate");
+    const templateStatus = document.getElementById("templateStatus");
+    const gmailSupportLink = document.getElementById("gmailSupportLink");
+    const supportModal = document.getElementById("supportModal");
+    const openSupportModalBtn = document.getElementById("openSupportModalBtn");
+    const closeSupportModalBtn = document.getElementById("closeSupportModalBtn");
+    const copySupportTemplateBtn = document.getElementById("copySupportTemplateBtn");
     const resetEmail = document.getElementById("resetEmail");
     const resetLicenseKey = document.getElementById("resetLicenseKey");
     const resetSessionId = document.getElementById("resetSessionId");
     const submitResetBtn = document.getElementById("submitResetBtn");
     const resetStatus = document.getElementById("resetStatus");
-    const openSupportModalBtn = document.getElementById("openSupportModalBtn");
-    const closeSupportModalBtn = document.getElementById("closeSupportModalBtn");
-    const supportModal = document.getElementById("supportModal");
-    const gmailSupportLink = document.getElementById("gmailSupportLink");
-    const supportTemplate = document.getElementById("supportTemplate");
-    const copySupportTemplateBtn = document.getElementById("copySupportTemplateBtn");
-    const copySupportTemplateStatus = document.getElementById("copySupportTemplateStatus");
     const workerBase = "https://license.salvocan05.workers.dev";
     const urlParams = new URLSearchParams(window.location.search);
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
-    let resetOpen = false;
 
-    function applyLanguage(lang) {
-      const safeLang = ["it", "en", "es"].includes(lang) ? lang : "it";
-      const t = translations[safeLang] || translations.it;
-      currentLanguage = safeLang;
-      document.documentElement.lang = safeLang;
-      document.title = t.pageTitle || translations.it.pageTitle;
-      languageSelect.value = safeLang;
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        el.textContent = t[el.dataset.i18n] || el.dataset.i18n;
-      });
-      document.querySelectorAll("[data-i18n-html]").forEach((el) => {
-        el.innerHTML = t[el.dataset.i18nHtml] || el.dataset.i18nHtml;
-      });
-      toggleResetBtn.textContent = resetOpen ? t.resetToggleOpen : t.resetToggleClosed;
-      if (!resetStatus.dataset.lockedText) {
-        resetStatus.textContent = "";
-      }
-      copySupportTemplateStatus.textContent = currentText("copyTemplateHint");
-      rebuildSupportTemplate();
-      localStorage.setItem("sapotweak_site_lang", safeLang);
-    }
-
-    function currentText(key) {
+    function t(key) {
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
-    function setResetOpen(nextValue) {
-      resetOpen = !!nextValue;
-      resetPanel.style.display = resetOpen ? "block" : "none";
-      toggleResetBtn.textContent = currentText(resetOpen ? "resetToggleOpen" : "resetToggleClosed");
+    function setText(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
     }
 
-    function supportTemplateText() {
-      const sessionId = resetSessionId.value.trim() || urlParams.get("session_id") || "";
-      const email = resetEmail.value.trim() || urlParams.get("email") || "";
-      const key = resetLicenseKey.value.trim() || urlParams.get("licenseKey") || "";
+    function setHtml(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = value;
+    }
+
+    function buildTemplate() {
+      if (currentLanguage === "en") {
+        return [
+          "Payment email: " + (resetEmail.value.trim() || ""),
+          "Problem: ",
+          "Key: " + (resetLicenseKey.value.trim() || ""),
+          "Session ID: " + (resetSessionId.value.trim() || ""),
+          "Did you reset Windows or reinstall the app on the same PC?: yes/no",
+          "App version: ",
+          "Shown error: ",
+          "Screenshot attached: yes/no",
+          "Extra details: "
+        ].join("\n");
+      }
+      if (currentLanguage === "es") {
+        return [
+          "Email del pago: " + (resetEmail.value.trim() || ""),
+          "Problema: ",
+          "Key: " + (resetLicenseKey.value.trim() || ""),
+          "Session ID: " + (resetSessionId.value.trim() || ""),
+          "Has reseteado Windows o reinstalado la app en el mismo PC?: sí/no",
+          "Versión app: ",
+          "Error mostrado: ",
+          "Captura adjunta: sí/no",
+          "Detalles extra: "
+        ].join("\n");
+      }
       return [
-        "Email usata: " + (email || ""),
+        "Email usata: " + (resetEmail.value.trim() || ""),
         "Problema: ",
-        "Key: " + key,
-        "Session ID: " + sessionId,
-        "Hai resettato Windows o reinstallato l app?: si/no",
+        "Key: " + (resetLicenseKey.value.trim() || ""),
+        "Session ID: " + (resetSessionId.value.trim() || ""),
+        "Hai resettato Windows o reinstallato l'app sullo stesso PC?: sì/no",
         "Versione app: ",
         "Errore mostrato: ",
-        "Screenshot allegato: si/no",
+        "Screenshot allegato: sì/no",
         "Dettagli extra: "
-      ].join("\\n");
+      ].join("\n");
     }
 
-    function rebuildSupportTemplate() {
-      supportTemplate.value = supportTemplateText();
-      gmailSupportLink.href =
-        "mailto:sapotweak@gmail.com?subject=" +
-        encodeURIComponent("SapoTweak Support") +
-        "&body=" +
-        encodeURIComponent(supportTemplate.value);
+    function refreshTemplate() {
+      const template = buildTemplate();
+      supportTemplate.value = template;
+      gmailSupportLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+        encodeURIComponent("sapotweak@gmail.com") +
+        "&su=" + encodeURIComponent(t("supportSubject")) +
+        "&body=" + encodeURIComponent(template);
     }
 
-    function setSupportModalOpen(nextValue) {
-      supportModal.classList.toggle("show", !!nextValue);
-      supportModal.setAttribute("aria-hidden", nextValue ? "false" : "true");
+    function applyLanguage(lang) {
+      currentLanguage = ["it", "en", "es"].includes(lang) ? lang : "it";
+      localStorage.setItem("sapotweak_site_lang", currentLanguage);
+      const text = translations[currentLanguage] || translations.it;
+      document.documentElement.lang = currentLanguage;
+      document.title = text.pageTitle;
+      languageSelect.value = currentLanguage;
+      setText("backLink", text.backLink);
+      setText("plansLink", text.plansLink);
+      setText("reviewsLink", text.reviewsLink);
+      setText("eyebrow", text.eyebrow);
+      setHtml("title", text.title);
+      setText("lead", text.lead);
+      setText("card1Title", text.card1Title);
+      setText("card1Text", text.card1Text);
+      setText("card2Title", text.card2Title);
+      setText("card2Text", text.card2Text);
+      setText("card3Title", text.card3Title);
+      setText("card3Text", text.card3Text);
+      setText("card4Title", text.card4Title);
+      setText("card4Text", text.card4Text);
+      setText("supportTag", text.supportTag);
+      setText("supportTitle", text.supportTitle);
+      setText("supportLead", text.supportLead);
+      setText("openSupportModalBtn", text.openSupportModalBtn);
+      setText("copySupportTemplateBtn", text.copySupportTemplateBtn);
+      setText("templateTitle", text.templateTitle);
+      setText("templateLead", text.templateLead);
+      setText("templateStatus", text.templateStatus);
+      setText("resetTag", text.resetTag);
+      setText("resetTitle", text.resetTitle);
+      setText("resetLead", text.resetLead);
+      setText("resetEmailLabel", text.resetEmailLabel);
+      setText("resetKeyLabel", text.resetKeyLabel);
+      setText("resetSessionLabel", text.resetSessionLabel);
+      setText("submitResetBtn", text.submitResetBtn);
+      setText("footerText", text.footerText);
+      setText("termsLink", text.termsLink);
+      setText("privacyLink", text.privacyLink);
+      setText("reviewsFooterLink", text.reviewsFooterLink);
+      setText("supportModalTitle", text.supportModalTitle);
+      setText("supportModalLead", text.supportModalLead);
+      setText("gmailTitle", text.gmailTitle);
+      setText("gmailText", text.gmailText);
+      setText("discordTitle", text.discordTitle);
+      setText("discordText", text.discordText);
+      setText("closeSupportModalBtn", text.closeSupportModalBtn);
+      if (!resetStatus.dataset.lockedText) {
+        resetStatus.textContent = "";
+      }
+      refreshTemplate();
     }
 
-    async function copySupportTemplate() {
-      rebuildSupportTemplate();
+    async function copyTemplate() {
+      refreshTemplate();
       try {
         await navigator.clipboard.writeText(supportTemplate.value);
-        copySupportTemplateStatus.textContent = currentText("copyTemplateDone");
       } catch {
         supportTemplate.focus();
         supportTemplate.select();
-        copySupportTemplateStatus.textContent = currentText("copyTemplateDone");
       }
+      templateStatus.textContent = t("templateCopied");
     }
 
     async function submitReset() {
       resetStatus.dataset.lockedText = "1";
       resetStatus.className = "reset-status";
-      resetStatus.textContent = currentText("resetLoading");
+      resetStatus.textContent = t("resetLoading");
 
       try {
         const response = await fetch(workerBase + "/license/reset", {
@@ -793,50 +936,129 @@
 
         if (response.ok && data.ok) {
           resetStatus.classList.add("success");
-          resetStatus.textContent = data.message || currentText("resetSuccess");
+          resetStatus.textContent = data.message || t("resetSuccess");
           return;
         }
-
         if (response.status === 429) {
           resetStatus.classList.add("error");
-          resetStatus.textContent = data.error || currentText("resetCooldown");
+          resetStatus.textContent = data.error || t("resetCooldown");
           return;
         }
-
         if (data && data.manualReview) {
           resetStatus.classList.add("error");
-          resetStatus.textContent = data.error || currentText("resetManual");
+          resetStatus.textContent = data.error || t("resetManual");
           return;
         }
-
         resetStatus.classList.add("error");
-        resetStatus.textContent = (data && data.error) || currentText("resetError");
+        resetStatus.textContent = (data && data.error) || t("resetError");
       } catch {
         resetStatus.classList.add("error");
-        resetStatus.textContent = currentText("resetError");
+        resetStatus.textContent = t("resetError");
       }
     }
 
-    toggleResetBtn.addEventListener("click", () => setResetOpen(!resetOpen));
-    submitResetBtn.addEventListener("click", submitReset);
-    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+    function initMeshBackground() {
+      const canvas = document.getElementById("meshCanvas");
+      if (!canvas) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      let animationFrame = 0;
+      let width = 0;
+      let height = 0;
+      let points = [];
+      const maxDistance = 180;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.6);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const density = width < 900 ? 34 : 48;
+        const count = Math.max(28, Math.floor((width * height) / (density * density * 10)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          vy: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          r: Math.random() * 1.8 + 0.4
+        }));
+      }
+
+      function step() {
+        context.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i += 1) {
+          const point = points[i];
+          point.x += point.vx;
+          point.y += point.vy;
+
+          if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+          if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+
+          for (let j = i + 1; j < points.length; j += 1) {
+            const other = points[j];
+            const dx = point.x - other.x;
+            const dy = point.y - other.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > maxDistance) continue;
+
+            const alpha = 1 - distance / maxDistance;
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.strokeStyle = `rgba(182, 146, 255, ${alpha * 0.12})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
+        }
+
+        for (const point of points) {
+          context.beginPath();
+          context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+          context.fillStyle = "rgba(218, 201, 255, 0.22)";
+          context.fill();
+        }
+
+        animationFrame = window.requestAnimationFrame(step);
+      }
+
+      resize();
+      step();
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
+    }
+
+    languageSelect.addEventListener("change", event => applyLanguage(event.target.value));
     openSupportModalBtn.addEventListener("click", () => {
-      rebuildSupportTemplate();
-      setSupportModalOpen(true);
+      templateStatus.textContent = t("templateStatus");
+      refreshTemplate();
+      supportModal.classList.add("show");
     });
-    closeSupportModalBtn.addEventListener("click", () => setSupportModalOpen(false));
-    supportModal.addEventListener("click", (event) => {
-      if (event.target === supportModal) setSupportModalOpen(false);
+    closeSupportModalBtn.addEventListener("click", () => supportModal.classList.remove("show"));
+    supportModal.addEventListener("click", event => {
+      if (event.target === supportModal) supportModal.classList.remove("show");
     });
-    copySupportTemplateBtn.addEventListener("click", copySupportTemplate);
-    [resetEmail, resetLicenseKey, resetSessionId].forEach((input) => {
-      input.addEventListener("input", rebuildSupportTemplate);
+    copySupportTemplateBtn.addEventListener("click", copyTemplate);
+    submitResetBtn.addEventListener("click", submitReset);
+    [resetEmail, resetLicenseKey, resetSessionId].forEach(input => {
+      input.addEventListener("input", () => {
+        templateStatus.textContent = t("templateStatus");
+        refreshTemplate();
+      });
     });
+
     resetEmail.value = urlParams.get("email") || "";
     resetLicenseKey.value = urlParams.get("licenseKey") || "";
     resetSessionId.value = urlParams.get("session_id") || "";
-    rebuildSupportTemplate();
     applyLanguage(currentLanguage);
+    initMeshBackground();
   </script>
 </body>
 </html>
