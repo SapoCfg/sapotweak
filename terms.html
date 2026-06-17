@@ -23,33 +23,60 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
+      font-family: "Sora", Inter, Arial, sans-serif;
       color: var(--text);
-      background:
-        linear-gradient(180deg, rgba(124,58,237,.16), rgba(5,5,7,0) 34%),
-        linear-gradient(180deg, #08070d, var(--bg));
+      background: linear-gradient(180deg, #05050a, #030305);
       overflow-x: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(137, 79, 255, .20), transparent 0 22%),
+        radial-gradient(circle at 82% 18%, rgba(109, 46, 232, .14), transparent 0 24%),
+        linear-gradient(180deg, #040308, #090611);
+      z-index: -4;
+    }
+    .mesh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: .96;
+      pointer-events: none;
     }
     .grid {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.88), rgba(0,0,0,.18));
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.96), rgba(0,0,0,.24));
     }
     .wrap {
       width: min(1120px, 100%);
       margin: 0 auto;
       padding: 30px;
+      position: relative;
+      z-index: 1;
     }
     .nav {
+      position: sticky;
+      top: 18px;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(10, 9, 17, .72);
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
       margin-bottom: 56px;
     }
     .brand {
@@ -62,10 +89,10 @@
       letter-spacing: .14em;
     }
     .brand img {
-      width: 46px;
-      height: 46px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(142,68,255,.42));
+      filter: drop-shadow(0 0 18px rgba(157, 92, 255, .42));
     }
     .nav-actions {
       display: flex;
@@ -79,11 +106,13 @@
       min-height: 42px;
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.045);
       color: #f4efff;
       padding: 0 15px;
-      font-size: 13px;
-      font-weight: 900;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
       text-decoration: none;
     }
     .lang-select {
@@ -106,15 +135,26 @@
     }
     .kicker {
       width: fit-content;
-      border: 1px solid rgba(167,139,250,.38);
+      border: 1px solid rgba(184,150,255,.28);
       border-radius: 999px;
-      padding: 8px 12px;
-      color: #dfd4ff;
-      background: rgba(124,58,237,.14);
-      font-size: 12px;
+      padding: 10px 16px;
+      color: #ebe0ff;
+      background: rgba(127, 66, 255, .12);
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: .08em;
+      letter-spacing: .16em;
       text-transform: uppercase;
+    }
+    .kicker::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      border-radius: 999px;
+      background: #b46cff;
+      box-shadow: 0 0 18px rgba(180,108,255,.85);
+      vertical-align: middle;
     }
     h1 {
       margin: 0;
@@ -146,8 +186,10 @@
     section {
       padding: 22px;
       border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(23,20,38,.9), rgba(13,12,22,.9));
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(17,13,30,.84), rgba(9,8,16,.90));
+      box-shadow: 0 26px 90px rgba(0,0,0,.24);
+      backdrop-filter: blur(12px);
     }
     section h2 {
       margin: 0 0 10px;
@@ -170,8 +212,9 @@
     .accept-panel {
       padding: 22px;
       border: 1px solid rgba(167,139,250,.3);
-      border-radius: 18px;
+      border-radius: 22px;
       background: linear-gradient(180deg, rgba(124,58,237,.14), rgba(255,255,255,.04));
+      box-shadow: 0 24px 80px rgba(0,0,0,.22);
     }
     .accept-row {
       display: flex;
@@ -294,6 +337,8 @@
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
   <div class="grid"></div>
   <main class="wrap">
     <nav class="nav">
@@ -347,7 +392,7 @@
         <section id="license">
           <h2 data-i18n="licenseTitle">4. Licenza e attivazione</h2>
           <p data-i18n="licenseText1">L'accesso a SapoTweak avviene tramite key personale. La licenza può essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.</p>
-          <p data-i18n="licenseText2">La key è pensata per restare valida dopo reset o reinstallazione sullo stesso hardware principale. Se l'attivazione non passa, il reset self-service copre i casi di reinstallazione sullo stesso PC. Cambi importanti come scheda madre, CPU o altri componenti identificativi possono richiedere verifica manuale prima di una nuova attivazione.</p>
+          <p data-i18n="licenseText2">La key è personale e resta legata alle regole del piano acquistato. Reset o reinstallazione possono richiedere una nuova validazione. Cambi hardware, modifiche importanti al sistema o perdita di compatibilita' non costituiscono motivo automatico di rimborso, nuova licenza o assistenza straordinaria, salvo diritti obbligatori previsti dalla legge applicabile.</p>
         </section>
 
         <section id="payments">
@@ -432,7 +477,7 @@
         performanceItem3: "Ogni tweak va scelto dall'utente in base al proprio sistema e alle proprie preferenze.",
         licenseTitle: "4. Licenza e attivazione",
         licenseText1: "L'accesso a SapoTweak avviene tramite key personale. La licenza può essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.",
-        licenseText2: "La key è pensata per restare valida dopo reset o reinstallazione sullo stesso hardware principale. Se l'attivazione non passa, il reset self-service copre i casi di reinstallazione sullo stesso PC. Cambi importanti come scheda madre, CPU o altri componenti identificativi possono richiedere verifica manuale prima di una nuova attivazione.",
+        licenseText2: "La key è personale e resta legata alle regole del piano acquistato. Reset o reinstallazione possono richiedere una nuova validazione. Cambi hardware, modifiche importanti al sistema o perdita di compatibilita' non costituiscono motivo automatico di rimborso, nuova licenza o assistenza straordinaria, salvo diritti obbligatori previsti dalla legge applicabile.",
         paymentsTitle: "5. Pagamenti, abbonamenti e rimborsi",
         paymentsText1: "Il checkout è gestito da Stripe. Le imposte possono essere calcolate separatamente in base al paese del cliente.",
         paymentsText2: "Se acquisti un abbonamento, l'accesso resta disponibile finché il piano è attivo e pagato. Se il pagamento fallisce, scade o viene annullato, l'accesso può essere sospeso secondo le regole del piano e del processore di pagamento.",
@@ -482,7 +527,7 @@
         performanceItem3: "Each tweak should be chosen by the user based on their own system and preferences.",
         licenseTitle: "4. License and activation",
         licenseText1: "Access to SapoTweak is provided through a personal key. The license may be limited to a specific device, activation count or purchased plan.",
-        licenseText2: "The key is intended to remain valid after reset or reinstall on the same main hardware. If activation fails, the self-service reset covers same-PC reinstall cases. Major changes such as motherboard, CPU or other identifying components may require manual review before a new activation.",
+        licenseText2: "The key is personal and remains subject to the purchased plan rules. Reset or reinstall may require a new validation. Hardware changes, major system changes, or loss of compatibility do not automatically create a right to refund, replacement license, or extraordinary support, except where mandatory law requires otherwise.",
         paymentsTitle: "5. Payments, subscriptions and refunds",
         paymentsText1: "Checkout is handled by Stripe. Taxes may be calculated separately based on the customer country.",
         paymentsText2: "If you buy a subscription, access remains available while the plan is active and paid. If payment fails, expires or is canceled, access may be suspended according to the plan and payment processor rules.",
@@ -532,11 +577,11 @@
         performanceItem3: "Cada tweak debe ser elegido por el usuario según su sistema y preferencias.",
         licenseTitle: "4. Licencia y activación",
         licenseText1: "El acceso a SapoTweak se proporciona mediante una key personal. La licencia puede estar limitada a un dispositivo, número de activaciones o plan comprado.",
-        licenseText2: "La key esta pensada para seguir siendo valida tras reset o reinstalacion en el mismo hardware principal. Si la activacion falla, el reset self-service cubre los casos de reinstalacion en el mismo PC. Cambios grandes como placa base, CPU u otros componentes identificativos pueden requerir revision manual antes de una nueva activacion.",
+        licenseText2: "La key es personal y sigue las reglas del plan comprado. Un reset o reinstalacion puede requerir una nueva validacion. Cambios de hardware, cambios importantes del sistema o perdida de compatibilidad no crean automaticamente derecho a reembolso, nueva licencia o soporte extraordinario, salvo cuando la ley obligatoria disponga lo contrario.",
         paymentsTitle: "5. Pagos, suscripciones y reembolsos",
         paymentsText1: "Stripe gestiona el checkout. Los impuestos pueden calcularse por separado según el país del cliente.",
         paymentsText2: "Si compras una suscripción, el acceso permanece disponible mientras el plan esté activo y pagado. Si el pago falla, caduca o se cancela, el acceso puede suspenderse según las reglas del plan y del procesador de pago.",
-        paymentsText3: "Despues del pago, la key y la descarga se suministran de inmediato como contenido digital. Una vez iniciado el suministro digital, el desistimiento o los reembolsos pueden quedar excluidos o limitados cuando la ley aplicable lo permita. Los derechos obligatorios del consumidor previstos por la ley se mantienen."
+        paymentsText3: "Despues del pago, la key y la descarga se suministran de inmediato como contenido digital. Una vez iniciado el suministro digital, el desistimiento o los reembolsos pueden quedar excluidos o limitados cuando la ley aplicable lo permita. Los derechos obligatorios del consumidor previstos por la ley se mantienen.",
         prohibitedTitle: "6. Acciones prohibidas",
         prohibitedText: "Se prohíben copia abusiva, redistribución, reventa no autorizada, compartir keys, modificar sistemas de licencia o updates, saltarse protecciones, extraer código o assets, ingeniería inversa no autorizada y cualquier uso fraudulento, ilegal o abusivo del software.",
         liabilityTitle: "7. Responsabilidad",
@@ -578,6 +623,84 @@
       if (enabled) localStorage.setItem("sapotweak_site_tos_ack_v1", "1");
     }
 
+    function initMeshBackground() {
+      const canvas = document.getElementById("meshCanvas");
+      if (!canvas) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      let animationFrame = 0;
+      let width = 0;
+      let height = 0;
+      let points = [];
+      const maxDistance = 180;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.6);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const density = width < 900 ? 34 : 48;
+        const count = Math.max(28, Math.floor((width * height) / (density * density * 10)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          vy: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          r: Math.random() * 1.8 + 0.4
+        }));
+      }
+
+      function step() {
+        context.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i += 1) {
+          const point = points[i];
+          point.x += point.vx;
+          point.y += point.vy;
+
+          if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+          if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+
+          for (let j = i + 1; j < points.length; j += 1) {
+            const other = points[j];
+            const dx = point.x - other.x;
+            const dy = point.y - other.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > maxDistance) continue;
+
+            const alpha = 1 - distance / maxDistance;
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.strokeStyle = `rgba(182, 146, 255, ${alpha * 0.12})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
+        }
+
+        for (const point of points) {
+          context.beginPath();
+          context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+          context.fillStyle = "rgba(218, 201, 255, 0.22)";
+          context.fill();
+        }
+
+        animationFrame = window.requestAnimationFrame(step);
+      }
+
+      resize();
+      step();
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
+    }
+
     languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
     acceptCheck.addEventListener("change", syncAcceptance);
 
@@ -586,6 +709,7 @@
     }
     applyLanguage(currentLanguage);
     syncAcceptance();
+    initMeshBackground();
   </script>
 </body>
 </html>
