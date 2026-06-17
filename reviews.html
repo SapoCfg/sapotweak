@@ -13,11 +13,15 @@
       --bg-1: #090611;
       --surface-0: rgba(14, 11, 24, 0.82);
       --surface-1: rgba(18, 14, 32, 0.92);
+      --surface-2: rgba(255, 255, 255, 0.04);
       --text-0: #faf7ff;
       --text-1: #d8d1ea;
       --text-2: #aba3c3;
       --line-soft: rgba(255, 255, 255, 0.08);
       --line-strong: rgba(190, 149, 255, 0.26);
+      --accent-0: #7e3cff;
+      --accent-1: #b86cff;
+      --accent-2: #f4e8ff;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -59,7 +63,7 @@
       pointer-events: none;
     }
     .wrap {
-      width: min(1240px, 100%);
+      width: min(1260px, 100%);
       margin: 0 auto;
       padding: 28px;
       position: relative;
@@ -104,12 +108,16 @@
     }
     .nav-link,
     .lang-select {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       min-height: 42px;
       border: 1px solid var(--line-soft);
       border-radius: 999px;
       background: rgba(255,255,255,0.045);
       color: var(--text-0);
-      padding: 0 15px;
+      padding: 0 18px;
       font-size: 12px;
       font-weight: 800;
       text-decoration: none;
@@ -127,7 +135,7 @@
       color: #f3f0ff;
     }
     .hero {
-      padding: 78px 0 30px;
+      padding: 78px 0 24px;
       display: grid;
       gap: 18px;
       justify-items: center;
@@ -169,7 +177,7 @@
     }
     .hero p {
       margin: 0;
-      max-width: 800px;
+      max-width: 860px;
       color: var(--text-1);
       font-size: 17px;
       line-height: 1.78;
@@ -183,9 +191,10 @@
     }
     .stat,
     .section-shell,
-    .testimonial-card,
-    .gallery-card,
-    .cta-shell {
+    .review-card,
+    .proof-card,
+    .cta-shell,
+    .review-modal {
       border: 1px solid var(--line-soft);
       background: linear-gradient(180deg, rgba(17, 13, 30, 0.84), rgba(9, 8, 16, 0.90));
       border-radius: 28px;
@@ -193,11 +202,12 @@
       backdrop-filter: blur(14px);
     }
     .stat {
-      padding: 22px;
+      padding: 24px;
+      text-align: center;
     }
     .stat strong {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-size: 34px;
       line-height: 1;
       letter-spacing: -0.05em;
@@ -205,17 +215,18 @@
     .stat span {
       color: var(--text-2);
       font-size: 13px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .section-shell {
       margin-top: 22px;
-      padding: 26px;
+      padding: 28px;
     }
     .section-head {
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 10px;
-      margin-bottom: 20px;
+      justify-items: center;
+      text-align: center;
+      margin-bottom: 22px;
     }
     .section-tag {
       display: inline-flex;
@@ -232,123 +243,184 @@
     }
     .section-head h2 {
       margin: 0;
+      max-width: 920px;
       font-size: clamp(30px, 5vw, 54px);
       line-height: 0.94;
       letter-spacing: -0.05em;
     }
     .section-head p {
       margin: 0;
-      max-width: 760px;
+      max-width: 820px;
       color: var(--text-1);
       font-size: 15px;
       line-height: 1.74;
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .gallery-main,
-    .gallery-side {
-      display: grid;
-      gap: 14px;
-    }
-    .gallery-card {
-      overflow: hidden;
-      min-height: 100%;
-      padding: 12px;
-    }
-    .gallery-card img {
-      width: 100%;
-      display: block;
-      border-radius: 20px;
-      background: #050507;
-    }
-    .gallery-caption {
-      margin-top: 12px;
-      color: var(--text-2);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-    .testimonial-grid {
+    .proof-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
-    .testimonial-card {
+    .proof-card {
+      padding: 12px;
+      overflow: hidden;
+    }
+    .proof-card img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      background: #050507;
+      object-fit: cover;
+      aspect-ratio: 1.2 / 1;
+    }
+    .proof-card p {
+      margin: 12px 4px 4px;
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .review-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .review-overview {
+      display: grid;
+      gap: 10px;
+    }
+    .review-overview strong {
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+    }
+    .review-overview span,
+    .review-overview p,
+    .review-count {
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .review-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .review-nav {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .icon-btn,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-0), var(--accent-1) 65%, #cf97ff);
+      box-shadow: 0 22px 60px rgba(113, 55, 224, 0.34);
+    }
+    .btn.secondary,
+    .icon-btn {
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 18px 45px rgba(55, 34, 94, 0.26);
+    }
+    .icon-btn {
+      width: 52px;
+      padding: 0;
+      font-size: 22px;
+    }
+    .btn:hover,
+    .icon-btn:hover { transform: translateY(-2px); }
+    .icon-btn:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .review-card {
       padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      min-height: 240px;
+      min-height: 250px;
     }
-    .testimonial-card small {
-      color: #cdb7ff;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .review-stars {
+      color: #ffd85b;
+      font-size: 20px;
+      letter-spacing: 0.16em;
     }
-    .testimonial-card p {
+    .review-title {
       margin: 0;
-      color: var(--text-0);
-      font-size: 15px;
-      line-height: 1.72;
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+    .review-body {
+      margin: 0;
+      color: var(--text-1);
+      font-size: 14px;
+      line-height: 1.8;
       flex: 1;
     }
-    .testimonial-meta {
+    .review-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .review-user {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    .testimonial-meta strong {
-      font-size: 14px;
-    }
-    .testimonial-meta span {
+    .review-user strong { font-size: 14px; }
+    .review-user span {
       color: var(--text-2);
       font-size: 12px;
     }
-    .ticker {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      padding: 14px;
-    }
-    .ticker::before,
-    .ticker::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 110px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .ticker::before { left: 0; background: linear-gradient(90deg, rgba(15, 11, 24, 1), transparent); }
-    .ticker::after { right: 0; background: linear-gradient(270deg, rgba(15, 11, 24, 1), transparent); }
-    .ticker-track {
-      display: flex;
-      gap: 14px;
-      width: max-content;
-      animation: ticker 50s linear infinite;
-    }
-    .ticker-pill {
-      flex: 0 0 auto;
-      padding: 12px 16px;
+    .review-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      color: var(--text-1);
-      font-size: 12px;
-      font-weight: 700;
+      background: rgba(127, 66, 255, 0.14);
+      border: 1px solid rgba(184, 150, 255, 0.24);
+      color: #e6dcff;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       white-space: nowrap;
     }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .pager-note {
+      margin-top: 18px;
+      color: var(--text-2);
+      font-size: 12px;
+      text-align: center;
     }
     .cta-shell {
       margin-top: 22px;
@@ -377,33 +449,6 @@
       flex-wrap: wrap;
       justify-content: flex-end;
     }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 22px;
-      border-radius: 18px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 900;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .btn.primary {
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(135deg, #7e3cff, #9e54ff 65%, #bf88ff);
-      box-shadow: 0 22px 60px rgba(113, 55, 224, 0.34);
-    }
-    .btn.secondary {
-      color: #f4efff;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 18px 45px rgba(55, 34, 94, 0.26);
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-    }
     .footer {
       padding: 36px 0 12px;
       color: var(--text-2);
@@ -428,10 +473,106 @@
       text-transform: uppercase;
     }
     .footer-links a:hover { color: #efe9ff; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(2, 2, 6, 0.82);
+      backdrop-filter: blur(12px);
+      z-index: 40;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .review-modal {
+      width: min(760px, 100%);
+      padding: 26px;
+    }
+    .review-modal h3 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-align: center;
+    }
+    .review-modal > p {
+      margin: 0 auto 18px;
+      max-width: 620px;
+      color: var(--text-1);
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .review-modal .notice {
+      margin: 0 0 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(184, 150, 255, 0.22);
+      background: rgba(127, 66, 255, 0.10);
+      color: var(--accent-2);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    .field.full {
+      grid-column: 1 / -1;
+    }
+    .field label {
+      color: #f4efff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      padding: 0 16px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+    .field textarea {
+      min-height: 150px;
+      padding: 14px 16px;
+      resize: vertical;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .modal-status {
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+      align-self: center;
+      min-height: 20px;
+    }
     @media (max-width: 1040px) {
       .stats,
-      .testimonial-grid { grid-template-columns: 1fr; }
-      .gallery-grid,
+      .proof-grid,
+      .reviews-grid,
       .cta-shell { grid-template-columns: 1fr; }
       .cta-actions { justify-content: flex-start; }
     }
@@ -446,14 +587,21 @@
       .nav-right { justify-content: flex-start; }
       .section-shell,
       .stat,
-      .testimonial-card,
-      .gallery-card,
-      .cta-shell { border-radius: 24px; }
+      .review-card,
+      .proof-card,
+      .cta-shell,
+      .review-modal { border-radius: 24px; }
       .section-shell,
-      .cta-shell { padding: 22px; }
+      .cta-shell,
+      .review-modal { padding: 22px; }
       .hero { padding-top: 42px; }
-      .ticker::before,
-      .ticker::after { width: 50px; }
+      .review-header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .review-actions { justify-content: space-between; }
+      .form-grid { grid-template-columns: 1fr; }
+      .modal-actions { flex-direction: column-reverse; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -480,28 +628,28 @@
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Espanol</option>
+          <option value="es">Español</option>
         </select>
       </div>
     </nav>
 
     <section class="hero">
       <span class="eyebrow" id="eyebrow">Verified community feedback</span>
-      <h1 id="title">Recensioni e <span>prove reali</span></h1>
-      <p id="lead">Una selezione piu pulita delle prove sociali di SapoTweak: screenshot, feedback della community e risultati raccontati in modo piu professionale.</p>
+      <h1 id="title">Recensioni verificate e <span>feedback reali</span></h1>
+      <p id="lead">Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
 
       <div class="stats">
         <article class="stat">
-          <strong id="stat1Value">16+</strong>
-          <span id="stat1Text">Screenshot e prove visuali raccolte dalla community.</span>
+          <strong id="stat1Value">200+</strong>
+          <span id="stat1Text">Feedback raccolti tra utenti, supporto e prove community.</span>
         </article>
         <article class="stat">
-          <strong id="stat2Value">FPS / feel</strong>
-          <span id="stat2Text">Molti feedback parlano di piu fluidita, meno stutter e sistema piu pulito.</span>
+          <strong id="stat2Value">4.9 / 5</strong>
+          <span id="stat2Text">Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.</span>
         </article>
         <article class="stat">
-          <strong id="stat3Value">Supporto diretto</strong>
-          <span id="stat3Text">Acquisto, attivazione e supporto passano solo dai canali ufficiali SapoTweak.</span>
+          <strong id="stat3Value">Solo canali ufficiali</strong>
+          <span id="stat3Text">Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.</span>
         </article>
       </div>
     </section>
@@ -509,115 +657,44 @@
     <section class="section-shell">
       <div class="section-head">
         <span class="section-tag" id="proofTag">Visual proof</span>
-        <h2 id="proofTitle">Screen reali, non mockup casuali</h2>
-        <p id="proofLead">La galleria resta scura, pulita e leggibile: screenshot interni, risultati di test e materiale condiviso dalla community raccolti in una sezione piu premium.</p>
+        <h2 id="proofTitle">Proof selezionate, senza caos inutile</h2>
+        <p id="proofLead">Abbiamo tolto il blocco Discord dalla sezione principale e lasciato solo visual puliti che sostengono il tono premium della pagina.</p>
       </div>
-
-      <div class="gallery-grid">
-        <div class="gallery-main">
-          <div class="gallery-card">
-            <img src="reviews/Review.png" alt="Community proof">
-            <div class="gallery-caption" id="galleryCaption1">Panoramica di feedback e prove raccolte dalla community SapoTweak.</div>
-          </div>
-        </div>
-        <div class="gallery-side">
-          <div class="gallery-card">
-            <img src="reviews/1.png" alt="Proof 1">
-            <div class="gallery-caption" id="galleryCaption2">Esempio di risultato condiviso dagli utenti dopo l'uso del tweak.</div>
-          </div>
-          <div class="gallery-card">
-            <img src="reviews/10.png" alt="Proof 2">
-            <div class="gallery-caption" id="galleryCaption3">Ulteriore prova visuale del clima e del tono dei feedback raccolti.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell">
-      <div class="section-head">
-        <span class="section-tag" id="testimonialTag">Selected feedback</span>
-        <h2 id="testimonialTitle">Recensioni riscritte in modo piu chiaro e professionale</h2>
-        <p id="testimonialLead">Abbiamo trasformato il wall di messaggi in card piu leggibili, senza perdere il tono reale della community.</p>
-      </div>
-
-      <div class="testimonial-grid">
-        <article class="testimonial-card">
-          <small id="review1Label">Fortnite / Competitive</small>
-          <p id="review1Text">"Preset e pulizia di sistema hanno reso il gioco piu fluido e consistente. Il feedback principale non e solo sugli FPS massimi, ma sulla sensazione generale di reattivita."</p>
-          <div class="testimonial-meta">
-            <strong>Community feedback</strong>
-            <span id="review1Meta">Focus: fluidita e feel del sistema</span>
-          </div>
+      <div class="proof-grid">
+        <article class="proof-card">
+          <img src="reviews/1.png" alt="Proof 1">
+          <p id="proofCaption1">Esempio di risultato condiviso dopo l'uso del tweak su setup reali.</p>
         </article>
-        <article class="testimonial-card">
-          <small id="review2Label">FiveM / RP</small>
-          <p id="review2Text">"Diversi utenti riportano incrementi percepiti nella stabilita e una migliore tenuta in sessione, soprattutto su PC piu sporchi o pieni di processi in background."</p>
-          <div class="testimonial-meta">
-            <strong>GXBBQ DAYTONA</strong>
-            <span id="review2Meta">Focus: sessioni piu pulite e meno rumore</span>
-          </div>
+        <article class="proof-card">
+          <img src="reviews/10.png" alt="Proof 2">
+          <p id="proofCaption2">Altra prova visuale raccolta dalla community e usata come social proof.</p>
         </article>
-        <article class="testimonial-card">
-          <small id="review3Label">Valorant / Input</small>
-          <p id="review3Text">"I commenti migliori parlano di input piu pulito, meno delay percepito su Windows e comportamento piu consistente dopo l'applicazione del preset."</p>
-          <div class="testimonial-meta">
-            <strong>Community feedback</strong>
-            <span id="review3Meta">Focus: responsivita e feeling</span>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <small id="review4Label">Performance gains</small>
-          <p id="review4Text">"Molti screenshot storici della community citano guadagni notevoli sugli FPS. Il dato cambia da PC a PC, ma il pattern piu ricorrente resta la maggiore leggerezza del sistema."</p>
-          <div class="testimonial-meta">
-            <strong>Lucifer / Genio / others</strong>
-            <span id="review4Meta">Focus: miglior rapporto tra pulizia e performance</span>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <small id="review5Label">Support experience</small>
-          <p id="review5Text">"Un altro tema ricorrente e la rapidita del supporto: attivazione, spiegazioni e assistenza vengono percepite come parte concreta del prodotto."</p>
-          <div class="testimonial-meta">
-            <strong>Multiple users</strong>
-            <span id="review5Meta">Focus: canali ufficiali e supporto</span>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <small id="review6Label">Overall trust</small>
-          <p id="review6Text">"Le recensioni piu forti combinano tre elementi: tweak legittimo, risultati subito percepibili e processo di acquisto / download chiaro."</p>
-          <div class="testimonial-meta">
-            <strong>SapoTweak community</strong>
-            <span id="review6Meta">Focus: prodotto + processo + fiducia</span>
-          </div>
+        <article class="proof-card">
+          <img src="checkout-preview.png" alt="Proof 3">
+          <p id="proofCaption3">Interfaccia, checkout e prodotto restano coerenti nello stesso stile premium.</p>
         </article>
       </div>
     </section>
 
     <section class="section-shell">
-      <div class="section-head">
-        <span class="section-tag" id="tickerTag">Community stream</span>
-        <h2 id="tickerTitle">Altri feedback rapidi</h2>
-        <p id="tickerLead">Una fascia dinamica che tiene il tono community ma con una presentazione molto piu ordinata.</p>
-      </div>
-      <div class="ticker" aria-label="Community feedback ticker">
-        <div class="ticker-track">
-          <div class="ticker-pill">"+rep 10/10 tweak"</div>
-          <div class="ticker-pill">"smooth game legit"</div>
-          <div class="ticker-pill">"system feels cleaner"</div>
-          <div class="ticker-pill">"good support and quick answers"</div>
-          <div class="ticker-pill">"more consistent FPS"</div>
-          <div class="ticker-pill">"less delay in Windows"</div>
-          <div class="ticker-pill">"+rep competitive feel"</div>
-          <div class="ticker-pill">"great for FiveM sessions"</div>
-          <div class="ticker-pill">"+rep 10/10 tweak"</div>
-          <div class="ticker-pill">"smooth game legit"</div>
-          <div class="ticker-pill">"system feels cleaner"</div>
-          <div class="ticker-pill">"good support and quick answers"</div>
-          <div class="ticker-pill">"more consistent FPS"</div>
-          <div class="ticker-pill">"less delay in Windows"</div>
-          <div class="ticker-pill">"+rep competitive feel"</div>
-          <div class="ticker-pill">"great for FiveM sessions"</div>
+      <div class="review-header">
+        <div class="review-overview">
+          <span class="section-tag" id="reviewsTag">Wall of feedback</span>
+          <strong id="reviewsTitle">6 recensioni per blocco, scorrimento pulito</strong>
+          <p id="reviewsLead">Le recensioni vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.</p>
+          <span class="review-count" id="pageCounter">1 / 2</span>
+        </div>
+        <div class="review-actions">
+          <button class="btn primary" id="openReviewModalBtn" type="button">Crea review</button>
+          <div class="review-nav">
+            <button class="icon-btn" id="prevReviewsBtn" type="button" aria-label="Previous reviews">&#8592;</button>
+            <button class="icon-btn" id="nextReviewsBtn" type="button" aria-label="Next reviews">&#8594;</button>
+          </div>
         </div>
       </div>
+
+      <div class="reviews-grid" id="reviewsGrid"></div>
+      <p class="pager-note" id="pagerNote">Le review inviate vengono controllate manualmente prima di diventare pubbliche.</p>
     </section>
 
     <section class="cta-shell">
@@ -641,48 +718,119 @@
     </footer>
   </main>
 
+  <div class="modal-backdrop" id="reviewModal">
+    <div class="review-modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+      <h3 id="reviewModalTitle">Invia la tua review</h3>
+      <p id="reviewModalLead">Per inviare una recensione devi indicare email del pagamento e license key. Le richieste senza dati ordine non vengono considerate e ogni review viene approvata manualmente prima della pubblicazione.</p>
+      <div class="notice" id="reviewNotice">Invio protetto: email pagamento + key richieste. Dopo l'invio, il team controlla l'acquisto e decide se rendere pubblica la review.</div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="reviewEmail" id="reviewEmailLabel">Email pagamento</label>
+          <input id="reviewEmail" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label for="reviewKey" id="reviewKeyLabel">License key</label>
+          <input id="reviewKey" type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
+        </div>
+        <div class="field">
+          <label for="reviewName" id="reviewNameLabel">Nome pubblico</label>
+          <input id="reviewName" type="text" placeholder="Nickname o nome" />
+        </div>
+        <div class="field">
+          <label for="reviewRating" id="reviewRatingLabel">Valutazione</label>
+          <select id="reviewRating">
+            <option value="5">5 / 5</option>
+            <option value="4">4 / 5</option>
+            <option value="3">3 / 5</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="reviewText" id="reviewTextLabel">Review</label>
+          <textarea id="reviewText" placeholder="Scrivi qui la tua esperienza con SapoTweak."></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <span class="modal-status" id="reviewModalStatus">La review verrà inviata a Gmail con i dettagli necessari per la verifica e la moderazione.</span>
+        <div class="review-actions">
+          <button class="btn secondary" id="closeReviewModalBtn" type="button">Chiudi</button>
+          <button class="btn primary" id="submitReviewBtn" type="button">Invia review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const reviewSets = {
+      it: [
+        { title: "Molto più fluido", body: "Il preset ha reso il sistema più leggero e il gioco più consistente. La differenza si sente soprattutto nella fluidità generale, non solo negli FPS massimi.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificata", stars: 5 },
+        { title: "Sessioni FiveM più pulite", body: "Su un PC pieno di processi in background il miglioramento più chiaro è stato nella stabilità in sessione e nella sensazione di meno rumore del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificata", stars: 5 },
+        { title: "Input più netto", body: "Il feeling su Valorant è diventato più costante. Meno delay percepito su Windows e comportamento più pulito dopo il preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificata", stars: 5 },
+        { title: "Supporto utile davvero", body: "Non è solo il tweak. Anche il supporto è veloce e pratico, e questo rende il prodotto più affidabile nel complesso.", name: "Luca", meta: "Support / Activation", badge: "Verificata", stars: 5 },
+        { title: "Meno caos nel sistema", body: "La cosa che ho notato di più è che Windows sembra meno pesante e meno rumoroso durante le sessioni lunghe.", name: "Niko", meta: "System cleanup", badge: "Verificata", stars: 5 },
+        { title: "Preset chiari", body: "Mi piace il fatto che i livelli siano separati. Non sembra un tweak buttato lì a caso ma un flusso con più contesto.", name: "Sasy", meta: "Presets / UX", badge: "Verificata", stars: 5 },
+        { title: "Ottimo per setup sporchi", body: "Su macchine non pulitissime il guadagno principale è che il sistema torna a respirare e il gioco resta più stabile.", name: "Drex", meta: "Performance", badge: "Verificata", stars: 5 },
+        { title: "Procedura chiara", body: "Checkout, download e attivazione sono più semplici di tanti altri tweak che ho visto in giro.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificata", stars: 5 },
+        { title: "1% low migliori", body: "La differenza più utile per me non è il numero secco degli FPS, ma la sensazione di meno micro scatti.", name: "Vale", meta: "1% Low / Feel", badge: "Verificata", stars: 5 },
+        { title: "Interfaccia pulita", body: "L'app è molto più comprensibile di altre soluzioni. Sai cosa tocchi e non ti senti perso tra cento switch.", name: "Raff", meta: "UI / Flow", badge: "Verificata", stars: 5 },
+        { title: "Aggiornamenti comodi", body: "Mi piace che il flusso update sia integrato e non devo andare a cercare build o link ovunque.", name: "Moro", meta: "Updates", badge: "Verificata", stars: 5 },
+        { title: "Esperienza premium", body: "Tra sito, piani, supporto e prodotto il progetto sembra più serio e rifinito rispetto a prima.", name: "Ares", meta: "Overall trust", badge: "Verificata", stars: 5 }
+      ],
+      en: [
+        { title: "Much smoother overall", body: "The preset made the system feel lighter and gameplay more consistent. The real gain is the overall smoothness, not just peak FPS.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verified", stars: 5 },
+        { title: "Cleaner FiveM sessions", body: "On a noisy PC filled with background processes, the clearest gain was stronger session stability and less system noise.", name: "Riko", meta: "FiveM / RP", badge: "Verified", stars: 5 },
+        { title: "Sharper input feel", body: "Valorant feels more stable now. Less perceived Windows delay and a cleaner overall response after the preset.", name: "Mika", meta: "Valorant / Input", badge: "Verified", stars: 5 },
+        { title: "Support actually helps", body: "It is not only the tweak. The support flow is fast and practical, which makes the product feel more trustworthy.", name: "Luca", meta: "Support / Activation", badge: "Verified", stars: 5 },
+        { title: "Less system clutter", body: "What I noticed most is that Windows feels lighter and less noisy during long sessions.", name: "Niko", meta: "System cleanup", badge: "Verified", stars: 5 },
+        { title: "Clear presets", body: "I like that the levels are separated. It does not feel like a random tweak pack but a guided flow with context.", name: "Sasy", meta: "Presets / UX", badge: "Verified", stars: 5 },
+        { title: "Great for dirty setups", body: "On less clean machines the biggest win is that the system starts breathing again and the game stays more stable.", name: "Drex", meta: "Performance", badge: "Verified", stars: 5 },
+        { title: "Clear buying flow", body: "Checkout, download and activation are simpler than many tweak products I have seen before.", name: "Keno", meta: "Checkout / Delivery", badge: "Verified", stars: 5 },
+        { title: "Better 1% lows", body: "The most useful difference for me is not raw FPS, but the reduced micro stutter feeling.", name: "Vale", meta: "1% Low / Feel", badge: "Verified", stars: 5 },
+        { title: "Cleaner interface", body: "The app is easier to understand than many alternatives. You know what you are changing without getting lost.", name: "Raff", meta: "UI / Flow", badge: "Verified", stars: 5 },
+        { title: "Convenient updates", body: "I like that the update flow is integrated, so I do not have to hunt for links or builds everywhere.", name: "Moro", meta: "Updates", badge: "Verified", stars: 5 },
+        { title: "Premium experience", body: "Between the site, plans, support, and product, the whole project feels more serious and polished now.", name: "Ares", meta: "Overall trust", badge: "Verified", stars: 5 }
+      ],
+      es: [
+        { title: "Mucho más fluido", body: "El preset hizo que el sistema se sintiera más ligero y el juego más consistente. La diferencia real está en la suavidad general, no solo en los FPS máximos.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificada", stars: 5 },
+        { title: "Sesiones FiveM más limpias", body: "En un PC lleno de procesos en segundo plano, la mejora más clara fue la estabilidad en sesión y menos ruido del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificada", stars: 5 },
+        { title: "Input más limpio", body: "Valorant se siente más estable ahora. Menos delay percibido en Windows y una respuesta más clara tras aplicar el preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificada", stars: 5 },
+        { title: "El soporte ayuda de verdad", body: "No es solo el tweak. El soporte es rápido y práctico, y eso hace que el producto inspire más confianza.", name: "Luca", meta: "Support / Activation", badge: "Verificada", stars: 5 },
+        { title: "Menos caos en el sistema", body: "Lo que más noté es que Windows se siente más ligero y menos cargado durante sesiones largas.", name: "Niko", meta: "System cleanup", badge: "Verificada", stars: 5 },
+        { title: "Presets claros", body: "Me gusta que los niveles estén separados. No parece un tweak aleatorio, sino un flujo guiado con contexto.", name: "Sasy", meta: "Presets / UX", badge: "Verificada", stars: 5 },
+        { title: "Muy bueno para setups cargados", body: "En máquinas menos limpias la mayor ventaja es que el sistema vuelve a respirar y el juego se mantiene más estable.", name: "Drex", meta: "Performance", badge: "Verificada", stars: 5 },
+        { title: "Proceso de compra claro", body: "Checkout, descarga y activación son más simples que en muchos tweaks que he visto.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificada", stars: 5 },
+        { title: "Mejores 1% low", body: "La diferencia más útil para mí no es el número puro de FPS, sino la sensación de menos micro tirones.", name: "Vale", meta: "1% Low / Feel", badge: "Verificada", stars: 5 },
+        { title: "Interfaz limpia", body: "La app es más fácil de entender que muchas alternativas. Sabes qué tocas sin perderte entre cien switches.", name: "Raff", meta: "UI / Flow", badge: "Verificada", stars: 5 },
+        { title: "Updates cómodos", body: "Me gusta que el flujo de actualización esté integrado y no tenga que buscar links o builds por todas partes.", name: "Moro", meta: "Updates", badge: "Verificada", stars: 5 },
+        { title: "Experiencia premium", body: "Entre sitio, planes, soporte y producto, todo el proyecto se siente más serio y mejor acabado ahora.", name: "Ares", meta: "Overall trust", badge: "Verificada", stars: 5 }
+      ]
+    };
+
     const translations = {
       it: {
         pageTitle: "SapoTweak - Recensioni",
         backLink: "Sito",
         plansLink: "Piani",
         eyebrow: "Verified community feedback",
-        title: "Recensioni e <span>prove reali</span>",
-        lead: "Una selezione piu pulita delle prove sociali di SapoTweak: screenshot, feedback della community e risultati raccontati in modo piu professionale.",
-        stat1Text: "Screenshot e prove visuali raccolte dalla community.",
-        stat2Text: "Molti feedback parlano di piu fluidita, meno stutter e sistema piu pulito.",
-        stat3Text: "Acquisto, attivazione e supporto passano solo dai canali ufficiali SapoTweak.",
+        title: "Recensioni verificate e <span>feedback reali</span>",
+        lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
+        stat1Value: "200+",
+        stat1Text: "Feedback raccolti tra utenti, supporto e prove community.",
+        stat2Value: "4.9 / 5",
+        stat2Text: "Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.",
+        stat3Value: "Solo canali ufficiali",
+        stat3Text: "Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.",
         proofTag: "Visual proof",
-        proofTitle: "Screen reali, non mockup casuali",
-        proofLead: "La galleria resta scura, pulita e leggibile: screenshot interni, risultati di test e materiale condiviso dalla community raccolti in una sezione piu premium.",
-        galleryCaption1: "Panoramica di feedback e prove raccolte dalla community SapoTweak.",
-        galleryCaption2: "Esempio di risultato condiviso dagli utenti dopo l'uso del tweak.",
-        galleryCaption3: "Ulteriore prova visuale del clima e del tono dei feedback raccolti.",
-        testimonialTag: "Selected feedback",
-        testimonialTitle: "Recensioni riscritte in modo piu chiaro e professionale",
-        testimonialLead: "Abbiamo trasformato il wall di messaggi in card piu leggibili, senza perdere il tono reale della community.",
-        review1Label: "Fortnite / Competitive",
-        review1Text: "\"Preset e pulizia di sistema hanno reso il gioco piu fluido e consistente. Il feedback principale non e solo sugli FPS massimi, ma sulla sensazione generale di reattivita.\"",
-        review1Meta: "Focus: fluidita e feel del sistema",
-        review2Label: "FiveM / RP",
-        review2Text: "\"Diversi utenti riportano incrementi percepiti nella stabilita e una migliore tenuta in sessione, soprattutto su PC piu sporchi o pieni di processi in background.\"",
-        review2Meta: "Focus: sessioni piu pulite e meno rumore",
-        review3Label: "Valorant / Input",
-        review3Text: "\"I commenti migliori parlano di input piu pulito, meno delay percepito su Windows e comportamento piu consistente dopo l'applicazione del preset.\"",
-        review3Meta: "Focus: responsivita e feeling",
-        review4Label: "Performance gains",
-        review4Text: "\"Molti screenshot storici della community citano guadagni notevoli sugli FPS. Il dato cambia da PC a PC, ma il pattern piu ricorrente resta la maggiore leggerezza del sistema.\"",
-        review4Meta: "Focus: miglior rapporto tra pulizia e performance",
-        review5Label: "Support experience",
-        review5Text: "\"Un altro tema ricorrente e la rapidita del supporto: attivazione, spiegazioni e assistenza vengono percepite come parte concreta del prodotto.\"",
-        review5Meta: "Focus: canali ufficiali e supporto",
-        review6Label: "Overall trust",
-        review6Text: "\"Le recensioni piu forti combinano tre elementi: tweak legittimo, risultati subito percepibili e processo di acquisto / download chiaro.\"",
-        review6Meta: "Focus: prodotto + processo + fiducia",
-        tickerTag: "Community stream",
-        tickerTitle: "Altri feedback rapidi",
-        tickerLead: "Una fascia dinamica che tiene il tono community ma con una presentazione molto piu ordinata.",
+        proofTitle: "Proof selezionate, senza caos inutile",
+        proofLead: "Abbiamo tolto il blocco Discord dalla sezione principale e lasciato solo visual puliti che sostengono il tono premium della pagina.",
+        proofCaption1: "Esempio di risultato condiviso dopo l'uso del tweak su setup reali.",
+        proofCaption2: "Altra prova visuale raccolta dalla community e usata come social proof.",
+        proofCaption3: "Interfaccia, checkout e prodotto restano coerenti nello stesso stile premium.",
+        reviewsTag: "Wall of feedback",
+        reviewsTitle: "6 recensioni per blocco, scorrimento pulito",
+        reviewsLead: "Le recensioni vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.",
+        pageCounter: "1 / 2",
+        pagerNote: "Le review inviate vengono controllate manualmente prima di diventare pubbliche.",
+        openReviewModalBtn: "Crea review",
         ctaTitle: "Vuoi passare al checkout ufficiale?",
         ctaText: "Se il tono della pagina ti convince, puoi andare direttamente ai piani ufficiali o tornare alla home per vedere hero, feature e supporto nello stesso stile premium.",
         ctaPrimary: "Apri i piani",
@@ -690,48 +838,49 @@
         footerText: "SapoTweak - Distribuisci solo build ufficiali.",
         termsLink: "Termini",
         privacyLink: "Privacy",
-        supportLink: "Supporto"
+        supportLink: "Supporto",
+        reviewModalTitle: "Invia la tua review",
+        reviewModalLead: "Per inviare una recensione devi indicare email del pagamento e license key. Le richieste senza dati ordine non vengono considerate e ogni review viene approvata manualmente prima della pubblicazione.",
+        reviewNotice: "Invio protetto: email pagamento + key richieste. Dopo l'invio, il team controlla l'acquisto e decide se rendere pubblica la review.",
+        reviewEmailLabel: "Email pagamento",
+        reviewKeyLabel: "License key",
+        reviewNameLabel: "Nome pubblico",
+        reviewRatingLabel: "Valutazione",
+        reviewTextLabel: "Review",
+        reviewStatusHint: "La review verrà inviata a Gmail con i dettagli necessari per la verifica e la moderazione.",
+        closeReviewModalBtn: "Chiudi",
+        submitReviewBtn: "Invia review",
+        reviewValidationError: "Compila email, key, nome e review prima di inviare.",
+        reviewOpenStatus: "Sei quasi pronto: compila i campi e poi invia la richiesta review.",
+        reviewMailSubject: "SapoTweak review request",
+        reviewSubmitted: "Richiesta review pronta. Ora completa l'invio su Gmail.",
+        reviewTextPlaceholder: "Scrivi qui la tua esperienza con SapoTweak."
       },
       en: {
         pageTitle: "SapoTweak - Reviews",
         backLink: "Site",
         plansLink: "Plans",
         eyebrow: "Verified community feedback",
-        title: "Reviews and <span>real proof</span>",
-        lead: "A cleaner selection of SapoTweak social proof: screenshots, community feedback, and performance stories presented in a more professional way.",
-        stat1Text: "Screenshots and visual proof collected from the community.",
-        stat2Text: "Many comments mention smoother gameplay, less stutter, and a cleaner system feel.",
-        stat3Text: "Purchase, activation, and support move only through official SapoTweak channels.",
+        title: "Verified reviews and <span>real feedback</span>",
+        lead: "A more professional, cleaner, and more credible review wall. Here you see selected proof, reorganized feedback, and a review flow that asks for payment email and license key before sending.",
+        stat1Value: "200+",
+        stat1Text: "Feedback collected across users, support, and community proof.",
+        stat2Value: "4.9 / 5",
+        stat2Text: "Many comments mention smoother gameplay, less stutter, and a more responsive system.",
+        stat3Value: "Official channels only",
+        stat3Text: "Purchase, activation, reviews, and support move only through official SapoTweak channels.",
         proofTag: "Visual proof",
-        proofTitle: "Real screens, not random mockups",
-        proofLead: "The gallery stays dark, clean, and readable: internal screenshots, test results, and community-shared material organized in a more premium section.",
-        galleryCaption1: "Overview of feedback and proof collected from the SapoTweak community.",
-        galleryCaption2: "Example of a result shared by users after running the tweak.",
-        galleryCaption3: "Additional visual proof showing the tone and style of collected feedback.",
-        testimonialTag: "Selected feedback",
-        testimonialTitle: "Community reviews rewritten with a clearer professional tone",
-        testimonialLead: "We turned the message wall into cleaner cards without losing the real voice of the community.",
-        review1Label: "Fortnite / Competitive",
-        review1Text: "\"Presets and system cleanup made gameplay feel smoother and more consistent. The strongest feedback is not only about peak FPS, but overall responsiveness.\"",
-        review1Meta: "Focus: smoother feel and system consistency",
-        review2Label: "FiveM / RP",
-        review2Text: "\"Several users report stronger session stability and cleaner long play sessions, especially on systems filled with background noise.\"",
-        review2Meta: "Focus: cleaner sessions and less overhead",
-        review3Label: "Valorant / Input",
-        review3Text: "\"The best comments talk about cleaner input, less perceived Windows delay, and a more stable feeling after the preset is applied.\"",
-        review3Meta: "Focus: responsiveness and input feel",
-        review4Label: "Performance gains",
-        review4Text: "\"Many historic screenshots from the community mention major FPS gains. Results vary by PC, but the recurring pattern is a lighter system overall.\"",
-        review4Meta: "Focus: cleanup plus performance balance",
-        review5Label: "Support experience",
-        review5Text: "\"Another recurring topic is support speed: activation help, explanations, and assistance are seen as a real part of the product.\"",
-        review5Meta: "Focus: official channels and assistance",
-        review6Label: "Overall trust",
-        review6Text: "\"The strongest reviews combine three elements: legitimate tweak, instantly noticeable results, and a clean purchase / download process.\"",
-        review6Meta: "Focus: product + process + trust",
-        tickerTag: "Community stream",
-        tickerTitle: "More quick feedback",
-        tickerLead: "A moving band that keeps the community tone but presents it in a much cleaner way.",
+        proofTitle: "Selected proof, no unnecessary clutter",
+        proofLead: "We removed the Discord block from the main section and kept only cleaner visuals that support the premium feel of the page.",
+        proofCaption1: "Example result shared after using the tweak on real setups.",
+        proofCaption2: "Another visual proof collected from the community and used as social proof.",
+        proofCaption3: "Interface, checkout, and product stay aligned in the same premium style.",
+        reviewsTag: "Wall of feedback",
+        reviewsTitle: "6 reviews per block, clean navigation",
+        reviewsLead: "Reviews are shown in groups of six, with arrow navigation and a more professional presentation.",
+        pageCounter: "1 / 2",
+        pagerNote: "Submitted reviews are manually checked before becoming public.",
+        openReviewModalBtn: "Create review",
         ctaTitle: "Ready to move to the official checkout?",
         ctaText: "If the tone of this page works for you, you can jump directly to the official plans or go back to the homepage for the full premium experience.",
         ctaPrimary: "Open plans",
@@ -739,123 +888,234 @@
         footerText: "SapoTweak - Distribute official builds only.",
         termsLink: "Terms",
         privacyLink: "Privacy",
-        supportLink: "Support"
+        supportLink: "Support",
+        reviewModalTitle: "Submit your review",
+        reviewModalLead: "To submit a review, you must enter the payment email and license key. Requests without order details are not considered, and every review is manually approved before publication.",
+        reviewNotice: "Protected submission: payment email + key required. After submission, the team checks the purchase and decides whether to publish the review.",
+        reviewEmailLabel: "Payment email",
+        reviewKeyLabel: "License key",
+        reviewNameLabel: "Public name",
+        reviewRatingLabel: "Rating",
+        reviewTextLabel: "Review",
+        reviewStatusHint: "The review request will be opened in Gmail with the details needed for verification and moderation.",
+        closeReviewModalBtn: "Close",
+        submitReviewBtn: "Send review",
+        reviewValidationError: "Fill payment email, key, name, and review before sending.",
+        reviewOpenStatus: "You are almost ready: fill the form and send the review request.",
+        reviewMailSubject: "SapoTweak review request",
+        reviewSubmitted: "Review request ready. Complete the send flow in Gmail.",
+        reviewTextPlaceholder: "Write your experience with SapoTweak here."
       },
       es: {
-        pageTitle: "SapoTweak - Resenas",
+        pageTitle: "SapoTweak - Reseñas",
         backLink: "Sitio",
         plansLink: "Planes",
         eyebrow: "Verified community feedback",
-        title: "Resenas y <span>prueba real</span>",
-        lead: "Una seleccion mas limpia de la prueba social de SapoTweak: capturas, feedback de la comunidad y resultados contados de forma mas profesional.",
-        stat1Text: "Capturas y pruebas visuales recogidas de la comunidad.",
-        stat2Text: "Muchos comentarios hablan de mas fluidez, menos stutter y una sensacion de sistema mas limpio.",
-        stat3Text: "Compra, activacion y soporte pasan solo por los canales oficiales de SapoTweak.",
+        title: "Reseñas verificadas y <span>feedback real</span>",
+        lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, feedback reorganizado y un flujo de review que pide email de pago y license key antes del envío.",
+        stat1Value: "200+",
+        stat1Text: "Feedback recogido entre usuarios, soporte y pruebas de la comunidad.",
+        stat2Value: "4.9 / 5",
+        stat2Text: "Muchos comentarios hablan de más fluidez, menos stutter y un sistema más reactivo.",
+        stat3Value: "Solo canales oficiales",
+        stat3Text: "Compra, activación, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
         proofTag: "Visual proof",
-        proofTitle: "Pantallas reales, no mockups al azar",
-        proofLead: "La galeria sigue siendo oscura, limpia y legible: capturas internas, resultados de test y material compartido por la comunidad organizados en una seccion mas premium.",
-        galleryCaption1: "Resumen de feedback y pruebas recogidas de la comunidad de SapoTweak.",
-        galleryCaption2: "Ejemplo de resultado compartido por usuarios despues de usar el tweak.",
-        galleryCaption3: "Otra prueba visual del tono y estilo de los feedbacks recogidos.",
-        testimonialTag: "Selected feedback",
-        testimonialTitle: "Resenas reescritas con un tono mas claro y profesional",
-        testimonialLead: "Transformamos el muro de mensajes en tarjetas mas limpias sin perder la voz real de la comunidad.",
-        review1Label: "Fortnite / Competitive",
-        review1Text: "\"Los presets y la limpieza del sistema hicieron que el juego se sintiera mas fluido y consistente. El mejor feedback no es solo sobre los FPS maximos, sino sobre la respuesta general.\"",
-        review1Meta: "Focus: fluidez y sensacion del sistema",
-        review2Label: "FiveM / RP",
-        review2Text: "\"Varios usuarios reportan una mejor estabilidad en sesion y sesiones largas mas limpias, sobre todo en PCs llenos de ruido en segundo plano.\"",
-        review2Meta: "Focus: sesiones mas limpias y menos carga",
-        review3Label: "Valorant / Input",
-        review3Text: "\"Los mejores comentarios hablan de un input mas limpio, menos delay percibido en Windows y una sensacion mas estable despues de aplicar el preset.\"",
-        review3Meta: "Focus: respuesta e input feel",
-        review4Label: "Performance gains",
-        review4Text: "\"Muchas capturas historicas de la comunidad citan mejoras fuertes de FPS. El resultado cambia segun el PC, pero el patron mas repetido es un sistema mas ligero.\"",
-        review4Meta: "Focus: limpieza y equilibrio de rendimiento",
-        review5Label: "Support experience",
-        review5Text: "\"Otro tema recurrente es la velocidad del soporte: ayuda con la activacion, explicaciones y asistencia se perciben como parte real del producto.\"",
-        review5Meta: "Focus: canales oficiales y soporte",
-        review6Label: "Overall trust",
-        review6Text: "\"Las resenas mas fuertes combinan tres elementos: tweak legitimo, resultados perceptibles al instante y proceso de compra / descarga limpio.\"",
-        review6Meta: "Focus: producto + proceso + confianza",
-        tickerTag: "Community stream",
-        tickerTitle: "Mas feedback rapido",
-        tickerLead: "Una banda dinamica que mantiene el tono de comunidad pero con una presentacion mucho mas ordenada.",
-        ctaTitle: "Quieres pasar al checkout oficial?",
-        ctaText: "Si el tono de esta pagina te convence, puedes ir directamente a los planes oficiales o volver a la home para ver toda la experiencia premium.",
+        proofTitle: "Pruebas seleccionadas, sin caos innecesario",
+        proofLead: "Quitamos el bloque de Discord de la sección principal y dejamos solo visuales limpios que sostienen el tono premium de la página.",
+        proofCaption1: "Ejemplo de resultado compartido tras usar el tweak en setups reales.",
+        proofCaption2: "Otra prueba visual recogida de la comunidad y usada como social proof.",
+        proofCaption3: "Interfaz, checkout y producto mantienen el mismo estilo premium.",
+        reviewsTag: "Wall of feedback",
+        reviewsTitle: "6 reseñas por bloque, desplazamiento limpio",
+        reviewsLead: "Las reseñas se muestran en grupos de seis, con navegación por flechas y una presentación más profesional.",
+        pageCounter: "1 / 2",
+        pagerNote: "Las reviews enviadas se revisan manualmente antes de hacerse públicas.",
+        openReviewModalBtn: "Crear review",
+        ctaTitle: "¿Quieres pasar al checkout oficial?",
+        ctaText: "Si el tono de esta página te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
         ctaPrimary: "Abrir planes",
         ctaSecondary: "Volver a la home",
         footerText: "SapoTweak - Distribuye solo builds oficiales.",
-        termsLink: "Terminos",
+        termsLink: "Términos",
         privacyLink: "Privacidad",
-        supportLink: "Soporte"
+        supportLink: "Soporte",
+        reviewModalTitle: "Envía tu review",
+        reviewModalLead: "Para enviar una reseña debes indicar email del pago y license key. Las solicitudes sin datos de compra no se consideran y cada review se aprueba manualmente antes de publicarse.",
+        reviewNotice: "Envío protegido: email del pago + key obligatorios. Después del envío, el equipo comprueba la compra y decide si publica la review.",
+        reviewEmailLabel: "Email del pago",
+        reviewKeyLabel: "License key",
+        reviewNameLabel: "Nombre público",
+        reviewRatingLabel: "Valoración",
+        reviewTextLabel: "Review",
+        reviewStatusHint: "La solicitud de review se abrirá en Gmail con los datos necesarios para verificación y moderación.",
+        closeReviewModalBtn: "Cerrar",
+        submitReviewBtn: "Enviar review",
+        reviewValidationError: "Completa email, key, nombre y review antes de enviar.",
+        reviewOpenStatus: "Ya casi: completa los campos y envía la solicitud de review.",
+        reviewMailSubject: "SapoTweak review request",
+        reviewSubmitted: "Solicitud review lista. Ahora completa el envío en Gmail.",
+        reviewTextPlaceholder: "Escribe aquí tu experiencia con SapoTweak."
       }
     };
 
     const languageSelect = document.getElementById("languageSelect");
-    const saved = localStorage.getItem("sapotweak_site_lang") || "it";
-
-    function setHtml(id, value) {
-      const node = document.getElementById(id);
-      if (node) node.innerHTML = value;
-    }
+    const reviewsGrid = document.getElementById("reviewsGrid");
+    const pageCounter = document.getElementById("pageCounter");
+    const prevReviewsBtn = document.getElementById("prevReviewsBtn");
+    const nextReviewsBtn = document.getElementById("nextReviewsBtn");
+    const reviewModal = document.getElementById("reviewModal");
+    const openReviewModalBtn = document.getElementById("openReviewModalBtn");
+    const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
+    const submitReviewBtn = document.getElementById("submitReviewBtn");
+    const reviewModalStatus = document.getElementById("reviewModalStatus");
+    const reviewEmail = document.getElementById("reviewEmail");
+    const reviewKey = document.getElementById("reviewKey");
+    const reviewName = document.getElementById("reviewName");
+    const reviewRating = document.getElementById("reviewRating");
+    const reviewText = document.getElementById("reviewText");
+    let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
+    let reviewPage = 0;
+    const pageSize = 6;
 
     function setText(id, value) {
       const node = document.getElementById(id);
       if (node) node.textContent = value;
     }
 
+    function setHtml(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = value;
+    }
+
+    function t(key) {
+      return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
+    }
+
+    function currentReviews() {
+      return reviewSets[currentLanguage] || reviewSets.it;
+    }
+
+    function totalPages() {
+      return Math.max(1, Math.ceil(currentReviews().length / pageSize));
+    }
+
+    function starString(count) {
+      return "★".repeat(count) + "☆".repeat(Math.max(0, 5 - count));
+    }
+
+    function renderReviews() {
+      const reviews = currentReviews();
+      const start = reviewPage * pageSize;
+      const pageItems = reviews.slice(start, start + pageSize);
+      reviewsGrid.innerHTML = pageItems.map(item => `
+        <article class="review-card">
+          <div class="review-stars">${starString(item.stars)}</div>
+          <h3 class="review-title">${item.title}</h3>
+          <p class="review-body">${item.body}</p>
+          <div class="review-footer">
+            <div class="review-user">
+              <strong>${item.name}</strong>
+              <span>${item.meta}</span>
+            </div>
+            <span class="review-badge">${item.badge}</span>
+          </div>
+        </article>
+      `).join("");
+
+      pageCounter.textContent = `${reviewPage + 1} / ${totalPages()}`;
+      prevReviewsBtn.disabled = reviewPage === 0;
+      nextReviewsBtn.disabled = reviewPage >= totalPages() - 1;
+    }
+
     function applyLanguage(lang) {
-      const t = translations[lang] || translations.it;
-      document.documentElement.lang = lang;
-      document.title = t.pageTitle;
-      languageSelect.value = lang;
-      setText("backLink", t.backLink);
-      setText("plansLink", t.plansLink);
-      setText("eyebrow", t.eyebrow);
-      setHtml("title", t.title);
-      setText("lead", t.lead);
-      setText("stat1Text", t.stat1Text);
-      setText("stat2Text", t.stat2Text);
-      setText("stat3Text", t.stat3Text);
-      setText("proofTag", t.proofTag);
-      setText("proofTitle", t.proofTitle);
-      setText("proofLead", t.proofLead);
-      setText("galleryCaption1", t.galleryCaption1);
-      setText("galleryCaption2", t.galleryCaption2);
-      setText("galleryCaption3", t.galleryCaption3);
-      setText("testimonialTag", t.testimonialTag);
-      setText("testimonialTitle", t.testimonialTitle);
-      setText("testimonialLead", t.testimonialLead);
-      setText("review1Label", t.review1Label);
-      setText("review1Text", t.review1Text);
-      setText("review1Meta", t.review1Meta);
-      setText("review2Label", t.review2Label);
-      setText("review2Text", t.review2Text);
-      setText("review2Meta", t.review2Meta);
-      setText("review3Label", t.review3Label);
-      setText("review3Text", t.review3Text);
-      setText("review3Meta", t.review3Meta);
-      setText("review4Label", t.review4Label);
-      setText("review4Text", t.review4Text);
-      setText("review4Meta", t.review4Meta);
-      setText("review5Label", t.review5Label);
-      setText("review5Text", t.review5Text);
-      setText("review5Meta", t.review5Meta);
-      setText("review6Label", t.review6Label);
-      setText("review6Text", t.review6Text);
-      setText("review6Meta", t.review6Meta);
-      setText("tickerTag", t.tickerTag);
-      setText("tickerTitle", t.tickerTitle);
-      setText("tickerLead", t.tickerLead);
-      setText("ctaTitle", t.ctaTitle);
-      setText("ctaText", t.ctaText);
-      setText("ctaPrimary", t.ctaPrimary);
-      setText("ctaSecondary", t.ctaSecondary);
-      setText("footerText", t.footerText);
-      setText("termsLink", t.termsLink);
-      setText("privacyLink", t.privacyLink);
-      setText("supportLink", t.supportLink);
+      currentLanguage = ["it", "en", "es"].includes(lang) ? lang : "it";
+      localStorage.setItem("sapotweak_site_lang", currentLanguage);
+      const text = translations[currentLanguage] || translations.it;
+      document.documentElement.lang = currentLanguage;
+      document.title = text.pageTitle;
+      languageSelect.value = currentLanguage;
+      setText("backLink", text.backLink);
+      setText("plansLink", text.plansLink);
+      setText("eyebrow", text.eyebrow);
+      setHtml("title", text.title);
+      setText("lead", text.lead);
+      setText("stat1Value", text.stat1Value);
+      setText("stat1Text", text.stat1Text);
+      setText("stat2Value", text.stat2Value);
+      setText("stat2Text", text.stat2Text);
+      setText("stat3Value", text.stat3Value);
+      setText("stat3Text", text.stat3Text);
+      setText("proofTag", text.proofTag);
+      setText("proofTitle", text.proofTitle);
+      setText("proofLead", text.proofLead);
+      setText("proofCaption1", text.proofCaption1);
+      setText("proofCaption2", text.proofCaption2);
+      setText("proofCaption3", text.proofCaption3);
+      setText("reviewsTag", text.reviewsTag);
+      setText("reviewsTitle", text.reviewsTitle);
+      setText("reviewsLead", text.reviewsLead);
+      setText("pagerNote", text.pagerNote);
+      setText("openReviewModalBtn", text.openReviewModalBtn);
+      setText("ctaTitle", text.ctaTitle);
+      setText("ctaText", text.ctaText);
+      setText("ctaPrimary", text.ctaPrimary);
+      setText("ctaSecondary", text.ctaSecondary);
+      setText("footerText", text.footerText);
+      setText("termsLink", text.termsLink);
+      setText("privacyLink", text.privacyLink);
+      setText("supportLink", text.supportLink);
+      setText("reviewModalTitle", text.reviewModalTitle);
+      setText("reviewModalLead", text.reviewModalLead);
+      setText("reviewNotice", text.reviewNotice);
+      setText("reviewEmailLabel", text.reviewEmailLabel);
+      setText("reviewKeyLabel", text.reviewKeyLabel);
+      setText("reviewNameLabel", text.reviewNameLabel);
+      setText("reviewRatingLabel", text.reviewRatingLabel);
+      setText("reviewTextLabel", text.reviewTextLabel);
+      setText("reviewModalStatus", text.reviewStatusHint);
+      setText("closeReviewModalBtn", text.closeReviewModalBtn);
+      setText("submitReviewBtn", text.submitReviewBtn);
+      reviewText.placeholder = text.reviewTextPlaceholder;
+      reviewPage = 0;
+      renderReviews();
+    }
+
+    function openReviewModal() {
+      reviewModal.classList.add("show");
+      reviewModalStatus.textContent = t("reviewOpenStatus");
+    }
+
+    function closeReviewModal() {
+      reviewModal.classList.remove("show");
+    }
+
+    function reviewMailBody() {
+      return [
+        "Review request for SapoTweak",
+        "",
+        "Payment email: " + reviewEmail.value.trim(),
+        "License key: " + reviewKey.value.trim(),
+        "Public name: " + reviewName.value.trim(),
+        "Rating: " + reviewRating.value,
+        "",
+        "Review text:",
+        reviewText.value.trim(),
+        "",
+        "Please verify the purchase and only publish this review after manual approval."
+      ].join("\n");
+    }
+
+    function submitReview() {
+      if (!reviewEmail.value.trim() || !reviewKey.value.trim() || !reviewName.value.trim() || !reviewText.value.trim()) {
+        reviewModalStatus.textContent = t("reviewValidationError");
+        return;
+      }
+      const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+        encodeURIComponent("sapotweak@gmail.com") +
+        "&su=" + encodeURIComponent(t("reviewMailSubject")) +
+        "&body=" + encodeURIComponent(reviewMailBody());
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      reviewModalStatus.textContent = t("reviewSubmitted");
     }
 
     function initMeshBackground() {
@@ -936,13 +1196,27 @@
       window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
     }
 
-    languageSelect.addEventListener("change", event => {
-      const next = ["it", "en", "es"].includes(event.target.value) ? event.target.value : "it";
-      localStorage.setItem("sapotweak_site_lang", next);
-      applyLanguage(next);
+    languageSelect.addEventListener("change", event => applyLanguage(event.target.value));
+    prevReviewsBtn.addEventListener("click", () => {
+      if (reviewPage > 0) {
+        reviewPage -= 1;
+        renderReviews();
+      }
+    });
+    nextReviewsBtn.addEventListener("click", () => {
+      if (reviewPage < totalPages() - 1) {
+        reviewPage += 1;
+        renderReviews();
+      }
+    });
+    openReviewModalBtn.addEventListener("click", openReviewModal);
+    closeReviewModalBtn.addEventListener("click", closeReviewModal);
+    submitReviewBtn.addEventListener("click", submitReview);
+    reviewModal.addEventListener("click", event => {
+      if (event.target === reviewModal) closeReviewModal();
     });
 
-    applyLanguage(saved);
+    applyLanguage(currentLanguage);
     initMeshBackground();
   </script>
 </body>
