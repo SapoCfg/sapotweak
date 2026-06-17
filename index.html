@@ -1412,9 +1412,128 @@
       background: rgba(123, 55, 255, .10);
       border-color: rgba(185, 145, 255, .18);
     }
-    .footer {
-      padding: 90px 0 36px;
+    .hero-preview {
+      width: min(100%, 980px);
+      padding: 20px;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(26, 16, 42, .92), rgba(8, 8, 15, .96)),
+        radial-gradient(circle at top, rgba(179, 133, 255, .18), transparent 42%);
+    }
+    .showcase {
+      position: relative;
+      overflow: hidden;
+    }
+    .showcase::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -24% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(134, 74, 255, .18), transparent 72%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+    .showcase-visual {
+      min-height: 0;
+      align-items: stretch;
+    }
+    .showcase-stack {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 16px;
+      width: 100%;
+    }
+    .showcase-screen {
+      padding: 16px;
+      border-radius: 28px;
+    }
+    .showcase-screen img {
+      border-radius: 20px;
+    }
+    .showcase-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
+    }
+    .showcase-proof-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 10px 40px rgba(0,0,0,.16);
+      backdrop-filter: blur(12px);
+    }
+    .showcase-proof-card small {
+      display: block;
+      margin-bottom: 8px;
+      color: #cdb7ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .showcase-proof-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.28;
+    }
+    .showcase-proof-card span {
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.64;
+    }
+    .luxury-plan {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(173, 113, 255, .14), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .luxury-plan::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(236,224,255,.74), transparent);
+      opacity: .82;
+    }
+    .offer-panel {
+      position: relative;
+      overflow: hidden;
+    }
+    .offer-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -80px -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(133, 65, 255, .14), transparent 72%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+    .offer-copy {
+      justify-content: space-between;
+    }
+    .payment-warning {
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .footer {
+      margin-top: 30px;
+      padding: 42px 24px 30px;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(14,10,24,.78), rgba(10,9,18,.82));
+      box-shadow: 0 26px 90px rgba(0,0,0,.24);
+      backdrop-filter: blur(14px);
     }
     @keyframes driftGlow {
       from { transform: translate3d(0, 0, 0) scale(1); }
@@ -1434,6 +1553,29 @@
         0 0 24px rgba(124, 58, 237, .14),
         inset 0 1px 0 rgba(255,255,255,.04);
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      filter: blur(6px);
+      transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+    .reveal [data-rise] {
+      opacity: 0;
+      transform: translateY(26px) scale(.985);
+      filter: blur(8px);
+      transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+      transition-delay: var(--rise-delay, 0ms);
+    }
+    .reveal.is-visible [data-rise] {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
     @media (prefers-reduced-motion: reduce), (pointer: coarse) {
       .btn, .btn::after { transition: none; }
     }
@@ -1448,6 +1590,7 @@
       .metrics-strip,
       .story-bullets,
       .hero-metrics,
+      .showcase-proof-grid,
       .showcase-points,
       .performance-band,
       .preset-grid,
@@ -1484,6 +1627,7 @@
       .app-stage-copy h2,
       .offer-copy h2 { font-size: clamp(34px, 12vw, 52px); }
       .showcase-visual { min-height: 420px; }
+      .showcase-proof-card { padding: 16px; }
       .video-panel video { min-height: 260px; }
     }
   </style>
@@ -1535,8 +1679,8 @@
           </div>
         </div>
       </div>
-      <div class="visual">
-        <img src="sapotweakpng.png" alt="Anteprima SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+      <div class="visual hero-preview">
+        <img src="checkout-preview.png" alt="Anteprima SapoTweak">
       </div>
     </section>
 
@@ -1560,15 +1704,15 @@
         <h2 data-i18n="showcaseTitle">Una suite pensata per FPS, latenza e pulizia di sistema</h2>
         <p data-i18n="showcaseLead">SapoTweak concentra tweak gaming, gestione servizi, rete e ripristino in un flusso unico. Non devi scavare in Windows: apri, scegli il preset e lavori per blocchi chiari.</p>
         <div class="showcase-points">
-          <article class="showcase-point">
+          <article class="showcase-point" data-rise>
             <strong data-i18n="showcaseP1Title">Boost FPS e meno stutter</strong>
             <span data-i18n="showcaseP1Text">Preset e ottimizzazioni mirate per alleggerire il sistema durante il gioco.</span>
           </article>
-          <article class="showcase-point">
+          <article class="showcase-point" data-rise>
             <strong data-i18n="showcaseP2Title">Input e rete piu reattivi</strong>
             <span data-i18n="showcaseP2Text">Focus su latenza, servizi in background e priorita delle risorse dove conta davvero.</span>
           </article>
-          <article class="showcase-point">
+          <article class="showcase-point" data-rise>
             <strong data-i18n="showcaseP3Title">Sempre reversibile</strong>
             <span data-i18n="showcaseP3Text">Ripristino, note chiare e controlli dentro l'app per non perdere il controllo del PC.</span>
           </article>
@@ -1577,20 +1721,27 @@
       <div class="showcase-visual">
         <div class="showcase-orb orb-a"></div>
         <div class="showcase-orb orb-b"></div>
-        <div class="showcase-main visual">
-          <img src="sapotweakpng.png" alt="Anteprima SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
-        </div>
-        <div class="floating-card float-top">
-          <small data-i18n="floating1Label">Gaming stack</small>
-          <strong data-i18n="floating1Value">Preset + pulizia + rete</strong>
-        </div>
-        <div class="floating-card float-mid">
-          <small data-i18n="floating2Label">Licenza</small>
-          <strong data-i18n="floating2Value">Attivazione personale</strong>
-        </div>
-        <div class="floating-card float-bottom">
-          <small data-i18n="floating3Label">Supporto</small>
-          <strong data-i18n="floating3Value">Discord e Gmail</strong>
+        <div class="showcase-stack">
+          <div class="showcase-main showcase-screen visual" data-rise>
+            <img src="checkout-preview.png" alt="Anteprima SapoTweak">
+          </div>
+          <div class="showcase-proof-grid">
+            <article class="showcase-proof-card" data-rise>
+              <small data-i18n="floating1Label">Gaming stack</small>
+              <strong data-i18n="floating1Value">Preset + pulizia + rete</strong>
+              <span data-i18n="proof1Text">Il flusso e pensato per arrivare subito ai tweak utili senza caos inutile.</span>
+            </article>
+            <article class="showcase-proof-card" data-rise>
+              <small data-i18n="floating2Label">Licenza</small>
+              <strong data-i18n="floating2Value">Attivazione personale</strong>
+              <span data-i18n="proof2Text">Checkout, conferma e supporto sono integrati in un percorso piu ordinato.</span>
+            </article>
+            <article class="showcase-proof-card" data-rise>
+              <small data-i18n="floating3Label">Supporto</small>
+              <strong data-i18n="floating3Value">Discord e Gmail</strong>
+              <span data-i18n="proof3Text">Popup dedicato, testo pronto da copiare e canali ufficiali chiari.</span>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -1710,23 +1861,23 @@
           <h2 data-i18n="paymentTitle">Arriva al pagamento solo quando hai gia capito il prodotto</h2>
           <p data-i18n="paymentLead">Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma.</p>
           <div class="offer-metrics">
-            <div class="offer-metric">
+            <div class="offer-metric" data-rise>
               <strong data-i18n="metric1Value">3 preset</strong>
               <span data-i18n="metric1Label">Safe, Advanced ed Extreme per livelli diversi.</span>
             </div>
-            <div class="offer-metric">
+            <div class="offer-metric" data-rise>
               <strong data-i18n="metric2Value">Supporto diretto</strong>
               <span data-i18n="metric2Label">Popup rapido con Gmail, Discord e testo gia pronto da copiare.</span>
             </div>
           </div>
         </div>
         <div class="offer-panel">
-          <div class="offer-plan">
+          <div class="offer-plan luxury-plan" data-rise>
             <small data-i18n="offerMonthlyLabel">Mensile</small>
             <strong data-i18n="offerMonthlyValue">9,99 €</strong>
             <span data-i18n="offerMonthlyNote">Accesso ricorrente con update e supporto.</span>
           </div>
-          <div class="offer-plan featured-plan">
+          <div class="offer-plan featured-plan luxury-plan" data-rise>
             <small data-i18n="offerQuarterlyLabel">Trimestrale</small>
             <strong data-i18n="offerQuarterlyValue">19,99 €</strong>
             <span data-i18n="offerQuarterlyNote">La scelta piu conveniente per usare davvero il tweak.</span>
@@ -1831,6 +1982,9 @@
         floating2Value: 'Attivazione personale',
         floating3Label: 'Supporto',
         floating3Value: 'Discord e Gmail',
+        proof1Text: 'Il flusso e pensato per arrivare subito ai tweak utili senza caos inutile.',
+        proof2Text: 'Checkout, conferma e supporto sono integrati in un percorso piu ordinato.',
+        proof3Text: 'Popup dedicato, testo pronto da copiare e canali ufficiali chiari.',
         perf1Title: 'Boost your FPS and eliminate stutters',
         perf1Text: 'Lavora su processi, servizi e componenti che tolgono consistenza al frame pacing.',
         perf2Title: 'Improve ping and responsiveness',
@@ -1959,6 +2113,9 @@
         floating2Value: 'Personal activation',
         floating3Label: 'Support',
         floating3Value: 'Discord and Gmail',
+        proof1Text: 'The flow is designed to reach the useful tweaks quickly without unnecessary clutter.',
+        proof2Text: 'Checkout, confirmation, and support now live inside a cleaner premium path.',
+        proof3Text: 'Dedicated popup, ready-to-copy text, and clearer official support channels.',
         perf1Title: 'Boost your FPS and eliminate stutters',
         perf1Text: 'Work on processes, services and components that damage frame pacing consistency.',
         perf2Title: 'Improve ping and responsiveness',
@@ -2081,6 +2238,9 @@
         floating2Value: 'Activación personal',
         floating3Label: 'Soporte',
         floating3Value: 'Discord y Gmail',
+        proof1Text: 'El flujo esta pensado para llegar rapido a los tweaks utiles sin caos innecesario.',
+        proof2Text: 'Checkout, confirmacion y soporte viven dentro de un recorrido mucho mas ordenado.',
+        proof3Text: 'Popup dedicado, texto listo para copiar y canales oficiales mucho mas claros.',
         perf1Title: 'Mejora los FPS y elimina stutters',
         perf1Text: 'Actúa sobre procesos, servicios y componentes que dañan la consistencia del frame pacing.',
         perf2Title: 'Mejora ping y respuesta',
@@ -2310,6 +2470,14 @@
 
     function initRevealSections() {
       const revealItems = document.querySelectorAll('.reveal');
+      revealItems.forEach(section => {
+        section.querySelectorAll('.performance-card, .preset-card, .app-stage-item, .feature-card, .offer-plan, .offer-metric').forEach(node => {
+          node.setAttribute('data-rise', '');
+        });
+        section.querySelectorAll('[data-rise]').forEach((node, index) => {
+          node.style.setProperty('--rise-delay', `${index * 90}ms`);
+        });
+      });
       if (!('IntersectionObserver' in window)) {
         revealItems.forEach(item => item.classList.add('is-visible'));
         return;
