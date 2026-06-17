@@ -1,816 +1,949 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Recensioni</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --bg-0: #040308;
+      --bg-1: #090611;
+      --surface-0: rgba(14, 11, 24, 0.82);
+      --surface-1: rgba(18, 14, 32, 0.92);
+      --text-0: #faf7ff;
+      --text-1: #d8d1ea;
+      --text-2: #aba3c3;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(190, 149, 255, 0.26);
+    }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      color: #fff;
-      background: #050507;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      color: var(--text-0);
+      background: linear-gradient(180deg, #05050a, #030305);
       overflow-x: hidden;
     }
-    button { font: inherit; }
     .bg {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 12%, rgba(124, 58, 237, .34), transparent 30%),
-        linear-gradient(180deg, #08070d, #030305);
+        radial-gradient(circle at 18% 14%, rgba(137, 79, 255, 0.20), transparent 0 22%),
+        radial-gradient(circle at 82% 18%, rgba(109, 46, 232, 0.14), transparent 0 24%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      z-index: -4;
+    }
+    .mesh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       z-index: -3;
+      opacity: 0.96;
+      pointer-events: none;
     }
     .grid {
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,.25));
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.24));
       z-index: -2;
+      pointer-events: none;
     }
-    .wrap { width: min(1240px, 100%); margin: 0 auto; padding: 32px; }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .14em; }
-    .brand img { width: 46px; height: 46px; object-fit: contain; filter: drop-shadow(0 0 18px rgba(142, 68, 255, .42)); }
-    .back {
-      color: #f6f1ff;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+    .wrap {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+      padding: 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .nav {
+      position: sticky;
+      top: 18px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line-soft);
       border-radius: 999px;
-      padding: 10px 15px;
+      background: rgba(10, 9, 17, 0.72);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+      backdrop-filter: blur(18px);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-0);
       text-decoration: none;
-      font-size: 13px;
       font-weight: 900;
+      letter-spacing: 0.08em;
     }
-    .hero { padding: 70px 0 32px; }
-    h1 {
-      margin: 0;
-      font-size: clamp(48px, 8vw, 92px);
-      line-height: .9;
-      letter-spacing: -.06em;
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(157, 92, 255, 0.42));
     }
-    h1 span {
-      background: linear-gradient(90deg, #fff, #7c3aed 56%, #a78bfa);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .hero p {
-      max-width: 780px;
-      color: #c7c2d8;
-      font-size: 18px;
-      line-height: 1.6;
-      margin: 24px 0 0;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 34px 0;
-    }
-            .stat, .review-card {
-      border: 1px solid rgba(167,139,250,.24);
-      background: linear-gradient(180deg, #151522, #101018);
-      border-radius: 18px;
-      box-shadow:
-        0 0 0 1px rgba(124, 58, 237, .08),
-        0 0 24px rgba(124, 58, 237, .14),
-        inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    .stat { padding: 20px; }
-    .stat b { display: block; font-size: 30px; line-height: 1; }
-    .stat span { display: block; color: #aaa4bc; margin-top: 8px; font-size: 13px; }
-    .marquee {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(167,139,250,.24);
-      background: #11111c;
-      border-radius: 22px;
-      padding: 16px;
-    }
-    .marquee::before,
-    .marquee::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .marquee::before { left: 0; background: linear-gradient(90deg, #11111c, transparent); }
-    .marquee::after { right: 0; background: linear-gradient(270deg, #11111c, transparent); }
-    .track {
+    .nav-right {
       display: flex;
-      gap: 16px;
-      width: max-content;
-      will-change: transform;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
-    .shot {
-      width: min(84vw, 760px);
-      aspect-ratio: 16 / 9;
-      border: 0;
-      padding: 0;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #050507;
-      box-shadow: 0 0 0 1px rgba(167,139,250,.22), 0 0 22px rgba(124,58,237,.16);
-      flex: 0 0 auto;
-      cursor: default;
-    }
-    .shot img { width: 100%; height: 100%; object-fit: contain; display: block; background: #050507; }
-    .hint {
-      margin: 12px 0 0;
-      color: #9e97b0;
-      font-size: 13px;
-    }
-    .section-title {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 42px 0 18px;
-    }
-    .section-title h2 { margin: 0; font-size: 30px; letter-spacing: -.03em; }
-    .section-title span { color: #9f99b0; font-size: 13px; }
-        .review-marquee {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(167,139,250,.24);
-      background: linear-gradient(180deg, #11111c, #0d0b18);
-      border-radius: 22px;
-      padding: 16px;
-      box-shadow:
-        0 0 0 1px rgba(124, 58, 237, .08),
-        0 0 28px rgba(124, 58, 237, .15),
-        inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    .review-marquee::before,
-    .review-marquee::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 110px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .review-marquee::before { left: 0; background: linear-gradient(90deg, #11111c, transparent); }
-    .review-marquee::after { right: 0; background: linear-gradient(270deg, #11111c, transparent); }
-        .review-marquee {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(167,139,250,.24);
-      background: linear-gradient(180deg, #11111c, #0d0b18);
-      border-radius: 22px;
-      padding: 16px;
-      box-shadow:
-        0 0 0 1px rgba(124, 58, 237, .08),
-        0 0 28px rgba(124, 58, 237, .15),
-        inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    .review-marquee::before,
-    .review-marquee::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 110px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .review-marquee::before { left: 0; background: linear-gradient(90deg, #11111c, transparent); }
-    .review-marquee::after { right: 0; background: linear-gradient(270deg, #11111c, transparent); }
-    .reviews {
-      display: flex;
-      gap: 14px;
-      width: max-content;
-      will-change: transform;
-    }
-    .review-card {
-      width: min(78vw, 360px);
-      flex: 0 0 auto;
-      padding: 18px;
-      min-height: 124px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .review-card:hover {
-      border-color: rgba(196,181,253,.44);
-      box-shadow:
-        0 0 0 1px rgba(167,139,250,.14),
-        0 0 32px rgba(124,58,237,.22),
-        inset 0 1px 0 rgba(255,255,255,.05);
-    }
-    .review-card p {
-      margin: 0;
-      color: #eeeaf8;
-      line-height: 1.45;
-      font-size: 15px;
-    }
-    .review-card span {
-      margin-top: 16px;
-      color: #9e97b0;
+    .nav-link,
+    .lang-select {
+      min-height: 42px;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.045);
+      color: var(--text-0);
+      padding: 0 15px;
       font-size: 12px;
       font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .note {
-      margin: 18px 0 0;
-      color: #aaa4bc;
-      line-height: 1.55;
-      font-size: 14px;
-    }
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 26px;
-      background: rgba(0,0,0,.82);
-      z-index: 30;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: min(96vw, 1600px);
-      max-height: 88vh;
-      object-fit: contain;
-      border-radius: 16px;
-      background: #050507;
-      box-shadow: 0 30px 90px rgba(0,0,0,.55);
-    }
-    .close {
-      position: fixed;
-      right: 24px;
-      top: 20px;
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,.10);
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .nav-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
     .lang-select {
-      border: 1px solid rgba(255,255,255,.11);
-      background: #151522;
-      border-radius: 999px;
-      padding: 10px 14px;
-      color: #f3f0ff;
-      font-size: 13px;
-      font-weight: 800;
+      font-family: inherit;
       outline: none;
       cursor: pointer;
       color-scheme: dark;
     }
-    .lang-select option { background: #151522; color: #f3f0ff; }
-    .footer {
-      padding: 42px 0;
-      color: #8e899e;
-      font-size: 13px;
+    .lang-select option {
+      background: #151522;
+      color: #f3f0ff;
+    }
+    .hero {
+      padding: 78px 0 30px;
+      display: grid;
+      gap: 18px;
+      justify-items: center;
       text-align: center;
-      display: flex;
-      flex-direction: column;
+    }
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
       gap: 10px;
-    }
-    .footer-links {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-    .footer-tos {
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,.72);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 150, 255, 0.28);
+      background: rgba(127, 66, 255, 0.12);
+      color: #ebe0ff;
       font-size: 11px;
       font-weight: 900;
-      letter-spacing: .08em;
-      cursor: pointer;
-      text-decoration: none;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
-    .footer-tos:hover { color: #efe9ff; }
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0,0,0,.68);
-      z-index: 30;
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #b46cff;
+      box-shadow: 0 0 18px rgba(180, 108, 255, 0.85);
     }
-    .modal-backdrop.show { display: grid; }
-    .modal-box {
-      width: min(760px, 100%);
-      max-height: 82vh;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(180deg, #151522, #101018);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 22px;
-      box-shadow: 0 32px 90px rgba(0,0,0,.5);
-      padding: 20px;
+    h1 {
+      margin: 0;
+      max-width: 960px;
+      font-size: clamp(52px, 8vw, 108px);
+      line-height: 0.90;
+      letter-spacing: -0.07em;
     }
-    .modal-box h2 { margin: 0 0 8px; font-size: 22px; }
-    .modal-box p { margin: 0 0 14px; color: #c7c2d8; font-size: 13px; line-height: 1.55; }
-    .tos-body {
-      margin: 0 0 14px;
-      padding: 14px 16px;
-      max-height: 54vh;
-      overflow: auto;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background: rgba(0,0,0,.18);
-      color: #f3f0ff;
+    h1 span {
+      background: linear-gradient(180deg, #ffffff 0%, #e9dcff 38%, #b56cff 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 800px;
+      color: var(--text-1);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+      width: 100%;
+    }
+    .stat,
+    .section-shell,
+    .testimonial-card,
+    .gallery-card,
+    .cta-shell {
+      border: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, rgba(17, 13, 30, 0.84), rgba(9, 8, 16, 0.90));
+      border-radius: 28px;
+      box-shadow: 0 28px 110px rgba(0,0,0,0.30);
+      backdrop-filter: blur(14px);
+    }
+    .stat {
+      padding: 22px;
+    }
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .stat span {
+      color: var(--text-2);
       font-size: 13px;
       line-height: 1.6;
     }
-    .tos-body p { margin: 0 0 12px; color: #ddd7f0; }
-    .tos-body ul { margin: 0; padding-left: 18px; }
-    .tos-body li { margin-bottom: 10px; }
-    .tos-confirm {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 0 0 14px;
-      color: #ddd7f0;
-      font-size: 12px;
-      line-height: 1.45;
-      cursor: pointer;
+    .section-shell {
+      margin-top: 22px;
+      padding: 26px;
     }
-    .tos-confirm input {
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .section-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 150, 255, 0.22);
+      background: rgba(127, 66, 255, 0.10);
+      color: #e6dcff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+    .section-head p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--text-1);
+      font-size: 15px;
+      line-height: 1.74;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .gallery-main,
+    .gallery-side {
+      display: grid;
+      gap: 14px;
+    }
+    .gallery-card {
+      overflow: hidden;
+      min-height: 100%;
+      padding: 12px;
+    }
+    .gallery-card img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      background: #050507;
+    }
+    .gallery-caption {
+      margin-top: 12px;
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .testimonial-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 240px;
+    }
+    .testimonial-card small {
+      color: #cdb7ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .testimonial-card p {
+      margin: 0;
+      color: var(--text-0);
+      font-size: 15px;
+      line-height: 1.72;
+      flex: 1;
+    }
+    .testimonial-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .testimonial-meta strong {
+      font-size: 14px;
+    }
+    .testimonial-meta span {
+      color: var(--text-2);
+      font-size: 12px;
+    }
+    .ticker {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      padding: 14px;
+    }
+    .ticker::before,
+    .ticker::after {
+      content: "";
       position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
+      top: 0;
+      bottom: 0;
+      width: 110px;
+      z-index: 2;
       pointer-events: none;
     }
-    .checkmark {
-      position: relative;
-      display: grid;
-      place-items: center;
+    .ticker::before { left: 0; background: linear-gradient(90deg, rgba(15, 11, 24, 1), transparent); }
+    .ticker::after { right: 0; background: linear-gradient(270deg, rgba(15, 11, 24, 1), transparent); }
+    .ticker-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: ticker 50s linear infinite;
+    }
+    .ticker-pill {
       flex: 0 0 auto;
-      width: 20px;
-      height: 20px;
-      margin-top: 1px;
-      border-radius: 7px;
-      border: 1px solid rgba(167,139,250,.62);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 3px rgba(124,58,237,.08);
-      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-1);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
     }
-    .checkmark::after {
-      content: "";
-      width: 6px;
-      height: 10px;
-      border: solid #fff;
-      border-width: 0 2px 2px 0;
-      opacity: 0;
-      transform: translateY(-1px) rotate(45deg) scale(.65);
-      transition: opacity .16s ease, transform .16s ease;
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
-    .tos-confirm input:checked + .checkmark {
-      border-color: rgba(196,181,253,.92);
-      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
-      box-shadow: 0 0 0 4px rgba(124,58,237,.16), 0 12px 26px rgba(124,58,237,.22);
+    .cta-shell {
+      margin-top: 22px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
     }
-    .tos-confirm input:checked + .checkmark::after {
-      opacity: 1;
-      transform: translateY(-1px) rotate(45deg) scale(1);
+    .cta-shell h2 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
     }
-    .tos-confirm input:focus-visible + .checkmark {
-      outline: 2px solid rgba(255,255,255,.82);
-      outline-offset: 3px;
+    .cta-shell p {
+      margin: 0;
+      color: var(--text-1);
+      font-size: 14px;
+      line-height: 1.72;
+      max-width: 720px;
     }
-    .modal-actions { display: flex; justify-content: flex-end; }
-    .modal-close {
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px 14px;
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 14px;
       font-weight: 900;
-      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
-    .modal-close:disabled {
-      opacity: .45;
-      cursor: not-allowed;
+    .btn.primary {
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, #7e3cff, #9e54ff 65%, #bf88ff);
+      box-shadow: 0 22px 60px rgba(113, 55, 224, 0.34);
     }
-    @media (max-width: 900px) {
-      .wrap { padding: 22px; }
-      .nav { align-items: flex-start; flex-direction: column; }
-      .nav-actions { justify-content: flex-start; }
-      .hero { padding-top: 48px; }
-      .stats { grid-template-columns: 1fr; }
-      .section-title { align-items: flex-start; flex-direction: column; }
-      .marquee::before, .marquee::after, .review-marquee::before, .review-marquee::after { width: 54px; }
-      .review-card { width: min(86vw, 340px); }
+    .btn.secondary {
+      color: #f4efff;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 18px 45px rgba(55, 34, 94, 0.26);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .footer {
+      padding: 36px 0 12px;
+      color: var(--text-2);
+      font-size: 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links {
+      display: inline-flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover { color: #efe9ff; }
+    @media (max-width: 1040px) {
+      .stats,
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .gallery-grid,
+      .cta-shell { grid-template-columns: 1fr; }
+      .cta-actions { justify-content: flex-start; }
+    }
+    @media (max-width: 720px) {
+      .wrap { padding: 18px; }
+      .nav {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 26px;
+      }
+      .nav-right { justify-content: flex-start; }
+      .section-shell,
+      .stat,
+      .testimonial-card,
+      .gallery-card,
+      .cta-shell { border-radius: 24px; }
+      .section-shell,
+      .cta-shell { padding: 22px; }
+      .hero { padding-top: 42px; }
+      .ticker::before,
+      .ticker::after { width: 50px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bg"></div>
+  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
   <div class="grid"></div>
+
   <main class="wrap">
     <nav class="nav">
-      <div class="brand">
+      <a class="brand" href="index.html">
         <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
         <span>SAPOTWEAK</span>
-      </div>
-      <div class="nav-actions">
-        <a class="back" id="backLink" href="index.html">Torna al sito</a>
+      </a>
+      <div class="nav-right">
+        <a class="nav-link" href="index.html" id="backLink">Sito</a>
+        <a class="nav-link" href="checkout.html" id="plansLink">Piani</a>
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Español</option>
+          <option value="es">Espanol</option>
         </select>
       </div>
     </nav>
 
     <section class="hero">
-      <h1 id="reviewTitle">Recensioni <span>SapoTweak</span></h1>
-      <p id="reviewHeroText">Screenshot e feedback reali condivisi dagli utenti dopo l'ottimizzazione. Le immagini scorrono in automatico e si possono aprire a schermo grande per leggere meglio gli FPS.</p>
-    </section>
+      <span class="eyebrow" id="eyebrow">Verified community feedback</span>
+      <h1 id="title">Recensioni e <span>prove reali</span></h1>
+      <p id="lead">Una selezione piu pulita delle prove sociali di SapoTweak: screenshot, feedback della community e risultati raccontati in modo piu professionale.</p>
 
-    <section class="stats" aria-label="Risultati dichiarati dagli utenti">
-      <div class="stat"><b>550+</b><span id="statFpsText">FPS dichiarati in alcuni feedback</span></div>
-      <div class="stat"><b>+200</b><span id="statClientsText">Clienti e feedback raccolti</span></div>
-      <div class="stat"><b>0 delay</b><span id="statDelayText">Feedback citato su Windows e FiveM</span></div>
-    </section>
-
-    <section class="marquee" aria-label="Screenshot automatici">
-      <div class="track" id="reviewTrack">
-        <button class="shot" type="button"><img src="reviews/1.png" alt="Screenshot FiveM 560 fps"></button>
-        <button class="shot" type="button"><img src="reviews/2.png" alt="Screenshot FiveM 563 fps"></button>
-        <button class="shot" type="button"><img src="reviews/3.png" alt="Screenshot FiveM 563 fps"></button>
-        <button class="shot" type="button"><img src="reviews/4.png" alt="Screenshot FiveM 565 fps"></button>
-        <button class="shot" type="button"><img src="reviews/5.png" alt="Screenshot FiveM 560 fps"></button>
-        <button class="shot" type="button"><img src="reviews/6.png" alt="Screenshot FiveM 564 fps"></button>
-        <button class="shot" type="button"><img src="reviews/7.png" alt="Screenshot FiveM 545 fps"></button>
-        <button class="shot" type="button"><img src="reviews/8.png" alt="Screenshot FiveM 565 fps"></button>
-        <button class="shot" type="button"><img src="reviews/9.png" alt="Screenshot FiveM 564 fps"></button>
-        <button class="shot" type="button"><img src="reviews/10.png" alt="Screenshot FiveM 563 fps con task manager"></button>
-        <button class="shot" type="button"><img src="reviews/11.png" alt="Screenshot FiveM 550 fps"></button>
-        <button class="shot" type="button"><img src="reviews/12.png" alt="Screenshot FiveM 560 fps"></button>
-        <button class="shot" type="button"><img src="reviews/13.png" alt="Screenshot FiveM 564 fps"></button>
-        <button class="shot" type="button"><img src="reviews/14.png" alt="Screenshot FiveM 563 fps"></button>
-        <button class="shot" type="button"><img src="reviews/15.png" alt="Screenshot FiveM 563 fps"></button>
-        <button class="shot" type="button"><img src="reviews/16.png" alt="Screenshot FiveM 563 fps"></button>
+      <div class="stats">
+        <article class="stat">
+          <strong id="stat1Value">16+</strong>
+          <span id="stat1Text">Screenshot e prove visuali raccolte dalla community.</span>
+        </article>
+        <article class="stat">
+          <strong id="stat2Value">FPS / feel</strong>
+          <span id="stat2Text">Molti feedback parlano di piu fluidita, meno stutter e sistema piu pulito.</span>
+        </article>
+        <article class="stat">
+          <strong id="stat3Value">Supporto diretto</strong>
+          <span id="stat3Text">Acquisto, attivazione e supporto passano solo dai canali ufficiali SapoTweak.</span>
+        </article>
       </div>
     </section>
-    <p class="hint" id="marqueeHint">Screenshot e commenti scorrono automaticamente.</p>
 
-    <div class="section-title">
-      <h2 id="commentsTitle">Commenti positivi</h2>
-      <span id="commentsSubtitle">Feedback raccolti dalla community</span>
-    </div>
+    <section class="section-shell">
+      <div class="section-head">
+        <span class="section-tag" id="proofTag">Visual proof</span>
+        <h2 id="proofTitle">Screen reali, non mockup casuali</h2>
+        <p id="proofLead">La galleria resta scura, pulita e leggibile: screenshot interni, risultati di test e materiale condiviso dalla community raccolti in una sezione piu premium.</p>
+      </div>
 
-    <section class="review-marquee" aria-label="Commenti degli utenti">
-      <div class="reviews" id="commentTrack">
-      <article class="review-card"><p>+rep 10/10 tweak 200+ fps</p><span>GXBBQ DAYTONA</span></article>
-      <article class="review-card"><p>+rep top tweak 200+ fps</p><span>K</span></article>
-      <article class="review-card"><p>very good tweak 100+fps</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep very good tweak 450+ fps</p><span>Genio</span></article>
-      <article class="review-card"><p>+rep very good tweak from 130 to 250 fps</p><span>kekk</span></article>
-      <article class="review-card"><p>+rep good tweak after the reset 10/10</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep hwid reset</p><span>savvu</span></article>
-      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che è di fascia media, ma il tweak è good</p><span>ZyroxTv</span></article>
-      <article class="review-card"><p>+rep good tweak mov clean, i went from 120 to 210-240 fps with really bad pc</p><span>demonka</span></article>
-      <article class="review-card"><p>+rep from 200fps to 300/400</p><span>life sentence</span></article>
-      <article class="review-card"><p>+rep very good tweak +550 fps</p><span>Genio</span></article>
-      <article class="review-card"><p>+rep from 130 fps to 290/380</p><span>krrkkkdj</span></article>
-      <article class="review-card"><p>+rep good tweak mov clean, peccato per il mio pc che è di fascia bassa, ma il tweak è good</p><span>alfaaaaaaaaaaa</span></article>
-      <article class="review-card"><p>+rep for SapoTweak v1.0</p><span>kasaltier1</span></article>
-      <article class="review-card"><p>+rep for SapoTweak V1.0</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep for SapoTweak V1.0</p><span>nicucz</span></article>
-      <article class="review-card"><p>+rep for SapoTweak V1.0</p><span>Kjjass</span></article>
-      <article class="review-card"><p>+rep for SapoTweak V1.0 - 5 stelle</p><span>99dario</span></article>
-      <article class="review-card"><p>+100% Affidabili, funziona tutto da come descritto</p><span>Deleted User</span></article>
-      <article class="review-card"><p>+100% affidabili, onesti e ottime config</p><span>Lucifer</span></article>
-      <article class="review-card"><p>+rep totally legit, nice guy, sooo nice tweaks amazing</p><span>white</span></article>
-      <article class="review-card"><p>+rep totally legit, nice guy, sooo nice tweaks amazing pass 250fps at 500 fps</p><span>Rizz</span></article>
-      <article class="review-card"><p>+ rep super affidabili e gentili da 120 - 140 fps a 400 - 425</p><span>Kaneki</span></article>
-      <article class="review-card"><p>+ rep super affidabili e gentili in rp da 70 fps a 115/120 fissi</p><span>GXBBQ DAYTONA</span></article>
-      <article class="review-card"><p>+rep best tweak in circolazione a parer mio (70 processi)</p><span>crxwi3</span></article>
-      <article class="review-card"><p>tweak eseguito in pochissimo, risultati subito percepibili, tutto top ragazzi simpatici</p><span>LuLy</span></article>
-      <article class="review-card"><p>+rep Best tweak 500+ fps Smooth game legit</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep ottimo tweak, affidabili.</p><span>Guido23</span></article>
-      <article class="review-card"><p>+rep for SapoTweak velocissimo e ottimo tweak</p><span>tore</span></article>
-      <article class="review-card"><p>+100 fps con cuello de botella y supporto bilingue</p><span>z...</span></article>
-      <article class="review-card"><p>+rep good opti</p><span>sivya</span></article>
-      <article class="review-card"><p>+rep excellent optimization from 200 fps to 500 -100 processes</p><span>FERO</span></article>
-      <article class="review-card"><p>+rep excellent optimization from 70fps to 200 -150 processes</p><span>K</span></article>
-      <article class="review-card"><p>+rep from 200fps to 400</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep +150fps good opti</p><span>Darky</span></article>
-      <article class="review-card"><p>+rep +220 fps affidabili (post reset)</p><span>Kaneki</span></article>
-      <article class="review-card"><p>+rep Best tweak 500+ fps Smooth game legit</p><span>ftw</span></article>
-      <article class="review-card"><p>+rep Best tweak 500+ fps</p><span>aasmddaaaaa</span></article>
-      <article class="review-card"><p>+rep Best tweak 500+ fps</p><span>loree</span></article>
-      <article class="review-card"><p>+rep Best tweak 300+ fps</p><span>Riviera2acc</span></article>
-      <article class="review-card"><p>+rep best tweak da 120 fps a 360-380</p><span>GXBBQ DAYTONA</span></article>
-      <article class="review-card"><p>+rep tweak professionale 500+fps</p><span>Lucifer</span></article>
-      <article class="review-card"><p>+rep best tweak de 200 a +500 fps !10/10</p><span>Deleted User</span></article>
-      <article class="review-card"><p>+rep best tweak da 150 fps a +500 fps</p><span>loree</span></article>
-      <article class="review-card"><p>+rep best tweak de 180 fps a +250 fps</p><span>1xyon</span></article>
-      <article class="review-card"><p>+rep tweak professionale 565+fps</p><span>MARANS.</span></article>
-      <article class="review-card"><p>+rep tweak da 180 fps a 250+</p><span>mattia</span></article>
-      <article class="review-card"><p>+rep tweak da 300 fps a 450</p><span>Deleted User</span></article>
-      <article class="review-card"><p>250/300 FPS - /380/400</p><span>Yatklc</span></article>
-      <article class="review-card"><p>+rep tweak da 400fps tirati a 520/550fps</p><span>shacky</span></article>
-      <article class="review-card"><p>+rep tweak da 410fps al massimo a 536fps</p><span>e-girl667</span></article>
-      <article class="review-card"><p>+rep tweak da 330/360 fps al massimo a 420fps</p><span>Community feedback</span></article>
-      <article class="review-card"><p>+rep tweaks soo good 155 fps to +250 and 0 delay in windows</p><span>Deleted User</span></article>
-      <article class="review-card"><p>+rep tweak op, fivem normally 180 fps and now 300/400 and 0 delay</p><span>dmaqnm</span></article>
-      <article class="review-card"><p>+rep god tweak, no words</p><span>gotth4ttizsm1.1</span></article>
-      <article class="review-card"><p>+rep god tweak 400+fps</p><span>moonn</span></article>
-      <article class="review-card"><p>+rep god tweak 300 +fps</p><span>Toffa</span></article>
-      <article class="review-card"><p>rep good tweak 350+ fps</p><span>crem1no</span></article>
-      <article class="review-card"><p>+rep 200fps 400+</p><span>Fox</span></article>
-      <article class="review-card"><p>+rep god tweak 400+ fps</p><span>savvu</span></article>
-      <article class="review-card"><p>+rep god tweak 450+ fps</p><span>Yatklc</span></article>
-      <article class="review-card"><p>+rep best tweak da 160 fps a +260 fps</p><span>Nokia_tv</span></article>
-      <article class="review-card"><p>+rep 10/10 tweak 500+ fps</p><span>luxyfps</span></article>
+      <div class="gallery-grid">
+        <div class="gallery-main">
+          <div class="gallery-card">
+            <img src="reviews/Review.png" alt="Community proof">
+            <div class="gallery-caption" id="galleryCaption1">Panoramica di feedback e prove raccolte dalla community SapoTweak.</div>
           </div>
+        </div>
+        <div class="gallery-side">
+          <div class="gallery-card">
+            <img src="reviews/1.png" alt="Proof 1">
+            <div class="gallery-caption" id="galleryCaption2">Esempio di risultato condiviso dagli utenti dopo l'uso del tweak.</div>
+          </div>
+          <div class="gallery-card">
+            <img src="reviews/10.png" alt="Proof 2">
+            <div class="gallery-caption" id="galleryCaption3">Ulteriore prova visuale del clima e del tono dei feedback raccolti.</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <p class="note" id="reviewsNote">Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.</p>
+    <section class="section-shell">
+      <div class="section-head">
+        <span class="section-tag" id="testimonialTag">Selected feedback</span>
+        <h2 id="testimonialTitle">Recensioni riscritte in modo piu chiaro e professionale</h2>
+        <p id="testimonialLead">Abbiamo trasformato il wall di messaggi in card piu leggibili, senza perdere il tono reale della community.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <small id="review1Label">Fortnite / Competitive</small>
+          <p id="review1Text">"Preset e pulizia di sistema hanno reso il gioco piu fluido e consistente. Il feedback principale non e solo sugli FPS massimi, ma sulla sensazione generale di reattivita."</p>
+          <div class="testimonial-meta">
+            <strong>Community feedback</strong>
+            <span id="review1Meta">Focus: fluidita e feel del sistema</span>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <small id="review2Label">FiveM / RP</small>
+          <p id="review2Text">"Diversi utenti riportano incrementi percepiti nella stabilita e una migliore tenuta in sessione, soprattutto su PC piu sporchi o pieni di processi in background."</p>
+          <div class="testimonial-meta">
+            <strong>GXBBQ DAYTONA</strong>
+            <span id="review2Meta">Focus: sessioni piu pulite e meno rumore</span>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <small id="review3Label">Valorant / Input</small>
+          <p id="review3Text">"I commenti migliori parlano di input piu pulito, meno delay percepito su Windows e comportamento piu consistente dopo l'applicazione del preset."</p>
+          <div class="testimonial-meta">
+            <strong>Community feedback</strong>
+            <span id="review3Meta">Focus: responsivita e feeling</span>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <small id="review4Label">Performance gains</small>
+          <p id="review4Text">"Molti screenshot storici della community citano guadagni notevoli sugli FPS. Il dato cambia da PC a PC, ma il pattern piu ricorrente resta la maggiore leggerezza del sistema."</p>
+          <div class="testimonial-meta">
+            <strong>Lucifer / Genio / others</strong>
+            <span id="review4Meta">Focus: miglior rapporto tra pulizia e performance</span>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <small id="review5Label">Support experience</small>
+          <p id="review5Text">"Un altro tema ricorrente e la rapidita del supporto: attivazione, spiegazioni e assistenza vengono percepite come parte concreta del prodotto."</p>
+          <div class="testimonial-meta">
+            <strong>Multiple users</strong>
+            <span id="review5Meta">Focus: canali ufficiali e supporto</span>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <small id="review6Label">Overall trust</small>
+          <p id="review6Text">"Le recensioni piu forti combinano tre elementi: tweak legittimo, risultati subito percepibili e processo di acquisto / download chiaro."</p>
+          <div class="testimonial-meta">
+            <strong>SapoTweak community</strong>
+            <span id="review6Meta">Focus: prodotto + processo + fiducia</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-head">
+        <span class="section-tag" id="tickerTag">Community stream</span>
+        <h2 id="tickerTitle">Altri feedback rapidi</h2>
+        <p id="tickerLead">Una fascia dinamica che tiene il tono community ma con una presentazione molto piu ordinata.</p>
+      </div>
+      <div class="ticker" aria-label="Community feedback ticker">
+        <div class="ticker-track">
+          <div class="ticker-pill">"+rep 10/10 tweak"</div>
+          <div class="ticker-pill">"smooth game legit"</div>
+          <div class="ticker-pill">"system feels cleaner"</div>
+          <div class="ticker-pill">"good support and quick answers"</div>
+          <div class="ticker-pill">"more consistent FPS"</div>
+          <div class="ticker-pill">"less delay in Windows"</div>
+          <div class="ticker-pill">"+rep competitive feel"</div>
+          <div class="ticker-pill">"great for FiveM sessions"</div>
+          <div class="ticker-pill">"+rep 10/10 tweak"</div>
+          <div class="ticker-pill">"smooth game legit"</div>
+          <div class="ticker-pill">"system feels cleaner"</div>
+          <div class="ticker-pill">"good support and quick answers"</div>
+          <div class="ticker-pill">"more consistent FPS"</div>
+          <div class="ticker-pill">"less delay in Windows"</div>
+          <div class="ticker-pill">"+rep competitive feel"</div>
+          <div class="ticker-pill">"great for FiveM sessions"</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-shell">
+      <div>
+        <h2 id="ctaTitle">Vuoi passare al checkout ufficiale?</h2>
+        <p id="ctaText">Se il tono della pagina ti convince, puoi andare direttamente ai piani ufficiali o tornare alla home per vedere hero, feature e supporto nello stesso stile premium.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn primary" href="checkout.html" id="ctaPrimary">Apri i piani</a>
+        <a class="btn secondary" href="index.html" id="ctaSecondary">Torna alla home</a>
+      </div>
+    </section>
 
     <footer class="footer">
-      <span id="footerText">&copy; SapoTweak - Recensioni utenti</span>
+      <span id="footerText">SapoTweak - Distribuisci solo build ufficiali.</span>
       <div class="footer-links">
-        <a class="footer-tos" href="terms.html" id="tosLink">TOS</a>
-        <a class="footer-tos" href="privacy.html">Privacy</a>
-        <a class="footer-tos" href="support.html">Supporto</a>
+        <a href="terms.html" id="termsLink">Termini</a>
+        <a href="privacy.html" id="privacyLink">Privacy</a>
+        <a href="support.html" id="supportLink">Supporto</a>
       </div>
     </footer>
   </main>
-  <div class="modal-backdrop" id="tosModal">
-    <div class="modal-box">
-      <h2 id="tosTitle">Termini di utilizzo</h2>
-      <p id="tosText">Condizioni rapide per l'uso del software.</p>
-      <div class="tos-body" id="tosBody"></div>
-      <label class="tos-confirm">
-        <input type="checkbox" id="tosAcceptCheck" onchange="syncTosAcceptanceUi()">
-        <span class="checkmark" aria-hidden="true"></span>
-        <span id="tosAcceptLabel">Ho letto e accetto le condizioni.</span>
-      </label>
-      <div class="modal-actions">
-        <button class="modal-close" type="button" id="tosCloseBtn" onclick="dismissTosModal()">Chiudi</button>
-        <button class="modal-close" type="button" id="tosAcceptBtn" onclick="acceptTos()">Accetta</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="close" type="button" id="closeLightbox" aria-label="Chiudi">&times;</button>
-    <img id="lightboxImage" src="" alt="">
-  </div>
+  <script>
+    const translations = {
+      it: {
+        pageTitle: "SapoTweak - Recensioni",
+        backLink: "Sito",
+        plansLink: "Piani",
+        eyebrow: "Verified community feedback",
+        title: "Recensioni e <span>prove reali</span>",
+        lead: "Una selezione piu pulita delle prove sociali di SapoTweak: screenshot, feedback della community e risultati raccontati in modo piu professionale.",
+        stat1Text: "Screenshot e prove visuali raccolte dalla community.",
+        stat2Text: "Molti feedback parlano di piu fluidita, meno stutter e sistema piu pulito.",
+        stat3Text: "Acquisto, attivazione e supporto passano solo dai canali ufficiali SapoTweak.",
+        proofTag: "Visual proof",
+        proofTitle: "Screen reali, non mockup casuali",
+        proofLead: "La galleria resta scura, pulita e leggibile: screenshot interni, risultati di test e materiale condiviso dalla community raccolti in una sezione piu premium.",
+        galleryCaption1: "Panoramica di feedback e prove raccolte dalla community SapoTweak.",
+        galleryCaption2: "Esempio di risultato condiviso dagli utenti dopo l'uso del tweak.",
+        galleryCaption3: "Ulteriore prova visuale del clima e del tono dei feedback raccolti.",
+        testimonialTag: "Selected feedback",
+        testimonialTitle: "Recensioni riscritte in modo piu chiaro e professionale",
+        testimonialLead: "Abbiamo trasformato il wall di messaggi in card piu leggibili, senza perdere il tono reale della community.",
+        review1Label: "Fortnite / Competitive",
+        review1Text: "\"Preset e pulizia di sistema hanno reso il gioco piu fluido e consistente. Il feedback principale non e solo sugli FPS massimi, ma sulla sensazione generale di reattivita.\"",
+        review1Meta: "Focus: fluidita e feel del sistema",
+        review2Label: "FiveM / RP",
+        review2Text: "\"Diversi utenti riportano incrementi percepiti nella stabilita e una migliore tenuta in sessione, soprattutto su PC piu sporchi o pieni di processi in background.\"",
+        review2Meta: "Focus: sessioni piu pulite e meno rumore",
+        review3Label: "Valorant / Input",
+        review3Text: "\"I commenti migliori parlano di input piu pulito, meno delay percepito su Windows e comportamento piu consistente dopo l'applicazione del preset.\"",
+        review3Meta: "Focus: responsivita e feeling",
+        review4Label: "Performance gains",
+        review4Text: "\"Molti screenshot storici della community citano guadagni notevoli sugli FPS. Il dato cambia da PC a PC, ma il pattern piu ricorrente resta la maggiore leggerezza del sistema.\"",
+        review4Meta: "Focus: miglior rapporto tra pulizia e performance",
+        review5Label: "Support experience",
+        review5Text: "\"Un altro tema ricorrente e la rapidita del supporto: attivazione, spiegazioni e assistenza vengono percepite come parte concreta del prodotto.\"",
+        review5Meta: "Focus: canali ufficiali e supporto",
+        review6Label: "Overall trust",
+        review6Text: "\"Le recensioni piu forti combinano tre elementi: tweak legittimo, risultati subito percepibili e processo di acquisto / download chiaro.\"",
+        review6Meta: "Focus: prodotto + processo + fiducia",
+        tickerTag: "Community stream",
+        tickerTitle: "Altri feedback rapidi",
+        tickerLead: "Una fascia dinamica che tiene il tono community ma con una presentazione molto piu ordinata.",
+        ctaTitle: "Vuoi passare al checkout ufficiale?",
+        ctaText: "Se il tono della pagina ti convince, puoi andare direttamente ai piani ufficiali o tornare alla home per vedere hero, feature e supporto nello stesso stile premium.",
+        ctaPrimary: "Apri i piani",
+        ctaSecondary: "Torna alla home",
+        footerText: "SapoTweak - Distribuisci solo build ufficiali.",
+        termsLink: "Termini",
+        privacyLink: "Privacy",
+        supportLink: "Supporto"
+      },
+      en: {
+        pageTitle: "SapoTweak - Reviews",
+        backLink: "Site",
+        plansLink: "Plans",
+        eyebrow: "Verified community feedback",
+        title: "Reviews and <span>real proof</span>",
+        lead: "A cleaner selection of SapoTweak social proof: screenshots, community feedback, and performance stories presented in a more professional way.",
+        stat1Text: "Screenshots and visual proof collected from the community.",
+        stat2Text: "Many comments mention smoother gameplay, less stutter, and a cleaner system feel.",
+        stat3Text: "Purchase, activation, and support move only through official SapoTweak channels.",
+        proofTag: "Visual proof",
+        proofTitle: "Real screens, not random mockups",
+        proofLead: "The gallery stays dark, clean, and readable: internal screenshots, test results, and community-shared material organized in a more premium section.",
+        galleryCaption1: "Overview of feedback and proof collected from the SapoTweak community.",
+        galleryCaption2: "Example of a result shared by users after running the tweak.",
+        galleryCaption3: "Additional visual proof showing the tone and style of collected feedback.",
+        testimonialTag: "Selected feedback",
+        testimonialTitle: "Community reviews rewritten with a clearer professional tone",
+        testimonialLead: "We turned the message wall into cleaner cards without losing the real voice of the community.",
+        review1Label: "Fortnite / Competitive",
+        review1Text: "\"Presets and system cleanup made gameplay feel smoother and more consistent. The strongest feedback is not only about peak FPS, but overall responsiveness.\"",
+        review1Meta: "Focus: smoother feel and system consistency",
+        review2Label: "FiveM / RP",
+        review2Text: "\"Several users report stronger session stability and cleaner long play sessions, especially on systems filled with background noise.\"",
+        review2Meta: "Focus: cleaner sessions and less overhead",
+        review3Label: "Valorant / Input",
+        review3Text: "\"The best comments talk about cleaner input, less perceived Windows delay, and a more stable feeling after the preset is applied.\"",
+        review3Meta: "Focus: responsiveness and input feel",
+        review4Label: "Performance gains",
+        review4Text: "\"Many historic screenshots from the community mention major FPS gains. Results vary by PC, but the recurring pattern is a lighter system overall.\"",
+        review4Meta: "Focus: cleanup plus performance balance",
+        review5Label: "Support experience",
+        review5Text: "\"Another recurring topic is support speed: activation help, explanations, and assistance are seen as a real part of the product.\"",
+        review5Meta: "Focus: official channels and assistance",
+        review6Label: "Overall trust",
+        review6Text: "\"The strongest reviews combine three elements: legitimate tweak, instantly noticeable results, and a clean purchase / download process.\"",
+        review6Meta: "Focus: product + process + trust",
+        tickerTag: "Community stream",
+        tickerTitle: "More quick feedback",
+        tickerLead: "A moving band that keeps the community tone but presents it in a much cleaner way.",
+        ctaTitle: "Ready to move to the official checkout?",
+        ctaText: "If the tone of this page works for you, you can jump directly to the official plans or go back to the homepage for the full premium experience.",
+        ctaPrimary: "Open plans",
+        ctaSecondary: "Back to home",
+        footerText: "SapoTweak - Distribute official builds only.",
+        termsLink: "Terms",
+        privacyLink: "Privacy",
+        supportLink: "Support"
+      },
+      es: {
+        pageTitle: "SapoTweak - Resenas",
+        backLink: "Sitio",
+        plansLink: "Planes",
+        eyebrow: "Verified community feedback",
+        title: "Resenas y <span>prueba real</span>",
+        lead: "Una seleccion mas limpia de la prueba social de SapoTweak: capturas, feedback de la comunidad y resultados contados de forma mas profesional.",
+        stat1Text: "Capturas y pruebas visuales recogidas de la comunidad.",
+        stat2Text: "Muchos comentarios hablan de mas fluidez, menos stutter y una sensacion de sistema mas limpio.",
+        stat3Text: "Compra, activacion y soporte pasan solo por los canales oficiales de SapoTweak.",
+        proofTag: "Visual proof",
+        proofTitle: "Pantallas reales, no mockups al azar",
+        proofLead: "La galeria sigue siendo oscura, limpia y legible: capturas internas, resultados de test y material compartido por la comunidad organizados en una seccion mas premium.",
+        galleryCaption1: "Resumen de feedback y pruebas recogidas de la comunidad de SapoTweak.",
+        galleryCaption2: "Ejemplo de resultado compartido por usuarios despues de usar el tweak.",
+        galleryCaption3: "Otra prueba visual del tono y estilo de los feedbacks recogidos.",
+        testimonialTag: "Selected feedback",
+        testimonialTitle: "Resenas reescritas con un tono mas claro y profesional",
+        testimonialLead: "Transformamos el muro de mensajes en tarjetas mas limpias sin perder la voz real de la comunidad.",
+        review1Label: "Fortnite / Competitive",
+        review1Text: "\"Los presets y la limpieza del sistema hicieron que el juego se sintiera mas fluido y consistente. El mejor feedback no es solo sobre los FPS maximos, sino sobre la respuesta general.\"",
+        review1Meta: "Focus: fluidez y sensacion del sistema",
+        review2Label: "FiveM / RP",
+        review2Text: "\"Varios usuarios reportan una mejor estabilidad en sesion y sesiones largas mas limpias, sobre todo en PCs llenos de ruido en segundo plano.\"",
+        review2Meta: "Focus: sesiones mas limpias y menos carga",
+        review3Label: "Valorant / Input",
+        review3Text: "\"Los mejores comentarios hablan de un input mas limpio, menos delay percibido en Windows y una sensacion mas estable despues de aplicar el preset.\"",
+        review3Meta: "Focus: respuesta e input feel",
+        review4Label: "Performance gains",
+        review4Text: "\"Muchas capturas historicas de la comunidad citan mejoras fuertes de FPS. El resultado cambia segun el PC, pero el patron mas repetido es un sistema mas ligero.\"",
+        review4Meta: "Focus: limpieza y equilibrio de rendimiento",
+        review5Label: "Support experience",
+        review5Text: "\"Otro tema recurrente es la velocidad del soporte: ayuda con la activacion, explicaciones y asistencia se perciben como parte real del producto.\"",
+        review5Meta: "Focus: canales oficiales y soporte",
+        review6Label: "Overall trust",
+        review6Text: "\"Las resenas mas fuertes combinan tres elementos: tweak legitimo, resultados perceptibles al instante y proceso de compra / descarga limpio.\"",
+        review6Meta: "Focus: producto + proceso + confianza",
+        tickerTag: "Community stream",
+        tickerTitle: "Mas feedback rapido",
+        tickerLead: "Una banda dinamica que mantiene el tono de comunidad pero con una presentacion mucho mas ordenada.",
+        ctaTitle: "Quieres pasar al checkout oficial?",
+        ctaText: "Si el tono de esta pagina te convence, puedes ir directamente a los planes oficiales o volver a la home para ver toda la experiencia premium.",
+        ctaPrimary: "Abrir planes",
+        ctaSecondary: "Volver a la home",
+        footerText: "SapoTweak - Distribuye solo builds oficiales.",
+        termsLink: "Terminos",
+        privacyLink: "Privacidad",
+        supportLink: "Soporte"
+      }
+    };
 
-      <script>
-    (() => {
-      const translations = {
-        it: {
-          pageTitle: 'SapoTweak - Recensioni',
-          backLink: 'Torna al sito',
-          reviewTitle: 'Recensioni <span>SapoTweak</span>',
-          reviewHeroText: "Screenshot e feedback reali condivisi dagli utenti dopo l'ottimizzazione. Le immagini scorrono in automatico e si possono aprire a schermo grande per leggere meglio gli FPS.",
-          statFpsText: 'FPS dichiarati in alcuni feedback',
-          statClientsText: 'Clienti e feedback raccolti',
-          statDelayText: 'Feedback citato su Windows e FiveM',
-          marqueeHint: 'Screenshot e commenti scorrono automaticamente.',
-          commentsTitle: 'Commenti positivi',
-          commentsSubtitle: 'Feedback raccolti dalla community',
-          reviewsNote: 'Le recensioni mostrano esperienze condivise dagli utenti e non garantiscono lo stesso risultato su ogni PC. Le prestazioni dipendono da hardware, software, impostazioni di gioco, temperature, spazio libero e processi installati.',
-          footerText: '© SapoTweak - Recensioni utenti',
-          tosLink: 'TOS',
-          tosTitle: 'Termini di utilizzo',
-          tosText: "Condizioni rapide per l'uso del software.",
-          tosCloseBtn: 'Chiudi',
-          tosAcceptLabel: 'Ho letto e accetto le condizioni.',
-          tosAcceptBtn: 'Accetta',
-          tosIntro: 'Usando o attivando SapoTweak accetti queste condizioni essenziali:',
-          tosItem1: 'I risultati di review, benchmark, FPS, processi, latenza e stabilità non saranno necessariamente uguali ai tuoi. Le prestazioni dipendono da hardware, pulizia e raffreddamento del PC, salute e spazio dei dischi, versione e stato di Windows, driver, BIOS, monitor, software installato, servizi, app in background, antivirus, overlay e patch dei giochi.',
-          tosItem2: 'Screenshot, video, review ed esempi pubblicati hanno valore illustrativo e non costituiscono una garanzia di risultato identico su ogni dispositivo o installazione Windows.',
-          tosItem3: "Si consiglia di creare un punto di ripristino o un backup prima dell'uso, per evitare conflitti con tweak, script, servizi o modifiche già applicate in precedenza dall'utente o da software terzi.",
-          tosItem4: "Ogni comando o tweak include una descrizione specifica per permettere all'utente di scegliere in autonomia cosa attivare o disattivare in base alle proprie preferenze e al proprio sistema.",
-          tosItem5: "Non ci assumiamo responsabilità per le scelte dell'utente su ciò che viene attivato, disattivato o modificato tramite il software, né per effetti derivanti da configurazioni pregresse, uso improprio o combinazioni decise manualmente dall'utente.",
-          tosItem6: "La key è pensata per continuare a funzionare dopo reset del PC, reinstallazione o cambio di Windows quando l'hardware principale rimane lo stesso. La sostituzione di scheda madre, CPU o altri componenti identificativi può richiedere una nuova attivazione; non effettuiamo rimborsi per cambi hardware, salvo dove richiesto dalla legge obbligatoria applicabile.",
-          tosItem7: "SapoTweak è un prodotto digitale fornito immediatamente. Dopo attivazione o inizio della fornitura digitale richiesta dall'utente, i rimborsi in genere non sono previsti, salvo dove richiesto dalla legge obbligatoria applicabile.",
-          tosItem8: 'Sono vietati furto o estrazione di dati, codice o asset del programma, reverse engineering non autorizzato, bypass delle protezioni, condivisione di key, redistribuzione abusiva, modifica dei sistemi di licenza o update e qualsiasi uso fraudolento del software.',
-          tosItem9: "Le violazioni possono comportare sospensione dell'accesso, revoca della licenza e azioni civili o penali ove applicabili."
-        },
-        en: {
-          pageTitle: 'SapoTweak - Reviews',
-          backLink: 'Back to site',
-          reviewTitle: 'Reviews <span>SapoTweak</span>',
-          reviewHeroText: 'Real screenshots and feedback shared by users after optimization. Images scroll automatically and can be opened full-screen to read FPS values more clearly.',
-          statFpsText: 'FPS reported in some feedback',
-          statClientsText: 'Customers and feedback collected',
-          statDelayText: 'Feedback mentioning Windows and FiveM delay',
-          marqueeHint: 'Screenshots and comments scroll automatically.',
-          commentsTitle: 'Positive comments',
-          commentsSubtitle: 'Feedback collected from the community',
-          reviewsNote: 'Reviews show experiences shared by users and do not guarantee the same result on every PC. Performance depends on hardware, software, game settings, temperatures, free space and installed processes.',
-          footerText: '© SapoTweak - User reviews',
-          tosLink: 'TOS',
-          tosTitle: 'Terms of Service',
-          tosText: 'Short terms for using the software.',
-          tosCloseBtn: 'Close',
-          tosAcceptLabel: 'I have read and accept the terms.',
-          tosAcceptBtn: 'Accept',
-          tosIntro: 'By using or activating SapoTweak, you accept these core terms:',
-          tosItem1: 'Review, benchmark, FPS, process-count, latency and stability results will not necessarily match yours. Performance depends on hardware, PC cleanliness and cooling, disk health and free space, Windows version and install condition, drivers, BIOS, monitor, installed software, services, background apps, antivirus, overlays and game patches.',
-          tosItem2: 'Published screenshots, videos, reviews and examples are illustrative only and do not guarantee the same outcome on every device or Windows installation.',
-          tosItem3: 'Creating a restore point or backup before use is recommended to reduce conflicts with tweaks, scripts, services or changes previously applied by the user or by third-party software.',
-          tosItem4: 'Each command or tweak includes a specific description so users can decide for themselves what to enable or disable based on their own preferences and system.',
-          tosItem5: 'We do not accept responsibility for the user choices regarding what is enabled, disabled or modified through the software, nor for effects caused by previous configurations, misuse or combinations manually chosen by the user.',
-          tosItem6: 'The key is intended to keep working after a PC reset, Windows reset, reinstall or Windows switch as long as the main hardware stays the same. Replacing the motherboard, CPU or other identifying hardware can require a new activation; refunds are not provided for hardware changes except where mandatory applicable law requires otherwise.',
-          tosItem7: 'SapoTweak is a digital product supplied immediately. After activation or after the start of the digital supply requested by the user, refunds are generally not available except where mandatory applicable law requires otherwise.',
-          tosItem8: 'Theft or extraction of program data, code or assets, unauthorized reverse engineering, protection bypassing, key sharing, abusive redistribution, tampering with licensing or update systems, and any fraudulent use of the software are prohibited.',
-          tosItem9: 'Violations may lead to access suspension, license revocation and civil or criminal action where applicable.'
-        },
-        es: {
-          pageTitle: 'SapoTweak - Reseñas',
-          backLink: 'Volver al sitio',
-          reviewTitle: 'Reseñas <span>SapoTweak</span>',
-          reviewHeroText: 'Capturas y feedback reales compartidos por usuarios después de la optimización. Las imágenes se desplazan automáticamente y se pueden abrir a pantalla completa para leer mejor los FPS.',
-          statFpsText: 'FPS declarados en algunos feedbacks',
-          statClientsText: 'Clientes y feedback recopilado',
-          statDelayText: 'Feedback citado sobre Windows y FiveM',
-          marqueeHint: 'Las capturas y los comentarios se desplazan automáticamente.',
-          commentsTitle: 'Comentarios positivos',
-          commentsSubtitle: 'Feedback recopilado de la comunidad',
-          reviewsNote: 'Las reseñas muestran experiencias compartidas por usuarios y no garantizan el mismo resultado en todos los PC. El rendimiento depende de hardware, software, ajustes del juego, temperaturas, espacio libre y procesos instalados.',
-          footerText: '© SapoTweak - Reseñas de usuarios',
-          tosLink: 'TOS',
-          tosTitle: 'Términos de uso',
-          tosText: 'Condiciones breves para usar el software.',
-          tosCloseBtn: 'Cerrar',
-          tosAcceptLabel: 'He leído y acepto las condiciones.',
-          tosAcceptBtn: 'Aceptar',
-          tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
-          tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no serán necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeración del PC, salud y espacio libre de los discos, versión y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
-          tosItem2: 'Las capturas, vídeos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
-          tosItem3: 'Se recomienda crear un punto de restauración o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
-          tosItem4: 'Cada comando o tweak incluye una descripción específica para que cada usuario pueda decidir por sí mismo qué activar o desactivar según sus preferencias y su sistema.',
-          tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
-          tosItem6: 'La key está pensada para seguir funcionando después de un reinicio del PC, reset de Windows, reinstalación o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activación; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. Tras la activación o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no están disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
-          tosItem8: 'Se prohíbe el robo o extracción de datos, código o assets del programa, la ingeniería inversa no autorizada, el bypass de protecciones, compartir keys, la redistribución abusiva, la manipulación de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
-          tosItem9: 'Las infracciones pueden implicar suspensión de acceso, revocación de la licencia y acciones civiles o penales cuando corresponda.'
+    const languageSelect = document.getElementById("languageSelect");
+    const saved = localStorage.getItem("sapotweak_site_lang") || "it";
+
+    function setHtml(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = value;
+    }
+
+    function setText(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.it;
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+      languageSelect.value = lang;
+      setText("backLink", t.backLink);
+      setText("plansLink", t.plansLink);
+      setText("eyebrow", t.eyebrow);
+      setHtml("title", t.title);
+      setText("lead", t.lead);
+      setText("stat1Text", t.stat1Text);
+      setText("stat2Text", t.stat2Text);
+      setText("stat3Text", t.stat3Text);
+      setText("proofTag", t.proofTag);
+      setText("proofTitle", t.proofTitle);
+      setText("proofLead", t.proofLead);
+      setText("galleryCaption1", t.galleryCaption1);
+      setText("galleryCaption2", t.galleryCaption2);
+      setText("galleryCaption3", t.galleryCaption3);
+      setText("testimonialTag", t.testimonialTag);
+      setText("testimonialTitle", t.testimonialTitle);
+      setText("testimonialLead", t.testimonialLead);
+      setText("review1Label", t.review1Label);
+      setText("review1Text", t.review1Text);
+      setText("review1Meta", t.review1Meta);
+      setText("review2Label", t.review2Label);
+      setText("review2Text", t.review2Text);
+      setText("review2Meta", t.review2Meta);
+      setText("review3Label", t.review3Label);
+      setText("review3Text", t.review3Text);
+      setText("review3Meta", t.review3Meta);
+      setText("review4Label", t.review4Label);
+      setText("review4Text", t.review4Text);
+      setText("review4Meta", t.review4Meta);
+      setText("review5Label", t.review5Label);
+      setText("review5Text", t.review5Text);
+      setText("review5Meta", t.review5Meta);
+      setText("review6Label", t.review6Label);
+      setText("review6Text", t.review6Text);
+      setText("review6Meta", t.review6Meta);
+      setText("tickerTag", t.tickerTag);
+      setText("tickerTitle", t.tickerTitle);
+      setText("tickerLead", t.tickerLead);
+      setText("ctaTitle", t.ctaTitle);
+      setText("ctaText", t.ctaText);
+      setText("ctaPrimary", t.ctaPrimary);
+      setText("ctaSecondary", t.ctaSecondary);
+      setText("footerText", t.footerText);
+      setText("termsLink", t.termsLink);
+      setText("privacyLink", t.privacyLink);
+      setText("supportLink", t.supportLink);
+    }
+
+    function initMeshBackground() {
+      const canvas = document.getElementById("meshCanvas");
+      if (!canvas) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      let animationFrame = 0;
+      let width = 0;
+      let height = 0;
+      let points = [];
+      const maxDistance = 180;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.6);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const density = width < 900 ? 34 : 48;
+        const count = Math.max(28, Math.floor((width * height) / (density * density * 10)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          vy: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          r: Math.random() * 1.8 + 0.4
+        }));
+      }
+
+      function step() {
+        context.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i += 1) {
+          const point = points[i];
+          point.x += point.vx;
+          point.y += point.vy;
+
+          if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+          if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+
+          for (let j = i + 1; j < points.length; j += 1) {
+            const other = points[j];
+            const dx = point.x - other.x;
+            const dy = point.y - other.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > maxDistance) continue;
+
+            const alpha = 1 - distance / maxDistance;
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.strokeStyle = `rgba(182, 146, 255, ${alpha * 0.12})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
         }
-      };
-      let currentLanguage = localStorage.getItem('sapotweak_site_lang') || 'it';
 
-      function onReady(callback) {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', callback);
-        } else {
-          callback();
-        }
-      }
-
-      function t(key) {
-        return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
-      }
-
-      function updateTosBody() {
-        const body = document.getElementById('tosBody');
-        if (!body) return;
-        body.innerHTML = `
-          <p>${t('tosIntro')}</p>
-          <ul>
-            <li>${t('tosItem1')}</li>
-            <li>${t('tosItem2')}</li>
-            <li>${t('tosItem3')}</li>
-            <li>${t('tosItem4')}</li>
-            <li>${t('tosItem5')}</li>
-            <li>${t('tosItem6')}</li>
-            <li>${t('tosItem7')}</li>
-            <li>${t('tosItem8')}</li>
-            <li>${t('tosItem9')}</li>
-          </ul>
-        `;
-      }
-      function hasAcceptedTos() {
-        return localStorage.getItem('sapotweak_site_tos_ack_v1') === '1';
-      }
-      function syncTosAcceptanceUi() {
-        const check = document.getElementById('tosAcceptCheck');
-        const btn = document.getElementById('tosAcceptBtn');
-        if (!check || !btn) return;
-        if (hasAcceptedTos()) check.checked = true;
-        btn.disabled = !check.checked;
-      }
-
-      function applyLanguage() {
-        document.documentElement.lang = currentLanguage;
-        document.title = t('pageTitle');
-        const select = document.getElementById('languageSelect');
-        if (select) select.value = currentLanguage;
-        document.getElementById('backLink').textContent = t('backLink');
-        document.getElementById('reviewTitle').innerHTML = t('reviewTitle');
-        document.getElementById('reviewHeroText').textContent = t('reviewHeroText');
-        document.getElementById('statFpsText').textContent = t('statFpsText');
-        document.getElementById('statClientsText').textContent = t('statClientsText');
-        document.getElementById('statDelayText').textContent = t('statDelayText');
-        document.getElementById('marqueeHint').textContent = t('marqueeHint');
-        document.getElementById('commentsTitle').textContent = t('commentsTitle');
-        document.getElementById('commentsSubtitle').textContent = t('commentsSubtitle');
-        document.getElementById('reviewsNote').textContent = t('reviewsNote');
-        document.getElementById('footerText').textContent = t('footerText');
-        document.getElementById('tosLink').textContent = t('tosLink');
-        document.getElementById('tosTitle').textContent = t('tosTitle');
-        document.getElementById('tosText').textContent = t('tosText');
-        document.getElementById('tosCloseBtn').textContent = t('tosCloseBtn');
-        document.getElementById('tosAcceptLabel').textContent = t('tosAcceptLabel');
-        document.getElementById('tosAcceptBtn').textContent = t('tosAcceptBtn');
-        updateTosBody();
-        syncTosAcceptanceUi();
-      }
-
-      window.showTosModal = function showTosModal() {
-        updateTosBody();
-        syncTosAcceptanceUi();
-        document.getElementById('tosModal').classList.add('show');
-      };
-
-      window.dismissTosModal = function dismissTosModal() {
-        document.getElementById('tosModal').classList.remove('show');
-      };
-      window.acceptTos = function acceptTos() {
-        const check = document.getElementById('tosAcceptCheck');
-        if (!check || !check.checked) return;
-        localStorage.setItem('sapotweak_site_tos_ack_v1', '1');
-        syncTosAcceptanceUi();
-        dismissTosModal();
-      };
-
-      onReady(() => {
-        const select = document.getElementById('languageSelect');
-        if (select) {
-          select.addEventListener('change', event => {
-            currentLanguage = ['it', 'en', 'es'].includes(event.target.value) ? event.target.value : 'it';
-            localStorage.setItem('sapotweak_site_lang', currentLanguage);
-            applyLanguage();
-          });
-        }
-        applyLanguage();
-        const imageTrack = document.getElementById('reviewTrack');
-        const commentTrack = document.getElementById('commentTrack');
-        const speed = 71.3;
-        let lastTime = performance.now();
-
-        function cloneForLoop(track) {
-          if (!track || track.dataset.loopReady === 'true') return;
-          Array.from(track.children).forEach(item => {
-            const clone = item.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            track.appendChild(clone);
-          });
-          track.dataset.loopReady = 'true';
+        for (const point of points) {
+          context.beginPath();
+          context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+          context.fillStyle = "rgba(218, 201, 255, 0.22)";
+          context.fill();
         }
 
-        cloneForLoop(imageTrack);
-        cloneForLoop(commentTrack);
+        animationFrame = window.requestAnimationFrame(step);
+      }
 
-        const movingTracks = [
-          { element: imageTrack, position: 0 },
-          { element: commentTrack, position: 0 }
-        ].filter(item => item.element);
+      resize();
+      step();
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
+    }
 
-        function animate(now) {
-          const delta = (now - lastTime) / 1000;
-          lastTime = now;
+    languageSelect.addEventListener("change", event => {
+      const next = ["it", "en", "es"].includes(event.target.value) ? event.target.value : "it";
+      localStorage.setItem("sapotweak_site_lang", next);
+      applyLanguage(next);
+    });
 
-          movingTracks.forEach(item => {
-            const loopWidth = item.element.scrollWidth / 2;
-            if (loopWidth <= 0) return;
-            item.position -= speed * delta;
-            if (Math.abs(item.position) >= loopWidth) item.position = 0;
-            item.element.style.transform = `translate3d(${item.position}px, 0, 0)`;
-          });
-
-          requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-      });
-    })();
+    applyLanguage(saved);
+    initMeshBackground();
   </script>
 </body>
 </html>
-
