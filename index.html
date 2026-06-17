@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Licenza</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
+      font-family: "Sora", "Segoe UI", sans-serif;
       color: #fff;
       background: #050507;
       overflow-x: hidden;
@@ -70,7 +71,35 @@
       grid-template-columns: 1fr 1fr;
       gap: 52px;
       align-items: center;
-      padding: 76px 0 36px;
+      padding: 92px 0 52px;
+    }
+    .hero-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(167,139,250,.24);
+      background: rgba(124,58,237,.10);
+      color: #e9dcff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #9f67ff;
+      box-shadow: 0 0 16px rgba(159,103,255,.8);
     }
     h1 {
       font-size: clamp(48px, 8vw, 94px);
@@ -88,10 +117,359 @@
       color: #c5c1d8;
       font-size: 18px;
       line-height: 1.62;
-      margin: 26px 0;
+      margin: 0;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+      max-width: 720px;
+    }
+    .hero-metric {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .hero-metric strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+    .hero-metric span {
+      color: #b9b5ca;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .showcase {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 18px;
+    }
+    .showcase-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .showcase-copy h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: .96;
+      letter-spacing: -.05em;
+    }
+    .showcase-copy p {
+      margin: 0;
+      color: #bdb8d2;
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 620px;
+    }
+    .showcase-points {
+      display: grid;
+      gap: 12px;
+    }
+    .showcase-point {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .showcase-point strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 16px;
+    }
+    .showcase-point span {
+      color: #b8b3ca;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .showcase-visual {
+      position: relative;
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+    }
+    .showcase-main {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 620px);
+    }
+    .showcase-main img {
+      transform: scale(1.02);
+    }
+    .showcase-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(16px);
+      z-index: 0;
+      opacity: .8;
+    }
+    .orb-a {
+      width: 220px;
+      height: 220px;
+      top: 34px;
+      right: 60px;
+      background: radial-gradient(circle, rgba(168,85,247,.45), transparent 70%);
+    }
+    .orb-b {
+      width: 260px;
+      height: 260px;
+      bottom: 34px;
+      left: 20px;
+      background: radial-gradient(circle, rgba(99,102,241,.36), transparent 72%);
+    }
+    .floating-card {
+      position: absolute;
+      z-index: 3;
+      min-width: 180px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(12,12,20,.82);
+      box-shadow: 0 18px 48px rgba(0,0,0,.34);
+      backdrop-filter: blur(10px);
+    }
+    .floating-card small {
+      display: block;
+      margin-bottom: 6px;
+      color: #aa9fc9;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .floating-card strong {
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .float-top { top: 74px; left: -8px; }
+    .float-mid { top: 272px; right: -10px; }
+    .float-bottom { bottom: 68px; left: 46px; }
+    .performance-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .performance-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, #141420, #0d0d16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 28px rgba(124,58,237,.10);
+    }
+    .performance-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .performance-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+    }
+    .performance-card p {
+      margin: 0;
+      color: #b8b3ca;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .preset-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .preset-card.featured {
+      border-color: rgba(167,139,250,.42);
+      box-shadow: 0 0 34px rgba(124,58,237,.14);
+      transform: translateY(-8px);
+    }
+    .preset-badge {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .preset-badge.safe { background: rgba(74,222,128,.14); color: #bef8cf; }
+    .preset-badge.advanced { background: rgba(167,139,250,.16); color: #e2d5ff; }
+    .preset-badge.extreme { background: rgba(248,113,113,.16); color: #ffd0d0; }
+    .preset-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      line-height: 1.05;
+    }
+    .preset-card p {
+      margin: 0;
+      color: #b8b3ca;
+      font-size: 14px;
+      line-height: 1.68;
+    }
+    .app-stage {
+      display: grid;
+      grid-template-columns: .94fr 1.06fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .app-stage-copy,
+    .offer-shell,
+    .offer-panel {
+      border: 1px solid rgba(255,255,255,.09);
+      background: linear-gradient(180deg, #151522, #101018);
+      border-radius: 24px;
+      box-shadow: 0 0 0 1px rgba(124, 58, 237, .08), 0 0 24px rgba(124, 58, 237, .14), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .app-stage-copy {
+      padding: 22px;
+    }
+    .app-stage-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .app-stage-item {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      color: #c7c2d8;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .app-stage-item b {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+    .premium-grid .premium-card {
+      min-height: 176px;
+    }
+    .offer-shell {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      padding: 22px;
+    }
+    .offer-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .offer-copy h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .offer-copy p {
+      margin: 0;
+      color: #b8b3ca;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .offer-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .offer-metric {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    .offer-metric strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 20px;
+    }
+    .offer-metric span {
+      color: #c5bfd6;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .offer-panel {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: linear-gradient(180deg, rgba(124,58,237,.16), rgba(255,255,255,.03));
+      border-color: rgba(167,139,250,.22);
+    }
+    .offer-plan {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(8,8,14,.26);
+    }
+    .featured-plan {
+      border-color: rgba(167,139,250,.34);
+      box-shadow: 0 0 28px rgba(124,58,237,.14);
+    }
+    .offer-plan small {
+      display: block;
+      margin-bottom: 8px;
+      color: #b59cff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .offer-plan strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 34px;
+      line-height: 1;
+    }
+    .offer-plan span {
+      color: #cbc5dd;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .timeline-panel,
+    .cards,
+    .details,
+    .payment-card,
+    .story-grid,
+    .metrics-strip,
+    .feature-wall {
+      display: none !important;
+    }
+    .checkout-chip.large {
+      min-height: 52px;
+      width: 100%;
+      margin-bottom: 0;
+      font-size: 16px;
     }
     .section {
-      margin-top: 34px;
+      margin-top: 84px;
     }
     .section-head {
       display: flex;
@@ -165,13 +543,13 @@
     }
     .btn:hover::after { transform: translateX(115%); }
     .btn.youtube {
-      background: linear-gradient(135deg, #ff0033, #c90024);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: 0 18px 45px rgba(255, 0, 0, .18);
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(124,58,237,.20));
+      color: #f4efff;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 45px rgba(68, 37, 126, .22);
     }
     .btn.youtube:hover {
-      box-shadow: 0 24px 70px rgba(255, 0, 0, .30);
+      box-shadow: 0 24px 70px rgba(92, 50, 170, .32);
     }
     .visual {
       border: 1px solid rgba(255,255,255,.11);
@@ -692,14 +1070,29 @@
       .btn, .btn::after { transition: none; }
     }
     @media (max-width: 1000px) {
+      .showcase,
       .story-grid,
-      .payment-layout { grid-template-columns: 1fr; }
+      .payment-layout,
+      .app-stage,
+      .offer-shell { grid-template-columns: 1fr; }
       .timeline-grid,
       .feature-grid,
       .metrics-strip,
-      .story-bullets { grid-template-columns: 1fr; }
+      .story-bullets,
+      .hero-metrics,
+      .showcase-points,
+      .performance-band,
+      .preset-grid,
+      .offer-metrics,
+      .app-stage-list { grid-template-columns: 1fr; }
       .feature-video { grid-template-columns: 1fr; }
       .video-panel video { min-height: 260px; }
+      .showcase-visual { min-height: 520px; }
+      .float-top,
+      .float-mid,
+      .float-bottom { position: static; }
+      .showcase-visual { display: flex; flex-direction: column; gap: 14px; }
+      .preset-card.featured { transform: none; }
     }
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; padding-top: 54px; }
@@ -708,6 +1101,7 @@
       .nav-actions { justify-content: flex-start; }
       .visual { order: -1; }
       .support-choice-grid { grid-template-columns: 1fr; }
+      .showcase-main { width: 100%; }
     }
   </style>
 </head>
@@ -733,11 +1127,28 @@
 
     <section class="hero">
       <div class="copy">
-        <h1><span data-i18n="headlineMain">Licenza</span> <span>SapoTweak</span></h1>
-        <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. In questa fase beta a pagamento scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
-        <div class="actions">
-          <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
-          <a class="btn youtube" id="introVideoBtn" href="#intro-video" data-i18n="introVideoBtn">Video introduttivo</a>
+        <div class="hero-stack">
+          <span class="eyebrow" data-i18n="heroEyebrow">Windows gaming optimization suite</span>
+          <h1><span data-i18n="headlineMain">Licenza</span> <span>SapoTweak</span></h1>
+          <p data-i18n="heroText">SapoTweak viene sbloccato tramite licenza personale. In questa fase beta a pagamento scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.</p>
+          <div class="hero-metrics">
+            <div class="hero-metric">
+              <strong data-i18n="heroMetric1Title">Preset guidati</strong>
+              <span data-i18n="heroMetric1Text">Safe, Advanced ed Extreme per livelli diversi di intervento.</span>
+            </div>
+            <div class="hero-metric">
+              <strong data-i18n="heroMetric2Title">Supporto reale</strong>
+              <span data-i18n="heroMetric2Text">Popup diretto con Gmail, Discord e testo pronto da copiare.</span>
+            </div>
+            <div class="hero-metric">
+              <strong data-i18n="heroMetric3Title">Checkout chiaro</strong>
+              <span data-i18n="heroMetric3Text">Prezzi semplici, attivazione immediata e download ufficiale.</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn" id="downloadBtn" href="checkout.html" data-i18n="downloadBtn">Scegli il piano</a>
+            <a class="btn youtube" id="introVideoBtn" href="#app-overview" data-i18n="introVideoBtn">Video introduttivo</a>
+          </div>
         </div>
       </div>
       <div class="visual">
@@ -745,43 +1156,7 @@
       </div>
     </section>
 
-    <section class="section reveal">
-      <div class="section-head">
-        <span class="section-tag" data-i18n="flowTag">Percorso chiaro</span>
-        <h2 data-i18n="flowTitle">Capisci cosa compri prima ancora di arrivare al checkout</h2>
-        <p data-i18n="flowLead">La home adesso accompagna l'utente in ordine: cosa fa SapoTweak, come lavora nell'app, cosa aspettarsi dalla licenza e solo alla fine il pagamento.</p>
-      </div>
-      <div class="timeline-panel">
-        <div class="timeline-grid">
-          <article class="timeline-card">
-            <span class="timeline-step">01</span>
-            <h3 data-i18n="step1Title">Scegli il livello</h3>
-            <p data-i18n="step1Text">Preset Safe, Advanced ed Extreme con impatto e rischio separati, cosi non entri alla cieca.</p>
-          </article>
-          <article class="timeline-card">
-            <span class="timeline-step">02</span>
-            <h3 data-i18n="step2Title">Applica in modo guidato</h3>
-            <p data-i18n="step2Text">Ogni sezione spiega il tweak, mostra avvisi reali e lascia spazio al ripristino se vuoi tornare indietro.</p>
-          </article>
-          <article class="timeline-card">
-            <span class="timeline-step">03</span>
-            <h3 data-i18n="step3Title">Controlla i risultati</h3>
-            <p data-i18n="step3Text">Testi FPS, 1% low, input e stabilita con il tuo setup invece di affidarti a promesse vaghe.</p>
-          </article>
-          <article class="timeline-card">
-            <span class="timeline-step">04</span>
-            <h3 data-i18n="step4Title">Gestisci supporto e update</h3>
-            <p data-i18n="step4Text">Download ufficiale, aggiornamenti integrati e supporto diretto via Gmail o ticket Discord in pochi click.</p>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="cards" hidden aria-hidden="true">
-      <div class="card"><b data-i18n="card1Title">Preset gaming</b><span data-i18n="card1Text">Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.</span></div>
-      <div class="card"><b data-i18n="card2Title">Licenza protetta</b><span data-i18n="card2Text">Attivazione collegata al PC con controllo automatico all'avvio dell'app.</span></div>
-      <div class="card"><b data-i18n="card3Title">Aggiornamenti integrati</b><span data-i18n="card3Text">L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.</span></div>
-    </section>
 
         <section class="details" data-i18n="detailsText" hidden aria-hidden="true">
       SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, così l'utente può scegliere in autonomia.
@@ -794,51 +1169,119 @@
       <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.</p>
     </section>
 
+
+    <section class="showcase reveal">
+      <div class="showcase-copy">
+        <span class="section-tag" data-i18n="showcaseTag">Prestazioni reali</span>
+        <h2 data-i18n="showcaseTitle">Una suite pensata per FPS, latenza e pulizia di sistema</h2>
+        <p data-i18n="showcaseLead">SapoTweak concentra tweak gaming, gestione servizi, rete e ripristino in un flusso unico. Non devi scavare in Windows: apri, scegli il preset e lavori per blocchi chiari.</p>
+        <div class="showcase-points">
+          <article class="showcase-point">
+            <strong data-i18n="showcaseP1Title">Boost FPS e meno stutter</strong>
+            <span data-i18n="showcaseP1Text">Preset e ottimizzazioni mirate per alleggerire il sistema durante il gioco.</span>
+          </article>
+          <article class="showcase-point">
+            <strong data-i18n="showcaseP2Title">Input e rete piu reattivi</strong>
+            <span data-i18n="showcaseP2Text">Focus su latenza, servizi in background e priorita delle risorse dove conta davvero.</span>
+          </article>
+          <article class="showcase-point">
+            <strong data-i18n="showcaseP3Title">Sempre reversibile</strong>
+            <span data-i18n="showcaseP3Text">Ripristino, note chiare e controlli dentro l'app per non perdere il controllo del PC.</span>
+          </article>
+        </div>
+      </div>
+      <div class="showcase-visual">
+        <div class="showcase-orb orb-a"></div>
+        <div class="showcase-orb orb-b"></div>
+        <div class="showcase-main visual">
+          <img src="sapotweakpng.png" alt="Anteprima SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+        </div>
+        <div class="floating-card float-top">
+          <small data-i18n="floating1Label">Gaming stack</small>
+          <strong data-i18n="floating1Value">Preset + pulizia + rete</strong>
+        </div>
+        <div class="floating-card float-mid">
+          <small data-i18n="floating2Label">Licenza</small>
+          <strong data-i18n="floating2Value">Attivazione personale</strong>
+        </div>
+        <div class="floating-card float-bottom">
+          <small data-i18n="floating3Label">Supporto</small>
+          <strong data-i18n="floating3Value">Discord e Gmail</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="performance-band reveal">
+      <article class="performance-card">
+        <span class="performance-index">01</span>
+        <h3 data-i18n="perf1Title">Boost your FPS and eliminate stutters</h3>
+        <p data-i18n="perf1Text">Lavora su processi, servizi e componenti che tolgono consistenza al frame pacing.</p>
+      </article>
+      <article class="performance-card">
+        <span class="performance-index">02</span>
+        <h3 data-i18n="perf2Title">Improve ping and responsiveness</h3>
+        <p data-i18n="perf2Text">Ottimizzazioni mirate per lasciare piu spazio al gioco e meno rumore al sistema.</p>
+      </article>
+      <article class="performance-card">
+        <span class="performance-index">03</span>
+        <h3 data-i18n="perf3Title">Stay safe with guided controls</h3>
+        <p data-i18n="perf3Text">Ogni categoria resta leggibile, con warning reali e opzioni di ritorno ai valori conservativi.</p>
+      </article>
+    </section>
+
     <section class="section reveal">
-      <div class="story-grid">
-        <div class="story-panel story-copy">
+      <div class="section-head">
+        <span class="section-tag" data-i18n="presetTag">Preset levels</span>
+        <h2 data-i18n="presetTitle">Tre livelli, tre modi diversi di usare SapoTweak</h2>
+        <p data-i18n="presetLead">Il sito adesso racconta subito che non esiste un solo bottone magico: esistono livelli diversi, in base a quanto vuoi spingere il sistema.</p>
+      </div>
+      <div class="preset-grid">
+        <article class="preset-card">
+          <span class="preset-badge safe" data-i18n="presetSafeBadge">Safe</span>
+          <h3 data-i18n="presetSafeTitle">Partenza conservativa</h3>
+          <p data-i18n="presetSafeText">Pensato per chi vuole un sistema piu pulito e gaming-focused senza toccare aree troppo aggressive.</p>
+        </article>
+        <article class="preset-card featured">
+          <span class="preset-badge advanced" data-i18n="presetAdvancedBadge">Advanced</span>
+          <h3 data-i18n="presetAdvancedTitle">Bilanciato e competitivo</h3>
+          <p data-i18n="presetAdvancedText">Il preset centrale per chi vuole piu spinta su latenza, processi e comportamento generale del PC.</p>
+        </article>
+        <article class="preset-card">
+          <span class="preset-badge extreme" data-i18n="presetExtremeBadge">Extreme</span>
+          <h3 data-i18n="presetExtremeTitle">Massima spinta</h3>
+          <p data-i18n="presetExtremeText">Per utenti avanzati che vogliono spremere il sistema e sanno leggere avvisi e conseguenze prima di applicare.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="app-overview">
+      <div class="app-stage">
+        <div class="app-stage-copy">
           <span class="section-tag" data-i18n="appTag">Dentro l'app</span>
           <h2 data-i18n="appTitle">Interfaccia guidata, meno caos, piu contesto</h2>
           <p data-i18n="appLead">SapoTweak non mostra cento switch casuali. Filtra le azioni utili, evidenzia gli avvisi importanti e separa le modifiche per categoria.</p>
-          <div class="story-bullets">
-            <div class="story-bullet">
+          <div class="app-stage-list">
+            <div class="app-stage-item">
               <b data-i18n="rail1Title">Preset guidati</b>
               <span data-i18n="rail1Text">Safe, Advanced ed Extreme con livelli separati per utenti diversi.</span>
             </div>
-            <div class="story-bullet">
+            <div class="app-stage-item">
               <b data-i18n="rail2Title">Ripristino</b>
               <span data-i18n="rail2Text">Backup e ritorno ai valori conservativi se un preset non convince.</span>
             </div>
-            <div class="story-bullet">
+            <div class="app-stage-item">
               <b data-i18n="rail3Title">Gaming focus</b>
               <span data-i18n="rail3Text">Ottimizzazioni mirate su latenza, servizi, input e pulizia Windows.</span>
             </div>
-            <div class="story-bullet">
+            <div class="app-stage-item">
               <b data-i18n="rail4Title">Update integrati</b>
               <span data-i18n="rail4Text">Controllo versione e download guidato direttamente dentro l'app.</span>
             </div>
           </div>
         </div>
-        <div class="story-panel video-panel" id="intro-video">
+        <div class="app-stage-media video-panel">
           <video src="tweakvideo.mp4" autoplay muted loop playsinline poster="sapotweakpng.png"></video>
         </div>
-      </div>
-    </section>
-
-    <section class="section reveal">
-      <div class="metrics-strip">
-        <article class="metric-tile">
-          <strong data-i18n="metric1Value">3 preset</strong>
-          <span data-i18n="metric1Label">Safe, Advanced ed Extreme per livelli diversi.</span>
-        </article>
-        <article class="metric-tile">
-          <strong data-i18n="metric2Value">Supporto diretto</strong>
-          <span data-i18n="metric2Label">Popup rapido con Gmail, Discord e testo gia pronto da copiare.</span>
-        </article>
-        <article class="metric-tile">
-          <strong data-i18n="metric3Value">Update in app</strong>
-          <span data-i18n="metric3Label">Version check e download guidato senza cercare build in giro.</span>
-        </article>
       </div>
     </section>
 
@@ -848,46 +1291,64 @@
         <h2 data-i18n="featureTitle">Una pagina piu leggibile, orientata a fiducia e decisione</h2>
         <p data-i18n="featureLead">Abbiamo separato valore, funzionamento e acquisto per far capire meglio il prodotto senza blocchi tutti uguali e schiacciati.</p>
       </div>
-      <div class="feature-wall">
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3 data-i18n="card1Title">Preset gaming</h3>
-            <p data-i18n="card1Text">Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.</p>
-          </article>
-          <article class="feature-card">
-            <h3 data-i18n="card2Title">Licenza protetta</h3>
-            <p data-i18n="card2Text">Attivazione collegata al PC con controllo automatico all'avvio dell'app.</p>
-          </article>
-          <article class="feature-card">
-            <h3 data-i18n="card3Title">Aggiornamenti integrati</h3>
-            <p data-i18n="card3Text">L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.</p>
-          </article>
-          <article class="feature-card">
-            <h3 data-i18n="rail5Title">PC rilevato</h3>
-            <p data-i18n="rail5Text">L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.</p>
-          </article>
-          <article class="feature-card">
-            <h3 data-i18n="rail6Title">Interfaccia pulita</h3>
-            <p data-i18n="rail6Text">Mostra solo le azioni utili, evitando impostazioni fuori contesto.</p>
-          </article>
-          <article class="feature-card">
-            <h3 data-i18n="detailsTitle">Note chiare</h3>
-            <p data-i18n="detailsText">SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.</p>
-          </article>
-        </div>
+      <div class="feature-grid premium-grid">
+        <article class="feature-card premium-card">
+          <h3 data-i18n="card1Title">Preset gaming</h3>
+          <p data-i18n="card1Text">Profili Safe, Advanced ed Extreme per alleggerire Windows senza toccare servizi critici.</p>
+        </article>
+        <article class="feature-card premium-card">
+          <h3 data-i18n="card2Title">Licenza protetta</h3>
+          <p data-i18n="card2Text">Attivazione collegata al PC con controllo automatico all'avvio dell'app.</p>
+        </article>
+        <article class="feature-card premium-card">
+          <h3 data-i18n="card3Title">Aggiornamenti integrati</h3>
+          <p data-i18n="card3Text">L'app controlla le nuove versioni e guida l'utente durante il download dell'installer.</p>
+        </article>
+        <article class="feature-card premium-card">
+          <h3 data-i18n="rail5Title">PC rilevato</h3>
+          <p data-i18n="rail5Text">L'app filtra tweak in base a RAM, GPU, CPU e versione Windows.</p>
+        </article>
+        <article class="feature-card premium-card">
+          <h3 data-i18n="rail6Title">Interfaccia pulita</h3>
+          <p data-i18n="rail6Text">Mostra solo le azioni utili, evitando impostazioni fuori contesto.</p>
+        </article>
+        <article class="feature-card premium-card">
+          <h3 data-i18n="detailsTitle">Note chiare</h3>
+          <p data-i18n="detailsText">SapoTweak richiede l'avvio come amministratore per applicare modifiche di sistema. I preset sono separati per livello di rischio e includono note chiare su cosa viene modificato, cosi l'utente puo scegliere in autonomia.</p>
+        </article>
       </div>
     </section>
 
     <section class="section reveal">
-      <div class="payment-layout">
-        <div class="payment-copy">
+      <div class="offer-shell">
+        <div class="offer-copy">
           <span class="section-tag" data-i18n="paymentTag">Checkout finale</span>
           <h2 data-i18n="paymentTitle">Arriva al pagamento solo quando hai gia capito il prodotto</h2>
           <p data-i18n="paymentLead">Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma.</p>
-          <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.</p>
+          <div class="offer-metrics">
+            <div class="offer-metric">
+              <strong data-i18n="metric1Value">3 preset</strong>
+              <span data-i18n="metric1Label">Safe, Advanced ed Extreme per livelli diversi.</span>
+            </div>
+            <div class="offer-metric">
+              <strong data-i18n="metric2Value">Supporto diretto</strong>
+              <span data-i18n="metric2Label">Popup rapido con Gmail, Discord e testo gia pronto da copiare.</span>
+            </div>
+          </div>
         </div>
-        <div class="payment-box">
-          <a class="checkout-chip" href="checkout.html" data-i18n="paymentButton">Apri il checkout</a>
+        <div class="offer-panel">
+          <div class="offer-plan">
+            <small data-i18n="offerMonthlyLabel">Mensile</small>
+            <strong data-i18n="offerMonthlyValue">9,99 €</strong>
+            <span data-i18n="offerMonthlyNote">Accesso ricorrente con update e supporto.</span>
+          </div>
+          <div class="offer-plan featured-plan">
+            <small data-i18n="offerQuarterlyLabel">Trimestrale</small>
+            <strong data-i18n="offerQuarterlyValue">19,99 €</strong>
+            <span data-i18n="offerQuarterlyNote">La scelta piu conveniente per usare davvero il tweak.</span>
+          </div>
+          <a class="checkout-chip large" href="checkout.html" data-i18n="paymentButton">Apri il checkout</a>
+          <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.</p>
           <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Durante la beta alcune aree possono ricevere fix rapidi o cambiare piu spesso.</p>
         </div>
       </div>
@@ -961,9 +1422,49 @@
         versionLabel: 'Versione',
         reviewsLink: 'Recensioni',
         headlineMain: 'Licenza',
+        heroEyebrow: 'Windows gaming optimization suite',
         heroText: "SapoTweak viene sbloccato tramite licenza personale. In questa fase beta a pagamento scegli il piano, completi il pagamento e ricevi subito key e download ufficiale nella pagina di conferma.",
+        heroMetric1Title: 'Preset guidati',
+        heroMetric1Text: 'Safe, Advanced ed Extreme per livelli diversi di intervento.',
+        heroMetric2Title: 'Supporto reale',
+        heroMetric2Text: 'Popup diretto con Gmail, Discord e testo pronto da copiare.',
+        heroMetric3Title: 'Checkout chiaro',
+        heroMetric3Text: 'Prezzi semplici, attivazione immediata e download ufficiale.',
         downloadBtn: 'Scegli il piano',
         introVideoBtn: 'Video introduttivo',
+        showcaseTag: 'Prestazioni reali',
+        showcaseTitle: 'Una suite pensata per FPS, latenza e pulizia di sistema',
+        showcaseLead: 'SapoTweak concentra tweak gaming, gestione servizi, rete e ripristino in un flusso unico. Non devi scavare in Windows: apri, scegli il preset e lavori per blocchi chiari.',
+        showcaseP1Title: 'Boost FPS e meno stutter',
+        showcaseP1Text: 'Preset e ottimizzazioni mirate per alleggerire il sistema durante il gioco.',
+        showcaseP2Title: 'Input e rete piu reattivi',
+        showcaseP2Text: 'Focus su latenza, servizi in background e priorita delle risorse dove conta davvero.',
+        showcaseP3Title: 'Sempre reversibile',
+        showcaseP3Text: "Ripristino, note chiare e controlli dentro l'app per non perdere il controllo del PC.",
+        floating1Label: 'Gaming stack',
+        floating1Value: 'Preset + pulizia + rete',
+        floating2Label: 'Licenza',
+        floating2Value: 'Attivazione personale',
+        floating3Label: 'Supporto',
+        floating3Value: 'Discord e Gmail',
+        perf1Title: 'Boost your FPS and eliminate stutters',
+        perf1Text: 'Lavora su processi, servizi e componenti che tolgono consistenza al frame pacing.',
+        perf2Title: 'Improve ping and responsiveness',
+        perf2Text: 'Ottimizzazioni mirate per lasciare piu spazio al gioco e meno rumore al sistema.',
+        perf3Title: 'Stay safe with guided controls',
+        perf3Text: 'Ogni categoria resta leggibile, con warning reali e opzioni di ritorno ai valori conservativi.',
+        presetTag: 'Preset levels',
+        presetTitle: 'Tre livelli, tre modi diversi di usare SapoTweak',
+        presetLead: 'Il sito adesso racconta subito che non esiste un solo bottone magico: esistono livelli diversi, in base a quanto vuoi spingere il sistema.',
+        presetSafeBadge: 'Safe',
+        presetSafeTitle: 'Partenza conservativa',
+        presetSafeText: 'Pensato per chi vuole un sistema piu pulito e gaming-focused senza toccare aree troppo aggressive.',
+        presetAdvancedBadge: 'Advanced',
+        presetAdvancedTitle: 'Bilanciato e competitivo',
+        presetAdvancedText: 'Il preset centrale per chi vuole piu spinta su latenza, processi e comportamento generale del PC.',
+        presetExtremeBadge: 'Extreme',
+        presetExtremeTitle: 'Massima spinta',
+        presetExtremeText: 'Per utenti avanzati che vogliono spremere il sistema e sanno leggere avvisi e conseguenze prima di applicare.',
         flowTag: 'Percorso chiaro',
         flowTitle: 'Capisci cosa compri prima ancora di arrivare al checkout',
         flowLead: "La home adesso accompagna l'utente in ordine: cosa fa SapoTweak, come lavora nell'app, cosa aspettarsi dalla licenza e solo alla fine il pagamento.",
@@ -984,6 +1485,12 @@
         metric2Label: 'Popup rapido con Gmail, Discord e testo gia pronto da copiare.',
         metric3Value: 'Update in app',
         metric3Label: 'Version check e download guidato senza cercare build in giro.',
+        offerMonthlyLabel: 'Mensile',
+        offerMonthlyValue: '9,99 €',
+        offerMonthlyNote: 'Accesso ricorrente con update e supporto.',
+        offerQuarterlyLabel: 'Trimestrale',
+        offerQuarterlyValue: '19,99 €',
+        offerQuarterlyNote: 'La scelta piu conveniente per usare davvero il tweak.',
         featureTag: 'Perche SapoTweak',
         featureTitle: 'Una pagina piu leggibile, orientata a fiducia e decisione',
         featureLead: 'Abbiamo separato valore, funzionamento e acquisto per far capire meglio il prodotto senza blocchi tutti uguali e schiacciati.',
@@ -1044,9 +1551,49 @@
         versionLabel: 'Version',
         reviewsLink: 'Reviews',
         headlineMain: 'License',
+        heroEyebrow: 'Windows gaming optimization suite',
         heroText: 'SapoTweak is unlocked through a personal license. During this paid beta phase you choose a plan, complete checkout and receive the key plus the official download on the confirmation page.',
+        heroMetric1Title: 'Guided presets',
+        heroMetric1Text: 'Safe, Advanced and Extreme for different levels of intensity.',
+        heroMetric2Title: 'Real support',
+        heroMetric2Text: 'Direct popup with Gmail, Discord and a ready-to-copy message.',
+        heroMetric3Title: 'Clear checkout',
+        heroMetric3Text: 'Simple pricing, instant activation and the official download.',
         downloadBtn: 'Choose plan',
         introVideoBtn: 'Introductory video',
+        showcaseTag: 'Real performance',
+        showcaseTitle: 'A suite built for FPS, latency and system cleanup',
+        showcaseLead: 'SapoTweak brings gaming tweaks, service control, network work and restore tools into one flow. No deep Windows digging: open the app, choose your preset and move through clear blocks.',
+        showcaseP1Title: 'Boost FPS and reduce stutters',
+        showcaseP1Text: 'Focused presets and optimizations help remove overhead while you play.',
+        showcaseP2Title: 'Faster input and cleaner networking',
+        showcaseP2Text: 'Built around latency, background load and resource priority where responsiveness matters most.',
+        showcaseP3Title: 'Always reversible',
+        showcaseP3Text: 'Restore paths, clear notes and in-app controls keep you in charge of the PC.',
+        floating1Label: 'Gaming stack',
+        floating1Value: 'Presets + cleanup + network',
+        floating2Label: 'License',
+        floating2Value: 'Personal activation',
+        floating3Label: 'Support',
+        floating3Value: 'Discord and Gmail',
+        perf1Title: 'Boost your FPS and eliminate stutters',
+        perf1Text: 'Work on processes, services and components that damage frame pacing consistency.',
+        perf2Title: 'Improve ping and responsiveness',
+        perf2Text: 'Targeted optimizations leave more room for the game and less noise in the system.',
+        perf3Title: 'Stay safe with guided controls',
+        perf3Text: 'Every category stays readable, with real warnings and conservative rollback options.',
+        presetTag: 'Preset levels',
+        presetTitle: 'Three levels, three different ways to use SapoTweak',
+        presetLead: 'The site now makes it obvious that there is no single magic switch. There are different intensity levels depending on how far you want to push the system.',
+        presetSafeBadge: 'Safe',
+        presetSafeTitle: 'Conservative start',
+        presetSafeText: 'For users who want a cleaner, gaming-focused setup without touching overly aggressive areas.',
+        presetAdvancedBadge: 'Advanced',
+        presetAdvancedTitle: 'Balanced and competitive',
+        presetAdvancedText: 'The core preset for users who want stronger latency, process and overall system behavior tuning.',
+        presetExtremeBadge: 'Extreme',
+        presetExtremeTitle: 'Maximum push',
+        presetExtremeText: 'For advanced users who want to squeeze the system harder and can read the warnings before applying.',
         flowTag: 'Clear path',
         flowTitle: 'Understand the product before you ever reach checkout',
         flowLead: 'The homepage now walks the user in order: what SapoTweak does, how it works inside the app, what to expect from the license, and only then the payment step.',
@@ -1067,6 +1614,12 @@
         metric2Label: 'Fast popup with Gmail, Discord and ready-to-copy support text.',
         metric3Value: 'In-app updates',
         metric3Label: 'Version checks and guided downloads without hunting for builds.',
+        offerMonthlyLabel: 'Monthly',
+        offerMonthlyValue: '9.99 €',
+        offerMonthlyNote: 'Recurring access with updates and support.',
+        offerQuarterlyLabel: 'Quarterly',
+        offerQuarterlyValue: '19.99 €',
+        offerQuarterlyNote: 'The better-value choice if you plan to really use the tweak.',
         featureTag: 'Why SapoTweak',
         featureTitle: 'A cleaner page focused on trust and decision making',
         featureLead: 'Value, product behavior and purchase are now separated so the product is easier to understand at a glance.',
@@ -1126,9 +1679,43 @@
         versionLabel: 'Versión',
         reviewsLink: 'Reseñas',
         headlineMain: 'Licencia',
+        heroEyebrow: 'Suite de optimizaciÃ³n gaming para Windows',
         heroText: 'SapoTweak se desbloquea mediante una licencia personal. En esta fase de beta de pago eliges el plan, completas el pago y recibes la key y la descarga oficial en la página de confirmación.',
         downloadBtn: 'Elegir plan',
         introVideoBtn: 'Vídeo introductorio',
+        showcaseTag: 'Rendimiento real',
+        showcaseTitle: 'Una suite pensada para FPS, latencia y limpieza del sistema',
+        showcaseLead: 'SapoTweak une tweaks gaming, control de servicios, red y restauración en un solo flujo. No tienes que perderte en Windows: abres la app, eliges el preset y trabajas por bloques claros.',
+        showcaseP1Title: 'Más FPS y menos stutter',
+        showcaseP1Text: 'Presets y optimizaciones centradas en aligerar el sistema mientras juegas.',
+        showcaseP2Title: 'Input y red más reactivos',
+        showcaseP2Text: 'Enfoque real sobre latencia, carga en segundo plano y prioridad de recursos.',
+        showcaseP3Title: 'Siempre reversible',
+        showcaseP3Text: 'Restauración, notas claras y controles dentro de la app para no perder el control del PC.',
+        floating1Label: 'Gaming stack',
+        floating1Value: 'Preset + limpieza + red',
+        floating2Label: 'Licencia',
+        floating2Value: 'Activación personal',
+        floating3Label: 'Soporte',
+        floating3Value: 'Discord y Gmail',
+        perf1Title: 'Mejora los FPS y elimina stutters',
+        perf1Text: 'Actúa sobre procesos, servicios y componentes que dañan la consistencia del frame pacing.',
+        perf2Title: 'Mejora ping y respuesta',
+        perf2Text: 'Optimizaciones para dejar más espacio al juego y menos ruido al sistema.',
+        perf3Title: 'Mantén el control con guía real',
+        perf3Text: 'Cada categoría sigue siendo clara, con avisos reales y opciones de vuelta a valores conservadores.',
+        presetTag: 'Niveles de preset',
+        presetTitle: 'Tres niveles, tres formas distintas de usar SapoTweak',
+        presetLead: 'La web ahora deja claro que no existe un único botón mágico. Hay niveles diferentes según cuánto quieras empujar el sistema.',
+        presetSafeBadge: 'Safe',
+        presetSafeTitle: 'Inicio conservador',
+        presetSafeText: 'Pensado para quien quiere un sistema más limpio y gaming-focused sin tocar zonas demasiado agresivas.',
+        presetAdvancedBadge: 'Advanced',
+        presetAdvancedTitle: 'Equilibrado y competitivo',
+        presetAdvancedText: 'El preset central para quien quiere más empuje en latencia, procesos y comportamiento general del PC.',
+        presetExtremeBadge: 'Extreme',
+        presetExtremeTitle: 'Máximo empuje',
+        presetExtremeText: 'Para usuarios avanzados que quieren exprimir el sistema y saben leer avisos y consecuencias antes de aplicar.',
         flowTag: 'Ruta clara',
         flowTitle: 'Entiende lo que compras antes de llegar al checkout',
         flowLead: 'La home ahora guia al usuario en orden: que hace SapoTweak, como funciona dentro de la app, que esperar de la licencia y solo al final el pago.',
@@ -1149,6 +1736,12 @@
         metric2Label: 'Popup rapido con Gmail, Discord y texto listo para copiar.',
         metric3Value: 'Updates en app',
         metric3Label: 'Control de version y descarga guiada sin buscar builds por fuera.',
+        offerMonthlyLabel: 'Mensual',
+        offerMonthlyValue: '9,99 €',
+        offerMonthlyNote: 'Acceso recurrente con updates y soporte.',
+        offerQuarterlyLabel: 'Trimestral',
+        offerQuarterlyValue: '19,99 €',
+        offerQuarterlyNote: 'La opción más conveniente si vas a usar de verdad el tweak.',
         featureTag: 'Por que SapoTweak',
         featureTitle: 'Una pagina mas clara, enfocada en confianza y decision',
         featureLead: 'Separamos valor, funcionamiento y compra para que el producto se entienda mejor y no se vea todo amontonado.',
