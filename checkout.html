@@ -5,74 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Checkout</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
     :root {
-      --bg-0: #05030a;
-      --bg-1: #0a0612;
-      --surface-0: rgba(15, 11, 25, .82);
-      --surface-1: rgba(21, 15, 36, .9);
-      --surface-2: rgba(34, 18, 58, .92);
-      --line-soft: rgba(255,255,255,.08);
-      --line-strong: rgba(183, 141, 255, .26);
-      --text-0: #f8f4ff;
-      --text-1: #d7cfee;
-      --text-2: #a9a1c1;
-      --accent-0: #7c5cff;
-      --accent-1: #b06cff;
+      color-scheme: dark;
+      --bg-0: #040308;
+      --bg-1: #090611;
+      --surface-0: rgba(14, 11, 24, 0.82);
+      --surface-1: rgba(18, 14, 32, 0.92);
+      --surface-2: rgba(32, 20, 54, 0.96);
+      --line-soft: rgba(255, 255, 255, 0.09);
+      --line-strong: rgba(190, 149, 255, 0.28);
+      --text-0: #fbf7ff;
+      --text-1: #d7d0ea;
+      --text-2: #aaa2c1;
+      --accent-0: #7f42ff;
+      --accent-1: #b366ff;
+      --accent-2: #e6d7ff;
     }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
+      font-family: "Sora", "Segoe UI", sans-serif;
       color: var(--text-0);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(155, 92, 255, .22), transparent 0 18%),
-        radial-gradient(circle at 78% 18%, rgba(118, 62, 255, .14), transparent 0 24%),
-        linear-gradient(180deg, var(--bg-0), var(--bg-1));
-      position: relative;
+      background: linear-gradient(180deg, #05050a, #030305);
       overflow-x: hidden;
     }
-    body::before,
-    body::after {
-      content: "";
+    .bg {
       position: fixed;
       inset: 0;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(137, 79, 255, 0.20), transparent 0 22%),
+        radial-gradient(circle at 82% 20%, rgba(109, 46, 232, 0.14), transparent 0 24%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      z-index: -4;
+    }
+    .mesh-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.96;
       pointer-events: none;
     }
-    body::before {
+    .grid {
+      position: fixed;
+      inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,.35));
-      opacity: .85;
-    }
-    body::after {
-      background:
-        radial-gradient(circle at 22% 34%, rgba(180, 136, 255, .16), transparent 0 22%),
-        radial-gradient(circle at 72% 66%, rgba(110, 48, 232, .16), transparent 0 24%);
-      filter: blur(26px);
-      opacity: .85;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.24));
+      z-index: -2;
+      pointer-events: none;
     }
     .page {
       position: relative;
       z-index: 1;
-      width: min(1040px, 100%);
+      width: min(1180px, 100%);
       margin: 0 auto;
-      padding: 24px;
+      padding: 28px;
     }
     .topbar {
+      position: sticky;
+      top: 18px;
+      z-index: 10;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 42px;
+      justify-content: space-between;
+      gap: 18px;
       padding: 14px 18px;
       border: 1px solid var(--line-soft);
-      border-radius: 24px;
-      background: rgba(8, 7, 16, .56);
-      box-shadow: 0 24px 70px rgba(0,0,0,.26);
+      border-radius: 999px;
+      background: rgba(10, 9, 17, 0.72);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.28);
       backdrop-filter: blur(18px);
+      margin-bottom: 34px;
     }
     .brand {
       display: inline-flex;
@@ -81,117 +93,184 @@
       color: var(--text-0);
       text-decoration: none;
       font-weight: 900;
-      letter-spacing: .08em;
+      letter-spacing: 0.08em;
     }
     .brand img {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
-      border-radius: 999px;
-      filter: drop-shadow(0 0 18px rgba(160, 92, 255, .42));
+      filter: drop-shadow(0 0 18px rgba(157, 92, 255, 0.42));
     }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-link,
     .lang-select {
+      min-height: 42px;
       border: 1px solid var(--line-soft);
       border-radius: 999px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,.045);
+      background: rgba(255,255,255,0.045);
       color: var(--text-0);
-      font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      padding: 0 15px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .content {
+    .lang-select {
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      color-scheme: dark;
+    }
+    .lang-select option {
+      background: #151522;
+      color: #f3f0ff;
+    }
+    .hero-shell {
       display: grid;
-      gap: 30px;
-      justify-items: center;
+      grid-template-columns: 1fr 0.96fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .hero-copy,
+    .hero-media,
+    .consent-box,
+    .trust-strip,
+    .faq-shell,
+    .legal-links {
+      border: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, rgba(17, 13, 30, 0.84), rgba(9, 8, 16, 0.90));
+      border-radius: 32px;
+      box-shadow: 0 28px 110px rgba(0,0,0,0.30);
+      backdrop-filter: blur(14px);
+    }
+    .hero-copy {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 150, 255, 0.28);
+      background: rgba(127, 66, 255, 0.12);
+      color: #ebe0ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #b46cff;
+      box-shadow: 0 0 18px rgba(180, 108, 255, 0.85);
     }
     h1 {
       margin: 0;
-      font-size: clamp(40px, 7vw, 72px);
-      text-align: center;
-      line-height: .94;
-      letter-spacing: -.05em;
-      background: linear-gradient(180deg, #fff, #eadfff 36%, #b06cff 100%);
+      font-size: clamp(46px, 7vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+    }
+    h1 span {
+      background: linear-gradient(180deg, #ffffff 0%, #e9dcff 38%, #b56cff 100%);
       -webkit-background-clip: text;
       color: transparent;
     }
-    .beta-banner,
-    .hero,
-    .copy,
-    .consent-box,
-    .plans,
-    .note {
-      width: min(100%, 760px);
-    }
-    .beta-banner {
-      display: grid;
-      gap: 8px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      border: 1px solid var(--line-strong);
-      background: linear-gradient(180deg, rgba(124,92,255,.14), rgba(20,14,34,.82));
-      box-shadow: 0 24px 70px rgba(0,0,0,.22);
-      backdrop-filter: blur(14px);
-    }
-    .beta-kicker {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 28px;
-      width: fit-content;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #1f1832, #0f0c1a);
-      color: #f4edff;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .08em;
-    }
-    .beta-banner strong {
-      font-size: 18px;
-      color: var(--text-0);
-    }
-    .beta-banner p {
+    .hero-text {
       margin: 0;
       color: var(--text-1);
+      font-size: 16px;
+      line-height: 1.78;
+      max-width: 720px;
+    }
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .hero-point {
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .hero-point strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+    .hero-point span {
+      color: var(--text-2);
+      font-size: 12px;
       line-height: 1.6;
-      font-size: 14px;
     }
-    .hero {
-      background: linear-gradient(180deg, rgba(24, 16, 38, .9), rgba(11, 10, 20, .92));
-      border: 1px solid var(--line-soft);
-      border-radius: 30px;
+    .hero-media {
       padding: 18px;
-      box-shadow: 0 34px 100px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
-    .hero img {
+    .hero-media::before,
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(16px);
+      opacity: 0.9;
+    }
+    .hero-media::before {
+      width: 220px;
+      height: 220px;
+      top: 18px;
+      right: 32px;
+      background: radial-gradient(circle, rgba(163, 93, 255, 0.36), transparent 70%);
+    }
+    .hero-media::after {
+      width: 240px;
+      height: 240px;
+      bottom: 20px;
+      left: 20px;
+      background: radial-gradient(circle, rgba(98, 83, 255, 0.24), transparent 72%);
+    }
+    .hero-media img {
+      position: relative;
+      z-index: 1;
       width: 100%;
       display: block;
       border-radius: 22px;
-    }
-    .copy {
-      display: grid;
-      gap: 14px;
-      color: var(--text-1);
-      line-height: 1.7;
-      font-size: 17px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.42);
     }
     .consent-box {
+      margin-top: 22px;
+      padding: 22px 24px;
       display: grid;
       gap: 10px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      border: 1px solid var(--line-soft);
-      background: linear-gradient(180deg, rgba(20, 15, 34, .9), rgba(10, 9, 18, .88));
-      box-shadow: 0 24px 70px rgba(0,0,0,.22);
     }
     .consent-box strong {
-      color: var(--text-0);
-      font-size: 16px;
+      font-size: 17px;
     }
     .consent-box p {
       margin: 0;
       color: var(--text-1);
-      line-height: 1.6;
+      line-height: 1.65;
       font-size: 14px;
     }
     .consent-row {
@@ -200,8 +279,9 @@
       gap: 12px;
       color: var(--text-1);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
       cursor: pointer;
+      margin-top: 2px;
     }
     .consent-row input {
       position: absolute;
@@ -219,9 +299,9 @@
       height: 22px;
       margin-top: 1px;
       border-radius: 8px;
-      border: 1px solid rgba(177, 132, 255, .54);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 4px rgba(124,92,255,.08);
+      border: 1px solid rgba(177, 132, 255, 0.56);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 4px rgba(124,92,255,0.08);
       transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .checkmark::after {
@@ -231,55 +311,92 @@
       border: solid #fff;
       border-width: 0 2px 2px 0;
       opacity: 0;
-      transform: translateY(-1px) rotate(45deg) scale(.65);
+      transform: translateY(-1px) rotate(45deg) scale(0.65);
       transition: opacity .16s ease, transform .16s ease;
     }
     .consent-row input:checked + .checkmark {
       border-color: var(--accent-0);
       background: linear-gradient(135deg, #6d28d9, #8b5cf6);
-      box-shadow: 0 0 0 4px rgba(124,92,255,.16), 0 12px 26px rgba(124,92,255,.18);
+      box-shadow: 0 0 0 4px rgba(124,92,255,0.16), 0 12px 26px rgba(124,92,255,0.18);
     }
     .consent-row input:checked + .checkmark::after {
       opacity: 1;
       transform: translateY(-1px) rotate(45deg) scale(1);
     }
-    .consent-row input:focus-visible + .checkmark {
-      outline: 2px solid rgba(255,255,255,.75);
-      outline-offset: 3px;
-    }
     .plans {
+      margin-top: 24px;
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
     .plan {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
       gap: 16px;
-      align-items: center;
       text-decoration: none;
       color: inherit;
-      background: linear-gradient(180deg, rgba(19, 14, 32, .92), rgba(12, 10, 22, .92));
-      border: 1px solid var(--line-soft);
-      border-radius: 24px;
-      padding: 18px 20px;
-      box-shadow: 0 24px 70px rgba(0,0,0,.22);
+      padding: 24px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at top right, rgba(181, 108, 255, 0.16), transparent 38%),
+        linear-gradient(180deg, rgba(20, 14, 34, 0.96), rgba(10, 9, 18, 0.96));
+      box-shadow: 0 26px 80px rgba(0,0,0,0.24);
+      overflow: hidden;
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
+    .plan::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(236,224,255,0.74), transparent);
+      opacity: 0.7;
+    }
     .plan:hover {
-      transform: translateY(-2px);
-      border-color: rgba(176,108,255,.48);
-      box-shadow: 0 26px 60px rgba(124, 92, 255, .16);
+      transform: translateY(-3px);
+      border-color: rgba(190,149,255,0.34);
+      box-shadow: 0 30px 90px rgba(88, 40, 174, 0.18);
     }
     .plan.primary {
-      border-color: var(--accent-0);
-      background: linear-gradient(180deg, rgba(95, 51, 192, .22), rgba(16, 13, 28, .94));
-      box-shadow: 0 24px 64px rgba(124, 92, 255, .22);
+      border-color: rgba(190,149,255,0.40);
+      background:
+        radial-gradient(circle at top right, rgba(192, 119, 255, 0.20), transparent 40%),
+        linear-gradient(180deg, rgba(43, 22, 76, 0.96), rgba(11, 9, 22, 0.98));
+      box-shadow: 0 32px 100px rgba(111, 54, 221, 0.24);
     }
     .plan.is-disabled {
-      opacity: .42;
+      opacity: 0.44;
       pointer-events: none;
       transform: none;
-      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+    }
+    .plan-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .plan-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: #efe5ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-badge.highlight {
+      border-color: rgba(205, 171, 255, 0.26);
+      background: rgba(155, 92, 255, 0.16);
+      color: #f4ebff;
     }
     .radio {
       width: 18px;
@@ -288,6 +405,7 @@
       border: 2px solid var(--accent-0);
       position: relative;
       flex: none;
+      margin-top: 3px;
     }
     .primary .radio::after {
       content: "";
@@ -297,238 +415,626 @@
       background: var(--accent-1);
     }
     .plan-title {
-      font-size: 21px;
+      font-size: 24px;
       font-weight: 900;
-      color: var(--text-0);
+      line-height: 1.04;
+    }
+    .plan-copy {
+      display: grid;
+      gap: 10px;
     }
     .plan-subtitle {
-      margin-top: 4px;
-      font-size: 14px;
-      color: var(--text-2);
-    }
-    .price {
-      text-align: right;
-      font-size: 28px;
-      font-weight: 900;
-      color: #f2e6ff;
-    }
-    .note {
-      background: linear-gradient(180deg, rgba(20, 15, 34, .92), rgba(10, 9, 18, .9));
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      padding: 18px 20px;
       color: var(--text-1);
-      line-height: 1.6;
       font-size: 14px;
-      box-shadow: 0 24px 70px rgba(0,0,0,.20);
+      line-height: 1.7;
+    }
+    .plan-price {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .plan-price strong {
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .plan-price span {
+      color: var(--text-2);
+      font-size: 13px;
+      line-height: 1.4;
+      padding-bottom: 4px;
+    }
+    .plan-features {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .plan-features li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-1);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .plan-features li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7f42ff, #d197ff);
+      box-shadow: 0 0 14px rgba(190, 149, 255, 0.54);
+    }
+    .trust-strip {
+      margin-top: 20px;
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .trust-card {
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .trust-card strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 16px;
+    }
+    .trust-card span {
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .faq-shell {
+      margin-top: 20px;
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .faq-shell h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.04em;
+    }
+    .faq-item {
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    }
+    .faq-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .faq-item p {
+      margin: 0;
+      color: var(--text-2);
+      font-size: 13px;
+      line-height: 1.65;
     }
     .legal-links {
-      width: min(100%, 760px);
+      margin-top: 20px;
+      padding: 16px 18px;
       display: flex;
+      align-items: center;
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      margin-top: -4px;
+      border-radius: 22px;
     }
     .legal-links a {
       color: var(--text-2);
       text-decoration: none;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .04em;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .legal-links a:hover { color: #f5efff; }
-    @media (max-width: 700px) {
-      .plan { grid-template-columns: auto 1fr; }
-      .price { grid-column: 2; text-align: left; font-size: 24px; }
-      .copy { font-size: 16px; }
+    .legal-links a:hover { color: var(--accent-2); }
+    @media (max-width: 980px) {
+      .hero-shell { grid-template-columns: 1fr; }
+      .hero-points,
+      .trust-strip,
+      .plans { grid-template-columns: 1fr; }
+      .hero-media { order: -1; }
+    }
+    @media (max-width: 720px) {
+      .page { padding: 18px; }
+      .topbar {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 26px;
+      }
+      .topbar-right { justify-content: flex-start; }
+      .hero-copy,
+      .hero-media,
+      .consent-box,
+      .trust-strip,
+      .faq-shell,
+      .legal-links { border-radius: 26px; }
+      .hero-copy,
+      .consent-box,
+      .faq-shell { padding: 22px; }
+      .hero-point,
+      .trust-card,
+      .faq-item,
+      .plan { border-radius: 22px; }
+      .plan-price strong { font-size: 36px; }
+      h1 { font-size: clamp(38px, 12vw, 58px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <div class="bg"></div>
+  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
+  <div class="grid"></div>
+
+  <main class="page">
     <div class="topbar">
       <a class="brand" href="index.html">
-        <img src="sapotweak.png" alt="SapoTweak">
-        <span>SapoTweak</span>
+        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
+        <span>SAPOTWEAK</span>
       </a>
-      <select id="languageSelect" class="lang-select" aria-label="Language">
-        <option value="it">Italiano</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-      </select>
+      <div class="topbar-right">
+        <a class="nav-link" href="index.html" id="backLink">Sito</a>
+        <a class="nav-link" href="reviews.html" id="reviewsLink">Recensioni</a>
+        <select id="languageSelect" class="lang-select" aria-label="Language">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+        </select>
+      </div>
     </div>
 
-    <div class="content">
-      <h1 id="title">Scegli il piano SapoTweak</h1>
-
-      <div class="beta-banner">
-        <span class="beta-kicker" id="betaKicker">PAID BETA</span>
-        <strong id="betaTitle">Accesso anticipato a pagamento</strong>
-        <p id="betaText">Questa versione è in beta: il nucleo dell'app è funzionante, ma alcune aree possono cambiare velocemente, ricevere fix frequenti o avere piccoli bug residui. Comprando ora stai entrando nella fase di test reale del prodotto.</p>
+    <section class="hero-shell">
+      <div class="hero-copy">
+        <span class="eyebrow" id="eyebrow">Paid beta access</span>
+        <h1 id="title">Scegli il <span>piano SapoTweak</span></h1>
+        <p class="hero-text" id="heroText">SapoTweak sblocca preset gaming, ottimizzazioni su FPS e latenza, supporto diretto e download ufficiale in un flusso premium e pulito. Paghi su Stripe e ricevi subito licenza e accesso.</p>
+        <div class="hero-points">
+          <article class="hero-point">
+            <strong id="point1Title">Accesso immediato</strong>
+            <span id="point1Text">Dopo il pagamento trovi subito key e download nella pagina di conferma.</span>
+          </article>
+          <article class="hero-point">
+            <strong id="point2Title">Preset guidati</strong>
+            <span id="point2Text">Livelli Safe, Advanced ed Extreme per esigenze diverse.</span>
+          </article>
+          <article class="hero-point">
+            <strong id="point3Title">Supporto ufficiale</strong>
+            <span id="point3Text">Discord e Gmail con testo pronto per velocizzare l'assistenza.</span>
+          </article>
+        </div>
       </div>
 
-      <div class="hero">
+      <div class="hero-media">
         <img src="checkout-preview.png" alt="Anteprima SapoTweak">
       </div>
+    </section>
 
-      <div class="copy">
-        <div id="lead1">SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.</div>
-        <div id="lead2">Questa fase beta include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.</div>
-        <div id="lead3">Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app, insieme all'accesso immediato al contenuto digitale beta.</div>
-      </div>
+    <section class="consent-box">
+      <strong id="consentTitle">Conferma beta e fornitura digitale immediata</strong>
+      <p id="consentHelp">Prima di aprire Stripe devi confermare che stai acquistando una licenza beta con consegna digitale immediata dopo il pagamento.</p>
+      <label class="consent-row">
+        <input id="betaConsentCheck" type="checkbox">
+        <span class="checkmark" aria-hidden="true"></span>
+        <span id="consentLabel">Confermo che SapoTweak e una beta a pagamento, che alcune parti possono cambiare o ricevere fix rapidi, e che desidero l'avvio immediato della fornitura digitale dopo il pagamento.</span>
+      </label>
+    </section>
 
-      <div class="consent-box">
-        <strong id="consentTitle">Conferma beta e fornitura immediata</strong>
-        <p id="consentHelp">Prima di aprire Stripe devi confermare che stai acquistando accesso anticipato beta con fornitura digitale immediata dopo il pagamento. Key e download vengono mostrati subito nella pagina di conferma.</p>
-        <label class="consent-row">
-          <input id="betaConsentCheck" type="checkbox">
-          <span class="checkmark" aria-hidden="true"></span>
-          <span id="consentLabel">Confermo che SapoTweak è una beta a pagamento, che alcune funzioni possono cambiare o avere bug residui, e chiedo l'avvio immediato della fornitura digitale dopo il pagamento. So che, per contenuti digitali forniti subito, il diritto di recesso può essere escluso o limitato nei limiti consentiti dalla legge applicabile.</span>
-        </label>
-      </div>
-
-      <div class="plans">
-        <a class="plan primary is-disabled" id="monthlyPlan" data-href="https://buy.stripe.com/eVq3cwbmp3f46sB0Mo1VK06" href="#" aria-disabled="true" target="_blank" rel="noopener">
+    <section class="plans">
+      <a class="plan primary is-disabled" id="monthlyPlan" data-href="https://buy.stripe.com/eVq3cwbmp3f46sB0Mo1VK06" href="#" aria-disabled="true" target="_blank" rel="noopener">
+        <div class="plan-top">
+          <span class="plan-badge highlight" id="monthlyBadge">Most popular</span>
           <span class="radio" aria-hidden="true"></span>
-          <div>
-            <div class="plan-title" id="monthlyTitle">Mensile</div>
-            <div class="plan-subtitle" id="monthlyText">9,99 EUR al mese, accesso beta, tasse escluse</div>
-          </div>
-          <div class="price">9,99 EUR</div>
-        </a>
+        </div>
+        <div class="plan-copy">
+          <div class="plan-title" id="monthlyTitle">Mensile</div>
+          <div class="plan-subtitle" id="monthlyText">Ideale per entrare subito nel tweak con update continui e supporto ufficiale.</div>
+        </div>
+        <div class="plan-price">
+          <strong>9,99 EUR</strong>
+          <span id="monthlyPeriod">al mese</span>
+        </div>
+        <ul class="plan-features">
+          <li id="monthlyF1">Accesso immediato alla beta SapoTweak</li>
+          <li id="monthlyF2">Download ufficiale e aggiornamenti</li>
+          <li id="monthlyF3">Supporto via Discord o Gmail</li>
+        </ul>
+      </a>
 
-        <a class="plan is-disabled" id="quarterlyPlan" data-href="https://buy.stripe.com/fZueVe4Y1dTI6sB3YA1VK07" href="#" aria-disabled="true" target="_blank" rel="noopener">
+      <a class="plan is-disabled" id="quarterlyPlan" data-href="https://buy.stripe.com/fZueVe4Y1dTI6sB3YA1VK07" href="#" aria-disabled="true" target="_blank" rel="noopener">
+        <div class="plan-top">
+          <span class="plan-badge" id="quarterlyBadge">Best value</span>
           <span class="radio" aria-hidden="true"></span>
-          <div>
-            <div class="plan-title" id="quarterlyTitle">Trimestrale</div>
-            <div class="plan-subtitle" id="quarterlyText">19,99 EUR ogni 3 mesi, accesso beta, tasse escluse</div>
-          </div>
-          <div class="price">19,99 EUR</div>
-        </a>
-      </div>
+        </div>
+        <div class="plan-copy">
+          <div class="plan-title" id="quarterlyTitle">Trimestrale</div>
+          <div class="plan-subtitle" id="quarterlyText">Pensato per chi vuole usare davvero il tweak con il miglior rapporto prezzo / durata.</div>
+        </div>
+        <div class="plan-price">
+          <strong>19,99 EUR</strong>
+          <span id="quarterlyPeriod">ogni 3 mesi</span>
+        </div>
+        <ul class="plan-features">
+          <li id="quarterlyF1">Miglior valore rispetto al mensile</li>
+          <li id="quarterlyF2">Stesso accesso completo alla beta</li>
+          <li id="quarterlyF3">Stesso supporto ufficiale e update</li>
+        </ul>
+      </a>
+    </section>
 
-      <div class="note" id="note">
-        Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e il reset automatico è pensato per reinstallazione o reset Windows sullo stesso hardware principale. Durante la beta il prodotto riceve fix e cambi rapidi, quindi alcune parti dell'esperienza possono evolvere più velocemente della versione finale.
+    <section class="trust-strip">
+      <article class="trust-card">
+        <strong id="trust1Title">Stripe checkout</strong>
+        <span id="trust1Text">Pagamento sicuro, tasse calcolate in base al paese e conferma immediata.</span>
+      </article>
+      <article class="trust-card">
+        <strong id="trust2Title">Digital delivery</strong>
+        <span id="trust2Text">Key e download compaiono subito nella pagina di successo.</span>
+      </article>
+      <article class="trust-card">
+        <strong id="trust3Title">Official build only</strong>
+        <span id="trust3Text">Distribuisci e scarica solo build ufficiali SapoTweak.</span>
+      </article>
+    </section>
+
+    <section class="faq-shell">
+      <h2 id="faqTitle">Prima di pagare</h2>
+      <div class="faq-item">
+        <strong id="faq1Title">Cosa ricevo subito?</strong>
+        <p id="faq1Text">Dopo Stripe vieni reindirizzato alla pagina di conferma con licenza e download ufficiale pronti.</p>
       </div>
-      <div class="legal-links">
-        <a href="terms.html" id="termsLink">Termini</a>
-        <a href="privacy.html" id="privacyLink">Privacy</a>
-        <a href="support.html" id="supportLink">Supporto</a>
+      <div class="faq-item">
+        <strong id="faq2Title">Il prezzo include le tasse?</strong>
+        <p id="faq2Text">No. Stripe aggiunge eventuali imposte in base al paese e alle regole applicabili al checkout.</p>
       </div>
+      <div class="faq-item">
+        <strong id="faq3Title">Posso aspettarmi fix e cambi?</strong>
+        <p id="faq3Text">Si. Durante la fase beta il prodotto puo ricevere fix frequenti, ottimizzazioni e piccoli cambi di esperienza.</p>
+      </div>
+    </section>
+
+    <div class="legal-links">
+      <a href="terms.html" id="termsLink">Termini</a>
+      <a href="privacy.html" id="privacyLink">Privacy</a>
+      <a href="support.html" id="supportLink">Supporto</a>
     </div>
-  </div>
+  </main>
 
   <script>
     const translations = {
       it: {
         pageTitle: "SapoTweak - Checkout",
-        title: "Scegli il piano SapoTweak",
-        betaKicker: "PAID BETA",
-        betaTitle: "Accesso anticipato a pagamento",
-        betaText: "Questa versione è in beta: il nucleo dell'app è funzionante, ma alcune aree possono cambiare velocemente, ricevere fix frequenti o avere piccoli bug residui. Comprando ora stai entrando nella fase di test reale del prodotto.",
-        lead1: "SapoTweak è uno strumento Windows per gamer competitivi che vogliono un sistema più pulito, rapido e reattivo.",
-        lead2: "Questa fase beta include preset guidati di ottimizzazione, tweak per FPS e latenza, profili dedicati per Fortnite, Valorant, FiveM e Rainbow Six Siege, e attivazione personale della licenza.",
-        lead3: "Dopo il pagamento vieni reindirizzato alla pagina di conferma dove trovi subito key e download ufficiale dell'app, insieme all'accesso immediato al contenuto digitale beta.",
-        consentTitle: "Conferma beta e fornitura immediata",
-        consentHelp: "Prima di aprire Stripe devi confermare che stai acquistando accesso anticipato beta con fornitura digitale immediata dopo il pagamento. Key e download vengono mostrati subito nella pagina di conferma.",
-        consentLabel: "Confermo che SapoTweak è una beta a pagamento, che alcune funzioni possono cambiare o avere bug residui, e chiedo l'avvio immediato della fornitura digitale dopo il pagamento. So che, per contenuti digitali forniti subito, il diritto di recesso può essere escluso o limitato nei limiti consentiti dalla legge applicabile.",
+        backLink: "Sito",
+        reviewsLink: "Recensioni",
+        eyebrow: "Paid beta access",
+        title: "Scegli il <span>piano SapoTweak</span>",
+        heroText: "SapoTweak sblocca preset gaming, ottimizzazioni su FPS e latenza, supporto diretto e download ufficiale in un flusso premium e pulito. Paghi su Stripe e ricevi subito licenza e accesso.",
+        point1Title: "Accesso immediato",
+        point1Text: "Dopo il pagamento trovi subito key e download nella pagina di conferma.",
+        point2Title: "Preset guidati",
+        point2Text: "Livelli Safe, Advanced ed Extreme per esigenze diverse.",
+        point3Title: "Supporto ufficiale",
+        point3Text: "Discord e Gmail con testo pronto per velocizzare l'assistenza.",
+        consentTitle: "Conferma beta e fornitura digitale immediata",
+        consentHelp: "Prima di aprire Stripe devi confermare che stai acquistando una licenza beta con consegna digitale immediata dopo il pagamento.",
+        consentLabel: "Confermo che SapoTweak e una beta a pagamento, che alcune parti possono cambiare o ricevere fix rapidi, e che desidero l'avvio immediato della fornitura digitale dopo il pagamento.",
+        monthlyBadge: "Most popular",
         monthlyTitle: "Mensile",
-        monthlyText: "9,99 EUR al mese, accesso beta, tasse escluse",
+        monthlyText: "Ideale per entrare subito nel tweak con update continui e supporto ufficiale.",
+        monthlyPeriod: "al mese",
+        monthlyF1: "Accesso immediato alla beta SapoTweak",
+        monthlyF2: "Download ufficiale e aggiornamenti",
+        monthlyF3: "Supporto via Discord o Gmail",
+        quarterlyBadge: "Best value",
         quarterlyTitle: "Trimestrale",
-        quarterlyText: "19,99 EUR ogni 3 mesi, accesso beta, tasse escluse",
-        note: "Il checkout è gestito da Stripe. Le imposte vengono calcolate separatamente in base al paese del cliente. La licenza resta collegata al PC e il reset automatico è pensato per reinstallazione o reset Windows sullo stesso hardware principale. Durante la beta il prodotto riceve fix e cambi rapidi, quindi alcune parti dell'esperienza possono evolvere più velocemente della versione finale."
+        quarterlyText: "Pensato per chi vuole usare davvero il tweak con il miglior rapporto prezzo / durata.",
+        quarterlyPeriod: "ogni 3 mesi",
+        quarterlyF1: "Miglior valore rispetto al mensile",
+        quarterlyF2: "Stesso accesso completo alla beta",
+        quarterlyF3: "Stesso supporto ufficiale e update",
+        trust1Title: "Stripe checkout",
+        trust1Text: "Pagamento sicuro, tasse calcolate in base al paese e conferma immediata.",
+        trust2Title: "Digital delivery",
+        trust2Text: "Key e download compaiono subito nella pagina di successo.",
+        trust3Title: "Official build only",
+        trust3Text: "Distribuisci e scarica solo build ufficiali SapoTweak.",
+        faqTitle: "Prima di pagare",
+        faq1Title: "Cosa ricevo subito?",
+        faq1Text: "Dopo Stripe vieni reindirizzato alla pagina di conferma con licenza e download ufficiale pronti.",
+        faq2Title: "Il prezzo include le tasse?",
+        faq2Text: "No. Stripe aggiunge eventuali imposte in base al paese e alle regole applicabili al checkout.",
+        faq3Title: "Posso aspettarmi fix e cambi?",
+        faq3Text: "Si. Durante la fase beta il prodotto puo ricevere fix frequenti, ottimizzazioni e piccoli cambi di esperienza.",
+        termsLink: "Termini",
+        privacyLink: "Privacy",
+        supportLink: "Supporto"
       },
       en: {
         pageTitle: "SapoTweak - Checkout",
-        title: "Choose your SapoTweak plan",
-        betaKicker: "PAID BETA",
-        betaTitle: "Paid early access",
-        betaText: "This build is a beta: the core app works, but some areas may change quickly, receive frequent fixes, or still contain minor bugs. Buying now means joining the real-world testing phase of the product.",
-        lead1: "SapoTweak is a Windows tool for competitive gamers who want a cleaner, faster and more responsive system.",
-        lead2: "This beta phase includes guided optimization presets, FPS and latency tweaks, dedicated profiles for Fortnite, Valorant, FiveM and Rainbow Six Siege, plus personal license activation.",
-        lead3: "After payment you are redirected to the confirmation page where the key and the official app download are shown immediately, together with instant access to the beta digital content.",
-        consentTitle: "Confirm beta and immediate digital supply",
-        consentHelp: "Before opening Stripe you need to confirm that you are buying paid beta access with immediate digital delivery after payment. The key and download are shown immediately on the confirmation page.",
-        consentLabel: "I confirm that SapoTweak is a paid beta, that some features may change or still contain minor bugs, and that I request the immediate start of the digital supply after payment. I understand that, for digital content supplied immediately, the withdrawal right may be excluded or limited where applicable law allows it.",
+        backLink: "Site",
+        reviewsLink: "Reviews",
+        eyebrow: "Paid beta access",
+        title: "Choose your <span>SapoTweak plan</span>",
+        heroText: "SapoTweak unlocks gaming presets, FPS and latency optimizations, direct support, and official downloads through a cleaner premium flow. Pay with Stripe and receive your license immediately.",
+        point1Title: "Instant access",
+        point1Text: "After payment, your key and download are shown immediately on the confirmation page.",
+        point2Title: "Guided presets",
+        point2Text: "Safe, Advanced, and Extreme levels for different usage styles.",
+        point3Title: "Official support",
+        point3Text: "Discord and Gmail with a ready-made template to speed up assistance.",
+        consentTitle: "Confirm beta and immediate digital delivery",
+        consentHelp: "Before opening Stripe you must confirm that you are purchasing a beta license with immediate digital delivery after payment.",
+        consentLabel: "I confirm that SapoTweak is a paid beta, that some areas may change or receive rapid fixes, and that I want the digital delivery to start immediately after payment.",
+        monthlyBadge: "Most popular",
         monthlyTitle: "Monthly",
-        monthlyText: "9.99 EUR per month, beta access, taxes excluded",
+        monthlyText: "Perfect for jumping in fast with continuous updates and official support.",
+        monthlyPeriod: "per month",
+        monthlyF1: "Immediate access to the SapoTweak beta",
+        monthlyF2: "Official download and updates",
+        monthlyF3: "Support through Discord or Gmail",
+        quarterlyBadge: "Best value",
         quarterlyTitle: "Quarterly",
-        quarterlyText: "19.99 EUR every 3 months, beta access, taxes excluded",
-        note: "Checkout is handled by Stripe. Taxes are calculated separately based on the customer country. The license remains bound to the PC and the automatic reset is intended only for reinstall or Windows reset on the same main hardware. During beta the product receives fast fixes and changes, so some parts of the experience may evolve faster than the final release."
+        quarterlyText: "Built for users who actually want to run the tweak with the strongest price-to-duration ratio.",
+        quarterlyPeriod: "every 3 months",
+        quarterlyF1: "Better value than monthly",
+        quarterlyF2: "Same full beta access",
+        quarterlyF3: "Same official support and updates",
+        trust1Title: "Stripe checkout",
+        trust1Text: "Secure payment, tax calculation by country, and immediate confirmation.",
+        trust2Title: "Digital delivery",
+        trust2Text: "Your key and official download appear instantly on the success page.",
+        trust3Title: "Official build only",
+        trust3Text: "Distribute and download official SapoTweak builds only.",
+        faqTitle: "Before you pay",
+        faq1Title: "What do I receive immediately?",
+        faq1Text: "After Stripe you are redirected to the confirmation page with your license and official download ready.",
+        faq2Title: "Are taxes included?",
+        faq2Text: "No. Stripe adds applicable taxes based on the customer country and checkout rules.",
+        faq3Title: "Should I expect fixes and changes?",
+        faq3Text: "Yes. During beta the product may receive frequent fixes, tuning updates, and small experience changes.",
+        termsLink: "Terms",
+        privacyLink: "Privacy",
+        supportLink: "Support"
       },
       es: {
         pageTitle: "SapoTweak - Checkout",
-        title: "Elige tu plan de SapoTweak",
-        betaKicker: "BETA DE PAGO",
-        betaTitle: "Acceso anticipado de pago",
-        betaText: "Esta versión está en beta: el núcleo de la app funciona, pero algunas áreas pueden cambiar rápido, recibir correcciones frecuentes o seguir teniendo pequeños fallos. Comprar ahora significa entrar en la fase real de pruebas del producto.",
-        lead1: "SapoTweak es una herramienta para Windows pensada para jugadores competitivos que quieren un sistema más limpio, rápido y reactivo.",
-        lead2: "Esta fase beta incluye presets guiados de optimización, tweaks para FPS y latencia, perfiles dedicados para Fortnite, Valorant, FiveM y Rainbow Six Siege, y activación personal de licencia.",
-        lead3: "Después del pago se abre la página de confirmación donde aparecen de inmediato la key y la descarga oficial de la app, junto con el acceso inmediato al contenido digital beta.",
-        consentTitle: "Confirmar beta y suministro digital inmediato",
-        consentHelp: "Antes de abrir Stripe debes confirmar que compras acceso beta de pago con suministro digital inmediato después del pago. La key y la descarga se muestran de inmediato en la pagina de confirmacion.",
-        consentLabel: "Confirmo que SapoTweak es una beta de pago, que algunas funciones pueden cambiar o seguir teniendo pequeños fallos, y que solicito el inicio inmediato del suministro digital después del pago. Entiendo que, para contenido digital suministrado de inmediato, el derecho de desistimiento puede quedar excluido o limitado cuando la ley aplicable lo permita.",
+        backLink: "Sitio",
+        reviewsLink: "Resenas",
+        eyebrow: "Paid beta access",
+        title: "Elige tu <span>plan SapoTweak</span>",
+        heroText: "SapoTweak desbloquea presets gaming, optimizaciones de FPS y latencia, soporte directo y descargas oficiales dentro de un flujo premium y limpio. Pagas con Stripe y recibes la licencia al instante.",
+        point1Title: "Acceso inmediato",
+        point1Text: "Despues del pago, la key y la descarga aparecen enseguida en la pagina de confirmacion.",
+        point2Title: "Presets guiados",
+        point2Text: "Niveles Safe, Advanced y Extreme para estilos de uso diferentes.",
+        point3Title: "Soporte oficial",
+        point3Text: "Discord y Gmail con texto listo para acelerar la asistencia.",
+        consentTitle: "Confirmar beta y entrega digital inmediata",
+        consentHelp: "Antes de abrir Stripe debes confirmar que compras una licencia beta con entrega digital inmediata despues del pago.",
+        consentLabel: "Confirmo que SapoTweak es una beta de pago, que algunas partes pueden cambiar o recibir fixes rapidos, y que deseo que la entrega digital comience inmediatamente despues del pago.",
+        monthlyBadge: "Most popular",
         monthlyTitle: "Mensual",
-        monthlyText: "9,99 EUR al mes, acceso beta, impuestos no incluidos",
+        monthlyText: "Ideal para entrar rapido al tweak con updates continuos y soporte oficial.",
+        monthlyPeriod: "al mes",
+        monthlyF1: "Acceso inmediato a la beta de SapoTweak",
+        monthlyF2: "Descarga oficial y actualizaciones",
+        monthlyF3: "Soporte por Discord o Gmail",
+        quarterlyBadge: "Best value",
         quarterlyTitle: "Trimestral",
-        quarterlyText: "19,99 EUR cada 3 meses, acceso beta, impuestos no incluidos",
-        note: "Stripe gestiona el checkout. Los impuestos se calculan por separado según el país del cliente. La licencia queda vinculada al PC y el reset automatico esta pensado solo para reinstalacion o reset de Windows en el mismo hardware principal. Durante la beta el producto recibe cambios y correcciones rápidas, por lo que algunas partes de la experiencia pueden evolucionar más deprisa que en la versión final."
+        quarterlyText: "Pensado para quien realmente quiere usar el tweak con la mejor relacion precio / duracion.",
+        quarterlyPeriod: "cada 3 meses",
+        quarterlyF1: "Mejor valor que el mensual",
+        quarterlyF2: "Mismo acceso completo a la beta",
+        quarterlyF3: "Mismo soporte oficial y updates",
+        trust1Title: "Stripe checkout",
+        trust1Text: "Pago seguro, impuestos calculados por pais y confirmacion inmediata.",
+        trust2Title: "Digital delivery",
+        trust2Text: "La key y la descarga oficial aparecen al instante en la pagina de exito.",
+        trust3Title: "Official build only",
+        trust3Text: "Distribuye y descarga solo builds oficiales de SapoTweak.",
+        faqTitle: "Antes de pagar",
+        faq1Title: "Que recibo de inmediato?",
+        faq1Text: "Despues de Stripe se abre la pagina de confirmacion con tu licencia y la descarga oficial listas.",
+        faq2Title: "El precio incluye impuestos?",
+        faq2Text: "No. Stripe agrega los impuestos aplicables segun el pais del cliente y las reglas del checkout.",
+        faq3Title: "Debo esperar fixes y cambios?",
+        faq3Text: "Si. Durante la beta el producto puede recibir fixes frecuentes, optimizaciones y pequenos cambios de experiencia.",
+        termsLink: "Terminos",
+        privacyLink: "Privacidad",
+        supportLink: "Soporte"
       }
     };
 
     const languageSelect = document.getElementById("languageSelect");
-    const saved = localStorage.getItem("sapotweak_site_lang") || "it";
+    const betaConsentCheck = document.getElementById("betaConsentCheck");
     const monthlyPlan = document.getElementById("monthlyPlan");
     const quarterlyPlan = document.getElementById("quarterlyPlan");
-    const betaConsentCheck = document.getElementById("betaConsentCheck");
+    const saved = localStorage.getItem("sapotweak_site_lang") || "it";
     const params = new URLSearchParams(window.location.search);
+
+    function setHtml(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = value;
+    }
+
+    function setText(id, value) {
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    }
 
     function applyLanguage(lang) {
       const t = translations[lang] || translations.it;
       document.documentElement.lang = lang;
       document.title = t.pageTitle;
       languageSelect.value = lang;
-      document.getElementById("title").textContent = t.title;
-      document.getElementById("betaKicker").textContent = t.betaKicker;
-      document.getElementById("betaTitle").textContent = t.betaTitle;
-      document.getElementById("betaText").textContent = t.betaText;
-      document.getElementById("lead1").textContent = t.lead1;
-      document.getElementById("lead2").textContent = t.lead2;
-      document.getElementById("lead3").textContent = t.lead3;
-      document.getElementById("consentTitle").textContent = t.consentTitle;
-      document.getElementById("consentHelp").textContent = t.consentHelp;
-      document.getElementById("consentLabel").textContent = t.consentLabel;
-      document.getElementById("monthlyTitle").textContent = t.monthlyTitle;
-      document.getElementById("monthlyText").textContent = t.monthlyText;
-      document.getElementById("quarterlyTitle").textContent = t.quarterlyTitle;
-      document.getElementById("quarterlyText").textContent = t.quarterlyText;
-      document.getElementById("note").textContent = t.note;
-      localStorage.setItem("sapotweak_site_lang", lang);
+      setText("backLink", t.backLink);
+      setText("reviewsLink", t.reviewsLink);
+      setText("eyebrow", t.eyebrow);
+      setHtml("title", t.title);
+      setText("heroText", t.heroText);
+      setText("point1Title", t.point1Title);
+      setText("point1Text", t.point1Text);
+      setText("point2Title", t.point2Title);
+      setText("point2Text", t.point2Text);
+      setText("point3Title", t.point3Title);
+      setText("point3Text", t.point3Text);
+      setText("consentTitle", t.consentTitle);
+      setText("consentHelp", t.consentHelp);
+      setText("consentLabel", t.consentLabel);
+      setText("monthlyBadge", t.monthlyBadge);
+      setText("monthlyTitle", t.monthlyTitle);
+      setText("monthlyText", t.monthlyText);
+      setText("monthlyPeriod", t.monthlyPeriod);
+      setText("monthlyF1", t.monthlyF1);
+      setText("monthlyF2", t.monthlyF2);
+      setText("monthlyF3", t.monthlyF3);
+      setText("quarterlyBadge", t.quarterlyBadge);
+      setText("quarterlyTitle", t.quarterlyTitle);
+      setText("quarterlyText", t.quarterlyText);
+      setText("quarterlyPeriod", t.quarterlyPeriod);
+      setText("quarterlyF1", t.quarterlyF1);
+      setText("quarterlyF2", t.quarterlyF2);
+      setText("quarterlyF3", t.quarterlyF3);
+      setText("trust1Title", t.trust1Title);
+      setText("trust1Text", t.trust1Text);
+      setText("trust2Title", t.trust2Title);
+      setText("trust2Text", t.trust2Text);
+      setText("trust3Title", t.trust3Title);
+      setText("trust3Text", t.trust3Text);
+      setText("faqTitle", t.faqTitle);
+      setText("faq1Title", t.faq1Title);
+      setText("faq1Text", t.faq1Text);
+      setText("faq2Title", t.faq2Title);
+      setText("faq2Text", t.faq2Text);
+      setText("faq3Title", t.faq3Title);
+      setText("faq3Text", t.faq3Text);
+      setText("termsLink", t.termsLink);
+      setText("privacyLink", t.privacyLink);
+      setText("supportLink", t.supportLink);
     }
 
-    function syncConsentState() {
+    function syncPlanState() {
       const enabled = !!betaConsentCheck.checked;
-      for (const plan of [monthlyPlan, quarterlyPlan]) {
-        const directHref = plan.dataset.href || "#";
+      [monthlyPlan, quarterlyPlan].forEach(plan => {
         plan.classList.toggle("is-disabled", !enabled);
         plan.setAttribute("aria-disabled", enabled ? "false" : "true");
-        plan.href = enabled ? directHref : "#";
+        plan.href = enabled ? plan.dataset.href : "#";
+      });
+    }
+
+    function initMeshBackground() {
+      const canvas = document.getElementById("meshCanvas");
+      if (!canvas) return;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      let animationFrame = 0;
+      let width = 0;
+      let height = 0;
+      let points = [];
+      const maxDistance = 180;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.6);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const density = width < 900 ? 34 : 48;
+        const count = Math.max(28, Math.floor((width * height) / (density * density * 10)));
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          vy: (Math.random() - 0.5) * (prefersReducedMotion ? 0.08 : 0.26),
+          r: Math.random() * 1.8 + 0.4
+        }));
       }
+
+      function step() {
+        context.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i += 1) {
+          const point = points[i];
+          point.x += point.vx;
+          point.y += point.vy;
+
+          if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+          if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+
+          for (let j = i + 1; j < points.length; j += 1) {
+            const other = points[j];
+            const dx = point.x - other.x;
+            const dy = point.y - other.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > maxDistance) continue;
+
+            const alpha = 1 - distance / maxDistance;
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.strokeStyle = `rgba(182, 146, 255, ${alpha * 0.12})`;
+            context.lineWidth = 1;
+            context.stroke();
+          }
+        }
+
+        for (const point of points) {
+          context.beginPath();
+          context.arc(point.x, point.y, point.r, 0, Math.PI * 2);
+          context.fillStyle = "rgba(218, 201, 255, 0.22)";
+          context.fill();
+        }
+
+        animationFrame = window.requestAnimationFrame(step);
+      }
+
+      resize();
+      step();
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("beforeunload", () => window.cancelAnimationFrame(animationFrame), { once: true });
     }
 
-    function selectPlan(plan) {
-      const normalized = plan === "quarterly" ? "quarterly" : "monthly";
-      monthlyPlan.classList.toggle("primary", normalized === "monthly");
-      quarterlyPlan.classList.toggle("primary", normalized === "quarterly");
+    if (params.get("plan") === "quarterly") {
+      monthlyPlan.classList.remove("primary");
+      quarterlyPlan.classList.add("primary");
     }
 
-    languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
-    betaConsentCheck.addEventListener("change", syncConsentState);
-    selectPlan(params.get("plan"));
+    betaConsentCheck.addEventListener("change", syncPlanState);
+    languageSelect.addEventListener("change", event => {
+      const next = ["it", "en", "es"].includes(event.target.value) ? event.target.value : "it";
+      localStorage.setItem("sapotweak_site_lang", next);
+      applyLanguage(next);
+    });
+
     applyLanguage(saved);
-    syncConsentState();
+    syncPlanState();
+    initMeshBackground();
   </script>
 </body>
 </html>
