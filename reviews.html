@@ -880,11 +880,25 @@
           <input id="reviewName" type="text" placeholder="Nickname o nome" />
         </div>
         <div class="field">
+          <label for="reviewTitleInput" id="reviewTitleLabel">Titolo review</label>
+          <input id="reviewTitleInput" type="text" placeholder="Titolo breve e chiaro" />
+        </div>
+        <div class="field">
           <label for="reviewRating" id="reviewRatingLabel">Valutazione</label>
           <select id="reviewRating">
             <option value="5">5 / 5</option>
             <option value="4">4 / 5</option>
             <option value="3">3 / 5</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="reviewCategory" id="reviewCategoryLabel">Categoria</label>
+          <select id="reviewCategory">
+            <option value="overall">Overall</option>
+            <option value="performance">Performance</option>
+            <option value="ui">UI / Flow</option>
+            <option value="support">Supporto</option>
+            <option value="delivery">Checkout / Delivery</option>
           </select>
         </div>
         <div class="field full">
@@ -893,7 +907,7 @@
         </div>
       </div>
       <div class="modal-actions">
-        <span class="modal-status" id="reviewModalStatus">La review verrà inviata a Gmail con i dettagli necessari per la verifica e la moderazione.</span>
+        <span class="modal-status" id="reviewModalStatus">La review verrà salvata nella inbox privata e pubblicata solo dopo approvazione manuale.</span>
         <div class="review-actions">
           <button class="btn secondary" id="closeReviewModalBtn" type="button">Chiudi</button>
           <button class="btn primary" id="submitReviewBtn" type="button">Invia review</button>
@@ -994,15 +1008,22 @@
         reviewEmailLabel: "Email pagamento",
         reviewKeyLabel: "License key",
         reviewNameLabel: "Nome pubblico",
+        reviewTitleLabel: "Titolo review",
         reviewRatingLabel: "Valutazione",
+        reviewCategoryLabel: "Categoria",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La review verrà inviata a Gmail con i dettagli necessari per la verifica e la moderazione.",
+        reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finché non la approvi manualmente.",
         closeReviewModalBtn: "Chiudi",
         submitReviewBtn: "Invia review",
-        reviewValidationError: "Compila email, key, nome e review prima di inviare.",
-        reviewOpenStatus: "Sei quasi pronto: compila i campi e poi invia la richiesta review.",
-        reviewMailSubject: "SapoTweak review request",
-        reviewSubmitted: "Richiesta review pronta. Ora completa l'invio su Gmail.",
+        reviewValidationError: "Compila email, key, nome, titolo e review prima di inviare.",
+        reviewOpenStatus: "Compila i campi e la review finirà nella inbox privata, non sul sito pubblico.",
+        reviewSubmitted: "Review inviata alla inbox privata. Ora puoi approvarla dal pannello admin.",
+        reviewSubmitError: "Invio review fallito. Riprova tra poco.",
+        reviewCategoryOverall: "Overall",
+        reviewCategoryPerformance: "Performance",
+        reviewCategoryUi: "UI / Flow",
+        reviewCategorySupport: "Supporto",
+        reviewCategoryDelivery: "Checkout / Delivery",
         reviewTextPlaceholder: "Scrivi qui la tua esperienza con SapoTweak."
       },
       en: {
@@ -1050,15 +1071,22 @@
         reviewEmailLabel: "Payment email",
         reviewKeyLabel: "License key",
         reviewNameLabel: "Public name",
+        reviewTitleLabel: "Review title",
         reviewRatingLabel: "Rating",
+        reviewCategoryLabel: "Category",
         reviewTextLabel: "Review",
-        reviewStatusHint: "The review request will be opened in Gmail with the details needed for verification and moderation.",
+        reviewStatusHint: "The review is saved in the private inbox and stays pending until you manually approve it.",
         closeReviewModalBtn: "Close",
         submitReviewBtn: "Send review",
-        reviewValidationError: "Fill payment email, key, name, and review before sending.",
-        reviewOpenStatus: "You are almost ready: fill the form and send the review request.",
-        reviewMailSubject: "SapoTweak review request",
-        reviewSubmitted: "Review request ready. Complete the send flow in Gmail.",
+        reviewValidationError: "Fill payment email, key, name, title, and review before sending.",
+        reviewOpenStatus: "Fill the fields and your review will go to the private inbox, not directly to the public site.",
+        reviewSubmitted: "Review sent to the private inbox. You can approve it later from the admin panel.",
+        reviewSubmitError: "Review submission failed. Please try again shortly.",
+        reviewCategoryOverall: "Overall",
+        reviewCategoryPerformance: "Performance",
+        reviewCategoryUi: "UI / Flow",
+        reviewCategorySupport: "Support",
+        reviewCategoryDelivery: "Checkout / Delivery",
         reviewTextPlaceholder: "Write your experience with SapoTweak here."
       },
       es: {
@@ -1098,15 +1126,22 @@
         reviewEmailLabel: "Email del pago",
         reviewKeyLabel: "License key",
         reviewNameLabel: "Nombre público",
+        reviewTitleLabel: "Título de la review",
         reviewRatingLabel: "Valoración",
+        reviewCategoryLabel: "Categoría",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La solicitud de review se abrirá en Gmail con los datos necesarios para verificación y moderación.",
+        reviewStatusHint: "La review se guarda en la inbox privada y queda pendiente hasta la aprobación manual.",
         closeReviewModalBtn: "Cerrar",
         submitReviewBtn: "Enviar review",
-        reviewValidationError: "Completa email, key, nombre y review antes de enviar.",
-        reviewOpenStatus: "Ya casi: completa los campos y envía la solicitud de review.",
-        reviewMailSubject: "SapoTweak review request",
-        reviewSubmitted: "Solicitud review lista. Ahora completa el envío en Gmail.",
+        reviewValidationError: "Completa email, key, nombre, título y review antes de enviar.",
+        reviewOpenStatus: "Completa los campos y la review irá a la inbox privada, no al sitio público.",
+        reviewSubmitted: "Review enviada a la inbox privada. Luego podrás aprobarla desde el panel admin.",
+        reviewSubmitError: "El envío de la review falló. Vuelve a intentarlo en breve.",
+        reviewCategoryOverall: "Overall",
+        reviewCategoryPerformance: "Performance",
+        reviewCategoryUi: "UI / Flow",
+        reviewCategorySupport: "Soporte",
+        reviewCategoryDelivery: "Checkout / Delivery",
         reviewTextPlaceholder: "Escribe aquí tu experiencia con SapoTweak."
       }
     };
@@ -1125,7 +1160,9 @@
     const reviewEmail = document.getElementById("reviewEmail");
     const reviewKey = document.getElementById("reviewKey");
     const reviewName = document.getElementById("reviewName");
+    const reviewTitleInput = document.getElementById("reviewTitleInput");
     const reviewRating = document.getElementById("reviewRating");
+    const reviewCategory = document.getElementById("reviewCategory");
     const reviewText = document.getElementById("reviewText");
     const proofImage = document.getElementById("proofImage");
     const proofCaption1 = document.getElementById("proofCaption1");
@@ -1136,6 +1173,8 @@
     let reviewPage = 0;
     let proofPage = 0;
     const pageSize = 6;
+    const reviewsApiBase = window.location.origin;
+    let publicReviewsByLanguage = { it: [], en: [], es: [] };
     const proofSlides = Array.from({ length: 16 }, (_, index) => ({
       src: `reviews/${index + 1}.png`
     }));
@@ -1154,7 +1193,28 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
+    function normalizeApprovedReview(row) {
+      const categoryMap = {
+        overall: t("reviewCategoryOverall"),
+        performance: t("reviewCategoryPerformance"),
+        ui: t("reviewCategoryUi"),
+        support: t("reviewCategorySupport"),
+        delivery: t("reviewCategoryDelivery")
+      };
+      const normalizedCategory = String(row.reviewCategory || row.meta || "overall").toLowerCase();
+      return {
+        title: row.reviewTitle || row.title || "Verified review",
+        body: row.reviewBody || row.body || "",
+        name: row.publicName || row.name || "User",
+        meta: categoryMap[normalizedCategory] || row.meta || t("reviewCategoryOverall"),
+        badge: row.badge || (currentLanguage === "it" ? "Verificata" : currentLanguage === "es" ? "Verificada" : "Verified"),
+        stars: Number(row.rating || row.stars || 5)
+      };
+    }
+
     function currentReviews() {
+      const live = publicReviewsByLanguage[currentLanguage] || [];
+      if (live.length) return live.map(normalizeApprovedReview);
       return reviewSets[currentLanguage] || reviewSets.it;
     }
 
@@ -1201,6 +1261,22 @@
       nextReviewsBtn.disabled = reviewPage >= totalPages() - 1;
     }
 
+    async function loadApprovedReviews() {
+      try {
+        const response = await fetch(
+          `${reviewsApiBase}/reviews/public?lang=${encodeURIComponent(currentLanguage)}&limit=120`,
+          { cache: "no-store" }
+        );
+        if (!response.ok) throw new Error("reviews_fetch_failed");
+        const payload = await response.json();
+        publicReviewsByLanguage[currentLanguage] = Array.isArray(payload.reviews) ? payload.reviews : [];
+      } catch {
+        publicReviewsByLanguage[currentLanguage] = [];
+      }
+      reviewPage = 0;
+      renderReviews();
+    }
+
     function applyLanguage(lang) {
       currentLanguage = ["it", "en", "es"].includes(lang) ? lang : "it";
       localStorage.setItem("sapotweak_site_lang", currentLanguage);
@@ -1223,20 +1299,20 @@
       setText("proofTitle", text.proofTitle);
       setText("proofLead", text.proofLead);
       setText("proofCaption1", text.proofCaption1);
-      setText("reviewSummaryLead", text.reviewSummaryLead);
-      setText("reviewFilterAll", text.reviewFilterAll);
-      setText("reviewFilterPerf", text.reviewFilterPerf);
-      setText("reviewFilterUi", text.reviewFilterUi);
-      setText("reviewFilterSupport", text.reviewFilterSupport);
-      setText("reviewScoreLabelLeft", text.reviewScoreLabelLeft);
-      setText("reviewScoreValueLeft", text.reviewScoreValueLeft);
-      setText("reviewScoreLabelRight", text.reviewScoreLabelRight);
-      setText("reviewsTag", text.reviewsTag);
-      setText("reviewsTitle", text.reviewsTitle);
-      setText("reviewsLead", text.reviewsLead);
-      setText("pagerNote", text.pagerNote);
-      setText("openReviewModalBtn", text.openReviewModalBtn);
-      setText("openReviewModalBtnTop", text.openReviewModalBtn);
+      setText("reviewSummaryLead", t("reviewSummaryLead"));
+      setText("reviewFilterAll", t("reviewFilterAll"));
+      setText("reviewFilterPerf", t("reviewFilterPerf"));
+      setText("reviewFilterUi", t("reviewFilterUi"));
+      setText("reviewFilterSupport", t("reviewFilterSupport"));
+      setText("reviewScoreLabelLeft", t("reviewScoreLabelLeft"));
+      setText("reviewScoreValueLeft", t("reviewScoreValueLeft"));
+      setText("reviewScoreLabelRight", t("reviewScoreLabelRight"));
+      setText("reviewsTag", t("reviewsTag"));
+      setText("reviewsTitle", t("reviewsTitle"));
+      setText("reviewsLead", t("reviewsLead"));
+      setText("pagerNote", t("pagerNote"));
+      setText("openReviewModalBtn", t("openReviewModalBtn"));
+      setText("openReviewModalBtnTop", t("openReviewModalBtn"));
       setText("ctaTitle", text.ctaTitle);
       setText("ctaText", text.ctaText);
       setText("ctaPrimary", text.ctaPrimary);
@@ -1245,22 +1321,29 @@
       setText("termsLink", text.termsLink);
       setText("privacyLink", text.privacyLink);
       setText("supportLink", text.supportLink);
-      setText("reviewModalTitle", text.reviewModalTitle);
-      setText("reviewModalLead", text.reviewModalLead);
-      setText("reviewNotice", text.reviewNotice);
-      setText("reviewEmailLabel", text.reviewEmailLabel);
-      setText("reviewKeyLabel", text.reviewKeyLabel);
-      setText("reviewNameLabel", text.reviewNameLabel);
-      setText("reviewRatingLabel", text.reviewRatingLabel);
-      setText("reviewTextLabel", text.reviewTextLabel);
-      setText("reviewModalStatus", text.reviewStatusHint);
-      setText("closeReviewModalBtn", text.closeReviewModalBtn);
-      setText("submitReviewBtn", text.submitReviewBtn);
-      reviewText.placeholder = text.reviewTextPlaceholder;
+      setText("reviewModalTitle", t("reviewModalTitle"));
+      setText("reviewModalLead", t("reviewModalLead"));
+      setText("reviewNotice", t("reviewNotice"));
+      setText("reviewEmailLabel", t("reviewEmailLabel"));
+      setText("reviewKeyLabel", t("reviewKeyLabel"));
+      setText("reviewNameLabel", t("reviewNameLabel"));
+      setText("reviewTitleLabel", t("reviewTitleLabel"));
+      setText("reviewRatingLabel", t("reviewRatingLabel"));
+      setText("reviewCategoryLabel", t("reviewCategoryLabel"));
+      setText("reviewTextLabel", t("reviewTextLabel"));
+      setText("reviewModalStatus", t("reviewStatusHint"));
+      setText("closeReviewModalBtn", t("closeReviewModalBtn"));
+      setText("submitReviewBtn", t("submitReviewBtn"));
+      reviewCategory.options[0].text = t("reviewCategoryOverall");
+      reviewCategory.options[1].text = t("reviewCategoryPerformance");
+      reviewCategory.options[2].text = t("reviewCategoryUi");
+      reviewCategory.options[3].text = t("reviewCategorySupport");
+      reviewCategory.options[4].text = t("reviewCategoryDelivery");
+      reviewText.placeholder = t("reviewTextPlaceholder");
       reviewPage = 0;
       proofPage = 0;
       renderProof();
-      renderReviews();
+      loadApprovedReviews();
     }
 
     function openReviewModal() {
@@ -1272,33 +1355,48 @@
       reviewModal.classList.remove("show");
     }
 
-    function reviewMailBody() {
-      return [
-        "Review request for SapoTweak",
-        "",
-        "Payment email: " + reviewEmail.value.trim(),
-        "License key: " + reviewKey.value.trim(),
-        "Public name: " + reviewName.value.trim(),
-        "Rating: " + reviewRating.value,
-        "",
-        "Review text:",
-        reviewText.value.trim(),
-        "",
-        "Please verify the purchase and only publish this review after manual approval."
-      ].join("\n");
-    }
-
-    function submitReview() {
-      if (!reviewEmail.value.trim() || !reviewKey.value.trim() || !reviewName.value.trim() || !reviewText.value.trim()) {
+    async function submitReview() {
+      if (
+        !reviewEmail.value.trim() ||
+        !reviewKey.value.trim() ||
+        !reviewName.value.trim() ||
+        !reviewTitleInput.value.trim() ||
+        !reviewText.value.trim()
+      ) {
         reviewModalStatus.textContent = t("reviewValidationError");
         return;
       }
-      const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-        encodeURIComponent("sapotweak@gmail.com") +
-        "&su=" + encodeURIComponent(t("reviewMailSubject")) +
-        "&body=" + encodeURIComponent(reviewMailBody());
-      window.open(gmailUrl, "_blank", "noopener,noreferrer");
-      reviewModalStatus.textContent = t("reviewSubmitted");
+
+      reviewModalStatus.textContent = "Verifica acquisto e salvataggio in corso...";
+
+      try {
+        const response = await fetch(`${reviewsApiBase}/reviews/submit`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            email: reviewEmail.value.trim(),
+            licenseKey: reviewKey.value.trim(),
+            publicName: reviewName.value.trim(),
+            reviewTitle: reviewTitleInput.value.trim(),
+            reviewBody: reviewText.value.trim(),
+            reviewCategory: reviewCategory.value,
+            reviewLanguage: currentLanguage,
+            rating: Number(reviewRating.value || 5)
+          })
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          reviewModalStatus.textContent = payload.error || t("reviewSubmitError");
+          return;
+        }
+
+        reviewModalStatus.textContent = t("reviewSubmitted");
+        reviewTitleInput.value = "";
+        reviewText.value = "";
+      } catch {
+        reviewModalStatus.textContent = t("reviewSubmitError");
+      }
     }
 
     function initMeshBackground() {
