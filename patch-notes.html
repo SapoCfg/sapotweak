@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SapoTweak - Patch Notes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --bg-0: #05050a;
+      --bg-1: #0b0813;
+      --surface: rgba(16, 12, 27, 0.9);
+      --surface-2: rgba(22, 17, 38, 0.96);
+      --line: rgba(255,255,255,0.08);
+      --text: #fbf6ff;
+      --muted: #c2b8d8;
+      --accent: #8b5cf6;
+      --accent-2: #d8b4fe;
+      --success: #34d399;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 10%, rgba(139,92,246,0.22), transparent 0 22%),
+        radial-gradient(circle at 82% 12%, rgba(216,180,254,0.11), transparent 0 24%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+    }
+    .wrap {
+      width: min(1260px, 100%);
+      margin: 0 auto;
+      padding: 28px;
+    }
+    .panel, .accordion-item, .mode-card {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(180deg, var(--surface), rgba(8,8,14,0.98));
+      box-shadow: 0 28px 110px rgba(0,0,0,0.30);
+      backdrop-filter: blur(16px);
+    }
+    .hero {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(192,132,252,0.24);
+      background: rgba(139,92,246,0.12);
+      color: #efe3ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .tag::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 18px rgba(216,180,254,0.84);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 7vw, 88px);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+    }
+    h1 span {
+      background: linear-gradient(180deg, #ffffff 0%, #e9dcff 42%, #b56cff 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .mode-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mode-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .mode-card.aggressive::before {
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,0.18), transparent 32%),
+        linear-gradient(135deg, rgba(124,58,237,0.10), transparent 46%);
+    }
+    .mode-card.clean::before {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 26%),
+        radial-gradient(circle at top left, rgba(216,180,254,0.08), transparent 28%);
+    }
+    .mode-card h2 {
+      margin: 14px 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+    .mode-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 14px;
+    }
+    .mode-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .mode-list span {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .section {
+      margin-top: 22px;
+      padding: 24px;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -0.04em;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .accordion {
+      display: grid;
+      gap: 14px;
+    }
+    .accordion-item {
+      overflow: hidden;
+    }
+    .accordion-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+    }
+    .trigger-main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .trigger-main strong {
+      font-size: 24px;
+      letter-spacing: -0.04em;
+    }
+    .trigger-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #e9deff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .badge.latest {
+      color: #dffcef;
+      border-color: rgba(52,211,153,0.22);
+      background: rgba(52,211,153,0.12);
+      box-shadow: 0 0 20px rgba(52,211,153,0.12);
+    }
+    .plus {
+      font-size: 28px;
+      line-height: 1;
+      color: #cbbaff;
+    }
+    .accordion-content {
+      display: none;
+      padding: 0 24px 24px;
+    }
+    .accordion-item.open .accordion-content {
+      display: block;
+    }
+    .accordion-item.open .plus {
+      transform: rotate(45deg);
+      display: inline-block;
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .note-block {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+    .note-block h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #efe8ff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .note-block ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+    .foot {
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .modes,
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 18px; }
+      .panel, .accordion-item, .mode-card { border-radius: 24px; }
+      .accordion-trigger { grid-template-columns: 1fr; }
+      .trigger-right { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel hero">
+      <span class="tag">Read patch notes</span>
+      <h1>Patch notes <span>live-ready</span></h1>
+      <p>Qui hai una pagina già pronta in stile SapoTweak con accordion, date, badge `Latest update` e due direzioni visuali da confrontare: una più aggressiva/premium stile EXM e una più pulita/professionale da software serio.</p>
+    </section>
+
+    <section class="modes">
+      <article class="mode-card aggressive">
+        <span class="tag">Aggressive / Premium</span>
+        <h2>Più impatto, più glow, più presenza</h2>
+        <p>Direzione visiva orientata a vendita, community e competitor style: headline più forti, badge più vivi, bordi luminosi e sezioni che spingono di più il feeling premium/performance.</p>
+        <div class="mode-list">
+          <span>Hero più contrastato con glow e punti luce più forti</span>
+          <span>Pricing e patch notes con tag evidenti e focus sul valore</span>
+          <span>Review wall e performance section più “showcase” e meno neutre</span>
+        </div>
+      </article>
+
+      <article class="mode-card clean">
+        <span class="tag">Clean / Professional</span>
+        <h2>Più ordine, più fiducia, più software serio</h2>
+        <p>Direzione più controllata e pulita: stesso DNA SapoTweak ma con leggibilità alta, spacing più sobrio e priorità alla credibilità di prodotto, supporto, attivazione e update.</p>
+        <div class="mode-list">
+          <span>Box più ordinati e testo più centrato sulla comprensione</span>
+          <span>Flow recensioni e supporto più “serio” e meno caotico</span>
+          <span>Patch notes leggibili anche da chi arriva per assistenza o update</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel section">
+      <div class="section-head">
+        <div>
+          <h2>Patch notes accordion</h2>
+          <p>Le note qui sotto sono già pronte per il sito. Italiano prima, inglese subito dopo, con badge e date in stile coerente alla home.</p>
+        </div>
+      </div>
+
+      <div class="accordion" id="patchAccordion">
+        <article class="accordion-item open">
+          <button class="accordion-trigger" type="button">
+            <div class="trigger-main">
+              <strong>SapoTweak 1.2.6</strong>
+            </div>
+            <div class="trigger-right">
+              <span class="badge latest">Latest update</span>
+              <span class="badge">June 18, 2026</span>
+              <span class="plus">+</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="note-grid">
+              <div class="note-block">
+                <h3>Italiano</h3>
+                <ul>
+                  <li>Aggiunta moderazione recensioni con flusso privato: submit dal sito, inbox admin, approvazione manuale e pubblicazione live.</li>
+                  <li>Pagina recensioni rifinita con proof manuali scorrevoli, wall feedback più professionale e supporto visivo più pulito.</li>
+                  <li>Checkout trimestrale aggiornato con focus su valore reale: priorità supporto, precedenza su reset e assistenza update.</li>
+                  <li>Fix vari di coerenza visiva tra home, recensioni, supporto e checkout.</li>
+                </ul>
+              </div>
+              <div class="note-block">
+                <h3>English</h3>
+                <ul>
+                  <li>Added real review moderation flow: website submission, private admin inbox, manual approval, and live publication.</li>
+                  <li>Refined the reviews page with manual proof browsing, a more professional feedback wall, and cleaner visual support.</li>
+                  <li>Updated the quarterly checkout plan with real-value focus: priority support, reset priority, and update assistance priority.</li>
+                  <li>Multiple visual consistency fixes across home, reviews, support, and checkout.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button">
+            <div class="trigger-main">
+              <strong>SapoTweak 1.2.5</strong>
+            </div>
+            <div class="trigger-right">
+              <span class="badge">June 17, 2026</span>
+              <span class="plus">+</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="note-grid">
+              <div class="note-block">
+                <h3>Italiano</h3>
+                <ul>
+                  <li>Nuovo logo SapoTweak applicato al sito e ai principali touchpoint visivi.</li>
+                  <li>Homepage riallineata verso uno stile più premium con mesh animato, scroll reveal più visibili e blocchi meglio separati.</li>
+                  <li>Supporto aggiornato con popup dedicato, testo rapido da copiare e scelta canale più chiara.</li>
+                </ul>
+              </div>
+              <div class="note-block">
+                <h3>English</h3>
+                <ul>
+                  <li>New SapoTweak logo rolled out across the site and key visual touchpoints.</li>
+                  <li>Homepage pushed toward a more premium look with animated mesh, stronger scroll reveals, and clearer content separation.</li>
+                  <li>Support flow updated with dedicated popup, faster copy-ready text, and clearer channel selection.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item">
+          <button class="accordion-trigger" type="button">
+            <div class="trigger-main">
+              <strong>SapoTweak 1.2.4</strong>
+            </div>
+            <div class="trigger-right">
+              <span class="badge">June 16, 2026</span>
+              <span class="plus">+</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="note-grid">
+              <div class="note-block">
+                <h3>Italiano</h3>
+                <ul>
+                  <li>Rifinita la sezione performance con grafici animati dedicati a FPS, ping, bufferbloat e input lag.</li>
+                  <li>Fix al tone of voice del sito per renderlo più coerente con il programma desktop.</li>
+                  <li>Correzioni su testi, allineamenti, pulsanti e stati di navigazione mobile.</li>
+                </ul>
+              </div>
+              <div class="note-block">
+                <h3>English</h3>
+                <ul>
+                  <li>Polished the performance section with custom animated charts for FPS, ping, bufferbloat, and input lag.</li>
+                  <li>Adjusted the website tone of voice to match the desktop app more closely.</li>
+                  <li>Fixed copy, alignment, button polish, and mobile navigation states.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <p class="foot">Se vuoi, nel passaggio successivo posso anche inserire questa pagina nel menu live del sito e sincronizzare il link patch notes su home, reviews, checkout e supporto.</p>
+  </main>
+
+  <script>
+    document.querySelectorAll(".accordion-trigger").forEach(trigger => {
+      trigger.addEventListener("click", () => {
+        const item = trigger.closest(".accordion-item");
+        item.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+</html>
