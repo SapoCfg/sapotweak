@@ -317,6 +317,83 @@
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
+    .review-summary-shell {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 26px;
+      justify-items: center;
+      text-align: center;
+    }
+    .review-summary-shell > p {
+      margin: 0;
+      max-width: 860px;
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+    .review-summary-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      padding-top: 4px;
+    }
+    .review-score-block {
+      display: grid;
+      gap: 6px;
+      justify-items: start;
+      text-align: left;
+    }
+    .review-score-block:last-child {
+      justify-items: end;
+      text-align: right;
+      margin-left: auto;
+    }
+    .review-score-label {
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .review-score-value {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: .94;
+      letter-spacing: -.05em;
+      font-weight: 900;
+    }
+    .review-stars-row {
+      color: #ffd95f;
+      font-size: 22px;
+      letter-spacing: .14em;
+      text-shadow: 0 0 18px rgba(255,217,95,.18);
+    }
+    .review-filter-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .review-filter-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+    .review-filter-pill.active {
+      border-color: rgba(184, 150, 255, 0.24);
+      background: rgba(127, 66, 255, 0.16);
+      color: #fff;
+      box-shadow: 0 0 26px rgba(127,66,255,.16);
+    }
     .review-overview {
       display: grid;
       gap: 10px;
@@ -636,6 +713,16 @@
         flex-direction: column;
         text-align: center;
       }
+      .review-summary-top,
+      .review-score-block,
+      .review-score-block:last-child {
+        justify-items: center;
+        text-align: center;
+        margin-left: 0;
+      }
+      .review-summary-top {
+        justify-content: center;
+      }
       .review-actions { justify-content: space-between; }
       .form-grid { grid-template-columns: 1fr; }
       .modal-actions { flex-direction: column-reverse; }
@@ -713,6 +800,26 @@
     </section>
 
     <section class="section-shell">
+      <div class="review-summary-shell">
+        <p id="reviewSummaryLead">Leggi cosa dicono gli utenti SapoTweak. Il flusso review richiede email pagamento e key, quindi il contenuto non entra nel sito in automatico: prima arriva al team, poi viene controllato e solo dopo eventualmente pubblicato.</p>
+        <button class="btn primary" id="openReviewModalBtnTop" type="button">Crea review</button>
+        <div class="review-filter-row">
+          <span class="review-filter-pill active" id="reviewFilterAll">Tutte</span>
+          <span class="review-filter-pill" id="reviewFilterPerf">Performance</span>
+          <span class="review-filter-pill" id="reviewFilterUi">UI / Flow</span>
+          <span class="review-filter-pill" id="reviewFilterSupport">Supporto</span>
+        </div>
+        <div class="review-summary-top">
+          <div class="review-score-block">
+            <span class="review-score-label" id="reviewScoreLabelLeft">Overall rating</span>
+            <strong class="review-score-value" id="reviewScoreValueLeft">4.9 out of 5</strong>
+          </div>
+          <div class="review-score-block">
+            <span class="review-score-label" id="reviewScoreLabelRight">based on 200+ reviews</span>
+            <strong class="review-stars-row">★★★★★</strong>
+          </div>
+        </div>
+      </div>
       <div class="review-header">
         <div class="review-overview">
           <span class="section-tag" id="reviewsTag">Wall of feedback</span>
@@ -859,6 +966,14 @@
         proofTitle: "Proof selezionate, senza caos inutile",
         proofLead: "Qui scorri manualmente tutte le proof storiche raccolte dalla community, senza thumbnail viola o blocchi fuori tono.",
         proofCaption1: "Archivio screenshot reale raccolto dalla community SapoTweak. Scorri manualmente per vedere tutte le proof storiche disponibili.",
+        reviewSummaryLead: "Leggi cosa dicono gli utenti SapoTweak. Il flusso review richiede email pagamento e key, quindi il contenuto non entra nel sito in automatico: prima arriva al team, poi viene controllato e solo dopo eventualmente pubblicato.",
+        reviewFilterAll: "Tutte",
+        reviewFilterPerf: "Performance",
+        reviewFilterUi: "UI / Flow",
+        reviewFilterSupport: "Supporto",
+        reviewScoreLabelLeft: "Valutazione generale",
+        reviewScoreValueLeft: "4.9 su 5",
+        reviewScoreLabelRight: "basato su 200+ feedback",
         reviewsTag: "Wall of feedback",
         reviewsTitle: "Recensioni approvate, 6 per blocco",
         reviewsLead: "Le recensioni testuali approvate vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.",
@@ -907,6 +1022,14 @@
         proofTitle: "Selected proof, no unnecessary clutter",
         proofLead: "Here you can manually scroll through the full archive of community proof shots, without the purple thumbnail or off-tone visuals.",
         proofCaption1: "Real screenshot archive collected from the SapoTweak community. Scroll manually to view every historical proof currently available.",
+        reviewSummaryLead: "Read what SapoTweak users have to say. The review flow requires payment email and license key, so nothing lands on the site automatically: it first reaches the team, gets checked, and only then can be published.",
+        reviewFilterAll: "All reviews",
+        reviewFilterPerf: "Performance",
+        reviewFilterUi: "UI / Flow",
+        reviewFilterSupport: "Support",
+        reviewScoreLabelLeft: "Overall rating",
+        reviewScoreValueLeft: "4.9 out of 5",
+        reviewScoreLabelRight: "based on 200+ reviews",
         reviewsTag: "Wall of feedback",
         reviewsTitle: "Approved reviews, 6 per block",
         reviewsLead: "Approved written reviews are shown in groups of six, with arrow navigation and a more professional presentation.",
@@ -995,6 +1118,7 @@
     const nextReviewsBtn = document.getElementById("nextReviewsBtn");
     const reviewModal = document.getElementById("reviewModal");
     const openReviewModalBtn = document.getElementById("openReviewModalBtn");
+    const openReviewModalBtnTop = document.getElementById("openReviewModalBtnTop");
     const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
     const submitReviewBtn = document.getElementById("submitReviewBtn");
     const reviewModalStatus = document.getElementById("reviewModalStatus");
@@ -1099,11 +1223,20 @@
       setText("proofTitle", text.proofTitle);
       setText("proofLead", text.proofLead);
       setText("proofCaption1", text.proofCaption1);
+      setText("reviewSummaryLead", text.reviewSummaryLead);
+      setText("reviewFilterAll", text.reviewFilterAll);
+      setText("reviewFilterPerf", text.reviewFilterPerf);
+      setText("reviewFilterUi", text.reviewFilterUi);
+      setText("reviewFilterSupport", text.reviewFilterSupport);
+      setText("reviewScoreLabelLeft", text.reviewScoreLabelLeft);
+      setText("reviewScoreValueLeft", text.reviewScoreValueLeft);
+      setText("reviewScoreLabelRight", text.reviewScoreLabelRight);
       setText("reviewsTag", text.reviewsTag);
       setText("reviewsTitle", text.reviewsTitle);
       setText("reviewsLead", text.reviewsLead);
       setText("pagerNote", text.pagerNote);
       setText("openReviewModalBtn", text.openReviewModalBtn);
+      setText("openReviewModalBtnTop", text.openReviewModalBtn);
       setText("ctaTitle", text.ctaTitle);
       setText("ctaText", text.ctaText);
       setText("ctaPrimary", text.ctaPrimary);
@@ -1274,6 +1407,7 @@
       }
     });
     openReviewModalBtn.addEventListener("click", openReviewModal);
+    openReviewModalBtnTop.addEventListener("click", openReviewModal);
     closeReviewModalBtn.addEventListener("click", closeReviewModal);
     submitReviewBtn.addEventListener("click", submitReview);
     reviewModal.addEventListener("click", event => {
