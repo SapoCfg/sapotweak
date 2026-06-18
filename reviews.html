@@ -1172,9 +1172,12 @@
     const pageSize = 6;
     const reviewsApiBase = "https://license.salvocan05.workers.dev";
     let publicReviewsByLanguage = { it: [], en: [], es: [] };
-    const proofSlides = Array.from({ length: 16 }, (_, index) => ({
-      src: `reviews/${index + 1}.png`
-    }));
+    const proofSlides = [
+      { src: "reviews/Review.png" },
+      ...Array.from({ length: 16 }, (_, index) => ({
+        src: `reviews/${index + 1}.png`
+      }))
+    ];
 
     function setText(id, value) {
       const node = document.getElementById(id);
