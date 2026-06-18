@@ -261,47 +261,46 @@
       gap: 18px;
       align-items: center;
     }
-    .proof-card {
-      padding: 14px;
+    .proof-viewport {
       overflow: hidden;
+      border-radius: 28px;
+    }
+    .proof-track {
       display: grid;
-      gap: 14px;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(280px, 34vw);
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 6px 4px 10px;
+      scrollbar-width: none;
     }
-    .proof-stage {
-      width: 100%;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #050507;
-      border: 1px solid rgba(255,255,255,0.06);
+    .proof-track::-webkit-scrollbar {
+      display: none;
     }
-    .proof-card img {
+    .proof-shot {
+      scroll-snap-align: start;
+      padding: 12px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.22);
+    }
+    .proof-shot img {
       width: 100%;
       display: block;
+      border-radius: 20px;
       background: #050507;
       object-fit: cover;
       aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.05);
     }
-    .proof-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .proof-card p {
-      margin: 0;
+    .proof-caption {
+      margin: 18px 0 0;
       color: var(--text-2);
       font-size: 13px;
       line-height: 1.7;
       text-align: center;
-      flex: 1 1 460px;
-    }
-    .proof-count {
-      color: var(--text-2);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
     }
     .proof-arrow {
       width: 72px;
@@ -666,7 +665,7 @@
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">EspaÃ±ol</option>
+          <option value="es">Español</option>
         </select>
       </div>
     </nav>
@@ -674,7 +673,7 @@
     <section class="hero">
       <span class="eyebrow" id="eyebrow">Verified community feedback</span>
       <h1 id="title">Recensioni verificate e <span>feedback reali</span></h1>
-      <p id="lead">Una parete recensioni piÃ¹ professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
+      <p id="lead">Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
 
       <div class="stats">
         <article class="stat">
@@ -683,7 +682,7 @@
         </article>
         <article class="stat">
           <strong id="stat2Value">4.9 / 5</strong>
-          <span id="stat2Text">Molti feedback parlano di piÃ¹ fluiditÃ , meno stutter e sistema piÃ¹ reattivo.</span>
+          <span id="stat2Text">Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.</span>
         </article>
         <article class="stat">
           <strong id="stat3Value">Solo canali ufficiali</strong>
@@ -700,17 +699,12 @@
       </div>
       <div class="proof-carousel">
         <button class="icon-btn proof-arrow" id="prevProofBtn" type="button" aria-label="Previous proof">&#8592;</button>
-        <article class="proof-card">
-          <div class="proof-stage">
-            <img id="proofImage" src="reviews/1.png" alt="Proof 1">
-          </div>
-          <div class="proof-meta">
-            <p id="proofCaption1">Archivio screenshot reale raccolto dalla community SapoTweak. Scorri manualmente per vedere tutte le proof storiche disponibili.</p>
-            <span class="proof-count" id="proofCounter">1 / 16</span>
-          </div>
-        </article>
+        <div class="proof-viewport" id="proofViewport">
+          <div class="proof-track" id="proofTrack"></div>
+        </div>
         <button class="icon-btn proof-arrow" id="nextProofBtn" type="button" aria-label="Next proof">&#8594;</button>
       </div>
+      <p class="proof-caption" id="proofCaption1">Archivio screenshot reale raccolto dalla community SapoTweak. Scorri manualmente per vedere tutte le proof storiche disponibili.</p>
     </section>
 
     <section class="section-shell">
@@ -801,7 +795,7 @@
         </div>
       </div>
       <div class="modal-actions">
-        <span class="modal-status" id="reviewModalStatus">La review verrÃ  salvata nella inbox privata e pubblicata solo dopo approvazione manuale.</span>
+        <span class="modal-status" id="reviewModalStatus">La review verrà salvata nella inbox privata e pubblicata solo dopo approvazione manuale.</span>
         <div class="review-actions">
           <button class="btn secondary" id="closeReviewModalBtn" type="button">Chiudi</button>
           <button class="btn primary" id="submitReviewBtn" type="button">Invia review</button>
@@ -813,18 +807,18 @@
   <script>
     const reviewSets = {
       it: [
-        { title: "Molto piÃ¹ fluido", body: "Il preset ha reso il sistema piÃ¹ leggero e il gioco piÃ¹ consistente. La differenza si sente soprattutto nella fluiditÃ  generale, non solo negli FPS massimi.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificata", stars: 5 },
-        { title: "Sessioni FiveM piÃ¹ pulite", body: "Su un PC pieno di processi in background il miglioramento piÃ¹ chiaro Ã¨ stato nella stabilitÃ  in sessione e nella sensazione di meno rumore del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificata", stars: 5 },
-        { title: "Input piÃ¹ netto", body: "Il feeling su Valorant Ã¨ diventato piÃ¹ costante. Meno delay percepito su Windows e comportamento piÃ¹ pulito dopo il preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificata", stars: 5 },
-        { title: "Supporto utile davvero", body: "Non Ã¨ solo il tweak. Anche il supporto Ã¨ veloce e pratico, e questo rende il prodotto piÃ¹ affidabile nel complesso.", name: "Luca", meta: "Support / Activation", badge: "Verificata", stars: 5 },
-        { title: "Meno caos nel sistema", body: "La cosa che ho notato di piÃ¹ Ã¨ che Windows sembra meno pesante e meno rumoroso durante le sessioni lunghe.", name: "Niko", meta: "System cleanup", badge: "Verificata", stars: 5 },
-        { title: "Preset chiari", body: "Mi piace il fatto che i livelli siano separati. Non sembra un tweak buttato lÃ¬ a caso ma un flusso con piÃ¹ contesto.", name: "Sasy", meta: "Presets / UX", badge: "Verificata", stars: 5 },
-        { title: "Ottimo per setup sporchi", body: "Su macchine non pulitissime il guadagno principale Ã¨ che il sistema torna a respirare e il gioco resta piÃ¹ stabile.", name: "Drex", meta: "Performance", badge: "Verificata", stars: 5 },
-        { title: "Procedura chiara", body: "Checkout, download e attivazione sono piÃ¹ semplici di tanti altri tweak che ho visto in giro.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificata", stars: 5 },
-        { title: "1% low migliori", body: "La differenza piÃ¹ utile per me non Ã¨ il numero secco degli FPS, ma la sensazione di meno micro scatti.", name: "Vale", meta: "1% Low / Feel", badge: "Verificata", stars: 5 },
-        { title: "Interfaccia pulita", body: "L'app Ã¨ molto piÃ¹ comprensibile di altre soluzioni. Sai cosa tocchi e non ti senti perso tra cento switch.", name: "Raff", meta: "UI / Flow", badge: "Verificata", stars: 5 },
+        { title: "Molto più fluido", body: "Il preset ha reso il sistema più leggero e il gioco più consistente. La differenza si sente soprattutto nella fluidità generale, non solo negli FPS massimi.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificata", stars: 5 },
+        { title: "Sessioni FiveM più pulite", body: "Su un PC pieno di processi in background il miglioramento più chiaro è stato nella stabilità in sessione e nella sensazione di meno rumore del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificata", stars: 5 },
+        { title: "Input più netto", body: "Il feeling su Valorant è diventato più costante. Meno delay percepito su Windows e comportamento più pulito dopo il preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificata", stars: 5 },
+        { title: "Supporto utile davvero", body: "Non è solo il tweak. Anche il supporto è veloce e pratico, e questo rende il prodotto più affidabile nel complesso.", name: "Luca", meta: "Support / Activation", badge: "Verificata", stars: 5 },
+        { title: "Meno caos nel sistema", body: "La cosa che ho notato di più è che Windows sembra meno pesante e meno rumoroso durante le sessioni lunghe.", name: "Niko", meta: "System cleanup", badge: "Verificata", stars: 5 },
+        { title: "Preset chiari", body: "Mi piace il fatto che i livelli siano separati. Non sembra un tweak buttato lì a caso ma un flusso con più contesto.", name: "Sasy", meta: "Presets / UX", badge: "Verificata", stars: 5 },
+        { title: "Ottimo per setup sporchi", body: "Su macchine non pulitissime il guadagno principale è che il sistema torna a respirare e il gioco resta più stabile.", name: "Drex", meta: "Performance", badge: "Verificata", stars: 5 },
+        { title: "Procedura chiara", body: "Checkout, download e attivazione sono più semplici di tanti altri tweak che ho visto in giro.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificata", stars: 5 },
+        { title: "1% low migliori", body: "La differenza più utile per me non è il numero secco degli FPS, ma la sensazione di meno micro scatti.", name: "Vale", meta: "1% Low / Feel", badge: "Verificata", stars: 5 },
+        { title: "Interfaccia pulita", body: "L'app è molto più comprensibile di altre soluzioni. Sai cosa tocchi e non ti senti perso tra cento switch.", name: "Raff", meta: "UI / Flow", badge: "Verificata", stars: 5 },
         { title: "Aggiornamenti comodi", body: "Mi piace che il flusso update sia integrato e non devo andare a cercare build o link ovunque.", name: "Moro", meta: "Updates", badge: "Verificata", stars: 5 },
-        { title: "Esperienza premium", body: "Tra sito, piani, supporto e prodotto il progetto sembra piÃ¹ serio e rifinito rispetto a prima.", name: "Ares", meta: "Overall trust", badge: "Verificata", stars: 5 }
+        { title: "Esperienza premium", body: "Tra sito, piani, supporto e prodotto il progetto sembra più serio e rifinito rispetto a prima.", name: "Ares", meta: "Overall trust", badge: "Verificata", stars: 5 }
       ],
       en: [
         { title: "Much smoother overall", body: "The preset made the system feel lighter and gameplay more consistent. The real gain is the overall smoothness, not just peak FPS.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verified", stars: 5 },
@@ -841,18 +835,18 @@
         { title: "Premium experience", body: "Between the site, plans, support, and product, the whole project feels more serious and polished now.", name: "Ares", meta: "Overall trust", badge: "Verified", stars: 5 }
       ],
       es: [
-        { title: "Mucho mÃ¡s fluido", body: "El preset hizo que el sistema se sintiera mÃ¡s ligero y el juego mÃ¡s consistente. La diferencia real estÃ¡ en la suavidad general, no solo en los FPS mÃ¡ximos.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificada", stars: 5 },
-        { title: "Sesiones FiveM mÃ¡s limpias", body: "En un PC lleno de procesos en segundo plano, la mejora mÃ¡s clara fue la estabilidad en sesiÃ³n y menos ruido del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificada", stars: 5 },
-        { title: "Input mÃ¡s limpio", body: "Valorant se siente mÃ¡s estable ahora. Menos delay percibido en Windows y una respuesta mÃ¡s clara tras aplicar el preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificada", stars: 5 },
-        { title: "El soporte ayuda de verdad", body: "No es solo el tweak. El soporte es rÃ¡pido y prÃ¡ctico, y eso hace que el producto inspire mÃ¡s confianza.", name: "Luca", meta: "Support / Activation", badge: "Verificada", stars: 5 },
-        { title: "Menos caos en el sistema", body: "Lo que mÃ¡s notÃ© es que Windows se siente mÃ¡s ligero y menos cargado durante sesiones largas.", name: "Niko", meta: "System cleanup", badge: "Verificada", stars: 5 },
-        { title: "Presets claros", body: "Me gusta que los niveles estÃ©n separados. No parece un tweak aleatorio, sino un flujo guiado con contexto.", name: "Sasy", meta: "Presets / UX", badge: "Verificada", stars: 5 },
-        { title: "Muy bueno para setups cargados", body: "En mÃ¡quinas menos limpias la mayor ventaja es que el sistema vuelve a respirar y el juego se mantiene mÃ¡s estable.", name: "Drex", meta: "Performance", badge: "Verificada", stars: 5 },
-        { title: "Proceso de compra claro", body: "Checkout, descarga y activaciÃ³n son mÃ¡s simples que en muchos tweaks que he visto.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificada", stars: 5 },
-        { title: "Mejores 1% low", body: "La diferencia mÃ¡s Ãºtil para mÃ­ no es el nÃºmero puro de FPS, sino la sensaciÃ³n de menos micro tirones.", name: "Vale", meta: "1% Low / Feel", badge: "Verificada", stars: 5 },
-        { title: "Interfaz limpia", body: "La app es mÃ¡s fÃ¡cil de entender que muchas alternativas. Sabes quÃ© tocas sin perderte entre cien switches.", name: "Raff", meta: "UI / Flow", badge: "Verificada", stars: 5 },
-        { title: "Updates cÃ³modos", body: "Me gusta que el flujo de actualizaciÃ³n estÃ© integrado y no tenga que buscar links o builds por todas partes.", name: "Moro", meta: "Updates", badge: "Verificada", stars: 5 },
-        { title: "Experiencia premium", body: "Entre sitio, planes, soporte y producto, todo el proyecto se siente mÃ¡s serio y mejor acabado ahora.", name: "Ares", meta: "Overall trust", badge: "Verificada", stars: 5 }
+        { title: "Mucho más fluido", body: "El preset hizo que el sistema se sintiera más ligero y el juego más consistente. La diferencia real está en la suavidad general, no solo en los FPS máximos.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificada", stars: 5 },
+        { title: "Sesiones FiveM más limpias", body: "En un PC lleno de procesos en segundo plano, la mejora más clara fue la estabilidad en sesión y menos ruido del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificada", stars: 5 },
+        { title: "Input más limpio", body: "Valorant se siente más estable ahora. Menos delay percibido en Windows y una respuesta más clara tras aplicar el preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificada", stars: 5 },
+        { title: "El soporte ayuda de verdad", body: "No es solo el tweak. El soporte es rápido y práctico, y eso hace que el producto inspire más confianza.", name: "Luca", meta: "Support / Activation", badge: "Verificada", stars: 5 },
+        { title: "Menos caos en el sistema", body: "Lo que más noté es que Windows se siente más ligero y menos cargado durante sesiones largas.", name: "Niko", meta: "System cleanup", badge: "Verificada", stars: 5 },
+        { title: "Presets claros", body: "Me gusta que los niveles estén separados. No parece un tweak aleatorio, sino un flujo guiado con contexto.", name: "Sasy", meta: "Presets / UX", badge: "Verificada", stars: 5 },
+        { title: "Muy bueno para setups cargados", body: "En máquinas menos limpias la mayor ventaja es que el sistema vuelve a respirar y el juego se mantiene más estable.", name: "Drex", meta: "Performance", badge: "Verificada", stars: 5 },
+        { title: "Proceso de compra claro", body: "Checkout, descarga y activación son más simples que en muchos tweaks que he visto.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificada", stars: 5 },
+        { title: "Mejores 1% low", body: "La diferencia más útil para mí no es el número puro de FPS, sino la sensación de menos micro tirones.", name: "Vale", meta: "1% Low / Feel", badge: "Verificada", stars: 5 },
+        { title: "Interfaz limpia", body: "La app es más fácil de entender que muchas alternativas. Sabes qué tocas sin perderte entre cien switches.", name: "Raff", meta: "UI / Flow", badge: "Verificada", stars: 5 },
+        { title: "Updates cómodos", body: "Me gusta que el flujo de actualización esté integrado y no tenga que buscar links o builds por todas partes.", name: "Moro", meta: "Updates", badge: "Verificada", stars: 5 },
+        { title: "Experiencia premium", body: "Entre sitio, planes, soporte y producto, todo el proyecto se siente más serio y mejor acabado ahora.", name: "Ares", meta: "Overall trust", badge: "Verificada", stars: 5 }
       ]
     };
 
@@ -973,11 +967,11 @@
         plansLink: "Piani",
         eyebrow: "Verified community feedback",
         title: "Recensioni verificate e <span>feedback reali</span>",
-        lead: "Una parete recensioni piÃ¹ professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
+        lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
         stat1Value: "200+",
         stat1Text: "Feedback raccolti tra utenti, supporto e prove community.",
         stat2Value: "4.9 / 5",
-        stat2Text: "Molti feedback parlano di piÃ¹ fluiditÃ , meno stutter e sistema piÃ¹ reattivo.",
+        stat2Text: "Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.",
         stat3Value: "Solo canali ufficiali",
         stat3Text: "Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.",
         proofTag: "Visual proof",
@@ -1016,11 +1010,11 @@
         reviewRatingLabel: "Valutazione",
         reviewCategoryLabel: "Categoria",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finchÃ© non la approvi manualmente.",
+        reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finché non la approvi manualmente.",
         closeReviewModalBtn: "Chiudi",
         submitReviewBtn: "Invia review",
         reviewValidationError: "Compila email, key, nome, titolo e review prima di inviare.",
-        reviewOpenStatus: "Compila i campi e la review finirÃ  nella inbox privata, non sul sito pubblico.",
+        reviewOpenStatus: "Compila i campi e la review finirà nella inbox privata, non sul sito pubblico.",
         reviewSubmitted: "Review inviata alla inbox privata. Ora puoi approvarla dal pannello admin.",
         reviewSubmitError: "Invio review fallito. Riprova tra poco.",
         reviewCategoryOverall: "Overall",
@@ -1094,59 +1088,59 @@
         reviewTextPlaceholder: "Write your experience with SapoTweak here."
       },
       es: {
-        pageTitle: "SapoTweak - ReseÃ±as",
+        pageTitle: "SapoTweak - Reseñas",
         backLink: "Sitio",
         plansLink: "Planes",
         eyebrow: "Verified community feedback",
-        title: "ReseÃ±as verificadas y <span>feedback real</span>",
-        lead: "Un muro de reseÃ±as mÃ¡s profesional, limpio y creÃ­ble. AquÃ­ ves pruebas seleccionadas, feedback reorganizado y un flujo de review que pide email de pago y license key antes del envÃ­o.",
+        title: "Reseñas verificadas y <span>feedback real</span>",
+        lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, feedback reorganizado y un flujo de review que pide email de pago y license key antes del envío.",
         stat1Value: "200+",
         stat1Text: "Feedback recogido entre usuarios, soporte y pruebas de la comunidad.",
         stat2Value: "4.9 / 5",
-        stat2Text: "Muchos comentarios hablan de mÃ¡s fluidez, menos stutter y un sistema mÃ¡s reactivo.",
+        stat2Text: "Muchos comentarios hablan de más fluidez, menos stutter y un sistema más reactivo.",
         stat3Value: "Solo canales oficiales",
-        stat3Text: "Compra, activaciÃ³n, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
+        stat3Text: "Compra, activación, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
         proofTag: "Visual proof",
         proofTitle: "Pruebas seleccionadas, sin caos innecesario",
-        proofLead: "AquÃ­ puedes recorrer manualmente todo el archivo histÃ³rico de proofs de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
-        proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las proofs histÃ³ricas disponibles.",
+        proofLead: "Aquí puedes recorrer manualmente todo el archivo histórico de proofs de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
+        proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las proofs históricas disponibles.",
         reviewsTag: "Wall of feedback",
         reviewsTitle: "Archivo de feedback de la comunidad",
-        reviewsLead: "Un archivo mÃ¡s limpio de testimonios de clientes y comunidad recogidos entre Discord, soporte y compradores reales. Recorre los bloques manualmente y abre el formulario solo si compraste SapoTweak.",
+        reviewsLead: "Un archivo más limpio de testimonios de clientes y comunidad recogidos entre Discord, soporte y compradores reales. Recorre los bloques manualmente y abre el formulario solo si compraste SapoTweak.",
         pageCounter: "1 / 2",
         pagerNote: "Las reviews enviadas desde el formulario llegan primero a la inbox privada y luego se revisan manualmente.",
         openReviewModalBtn: "Crear review",
         ctaTitle: "Â¿Quieres pasar al checkout oficial?",
-        ctaText: "Si el tono de esta pÃ¡gina te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
+        ctaText: "Si el tono de esta página te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
         ctaPrimary: "Abrir planes",
         ctaSecondary: "Volver a la home",
         footerText: "SapoTweak - Distribuye solo builds oficiales.",
-        termsLink: "TÃ©rminos",
+        termsLink: "Términos",
         privacyLink: "Privacidad",
         supportLink: "Soporte",
-        reviewModalTitle: "EnvÃ­a tu review",
-        reviewModalLead: "Para enviar una reseÃ±a debes indicar email del pago y license key. Las solicitudes sin datos de compra no se consideran y cada review se aprueba manualmente antes de publicarse.",
-        reviewNotice: "EnvÃ­o protegido: email del pago + key obligatorios. DespuÃ©s del envÃ­o, el equipo comprueba la compra y decide si publica la review.",
+        reviewModalTitle: "Envía tu review",
+        reviewModalLead: "Para enviar una reseña debes indicar email del pago y license key. Las solicitudes sin datos de compra no se consideran y cada review se aprueba manualmente antes de publicarse.",
+        reviewNotice: "Envío protegido: email del pago + key obligatorios. Después del envío, el equipo comprueba la compra y decide si publica la review.",
         reviewEmailLabel: "Email del pago",
         reviewKeyLabel: "License key",
-        reviewNameLabel: "Nombre pÃºblico",
-        reviewTitleLabel: "TÃ­tulo de la review",
-        reviewRatingLabel: "ValoraciÃ³n",
-        reviewCategoryLabel: "CategorÃ­a",
+        reviewNameLabel: "Nombre público",
+        reviewTitleLabel: "Título de la review",
+        reviewRatingLabel: "Valoración",
+        reviewCategoryLabel: "Categoría",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La review se guarda en la inbox privada y queda pendiente hasta la aprobaciÃ³n manual.",
+        reviewStatusHint: "La review se guarda en la inbox privada y queda pendiente hasta la aprobación manual.",
         closeReviewModalBtn: "Cerrar",
         submitReviewBtn: "Enviar review",
-        reviewValidationError: "Completa email, key, nombre, tÃ­tulo y review antes de enviar.",
-        reviewOpenStatus: "Completa los campos y la review irÃ¡ a la inbox privada, no al sitio pÃºblico.",
-        reviewSubmitted: "Review enviada a la inbox privada. Luego podrÃ¡s aprobarla desde el panel admin.",
-        reviewSubmitError: "El envÃ­o de la review fallÃ³. Vuelve a intentarlo en breve.",
+        reviewValidationError: "Completa email, key, nombre, título y review antes de enviar.",
+        reviewOpenStatus: "Completa los campos y la review irá a la inbox privada, no al sitio público.",
+        reviewSubmitted: "Review enviada a la inbox privada. Luego podrás aprobarla desde el panel admin.",
+        reviewSubmitError: "El envío de la review falló. Vuelve a intentarlo en breve.",
         reviewCategoryOverall: "Overall",
         reviewCategoryPerformance: "Performance",
         reviewCategoryUi: "UI / Flow",
         reviewCategorySupport: "Soporte",
         reviewCategoryDelivery: "Checkout / Delivery",
-        reviewTextPlaceholder: "Escribe aquÃ­ tu experiencia con SapoTweak."
+        reviewTextPlaceholder: "Escribe aquí tu experiencia con SapoTweak."
       }
     };
 
@@ -1168,14 +1162,13 @@
     const reviewRating = document.getElementById("reviewRating");
     const reviewCategory = document.getElementById("reviewCategory");
     const reviewText = document.getElementById("reviewText");
-    const proofImage = document.getElementById("proofImage");
+    const proofTrack = document.getElementById("proofTrack");
+    const proofViewport = document.getElementById("proofViewport");
     const proofCaption1 = document.getElementById("proofCaption1");
-    const proofCounter = document.getElementById("proofCounter");
     const prevProofBtn = document.getElementById("prevProofBtn");
     const nextProofBtn = document.getElementById("nextProofBtn");
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
     let reviewPage = 0;
-    let proofPage = 0;
     const pageSize = 6;
     const reviewsApiBase = "https://license.salvocan05.workers.dev";
     let publicReviewsByLanguage = { it: [], en: [], es: [] };
@@ -1267,19 +1260,17 @@
       return Math.max(1, Math.ceil(currentReviews().length / pageSize));
     }
 
-    function renderProof() {
-      const slide = proofSlides[proofPage];
-      if (!slide) return;
-      proofImage.src = slide.src;
-      proofImage.alt = `Proof ${proofPage + 1}`;
+    function renderProofGallery() {
+      proofTrack.innerHTML = proofSlides.map((slide, index) => `
+        <article class="proof-shot">
+          <img src="${slide.src}" alt="Proof ${index + 1}" loading="lazy">
+        </article>
+      `).join("");
       proofCaption1.textContent = t("proofCaption1");
-      proofCounter.textContent = `${proofPage + 1} / ${proofSlides.length}`;
-      prevProofBtn.disabled = proofPage === 0;
-      nextProofBtn.disabled = proofPage >= proofSlides.length - 1;
     }
 
     function starString(count) {
-      return "â˜…".repeat(count) + "â˜†".repeat(Math.max(0, 5 - count));
+      return "★".repeat(count) + "☆".repeat(Math.max(0, 5 - count));
     }
 
     function renderReviews() {
@@ -1386,8 +1377,7 @@
       reviewCategory.options[4].text = t("reviewCategoryDelivery");
       reviewText.placeholder = t("reviewTextPlaceholder");
       reviewPage = 0;
-      proofPage = 0;
-      renderProof();
+      renderProofGallery();
       loadApprovedReviews();
     }
 
@@ -1537,17 +1527,11 @@
     });
 
     prevProofBtn.addEventListener("click", () => {
-      if (proofPage > 0) {
-        proofPage -= 1;
-        renderProof();
-      }
+      proofViewport.scrollBy({ left: -Math.max(320, proofViewport.clientWidth * 0.92), behavior: "smooth" });
     });
 
     nextProofBtn.addEventListener("click", () => {
-      if (proofPage < proofSlides.length - 1) {
-        proofPage += 1;
-        renderProof();
-      }
+      proofViewport.scrollBy({ left: Math.max(320, proofViewport.clientWidth * 0.92), behavior: "smooth" });
     });
     openReviewModalBtn.addEventListener("click", openReviewModal);
     if (openReviewModalBtnTop) openReviewModalBtnTop.addEventListener("click", openReviewModal);
