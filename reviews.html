@@ -255,29 +255,59 @@
       font-size: 15px;
       line-height: 1.74;
     }
-    .proof-grid {
+    .proof-carousel {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: 72px minmax(0, 1fr) 72px;
+      gap: 18px;
+      align-items: center;
     }
     .proof-card {
-      padding: 12px;
+      padding: 14px;
       overflow: hidden;
+      display: grid;
+      gap: 14px;
+    }
+    .proof-stage {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #050507;
+      border: 1px solid rgba(255,255,255,0.06);
     }
     .proof-card img {
       width: 100%;
       display: block;
-      border-radius: 20px;
       background: #050507;
       object-fit: cover;
-      aspect-ratio: 1.2 / 1;
+      aspect-ratio: 16 / 9;
+    }
+    .proof-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     .proof-card p {
-      margin: 12px 4px 4px;
+      margin: 0;
+      color: var(--text-2);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+      flex: 1 1 460px;
+    }
+    .proof-count {
       color: var(--text-2);
       font-size: 12px;
-      line-height: 1.6;
-      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .proof-arrow {
+      width: 72px;
+      min-height: 72px;
+      border-radius: 24px;
+      font-size: 28px;
     }
     .review-header {
       display: flex;
@@ -290,6 +320,7 @@
     .review-overview {
       display: grid;
       gap: 10px;
+      text-align: left;
     }
     .review-overview strong {
       font-size: clamp(34px, 5vw, 58px);
@@ -571,9 +602,14 @@
     }
     @media (max-width: 1040px) {
       .stats,
-      .proof-grid,
       .reviews-grid,
       .cta-shell { grid-template-columns: 1fr; }
+      .proof-carousel { grid-template-columns: 1fr; }
+      .proof-arrow {
+        width: 56px;
+        min-height: 56px;
+        justify-self: center;
+      }
       .cta-actions { justify-content: flex-start; }
     }
     @media (max-width: 720px) {
@@ -584,7 +620,7 @@
         align-items: flex-start;
         border-radius: 26px;
       }
-      .nav-right { justify-content: flex-start; }
+      .nav-right { justify-content: center; width: 100%; }
       .section-shell,
       .stat,
       .review-card,
@@ -596,8 +632,9 @@
       .review-modal { padding: 22px; }
       .hero { padding-top: 42px; }
       .review-header {
-        align-items: stretch;
+        align-items: center;
         flex-direction: column;
+        text-align: center;
       }
       .review-actions { justify-content: space-between; }
       .form-grid { grid-template-columns: 1fr; }
@@ -660,19 +697,18 @@
         <h2 id="proofTitle">Proof selezionate, senza caos inutile</h2>
         <p id="proofLead">Abbiamo tolto il blocco Discord dalla sezione principale e lasciato solo visual puliti che sostengono il tono premium della pagina.</p>
       </div>
-      <div class="proof-grid">
+      <div class="proof-carousel">
+        <button class="icon-btn proof-arrow" id="prevProofBtn" type="button" aria-label="Previous proof">&#8592;</button>
         <article class="proof-card">
-          <img src="reviews/1.png" alt="Proof 1">
-          <p id="proofCaption1">Esempio di risultato condiviso dopo l'uso del tweak su setup reali.</p>
+          <div class="proof-stage">
+            <img id="proofImage" src="reviews/1.png" alt="Proof 1">
+          </div>
+          <div class="proof-meta">
+            <p id="proofCaption1">Archivio screenshot reale raccolto dalla community SapoTweak. Scorri manualmente per vedere tutte le proof storiche disponibili.</p>
+            <span class="proof-count" id="proofCounter">1 / 16</span>
+          </div>
         </article>
-        <article class="proof-card">
-          <img src="reviews/10.png" alt="Proof 2">
-          <p id="proofCaption2">Altra prova visuale raccolta dalla community e usata come social proof.</p>
-        </article>
-        <article class="proof-card">
-          <img src="checkout-preview.png" alt="Proof 3">
-          <p id="proofCaption3">Interfaccia, checkout e prodotto restano coerenti nello stesso stile premium.</p>
-        </article>
+        <button class="icon-btn proof-arrow" id="nextProofBtn" type="button" aria-label="Next proof">&#8594;</button>
       </div>
     </section>
 
@@ -680,8 +716,8 @@
       <div class="review-header">
         <div class="review-overview">
           <span class="section-tag" id="reviewsTag">Wall of feedback</span>
-          <strong id="reviewsTitle">6 recensioni per blocco, scorrimento pulito</strong>
-          <p id="reviewsLead">Le recensioni vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.</p>
+          <strong id="reviewsTitle">Recensioni approvate, 6 per blocco</strong>
+          <p id="reviewsLead">Le recensioni testuali approvate vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.</p>
           <span class="review-count" id="pageCounter">1 / 2</span>
         </div>
         <div class="review-actions">
@@ -821,13 +857,11 @@
         stat3Text: "Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.",
         proofTag: "Visual proof",
         proofTitle: "Proof selezionate, senza caos inutile",
-        proofLead: "Abbiamo tolto il blocco Discord dalla sezione principale e lasciato solo visual puliti che sostengono il tono premium della pagina.",
-        proofCaption1: "Esempio di risultato condiviso dopo l'uso del tweak su setup reali.",
-        proofCaption2: "Altra prova visuale raccolta dalla community e usata come social proof.",
-        proofCaption3: "Interfaccia, checkout e prodotto restano coerenti nello stesso stile premium.",
+        proofLead: "Qui scorri manualmente tutte le proof storiche raccolte dalla community, senza thumbnail viola o blocchi fuori tono.",
+        proofCaption1: "Archivio screenshot reale raccolto dalla community SapoTweak. Scorri manualmente per vedere tutte le proof storiche disponibili.",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "6 recensioni per blocco, scorrimento pulito",
-        reviewsLead: "Le recensioni vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.",
+        reviewsTitle: "Recensioni approvate, 6 per blocco",
+        reviewsLead: "Le recensioni testuali approvate vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.",
         pageCounter: "1 / 2",
         pagerNote: "Le review inviate vengono controllate manualmente prima di diventare pubbliche.",
         openReviewModalBtn: "Crea review",
@@ -871,13 +905,11 @@
         stat3Text: "Purchase, activation, reviews, and support move only through official SapoTweak channels.",
         proofTag: "Visual proof",
         proofTitle: "Selected proof, no unnecessary clutter",
-        proofLead: "We removed the Discord block from the main section and kept only cleaner visuals that support the premium feel of the page.",
-        proofCaption1: "Example result shared after using the tweak on real setups.",
-        proofCaption2: "Another visual proof collected from the community and used as social proof.",
-        proofCaption3: "Interface, checkout, and product stay aligned in the same premium style.",
+        proofLead: "Here you can manually scroll through the full archive of community proof shots, without the purple thumbnail or off-tone visuals.",
+        proofCaption1: "Real screenshot archive collected from the SapoTweak community. Scroll manually to view every historical proof currently available.",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "6 reviews per block, clean navigation",
-        reviewsLead: "Reviews are shown in groups of six, with arrow navigation and a more professional presentation.",
+        reviewsTitle: "Approved reviews, 6 per block",
+        reviewsLead: "Approved written reviews are shown in groups of six, with arrow navigation and a more professional presentation.",
         pageCounter: "1 / 2",
         pagerNote: "Submitted reviews are manually checked before becoming public.",
         openReviewModalBtn: "Create review",
@@ -921,13 +953,11 @@
         stat3Text: "Compra, activación, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
         proofTag: "Visual proof",
         proofTitle: "Pruebas seleccionadas, sin caos innecesario",
-        proofLead: "Quitamos el bloque de Discord de la sección principal y dejamos solo visuales limpios que sostienen el tono premium de la página.",
-        proofCaption1: "Ejemplo de resultado compartido tras usar el tweak en setups reales.",
-        proofCaption2: "Otra prueba visual recogida de la comunidad y usada como social proof.",
-        proofCaption3: "Interfaz, checkout y producto mantienen el mismo estilo premium.",
+        proofLead: "Aquí puedes recorrer manualmente todo el archivo histórico de proofs de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
+        proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las proofs históricas disponibles.",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "6 reseñas por bloque, desplazamiento limpio",
-        reviewsLead: "Las reseñas se muestran en grupos de seis, con navegación por flechas y una presentación más profesional.",
+        reviewsTitle: "Reseñas aprobadas, 6 por bloque",
+        reviewsLead: "Las reseñas de texto aprobadas se muestran en grupos de seis, con navegación por flechas y una presentación más profesional.",
         pageCounter: "1 / 2",
         pagerNote: "Las reviews enviadas se revisan manualmente antes de hacerse públicas.",
         openReviewModalBtn: "Crear review",
@@ -973,9 +1003,18 @@
     const reviewName = document.getElementById("reviewName");
     const reviewRating = document.getElementById("reviewRating");
     const reviewText = document.getElementById("reviewText");
+    const proofImage = document.getElementById("proofImage");
+    const proofCaption1 = document.getElementById("proofCaption1");
+    const proofCounter = document.getElementById("proofCounter");
+    const prevProofBtn = document.getElementById("prevProofBtn");
+    const nextProofBtn = document.getElementById("nextProofBtn");
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
     let reviewPage = 0;
+    let proofPage = 0;
     const pageSize = 6;
+    const proofSlides = Array.from({ length: 16 }, (_, index) => ({
+      src: `reviews/${index + 1}.png`
+    }));
 
     function setText(id, value) {
       const node = document.getElementById(id);
@@ -997,6 +1036,17 @@
 
     function totalPages() {
       return Math.max(1, Math.ceil(currentReviews().length / pageSize));
+    }
+
+    function renderProof() {
+      const slide = proofSlides[proofPage];
+      if (!slide) return;
+      proofImage.src = slide.src;
+      proofImage.alt = `Proof ${proofPage + 1}`;
+      proofCaption1.textContent = t("proofCaption1");
+      proofCounter.textContent = `${proofPage + 1} / ${proofSlides.length}`;
+      prevProofBtn.disabled = proofPage === 0;
+      nextProofBtn.disabled = proofPage >= proofSlides.length - 1;
     }
 
     function starString(count) {
@@ -1049,8 +1099,6 @@
       setText("proofTitle", text.proofTitle);
       setText("proofLead", text.proofLead);
       setText("proofCaption1", text.proofCaption1);
-      setText("proofCaption2", text.proofCaption2);
-      setText("proofCaption3", text.proofCaption3);
       setText("reviewsTag", text.reviewsTag);
       setText("reviewsTitle", text.reviewsTitle);
       setText("reviewsLead", text.reviewsLead);
@@ -1077,6 +1125,8 @@
       setText("submitReviewBtn", text.submitReviewBtn);
       reviewText.placeholder = text.reviewTextPlaceholder;
       reviewPage = 0;
+      proofPage = 0;
+      renderProof();
       renderReviews();
     }
 
@@ -1207,6 +1257,20 @@
       if (reviewPage < totalPages() - 1) {
         reviewPage += 1;
         renderReviews();
+      }
+    });
+
+    prevProofBtn.addEventListener("click", () => {
+      if (proofPage > 0) {
+        proofPage -= 1;
+        renderProof();
+      }
+    });
+
+    nextProofBtn.addEventListener("click", () => {
+      if (proofPage < proofSlides.length - 1) {
+        proofPage += 1;
+        renderProof();
       }
     });
     openReviewModalBtn.addEventListener("click", openReviewModal);
