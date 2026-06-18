@@ -255,43 +255,353 @@
     .float-top { top: 74px; left: -8px; }
     .float-mid { top: 272px; right: -10px; }
     .float-bottom { bottom: 68px; left: 46px; }
-    .performance-band {
+    .performance-lab {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
       margin-top: 30px;
     }
-    .performance-card {
-      padding: 22px;
-      border-radius: 24px;
+    .performance-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
       border: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, #141420, #0d0d16);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 0 28px rgba(124,58,237,.10);
+      background:
+        radial-gradient(circle at top left, rgba(153, 87, 255, .18), transparent 34%),
+        linear-gradient(180deg, rgba(20, 17, 34, .96), rgba(9, 9, 16, .98));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 40px rgba(124,58,237,.12),
+        0 24px 80px rgba(0,0,0,.22);
     }
-    .performance-index {
-      display: inline-flex;
-      align-items: center;
+    .performance-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.85), transparent);
+      pointer-events: none;
+    }
+    .performance-main {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 22px;
+      padding: 26px;
+      min-height: 420px;
+    }
+    .performance-copy,
+    .performance-graph-shell,
+    .performance-mini {
+      position: relative;
+      z-index: 1;
+    }
+    .performance-copy {
+      display: flex;
+      flex-direction: column;
       justify-content: center;
-      width: 38px;
-      height: 38px;
-      margin-bottom: 14px;
+      gap: 18px;
+      max-width: 520px;
+    }
+    .performance-kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
-      font-size: 12px;
+      border: 1px solid rgba(188, 154, 255, .22);
+      background: rgba(135, 84, 255, .12);
+      color: #f1e8ff;
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: .08em;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
-    .performance-card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      line-height: 1.05;
-      letter-spacing: -.03em;
+    .performance-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #a855f7;
+      box-shadow: 0 0 18px rgba(168,85,247,.7);
     }
-    .performance-card p {
+    .performance-copy h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: .93;
+      letter-spacing: -.05em;
+    }
+    .performance-copy p {
       margin: 0;
       color: #b8b3ca;
+      font-size: 15px;
+      line-height: 1.78;
+    }
+    .performance-copy .checkout-chip {
+      width: fit-content;
+    }
+    .performance-legend {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+      color: #c3bde1;
+      font-size: 13px;
+    }
+    .performance-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .performance-legend em {
+      font-style: normal;
+    }
+    .performance-legend b {
+      display: inline-flex;
+      width: 18px;
+      height: 4px;
+      border-radius: 999px;
+    }
+    .legend-after { background: #8f7cff; box-shadow: 0 0 18px rgba(143,124,255,.72); }
+    .legend-before { background: #ff657f; box-shadow: 0 0 18px rgba(255,101,127,.44); }
+    .performance-graph-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+    .graph-card {
+      position: relative;
+      width: 100%;
+      min-height: 320px;
+      padding: 18px 18px 10px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.05);
+      background: rgba(7, 7, 13, .54);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      overflow: hidden;
+    }
+    .graph-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 100% 56px, 56px 100%;
+      opacity: .45;
+      pointer-events: none;
+    }
+    .graph-card svg {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 292px;
+      overflow: visible;
+    }
+    .graph-line-before,
+    .graph-line-after,
+    .graph-dot {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .graph-line-before {
+      stroke: #ff627b;
+      stroke-width: 5;
+      opacity: .42;
+      filter: drop-shadow(0 0 14px rgba(255,98,123,.26));
+    }
+    .graph-line-after {
+      stroke: #8f7cff;
+      stroke-width: 5;
+      opacity: .86;
+      stroke-dasharray: 12 14;
+      animation: graphPulse 8.2s linear infinite;
+      filter: drop-shadow(0 0 20px rgba(143,124,255,.45));
+    }
+    .graph-dot {
+      stroke: transparent;
+      fill: #c3bbff;
+      filter: drop-shadow(0 0 22px rgba(195,187,255,.88));
+      animation: graphDotPulse 2.6s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .graph-caption {
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      color: #9f97bf;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    .performance-mini {
+      grid-column: span 6;
+      padding: 22px;
+      min-height: 320px;
+    }
+    .performance-mini h3 {
+      margin: 14px 0 10px;
+      font-size: 30px;
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .performance-mini p {
+      margin: 0;
+      max-width: 520px;
+      color: #b8b3ca;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .mini-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #f0e8ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .mini-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #c084fc;
+      box-shadow: 0 0 18px rgba(192,132,252,.7);
+    }
+    .latency-dots {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+      padding: 16px 0 8px;
+    }
+    .latency-dots::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 68px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,.02), rgba(255,255,255,.12), rgba(255,255,255,.02));
+    }
+    .dot-lane {
+      display: grid;
+      grid-template-columns: 140px 1fr 56px;
+      gap: 12px;
+      align-items: center;
+      color: #d8d2f0;
+      font-size: 13px;
+    }
+    .dot-track {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .dot-track span {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .dot-track.before span:nth-child(-n+3) {
+      background: #ff6f86;
+      box-shadow: 0 0 16px rgba(255,111,134,.52);
+    }
+    .dot-track.after span {
+      background: #98a0ff;
+      box-shadow: 0 0 18px rgba(152,160,255,.62);
+      animation: laneGlow 2.8s ease-in-out infinite;
+    }
+    .dot-track.after span:nth-child(2) { animation-delay: .08s; }
+    .dot-track.after span:nth-child(3) { animation-delay: .16s; }
+    .dot-track.after span:nth-child(4) { animation-delay: .24s; }
+    .dot-track.after span:nth-child(5) { animation-delay: .32s; }
+    .dot-track.after span:nth-child(6) { animation-delay: .40s; }
+    .grade-mark {
+      position: absolute;
+      right: 28px;
+      bottom: 26px;
+      font-size: clamp(96px, 12vw, 164px);
+      font-weight: 900;
+      letter-spacing: -.08em;
+      color: rgba(255,255,255,.05);
+      user-select: none;
+    }
+    .mini-chart {
+      position: relative;
+      margin-top: 22px;
+      min-height: 170px;
+      padding: 10px 0 0;
+    }
+    .mini-chart svg {
+      width: 100%;
+      height: 170px;
+      overflow: visible;
+    }
+    .mini-chart .graph-line-before {
+      stroke-width: 4;
+      opacity: .56;
+    }
+    .mini-chart .graph-line-after {
+      stroke-width: 4;
+      animation-duration: 9s;
+    }
+    .mini-chart .graph-fill-before {
+      fill: rgba(255,98,123,.10);
+    }
+    .mini-chart .graph-fill-after {
+      fill: rgba(143,124,255,.12);
+    }
+    .mini-chart .graph-dot {
+      animation-duration: 3s;
+    }
+    .mini-metrics {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .mini-metrics span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #d7d0ef;
+      font-size: 13px;
+    }
+    .mini-metrics b {
+      color: #fff;
       font-size: 14px;
-      line-height: 1.65;
+    }
+    .mini-metrics i {
+      display: inline-flex;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+    }
+    .mini-metrics .before { background: #ff657f; box-shadow: 0 0 16px rgba(255,101,127,.45); }
+    .mini-metrics .after { background: #8f7cff; box-shadow: 0 0 16px rgba(143,124,255,.62); }
+    @keyframes graphPulse {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -220; }
+    }
+    @keyframes graphDotPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.18); opacity: .72; }
+    }
+    @keyframes laneGlow {
+      0%, 100% { transform: translateY(0); opacity: .78; }
+      50% { transform: translateY(-3px); opacity: 1; }
     }
     .preset-grid {
       display: grid;
@@ -1243,7 +1553,6 @@
     }
     .hero-metric,
     .showcase-point,
-    .performance-card,
     .preset-card,
     .app-stage-item,
     .feature-card,
@@ -1321,17 +1630,20 @@
       width: min(100%, 700px);
       padding: 20px;
     }
-    .performance-band {
+    .performance-lab {
       margin-top: 26px;
       gap: 18px;
     }
-    .performance-card {
-      padding: 26px;
-      border-radius: 26px;
+    .performance-panel {
+      border-radius: 32px;
     }
-    .performance-index {
-      background: linear-gradient(135deg, #7837ff, #b168ff);
-      box-shadow: 0 14px 36px rgba(124,58,237,.30);
+    .performance-main {
+      padding: 28px;
+      min-height: 440px;
+    }
+    .performance-mini {
+      border-radius: 30px;
+      min-height: 340px;
     }
     .preset-grid,
     .feature-grid {
@@ -1602,10 +1914,12 @@
       .hero-metrics,
       .showcase-proof-grid,
       .showcase-points,
-      .performance-band,
+      .performance-lab,
       .preset-grid,
       .offer-metrics,
       .app-stage-list { grid-template-columns: 1fr; }
+      .performance-main { grid-template-columns: 1fr; }
+      .performance-mini { grid-column: span 12; }
       .feature-video { grid-template-columns: 1fr; }
       .video-panel video { min-height: 260px; }
       .showcase-visual { min-height: 520px; }
@@ -1756,21 +2070,68 @@
       </div>
     </section>
 
-    <section class="performance-band reveal">
-      <article class="performance-card">
-        <span class="performance-index">01</span>
-        <h3 data-i18n="perf1Title">Boost your FPS and eliminate stutters</h3>
-        <p data-i18n="perf1Text">Lavora su processi, servizi e componenti che tolgono consistenza al frame pacing.</p>
+    <section class="performance-lab reveal">
+      <article class="performance-panel performance-main">
+        <div class="performance-copy">
+          <span class="performance-kicker" data-i18n="perfTag">Performance lab</span>
+          <h2 data-i18n="perf1Title">Boost FPS, stabilizza il frame pacing, elimina il rumore inutile</h2>
+          <p data-i18n="perf1Text">SapoTweak lavora per ridurre il caos del sistema durante il gioco: meno processi invasivi, meno stutter, meno spike casuali e una sensazione generale più stabile nelle sessioni lunghe.</p>
+          <div class="performance-legend">
+            <span><b class="legend-after"></b><em data-i18n="perfLegendAfter">Dopo SapoTweak</em></span>
+            <span><b class="legend-before"></b><em data-i18n="perfLegendBefore">Prima</em></span>
+          </div>
+          <a class="checkout-chip" href="checkout.html" data-i18n="perfButton">Vai ai piani</a>
+        </div>
+        <div class="performance-graph-shell">
+          <div class="graph-card">
+            <svg viewBox="0 0 620 300" aria-hidden="true">
+              <polyline class="graph-line-before" points="8,194 42,212 78,170 112,226 148,174 184,238 220,164 256,226 292,188 326,242 360,176 394,220 428,182 462,232 496,168 530,214 566,176 604,198"></polyline>
+              <polyline class="graph-line-after" points="8,122 42,132 78,104 112,126 148,96 184,140 220,84 256,126 292,102 326,142 360,96 394,122 428,86 462,134 496,92 530,118 566,96 604,108"></polyline>
+              <circle class="graph-dot" cx="604" cy="108" r="7"></circle>
+            </svg>
+            <span class="graph-caption" data-i18n="perfChartCaption">Frame pacing stability</span>
+          </div>
+        </div>
       </article>
-      <article class="performance-card">
-        <span class="performance-index">02</span>
-        <h3 data-i18n="perf2Title">Improve ping and responsiveness</h3>
-        <p data-i18n="perf2Text">Ottimizzazioni mirate per lasciare più spazio al gioco e meno rumore al sistema.</p>
+      <article class="performance-panel performance-mini">
+        <span class="mini-kicker" data-i18n="perf2Eyebrow">Network feel</span>
+        <h3 data-i18n="perf2Title">Ping più pulito e bufferbloat sotto controllo</h3>
+        <p data-i18n="perf2Text">Quando il PC smette di trascinarsi dietro processi e servizi inutili, anche la rete percepita diventa più leggibile. Non è magia: è meno rumore dove non serve.</p>
+        <div class="latency-dots">
+          <div class="dot-lane">
+            <span data-i18n="perf2BeforeLabel">Senza tweak</span>
+            <div class="dot-track before">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <strong>84 ms</strong>
+          </div>
+          <div class="dot-lane">
+            <span data-i18n="perf2AfterLabel">Con SapoTweak</span>
+            <div class="dot-track after">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <strong>3 ms</strong>
+          </div>
+          <span class="grade-mark">A+</span>
+        </div>
       </article>
-      <article class="performance-card">
-        <span class="performance-index">03</span>
-        <h3 data-i18n="perf3Title">Stay safe with guided controls</h3>
-        <p data-i18n="perf3Text">Ogni categoria resta leggibile, con warning reali e opzioni di ritorno ai valori conservativi.</p>
+      <article class="performance-panel performance-mini">
+        <span class="mini-kicker" data-i18n="perf3Eyebrow">Input response</span>
+        <h3 data-i18n="perf3Title">Meno input lag e latenza di sistema più costante</h3>
+        <p data-i18n="perf3Text">L'obiettivo non è solo vedere un numero più alto, ma sentire un PC più pronto. Meno spike nei momenti peggiori, più continuità tra mouse, tastiera e gioco.</p>
+        <div class="mini-metrics">
+          <span><i class="before"></i><span data-i18n="perf3MetricBefore">Prima <b>11 ms</b></span></span>
+          <span><i class="after"></i><span data-i18n="perf3MetricAfter">Dopo <b>2 ms</b></span></span>
+        </div>
+        <div class="mini-chart">
+          <svg viewBox="0 0 560 170" aria-hidden="true">
+            <path class="graph-fill-before" d="M0,116 L42,138 L88,104 L132,78 L176,96 L220,74 L264,130 L308,80 L352,48 L396,66 L440,44 L484,70 L528,46 L560,36 L560,170 L0,170 Z"></path>
+            <path class="graph-fill-after" d="M0,142 L42,142 L88,142 L132,126 L176,126 L220,114 L264,114 L308,114 L352,132 L396,132 L440,142 L484,142 L528,152 L560,154 L560,170 L0,170 Z"></path>
+            <polyline class="graph-line-before" points="0,116 42,138 88,104 132,78 176,96 220,74 264,130 308,80 352,48 396,66 440,44 484,70 528,46 560,36"></polyline>
+            <polyline class="graph-line-after" points="0,142 42,142 88,142 132,126 176,126 220,114 264,114 308,114 352,132 396,132 440,142 484,142 528,152 560,154"></polyline>
+            <circle class="graph-dot" cx="528" cy="152" r="6"></circle>
+          </svg>
+        </div>
       </article>
     </section>
 
@@ -1995,12 +2356,23 @@
         proof1Text: 'Il flusso e pensato per arrivare subito ai tweak utili senza caos inutile.',
         proof2Text: 'Checkout, conferma e supporto sono integrati in un percorso più ordinato.',
         proof3Text: 'Popup dedicato, testo pronto da copiare e canali ufficiali chiari.',
-        perf1Title: 'Boost your FPS and eliminate stutters',
-        perf1Text: 'Lavora su processi, servizi e componenti che tolgono consistenza al frame pacing.',
-        perf2Title: 'Improve ping and responsiveness',
-        perf2Text: 'Ottimizzazioni mirate per lasciare più spazio al gioco e meno rumore al sistema.',
-        perf3Title: 'Stay safe with guided controls',
-        perf3Text: 'Ogni categoria resta leggibile, con warning reali e opzioni di ritorno ai valori conservativi.',
+        perfTag: 'Performance lab',
+        perf1Title: 'Boost FPS, stabilizza il frame pacing, elimina il rumore inutile',
+        perf1Text: 'SapoTweak lavora per ridurre il caos del sistema durante il gioco: meno processi invasivi, meno stutter, meno spike casuali e una sensazione generale più stabile nelle sessioni lunghe.',
+        perfLegendAfter: 'Dopo SapoTweak',
+        perfLegendBefore: 'Prima',
+        perfButton: 'Vai ai piani',
+        perfChartCaption: 'Frame pacing stability',
+        perf2Eyebrow: 'Network feel',
+        perf2Title: 'Ping più pulito e bufferbloat sotto controllo',
+        perf2Text: 'Quando il PC smette di trascinarsi dietro processi e servizi inutili, anche la rete percepita diventa più leggibile. Non è magia: è meno rumore dove non serve.',
+        perf2BeforeLabel: 'Senza tweak',
+        perf2AfterLabel: 'Con SapoTweak',
+        perf3Eyebrow: 'Input response',
+        perf3Title: 'Meno input lag e latenza di sistema più costante',
+        perf3Text: "L'obiettivo non è solo vedere un numero più alto, ma sentire un PC più pronto. Meno spike nei momenti peggiori, più continuità tra mouse, tastiera e gioco.",
+        perf3MetricBefore: 'Prima 11 ms',
+        perf3MetricAfter: 'Dopo 2 ms',
         presetTag: 'Preset levels',
         presetTitle: 'Tre livelli, tre modi diversi di usare SapoTweak',
         presetLead: 'Il sito adesso racconta subito che non esiste un solo bottone magico: esistono livelli diversi, in base a quanto vuoi spingere il sistema.',
@@ -2126,12 +2498,23 @@
         proof1Text: 'The flow is designed to reach the useful tweaks quickly without unnecessary clutter.',
         proof2Text: 'Checkout, confirmation, and support now live inside a cleaner premium path.',
         proof3Text: 'Dedicated popup, ready-to-copy text, and clearer official support channels.',
-        perf1Title: 'Boost your FPS and eliminate stutters',
-        perf1Text: 'Work on processes, services and components that damage frame pacing consistency.',
-        perf2Title: 'Improve ping and responsiveness',
-        perf2Text: 'Targeted optimizations leave more room for the game and less noise in the system.',
-        perf3Title: 'Stay safe with guided controls',
-        perf3Text: 'Every category stays readable, with real warnings and conservative rollback options.',
+        perfTag: 'Performance lab',
+        perf1Title: 'Boost FPS, stabilize frame pacing, and cut the useless system noise',
+        perf1Text: 'SapoTweak is built to reduce gameplay chaos: fewer invasive processes, fewer stutters, fewer random spikes, and a steadier feel during longer sessions.',
+        perfLegendAfter: 'After SapoTweak',
+        perfLegendBefore: 'Before',
+        perfButton: 'View plans',
+        perfChartCaption: 'Frame pacing stability',
+        perf2Eyebrow: 'Network feel',
+        perf2Title: 'Cleaner ping and lower bufferbloat pressure',
+        perf2Text: 'When the PC stops dragging around useless services and background clutter, the network feel becomes easier to read too. It is not magic, just less noise where it should not exist.',
+        perf2BeforeLabel: 'Without tweak',
+        perf2AfterLabel: 'With SapoTweak',
+        perf3Eyebrow: 'Input response',
+        perf3Title: 'Less input lag and more stable system latency',
+        perf3Text: 'The goal is not only a bigger number on paper, but a PC that feels more ready. Fewer spikes at the worst moments and more continuity between mouse, keyboard, and game.',
+        perf3MetricBefore: 'Before 11 ms',
+        perf3MetricAfter: 'After 2 ms',
         presetTag: 'Preset levels',
         presetTitle: 'Three levels, three different ways to use SapoTweak',
         presetLead: 'The site now makes it obvious that there is no single magic switch. There are different intensity levels depending on how far you want to push the system.',
@@ -2251,12 +2634,23 @@
         proof1Text: 'El flujo esta pensado para llegar rapido a los tweaks utiles sin caos innecesario.',
         proof2Text: 'Checkout, confirmacion y soporte viven dentro de un recorrido mucho mas ordenado.',
         proof3Text: 'Popup dedicado, texto listo para copiar y canales oficiales mucho mas claros.',
-        perf1Title: 'Mejora los FPS y elimina stutters',
-        perf1Text: 'Actúa sobre procesos, servicios y componentes que dañan la consistencia del frame pacing.',
-        perf2Title: 'Mejora ping y respuesta',
-        perf2Text: 'Optimizaciones para dejar más espacio al juego y menos ruido al sistema.',
-        perf3Title: 'Mantén el control con guía real',
-        perf3Text: 'Cada categoría sigue siendo clara, con avisos reales y opciones de vuelta a valores conservadores.',
+        perfTag: 'Performance lab',
+        perf1Title: 'Mejora FPS, estabiliza el frame pacing y elimina ruido inútil',
+        perf1Text: 'SapoTweak está pensado para reducir el caos del sistema durante el juego: menos procesos invasivos, menos stutter, menos picos aleatorios y una sensación mucho más estable en sesiones largas.',
+        perfLegendAfter: 'Después de SapoTweak',
+        perfLegendBefore: 'Antes',
+        perfButton: 'Ver planes',
+        perfChartCaption: 'Estabilidad de frame pacing',
+        perf2Eyebrow: 'Sensación de red',
+        perf2Title: 'Ping más limpio y bufferbloat bajo control',
+        perf2Text: 'Cuando el PC deja de arrastrar servicios y procesos inútiles, también la red se siente más limpia. No es magia: es menos ruido donde no hace falta.',
+        perf2BeforeLabel: 'Sin tweak',
+        perf2AfterLabel: 'Con SapoTweak',
+        perf3Eyebrow: 'Respuesta de input',
+        perf3Title: 'Menos input lag y latencia del sistema más estable',
+        perf3Text: 'La meta no es solo ver un número más alto, sino sentir un PC más listo. Menos picos en los peores momentos y más continuidad entre ratón, teclado y juego.',
+        perf3MetricBefore: 'Antes 11 ms',
+        perf3MetricAfter: 'Despues 2 ms',
         presetTag: 'Niveles de preset',
         presetTitle: 'Tres niveles, tres formas distintas de usar SapoTweak',
         presetLead: 'La web ahora deja claro que no existe un único botón mágico. Hay niveles diferentes según cuánto quieras empujar el sistema.',
@@ -2509,7 +2903,7 @@
     function initRevealSections() {
       const revealItems = document.querySelectorAll('.reveal');
       revealItems.forEach(section => {
-        section.querySelectorAll('.performance-card, .preset-card, .app-stage-item, .feature-card, .offer-plan, .offer-metric').forEach(node => {
+        section.querySelectorAll('.performance-panel, .preset-card, .app-stage-item, .feature-card, .offer-plan, .offer-metric').forEach(node => {
           node.setAttribute('data-rise', '');
         });
         section.querySelectorAll('[data-rise]').forEach((node, index) => {
