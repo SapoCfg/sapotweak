@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -311,88 +311,11 @@
     }
     .review-header {
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
       margin-bottom: 20px;
       flex-wrap: wrap;
-    }
-    .review-summary-shell {
-      display: grid;
-      gap: 18px;
-      margin-bottom: 26px;
-      justify-items: center;
-      text-align: center;
-    }
-    .review-summary-shell > p {
-      margin: 0;
-      max-width: 860px;
-      color: var(--text-2);
-      font-size: 15px;
-      line-height: 1.78;
-    }
-    .review-summary-top {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      padding-top: 4px;
-    }
-    .review-score-block {
-      display: grid;
-      gap: 6px;
-      justify-items: start;
-      text-align: left;
-    }
-    .review-score-block:last-child {
-      justify-items: end;
-      text-align: right;
-      margin-left: auto;
-    }
-    .review-score-label {
-      color: var(--text-2);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .review-score-value {
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: .94;
-      letter-spacing: -.05em;
-      font-weight: 900;
-    }
-    .review-stars-row {
-      color: #ffd95f;
-      font-size: 22px;
-      letter-spacing: .14em;
-      text-shadow: 0 0 18px rgba(255,217,95,.18);
-    }
-    .review-filter-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .review-filter-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
-      color: var(--text-2);
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: -.01em;
-    }
-    .review-filter-pill.active {
-      border-color: rgba(184, 150, 255, 0.24);
-      background: rgba(127, 66, 255, 0.16);
-      color: #fff;
-      box-shadow: 0 0 26px rgba(127,66,255,.16);
     }
     .review-overview {
       display: grid;
@@ -417,6 +340,7 @@
       gap: 12px;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: flex-start;
     }
     .review-nav {
       display: inline-flex;
@@ -709,21 +633,11 @@
       .review-modal { padding: 22px; }
       .hero { padding-top: 42px; }
       .review-header {
-        align-items: center;
+        align-items: flex-start;
         flex-direction: column;
-        text-align: center;
+        text-align: left;
       }
-      .review-summary-top,
-      .review-score-block,
-      .review-score-block:last-child {
-        justify-items: center;
-        text-align: center;
-        margin-left: 0;
-      }
-      .review-summary-top {
-        justify-content: center;
-      }
-      .review-actions { justify-content: space-between; }
+      .review-actions { justify-content: flex-start; }
       .form-grid { grid-template-columns: 1fr; }
       .modal-actions { flex-direction: column-reverse; }
     }
@@ -752,7 +666,7 @@
         <select class="lang-select" id="languageSelect" aria-label="Language">
           <option value="it">Italiano</option>
           <option value="en">English</option>
-          <option value="es">Español</option>
+          <option value="es">EspaÃ±ol</option>
         </select>
       </div>
     </nav>
@@ -760,7 +674,7 @@
     <section class="hero">
       <span class="eyebrow" id="eyebrow">Verified community feedback</span>
       <h1 id="title">Recensioni verificate e <span>feedback reali</span></h1>
-      <p id="lead">Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
+      <p id="lead">Una parete recensioni piÃ¹ professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
 
       <div class="stats">
         <article class="stat">
@@ -769,7 +683,7 @@
         </article>
         <article class="stat">
           <strong id="stat2Value">4.9 / 5</strong>
-          <span id="stat2Text">Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.</span>
+          <span id="stat2Text">Molti feedback parlano di piÃ¹ fluiditÃ , meno stutter e sistema piÃ¹ reattivo.</span>
         </article>
         <article class="stat">
           <strong id="stat3Value">Solo canali ufficiali</strong>
@@ -800,31 +714,11 @@
     </section>
 
     <section class="section-shell">
-      <div class="review-summary-shell">
-        <p id="reviewSummaryLead">Leggi cosa dicono gli utenti SapoTweak. Il flusso review richiede email pagamento e key, quindi il contenuto non entra nel sito in automatico: prima arriva al team, poi viene controllato e solo dopo eventualmente pubblicato.</p>
-        <button class="btn primary" id="openReviewModalBtnTop" type="button">Crea review</button>
-        <div class="review-filter-row">
-          <span class="review-filter-pill active" id="reviewFilterAll">Tutte</span>
-          <span class="review-filter-pill" id="reviewFilterPerf">Performance</span>
-          <span class="review-filter-pill" id="reviewFilterUi">UI / Flow</span>
-          <span class="review-filter-pill" id="reviewFilterSupport">Supporto</span>
-        </div>
-        <div class="review-summary-top">
-          <div class="review-score-block">
-            <span class="review-score-label" id="reviewScoreLabelLeft">Overall rating</span>
-            <strong class="review-score-value" id="reviewScoreValueLeft">4.9 out of 5</strong>
-          </div>
-          <div class="review-score-block">
-            <span class="review-score-label" id="reviewScoreLabelRight">based on 200+ reviews</span>
-            <strong class="review-stars-row">★★★★★</strong>
-          </div>
-        </div>
-      </div>
       <div class="review-header">
         <div class="review-overview">
           <span class="section-tag" id="reviewsTag">Wall of feedback</span>
-          <strong id="reviewsTitle">Recensioni approvate, 6 per blocco</strong>
-          <p id="reviewsLead">Le recensioni testuali approvate vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.</p>
+          <strong id="reviewsTitle">Feedback reali della community</strong>
+          <p id="reviewsLead">Archivio recensioni e testimonianze raccolte tra clienti, Discord e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.</p>
           <span class="review-count" id="pageCounter">1 / 2</span>
         </div>
         <div class="review-actions">
@@ -907,7 +801,7 @@
         </div>
       </div>
       <div class="modal-actions">
-        <span class="modal-status" id="reviewModalStatus">La review verrà salvata nella inbox privata e pubblicata solo dopo approvazione manuale.</span>
+        <span class="modal-status" id="reviewModalStatus">La review verrÃ  salvata nella inbox privata e pubblicata solo dopo approvazione manuale.</span>
         <div class="review-actions">
           <button class="btn secondary" id="closeReviewModalBtn" type="button">Chiudi</button>
           <button class="btn primary" id="submitReviewBtn" type="button">Invia review</button>
@@ -919,18 +813,18 @@
   <script>
     const reviewSets = {
       it: [
-        { title: "Molto più fluido", body: "Il preset ha reso il sistema più leggero e il gioco più consistente. La differenza si sente soprattutto nella fluidità generale, non solo negli FPS massimi.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificata", stars: 5 },
-        { title: "Sessioni FiveM più pulite", body: "Su un PC pieno di processi in background il miglioramento più chiaro è stato nella stabilità in sessione e nella sensazione di meno rumore del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificata", stars: 5 },
-        { title: "Input più netto", body: "Il feeling su Valorant è diventato più costante. Meno delay percepito su Windows e comportamento più pulito dopo il preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificata", stars: 5 },
-        { title: "Supporto utile davvero", body: "Non è solo il tweak. Anche il supporto è veloce e pratico, e questo rende il prodotto più affidabile nel complesso.", name: "Luca", meta: "Support / Activation", badge: "Verificata", stars: 5 },
-        { title: "Meno caos nel sistema", body: "La cosa che ho notato di più è che Windows sembra meno pesante e meno rumoroso durante le sessioni lunghe.", name: "Niko", meta: "System cleanup", badge: "Verificata", stars: 5 },
-        { title: "Preset chiari", body: "Mi piace il fatto che i livelli siano separati. Non sembra un tweak buttato lì a caso ma un flusso con più contesto.", name: "Sasy", meta: "Presets / UX", badge: "Verificata", stars: 5 },
-        { title: "Ottimo per setup sporchi", body: "Su macchine non pulitissime il guadagno principale è che il sistema torna a respirare e il gioco resta più stabile.", name: "Drex", meta: "Performance", badge: "Verificata", stars: 5 },
-        { title: "Procedura chiara", body: "Checkout, download e attivazione sono più semplici di tanti altri tweak che ho visto in giro.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificata", stars: 5 },
-        { title: "1% low migliori", body: "La differenza più utile per me non è il numero secco degli FPS, ma la sensazione di meno micro scatti.", name: "Vale", meta: "1% Low / Feel", badge: "Verificata", stars: 5 },
-        { title: "Interfaccia pulita", body: "L'app è molto più comprensibile di altre soluzioni. Sai cosa tocchi e non ti senti perso tra cento switch.", name: "Raff", meta: "UI / Flow", badge: "Verificata", stars: 5 },
+        { title: "Molto piÃ¹ fluido", body: "Il preset ha reso il sistema piÃ¹ leggero e il gioco piÃ¹ consistente. La differenza si sente soprattutto nella fluiditÃ  generale, non solo negli FPS massimi.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificata", stars: 5 },
+        { title: "Sessioni FiveM piÃ¹ pulite", body: "Su un PC pieno di processi in background il miglioramento piÃ¹ chiaro Ã¨ stato nella stabilitÃ  in sessione e nella sensazione di meno rumore del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificata", stars: 5 },
+        { title: "Input piÃ¹ netto", body: "Il feeling su Valorant Ã¨ diventato piÃ¹ costante. Meno delay percepito su Windows e comportamento piÃ¹ pulito dopo il preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificata", stars: 5 },
+        { title: "Supporto utile davvero", body: "Non Ã¨ solo il tweak. Anche il supporto Ã¨ veloce e pratico, e questo rende il prodotto piÃ¹ affidabile nel complesso.", name: "Luca", meta: "Support / Activation", badge: "Verificata", stars: 5 },
+        { title: "Meno caos nel sistema", body: "La cosa che ho notato di piÃ¹ Ã¨ che Windows sembra meno pesante e meno rumoroso durante le sessioni lunghe.", name: "Niko", meta: "System cleanup", badge: "Verificata", stars: 5 },
+        { title: "Preset chiari", body: "Mi piace il fatto che i livelli siano separati. Non sembra un tweak buttato lÃ¬ a caso ma un flusso con piÃ¹ contesto.", name: "Sasy", meta: "Presets / UX", badge: "Verificata", stars: 5 },
+        { title: "Ottimo per setup sporchi", body: "Su macchine non pulitissime il guadagno principale Ã¨ che il sistema torna a respirare e il gioco resta piÃ¹ stabile.", name: "Drex", meta: "Performance", badge: "Verificata", stars: 5 },
+        { title: "Procedura chiara", body: "Checkout, download e attivazione sono piÃ¹ semplici di tanti altri tweak che ho visto in giro.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificata", stars: 5 },
+        { title: "1% low migliori", body: "La differenza piÃ¹ utile per me non Ã¨ il numero secco degli FPS, ma la sensazione di meno micro scatti.", name: "Vale", meta: "1% Low / Feel", badge: "Verificata", stars: 5 },
+        { title: "Interfaccia pulita", body: "L'app Ã¨ molto piÃ¹ comprensibile di altre soluzioni. Sai cosa tocchi e non ti senti perso tra cento switch.", name: "Raff", meta: "UI / Flow", badge: "Verificata", stars: 5 },
         { title: "Aggiornamenti comodi", body: "Mi piace che il flusso update sia integrato e non devo andare a cercare build o link ovunque.", name: "Moro", meta: "Updates", badge: "Verificata", stars: 5 },
-        { title: "Esperienza premium", body: "Tra sito, piani, supporto e prodotto il progetto sembra più serio e rifinito rispetto a prima.", name: "Ares", meta: "Overall trust", badge: "Verificata", stars: 5 }
+        { title: "Esperienza premium", body: "Tra sito, piani, supporto e prodotto il progetto sembra piÃ¹ serio e rifinito rispetto a prima.", name: "Ares", meta: "Overall trust", badge: "Verificata", stars: 5 }
       ],
       en: [
         { title: "Much smoother overall", body: "The preset made the system feel lighter and gameplay more consistent. The real gain is the overall smoothness, not just peak FPS.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verified", stars: 5 },
@@ -947,20 +841,130 @@
         { title: "Premium experience", body: "Between the site, plans, support, and product, the whole project feels more serious and polished now.", name: "Ares", meta: "Overall trust", badge: "Verified", stars: 5 }
       ],
       es: [
-        { title: "Mucho más fluido", body: "El preset hizo que el sistema se sintiera más ligero y el juego más consistente. La diferencia real está en la suavidad general, no solo en los FPS máximos.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificada", stars: 5 },
-        { title: "Sesiones FiveM más limpias", body: "En un PC lleno de procesos en segundo plano, la mejora más clara fue la estabilidad en sesión y menos ruido del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificada", stars: 5 },
-        { title: "Input más limpio", body: "Valorant se siente más estable ahora. Menos delay percibido en Windows y una respuesta más clara tras aplicar el preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificada", stars: 5 },
-        { title: "El soporte ayuda de verdad", body: "No es solo el tweak. El soporte es rápido y práctico, y eso hace que el producto inspire más confianza.", name: "Luca", meta: "Support / Activation", badge: "Verificada", stars: 5 },
-        { title: "Menos caos en el sistema", body: "Lo que más noté es que Windows se siente más ligero y menos cargado durante sesiones largas.", name: "Niko", meta: "System cleanup", badge: "Verificada", stars: 5 },
-        { title: "Presets claros", body: "Me gusta que los niveles estén separados. No parece un tweak aleatorio, sino un flujo guiado con contexto.", name: "Sasy", meta: "Presets / UX", badge: "Verificada", stars: 5 },
-        { title: "Muy bueno para setups cargados", body: "En máquinas menos limpias la mayor ventaja es que el sistema vuelve a respirar y el juego se mantiene más estable.", name: "Drex", meta: "Performance", badge: "Verificada", stars: 5 },
-        { title: "Proceso de compra claro", body: "Checkout, descarga y activación son más simples que en muchos tweaks que he visto.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificada", stars: 5 },
-        { title: "Mejores 1% low", body: "La diferencia más útil para mí no es el número puro de FPS, sino la sensación de menos micro tirones.", name: "Vale", meta: "1% Low / Feel", badge: "Verificada", stars: 5 },
-        { title: "Interfaz limpia", body: "La app es más fácil de entender que muchas alternativas. Sabes qué tocas sin perderte entre cien switches.", name: "Raff", meta: "UI / Flow", badge: "Verificada", stars: 5 },
-        { title: "Updates cómodos", body: "Me gusta que el flujo de actualización esté integrado y no tenga que buscar links o builds por todas partes.", name: "Moro", meta: "Updates", badge: "Verificada", stars: 5 },
-        { title: "Experiencia premium", body: "Entre sitio, planes, soporte y producto, todo el proyecto se siente más serio y mejor acabado ahora.", name: "Ares", meta: "Overall trust", badge: "Verificada", stars: 5 }
+        { title: "Mucho mÃ¡s fluido", body: "El preset hizo que el sistema se sintiera mÃ¡s ligero y el juego mÃ¡s consistente. La diferencia real estÃ¡ en la suavidad general, no solo en los FPS mÃ¡ximos.", name: "Edo", meta: "Fortnite / Competitive", badge: "Verificada", stars: 5 },
+        { title: "Sesiones FiveM mÃ¡s limpias", body: "En un PC lleno de procesos en segundo plano, la mejora mÃ¡s clara fue la estabilidad en sesiÃ³n y menos ruido del sistema.", name: "Riko", meta: "FiveM / RP", badge: "Verificada", stars: 5 },
+        { title: "Input mÃ¡s limpio", body: "Valorant se siente mÃ¡s estable ahora. Menos delay percibido en Windows y una respuesta mÃ¡s clara tras aplicar el preset.", name: "Mika", meta: "Valorant / Input", badge: "Verificada", stars: 5 },
+        { title: "El soporte ayuda de verdad", body: "No es solo el tweak. El soporte es rÃ¡pido y prÃ¡ctico, y eso hace que el producto inspire mÃ¡s confianza.", name: "Luca", meta: "Support / Activation", badge: "Verificada", stars: 5 },
+        { title: "Menos caos en el sistema", body: "Lo que mÃ¡s notÃ© es que Windows se siente mÃ¡s ligero y menos cargado durante sesiones largas.", name: "Niko", meta: "System cleanup", badge: "Verificada", stars: 5 },
+        { title: "Presets claros", body: "Me gusta que los niveles estÃ©n separados. No parece un tweak aleatorio, sino un flujo guiado con contexto.", name: "Sasy", meta: "Presets / UX", badge: "Verificada", stars: 5 },
+        { title: "Muy bueno para setups cargados", body: "En mÃ¡quinas menos limpias la mayor ventaja es que el sistema vuelve a respirar y el juego se mantiene mÃ¡s estable.", name: "Drex", meta: "Performance", badge: "Verificada", stars: 5 },
+        { title: "Proceso de compra claro", body: "Checkout, descarga y activaciÃ³n son mÃ¡s simples que en muchos tweaks que he visto.", name: "Keno", meta: "Checkout / Delivery", badge: "Verificada", stars: 5 },
+        { title: "Mejores 1% low", body: "La diferencia mÃ¡s Ãºtil para mÃ­ no es el nÃºmero puro de FPS, sino la sensaciÃ³n de menos micro tirones.", name: "Vale", meta: "1% Low / Feel", badge: "Verificada", stars: 5 },
+        { title: "Interfaz limpia", body: "La app es mÃ¡s fÃ¡cil de entender que muchas alternativas. Sabes quÃ© tocas sin perderte entre cien switches.", name: "Raff", meta: "UI / Flow", badge: "Verificada", stars: 5 },
+        { title: "Updates cÃ³modos", body: "Me gusta que el flujo de actualizaciÃ³n estÃ© integrado y no tenga que buscar links o builds por todas partes.", name: "Moro", meta: "Updates", badge: "Verificada", stars: 5 },
+        { title: "Experiencia premium", body: "Entre sitio, planes, soporte y producto, todo el proyecto se siente mÃ¡s serio y mejor acabado ahora.", name: "Ares", meta: "Overall trust", badge: "Verificada", stars: 5 }
       ]
     };
+
+    const importedReviewArchive = [
+      { body: "+rep for btweakv1.0", name: "kasaltier1", meta: "Discord / Community", stars: 5 },
+      { body: "+rep for BtweakV1.0", name: "nicucz", meta: "Discord / Community", stars: 5 },
+      { body: "+rep for BtweakV1.0", name: "Kjass", meta: "Discord / Community", stars: 5 },
+      { body: "+rep for BtweakV1.0", name: "99dario", meta: "Discord / Community", stars: 5 },
+      { body: "+ 100% Affidabili, funziona tutto da come descritto", name: "Anonimo", meta: "Community / Trust", stars: 5 },
+      { body: "+100% affidabili,onesti e ottime config", name: "Lucifer", meta: "Community / Trust", stars: 5 },
+      { body: "+rep totally legit, nice guy, nices ass, sooo nice tweakss amazing", name: "white", meta: "Community / Discord", stars: 5 },
+      { body: "+rep totally legit, nice guy, sooo nice tweakss amazing pass 250fps at 500 fps", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "+ rep super affidabili e gentili da 120 - 140 fps a 400 - 425", name: "Kaneki", meta: "Performance / FPS", stars: 5 },
+      { body: "+ rep super affidabili e gentili in rp da 70 fps a 115/120 fissi", name: "GXBBO DAYTONA", meta: "FiveM / RP", stars: 5 },
+      { body: "+rep best tweak in circolazione a parer mio (70 processi)", name: "crxwi3", meta: "System / Cleanup", stars: 5 },
+      { body: "tweak eseguito in pochissimo, risultati subito percepibili, tutto top ragazzi simpatici", name: "LuLy", meta: "Support / Speed", stars: 5 },
+      { body: "+rep Best tweak 500+ fps Smooth game legit", name: "chexs", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep ottimo tweak, affidabili.", name: "Guido23", meta: "Community / Trust", stars: 5 },
+      { body: "+rep Better configuration many fps it goes very smooth legit", name: "11motta", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep for btweakv velocissimo e ottimo tweek", name: "tore", meta: "Community / Discord", stars: 5 },
+      { body: "+rep +100 fps con cuello de botella y soporte bilingue", name: "Z", meta: "Performance / Support", stars: 5 },
+      { body: "+rep good opti", name: "sivva", meta: "Optimization", stars: 5 },
+      { body: "+rep excellent optimization from 200 fps to 500 -100 processes", name: "ERO", meta: "Optimization / FPS", stars: 5 },
+      { body: "+rep excellent optimization from 70fps to 200 -150 processes", name: "K", meta: "Optimization / FPS", stars: 5 },
+      { body: "+rep from 200fps to 400", name: "niggamvp", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep +150fps good opti", name: "Darky", meta: "Optimization / FPS", stars: 5 },
+      { body: "+rep +220 fps affidabili ( post reset )", name: "Kaneki", meta: "Reset / Stability", stars: 5 },
+      { body: "+rep Best tweak 500+ fps", name: "aasmddaaaaa", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep Best tweak 300+ fps", name: "loree", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep Best tweak 300+ fps", name: "Riviera2acc", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep best tweak da 120 fps a 360-380", name: "GXBBO DAYTONA", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak professionale 500+fps", name: "Lucifer", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep best tweak de 200 a +500 fps !10/10", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep best tweak da 150 fps a +500 fps", name: "loree", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep best tweak de 180 fps a +250 fps", name: "1xyon", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak professionale 565+fps", name: "MARANS.", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak da 180 fps a 250+", name: "mattia", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak da 300 fps a 450", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "250/300 FPS - /380/400", name: "Yatklc", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak da 400fps tirati a 520/550fps", name: "shacky", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak da 410fps al massimo a 536fps", name: "Scx1k", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweak da 330/360 fps al massimo a 420fps", name: "9rz", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep tweaks soo good 155 fps to +250 and 0 delay in windows", name: "Anonimo", meta: "Latency / FPS", stars: 5 },
+      { body: "+rep tweak op, fivem normaly 180 fps and now 300/400 and 0 delay", name: "dmaqnm", meta: "FiveM / Latency", stars: 5 },
+      { body: "+rep god tweak, no words", name: "pakoziin", meta: "Community / Discord", stars: 5 },
+      { body: "+rep god tweak 400+ fps", name: "moonn", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep god tweak 300 +fps", name: "Toffa", meta: "Performance / FPS", stars: 5 },
+      { body: "rep good tweak 350+ fps", name: "cremlno", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep 200fps 400 +", name: "Fox", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep god tweak 400+ fps", name: "savvu", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep god tweak 450+ fps", name: "Yatklc", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep best tweak da 160 fps a +260 fps", name: "Nokia_tv", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep 10/10 tweak 500+ fps", name: "lluxyfps", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep 10/10 tweak 200+ fps", name: "GXBBO DAYTONA", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep top tweak 200+ fps", name: "K", meta: "Performance / FPS", stars: 5 },
+      { body: "very good tweak 100+fps", name: "yuki", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep very god tweak 450+ fps", name: "666", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep very good tweak from 130 to 250 fps", name: "kekko", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep good tweak after the reset 10/10", name: "xy", meta: "Reset / Stability", stars: 5 },
+      { body: "+rep hwid reset", name: "savvu", meta: "Reset / Support", stars: 5 },
+      { body: "+rep good tweak mov clean , peccato per il mio pc che e di fascia media me il tweak e good", name: "ZyroxTv", meta: "Movement / Clean", stars: 5 },
+      { body: "+rep good tweak mov clean,i went from 120 to 210-240 fps with realy bad pc", name: "demonka", meta: "Movement / FPS", stars: 5 },
+      { body: "+rep from 200fps to 300/400", name: "zzz", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep very god tweak +550 fps", name: "666", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep from 130 fps to 290/380", name: "KAPZ", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep good tweak mov clean , peccato per il mio pc che e di fascia bassa ma il tweak e good", name: "alfaaaaaaaaaa", meta: "Movement / Clean", stars: 5 },
+      { body: "+rep @Sapo247 grazie al suo tweak ora faccio 110 fps in piu e in piu il memz", name: "minifivem", meta: "Performance / FPS", stars: 5 },
+      { body: "+rep @Sapo247 ora faccio 430 fps su dtf, gentile", name: "pasto", meta: "Support / FPS", stars: 5 },
+      { body: "+rep @Sapo247 best tweak fr", name: "sagre", meta: "Community / Discord", stars: 5 },
+      { body: "+rep @Sapo247 mio fratello bravissimo con i tweak complimenti", name: "chrix", meta: "Community / Trust", stars: 5 },
+      { body: "+rep @Sapo247 best tweak", name: "15pmaa", meta: "Community / Discord", stars: 5 },
+      { body: "+rep @Sapo247 best tweak", name: "yx12", meta: "Community / Discord", stars: 5 },
+      { body: "+rep @Tygha una garanzia best tweak fn", name: "Cava", meta: "Fortnite / Trust", stars: 5 },
+      { body: "+rep @Tygha avevo problemi con il ping, (+180) ora gioco senza problemi a 10/15", name: "99dario", meta: "Ping / Latency", stars: 5 },
+      { body: "@Sapo247 tweak 10/10", name: "vipper", meta: "Community / Discord", stars: 5 },
+      { body: "@Sapo247 tweak 10/10", name: "Klayton", meta: "Community / Discord", stars: 5 },
+      { body: "@Sapo247 Gentile,veloce e disponibile. Lavoro fatto in pochissimo", name: "17 Kimera", meta: "Support / Speed", stars: 5 },
+      { body: "@Matte_ @Tygha 10/10", name: "genessi", meta: "Community / Discord", stars: 5 },
+      { body: "@Sapo247 10/10 tweak 10/10", name: "alking", meta: "Community / Discord", stars: 5 },
+      { body: "@Sapo247 best tweak 100000/10 would buy from him again", name: "Anonimo", meta: "Community / Trust", stars: 5 },
+      { body: "@Sapo247 best tweak +280 more fps", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "@Sapo247 da 100 a 400 fps god tweak veloce e bravo", name: "tore", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha best soft tweak consiglio", name: "Riviera2acc", meta: "Community / Trust", stars: 5 },
+      { body: "@Sapo247 a 160 a 450 fps god tweak veloce e bravo veloce e simpatico", name: "kush", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha 500 fps god tweak quick e simpatico", name: "vam9+", meta: "Performance / FPS", stars: 5 },
+      { body: "@adanez molto veloce a rispondere mi ha fatto capire tutto", name: "frero", meta: "Support / Clarity", stars: 5 },
+      { body: "@Sapo247 miglior tweak 5m , god davvero", name: "hawk.", meta: "FiveM / Trust", stars: 5 },
+      { body: "@Sapo247 miglior tweak per qualita prezzo e bravo veloce e simpatico", name: "nicucz", meta: "Community / Trust", stars: 5 },
+      { body: "@Sapo247 best tweaker per prezzo simpatico e veloce anche", name: "Anonimo", meta: "Community / Trust", stars: 5 },
+      { body: "@Sapo247 da150fps a +350 top", name: "crxwi3", meta: "Performance / FPS", stars: 5 },
+      { body: "@Sapo247 a 350 a 550 fps god tweak veloce e bravo veloce e simpatico retweek e e zebiii", name: "kush", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha de 170fps +500 fps god tweak", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha de 200fps +500 fps god tweak", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "@Sapo247 faccio 560 fps god tweak", name: "luckazin", meta: "Performance / FPS", stars: 5 },
+      { body: "@Sapo247 best tweak du fivenshy 560+ fps", name: "Dande", meta: "FiveM / FPS", stars: 5 },
+      { body: "@Sapo247 +500 FPS best tweak FiveM", name: "Anonimo", meta: "FiveM / FPS", stars: 5 },
+      { body: "@Tygha +500 FPS the best !!", name: "Anonimo", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha +430FPS the best !!", name: "Kowalski", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha +410 fps pc nuovo", name: "mrrrco", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha +500 fps", name: "Papillon", meta: "Performance / FPS", stars: 5 },
+      { body: "@adanez 10/10", name: "SPR1NGSH", meta: "Community / Discord", stars: 5 },
+      { body: "@Tygha de 60 fps a +200 fps goddd tweak", name: "PLAYER!", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha da 144 fps a 400 fps miglior tweeker", name: "tore", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha gentilissimo e veloce nel rispondere", name: "quit", meta: "Support / Speed", stars: 5 },
+      { body: "@Tygha the best doing Tweaks 10/10", name: "Anonimo", meta: "Community / Trust", stars: 5 },
+      { body: "@Tygha +450 fps nice tweak", name: "mxrqueez", meta: "Performance / FPS", stars: 5 },
+      { body: "@Tygha el mejorrr 10/10", name: "chexs", meta: "Community / Discord", stars: 5 },
+      { body: "+rep @Tygha GENTILISSIMO E DISPONIBILE", name: "Mino", meta: "Support / Speed", stars: 5 },
+      { body: "@Tygha Servizio molto veloce e molto buono", name: "zrx", meta: "Support / Service", stars: 5 },
+      { body: "@Tygha disponibile e gentile, grazie", name: "Leoross1", meta: "Support / Service", stars: 5 },
+      { body: "@Tygha @Sapo247 EROI, affidabili e per bene.", name: "Bryan", meta: "Community / Trust", stars: 5 }
+    ];
 
     const translations = {
       it: {
@@ -969,11 +973,11 @@
         plansLink: "Piani",
         eyebrow: "Verified community feedback",
         title: "Recensioni verificate e <span>feedback reali</span>",
-        lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
+        lead: "Una parete recensioni piÃ¹ professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
         stat1Value: "200+",
         stat1Text: "Feedback raccolti tra utenti, supporto e prove community.",
         stat2Value: "4.9 / 5",
-        stat2Text: "Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.",
+        stat2Text: "Molti feedback parlano di piÃ¹ fluiditÃ , meno stutter e sistema piÃ¹ reattivo.",
         stat3Value: "Solo canali ufficiali",
         stat3Text: "Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.",
         proofTag: "Visual proof",
@@ -989,10 +993,10 @@
         reviewScoreValueLeft: "4.9 su 5",
         reviewScoreLabelRight: "basato su 200+ feedback",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "Recensioni approvate, 6 per blocco",
-        reviewsLead: "Le recensioni testuali approvate vengono mostrate a gruppi da sei, con navigazione a freccia e presentazione più professionale.",
+        reviewsTitle: "Feedback reali della community",
+        reviewsLead: "Archivio recensioni e testimonianze raccolte tra clienti, Discord e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.",
         pageCounter: "1 / 2",
-        pagerNote: "Le review inviate vengono controllate manualmente prima di diventare pubbliche.",
+        pagerNote: "Le review inviate dal form finiscono prima nella inbox privata, poi vengono controllate manualmente.",
         openReviewModalBtn: "Crea review",
         ctaTitle: "Vuoi passare al checkout ufficiale?",
         ctaText: "Se il tono della pagina ti convince, puoi andare direttamente ai piani ufficiali o tornare alla home per vedere hero, feature e supporto nello stesso stile premium.",
@@ -1012,11 +1016,11 @@
         reviewRatingLabel: "Valutazione",
         reviewCategoryLabel: "Categoria",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finché non la approvi manualmente.",
+        reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finchÃ© non la approvi manualmente.",
         closeReviewModalBtn: "Chiudi",
         submitReviewBtn: "Invia review",
         reviewValidationError: "Compila email, key, nome, titolo e review prima di inviare.",
-        reviewOpenStatus: "Compila i campi e la review finirà nella inbox privata, non sul sito pubblico.",
+        reviewOpenStatus: "Compila i campi e la review finirÃ  nella inbox privata, non sul sito pubblico.",
         reviewSubmitted: "Review inviata alla inbox privata. Ora puoi approvarla dal pannello admin.",
         reviewSubmitError: "Invio review fallito. Riprova tra poco.",
         reviewCategoryOverall: "Overall",
@@ -1052,10 +1056,10 @@
         reviewScoreValueLeft: "4.9 out of 5",
         reviewScoreLabelRight: "based on 200+ reviews",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "Approved reviews, 6 per block",
-        reviewsLead: "Approved written reviews are shown in groups of six, with arrow navigation and a more professional presentation.",
+        reviewsTitle: "Community feedback archive",
+        reviewsLead: "A cleaner archive of customer and community testimonials collected across Discord, support, and real buyers. Scroll manually through each block and open the form only if you purchased SapoTweak.",
         pageCounter: "1 / 2",
-        pagerNote: "Submitted reviews are manually checked before becoming public.",
+        pagerNote: "Reviews sent from the form land in the private inbox first, then they are checked manually.",
         openReviewModalBtn: "Create review",
         ctaTitle: "Ready to move to the official checkout?",
         ctaText: "If the tone of this page works for you, you can jump directly to the official plans or go back to the homepage for the full premium experience.",
@@ -1090,59 +1094,59 @@
         reviewTextPlaceholder: "Write your experience with SapoTweak here."
       },
       es: {
-        pageTitle: "SapoTweak - Reseñas",
+        pageTitle: "SapoTweak - ReseÃ±as",
         backLink: "Sitio",
         plansLink: "Planes",
         eyebrow: "Verified community feedback",
-        title: "Reseñas verificadas y <span>feedback real</span>",
-        lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, feedback reorganizado y un flujo de review que pide email de pago y license key antes del envío.",
+        title: "ReseÃ±as verificadas y <span>feedback real</span>",
+        lead: "Un muro de reseÃ±as mÃ¡s profesional, limpio y creÃ­ble. AquÃ­ ves pruebas seleccionadas, feedback reorganizado y un flujo de review que pide email de pago y license key antes del envÃ­o.",
         stat1Value: "200+",
         stat1Text: "Feedback recogido entre usuarios, soporte y pruebas de la comunidad.",
         stat2Value: "4.9 / 5",
-        stat2Text: "Muchos comentarios hablan de más fluidez, menos stutter y un sistema más reactivo.",
+        stat2Text: "Muchos comentarios hablan de mÃ¡s fluidez, menos stutter y un sistema mÃ¡s reactivo.",
         stat3Value: "Solo canales oficiales",
-        stat3Text: "Compra, activación, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
+        stat3Text: "Compra, activaciÃ³n, reviews y soporte pasan solo por los canales oficiales de SapoTweak.",
         proofTag: "Visual proof",
         proofTitle: "Pruebas seleccionadas, sin caos innecesario",
-        proofLead: "Aquí puedes recorrer manualmente todo el archivo histórico de proofs de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
-        proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las proofs históricas disponibles.",
+        proofLead: "AquÃ­ puedes recorrer manualmente todo el archivo histÃ³rico de proofs de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
+        proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las proofs histÃ³ricas disponibles.",
         reviewsTag: "Wall of feedback",
-        reviewsTitle: "Reseñas aprobadas, 6 por bloque",
-        reviewsLead: "Las reseñas de texto aprobadas se muestran en grupos de seis, con navegación por flechas y una presentación más profesional.",
+        reviewsTitle: "Archivo de feedback de la comunidad",
+        reviewsLead: "Un archivo mÃ¡s limpio de testimonios de clientes y comunidad recogidos entre Discord, soporte y compradores reales. Recorre los bloques manualmente y abre el formulario solo si compraste SapoTweak.",
         pageCounter: "1 / 2",
-        pagerNote: "Las reviews enviadas se revisan manualmente antes de hacerse públicas.",
+        pagerNote: "Las reviews enviadas desde el formulario llegan primero a la inbox privada y luego se revisan manualmente.",
         openReviewModalBtn: "Crear review",
-        ctaTitle: "¿Quieres pasar al checkout oficial?",
-        ctaText: "Si el tono de esta página te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
+        ctaTitle: "Â¿Quieres pasar al checkout oficial?",
+        ctaText: "Si el tono de esta pÃ¡gina te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
         ctaPrimary: "Abrir planes",
         ctaSecondary: "Volver a la home",
         footerText: "SapoTweak - Distribuye solo builds oficiales.",
-        termsLink: "Términos",
+        termsLink: "TÃ©rminos",
         privacyLink: "Privacidad",
         supportLink: "Soporte",
-        reviewModalTitle: "Envía tu review",
-        reviewModalLead: "Para enviar una reseña debes indicar email del pago y license key. Las solicitudes sin datos de compra no se consideran y cada review se aprueba manualmente antes de publicarse.",
-        reviewNotice: "Envío protegido: email del pago + key obligatorios. Después del envío, el equipo comprueba la compra y decide si publica la review.",
+        reviewModalTitle: "EnvÃ­a tu review",
+        reviewModalLead: "Para enviar una reseÃ±a debes indicar email del pago y license key. Las solicitudes sin datos de compra no se consideran y cada review se aprueba manualmente antes de publicarse.",
+        reviewNotice: "EnvÃ­o protegido: email del pago + key obligatorios. DespuÃ©s del envÃ­o, el equipo comprueba la compra y decide si publica la review.",
         reviewEmailLabel: "Email del pago",
         reviewKeyLabel: "License key",
-        reviewNameLabel: "Nombre público",
-        reviewTitleLabel: "Título de la review",
-        reviewRatingLabel: "Valoración",
-        reviewCategoryLabel: "Categoría",
+        reviewNameLabel: "Nombre pÃºblico",
+        reviewTitleLabel: "TÃ­tulo de la review",
+        reviewRatingLabel: "ValoraciÃ³n",
+        reviewCategoryLabel: "CategorÃ­a",
         reviewTextLabel: "Review",
-        reviewStatusHint: "La review se guarda en la inbox privada y queda pendiente hasta la aprobación manual.",
+        reviewStatusHint: "La review se guarda en la inbox privada y queda pendiente hasta la aprobaciÃ³n manual.",
         closeReviewModalBtn: "Cerrar",
         submitReviewBtn: "Enviar review",
-        reviewValidationError: "Completa email, key, nombre, título y review antes de enviar.",
-        reviewOpenStatus: "Completa los campos y la review irá a la inbox privada, no al sitio público.",
-        reviewSubmitted: "Review enviada a la inbox privada. Luego podrás aprobarla desde el panel admin.",
-        reviewSubmitError: "El envío de la review falló. Vuelve a intentarlo en breve.",
+        reviewValidationError: "Completa email, key, nombre, tÃ­tulo y review antes de enviar.",
+        reviewOpenStatus: "Completa los campos y la review irÃ¡ a la inbox privada, no al sitio pÃºblico.",
+        reviewSubmitted: "Review enviada a la inbox privada. Luego podrÃ¡s aprobarla desde el panel admin.",
+        reviewSubmitError: "El envÃ­o de la review fallÃ³. Vuelve a intentarlo en breve.",
         reviewCategoryOverall: "Overall",
         reviewCategoryPerformance: "Performance",
         reviewCategoryUi: "UI / Flow",
         reviewCategorySupport: "Soporte",
         reviewCategoryDelivery: "Checkout / Delivery",
-        reviewTextPlaceholder: "Escribe aquí tu experiencia con SapoTweak."
+        reviewTextPlaceholder: "Escribe aquÃ­ tu experiencia con SapoTweak."
       }
     };
 
@@ -1193,6 +1197,36 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
+    function localizedVerifiedBadge() {
+      return currentLanguage === "it" ? "Verificata" : currentLanguage === "es" ? "Verificada" : "Verified";
+    }
+
+    function sanitizeReviewName(name) {
+      const value = String(name || "").trim();
+      if (!value) return "Anonimo";
+      const normalized = value.toLowerCase();
+      if (normalized === "deleted user" || normalized === "account eliminato") return "Anonimo";
+      return value;
+    }
+
+    function normalizeReviewBody(body) {
+      return String(body || "")
+        .replace(/\s+/g, " ")
+        .replace(/[❤❤️🥰🚀✅]/g, "")
+        .trim();
+    }
+
+    function normalizeStaticReview(row) {
+      return {
+        title: row.title || "",
+        body: normalizeReviewBody(row.body),
+        name: sanitizeReviewName(row.name),
+        meta: row.meta || "Discord / Community",
+        badge: row.badge || localizedVerifiedBadge(),
+        stars: Number(row.stars || 5)
+      };
+    }
+
     function normalizeApprovedReview(row) {
       const categoryMap = {
         overall: t("reviewCategoryOverall"),
@@ -1203,19 +1237,30 @@
       };
       const normalizedCategory = String(row.reviewCategory || row.meta || "overall").toLowerCase();
       return {
-        title: row.reviewTitle || row.title || "Verified review",
-        body: row.reviewBody || row.body || "",
-        name: row.publicName || row.name || "User",
+        title: row.reviewTitle || row.title || "",
+        body: normalizeReviewBody(row.reviewBody || row.body || ""),
+        name: sanitizeReviewName(row.publicName || row.name || "User"),
         meta: categoryMap[normalizedCategory] || row.meta || t("reviewCategoryOverall"),
-        badge: row.badge || (currentLanguage === "it" ? "Verificata" : currentLanguage === "es" ? "Verificada" : "Verified"),
+        badge: row.badge || localizedVerifiedBadge(),
         stars: Number(row.rating || row.stars || 5)
       };
     }
 
+    function dedupeReviews(rows) {
+      const seen = new Set();
+      return rows.filter((row) => {
+        const key = `${sanitizeReviewName(row.name).toLowerCase()}::${normalizeReviewBody(row.body).toLowerCase()}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
     function currentReviews() {
-      const live = publicReviewsByLanguage[currentLanguage] || [];
-      if (live.length) return live.map(normalizeApprovedReview);
-      return reviewSets[currentLanguage] || reviewSets.it;
+      const live = (publicReviewsByLanguage[currentLanguage] || []).map(normalizeApprovedReview);
+      const curated = (reviewSets[currentLanguage] || reviewSets.it).map(normalizeStaticReview);
+      const imported = importedReviewArchive.map(normalizeStaticReview);
+      return dedupeReviews([...live, ...curated, ...imported]);
     }
 
     function totalPages() {
@@ -1234,7 +1279,7 @@
     }
 
     function starString(count) {
-      return "★".repeat(count) + "☆".repeat(Math.max(0, 5 - count));
+      return "â˜…".repeat(count) + "â˜†".repeat(Math.max(0, 5 - count));
     }
 
     function renderReviews() {
@@ -1244,7 +1289,7 @@
       reviewsGrid.innerHTML = pageItems.map(item => `
         <article class="review-card">
           <div class="review-stars">${starString(item.stars)}</div>
-          <h3 class="review-title">${item.title}</h3>
+          ${item.title ? `<h3 class="review-title">${item.title}</h3>` : ""}
           <p class="review-body">${item.body}</p>
           <div class="review-footer">
             <div class="review-user">
@@ -1505,7 +1550,7 @@
       }
     });
     openReviewModalBtn.addEventListener("click", openReviewModal);
-    openReviewModalBtnTop.addEventListener("click", openReviewModal);
+    if (openReviewModalBtnTop) openReviewModalBtnTop.addEventListener("click", openReviewModal);
     closeReviewModalBtn.addEventListener("click", closeReviewModal);
     submitReviewBtn.addEventListener("click", submitReview);
     reviewModal.addEventListener("click", event => {
