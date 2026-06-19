@@ -268,12 +268,13 @@
     .proof-track {
       display: grid;
       grid-auto-flow: column;
-      grid-auto-columns: minmax(280px, 34vw);
-      gap: 18px;
+      grid-auto-columns: 100%;
+      gap: 0;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 6px 4px 10px;
+      padding: 0;
       scrollbar-width: none;
+      touch-action: pan-x;
     }
     .proof-track::-webkit-scrollbar {
       display: none;
@@ -581,6 +582,13 @@
       font-size: 14px;
       outline: none;
     }
+    .field select {
+      color-scheme: dark;
+    }
+    .field select option {
+      background: #151522;
+      color: #f3f0ff;
+    }
     .field textarea {
       min-height: 150px;
       padding: 14px 16px;
@@ -673,7 +681,7 @@
     <section class="hero">
       <span class="eyebrow" id="eyebrow">Verified community feedback</span>
       <h1 id="title">Recensioni verificate e <span>feedback reali</span></h1>
-      <p id="lead">Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.</p>
+      <p id="lead">Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede solo license key e approvazione manuale prima della pubblicazione.</p>
 
       <div class="stats">
         <article class="stat">
@@ -712,7 +720,7 @@
         <div class="review-overview">
           <span class="section-tag" id="reviewsTag">Wall of feedback</span>
           <strong id="reviewsTitle">Feedback reali della community</strong>
-          <p id="reviewsLead">Archivio recensioni e testimonianze raccolte tra clienti, Discord e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.</p>
+          <p id="reviewsLead">Archivio recensioni e testimonianze raccolte tra clienti, community e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.</p>
           <span class="review-count" id="pageCounter">1 / 2</span>
         </div>
         <div class="review-actions">
@@ -752,13 +760,9 @@
   <div class="modal-backdrop" id="reviewModal">
     <div class="review-modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
       <h3 id="reviewModalTitle">Invia la tua review</h3>
-      <p id="reviewModalLead">Per inviare una recensione devi indicare email del pagamento e license key. Le richieste senza dati ordine non vengono considerate e ogni review viene approvata manualmente prima della pubblicazione.</p>
-      <div class="notice" id="reviewNotice">Invio protetto: email pagamento + key richieste. Dopo l'invio, il team controlla l'acquisto e decide se rendere pubblica la review.</div>
+      <p id="reviewModalLead">Per inviare una recensione devi indicare la license key. Ogni review viene controllata manualmente prima della pubblicazione.</p>
+      <div class="notice" id="reviewNotice">Invio protetto: la key viene verificata e la review entra prima nella inbox privata del team.</div>
       <div class="form-grid">
-        <div class="field">
-          <label for="reviewEmail" id="reviewEmailLabel">Email pagamento</label>
-          <input id="reviewEmail" type="email" placeholder="you@example.com" />
-        </div>
         <div class="field">
           <label for="reviewKey" id="reviewKeyLabel">License key</label>
           <input id="reviewKey" type="text" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" />
@@ -967,7 +971,7 @@
         plansLink: "Piani",
         eyebrow: "Feedback verificado de la comunidad",
         title: "Recensioni verificate e <span>feedback reali</span>",
-        lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede email pagamento e key prima dell'invio.",
+        lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede solo license key e approvazione manuale prima della pubblicazione.",
         stat1Value: "200+",
         stat1Text: "Feedback raccolti tra utenti, supporto e prove community.",
         stat2Value: "4.9 / 5",
@@ -988,7 +992,7 @@
         reviewScoreLabelRight: "basato su 200+ feedback",
         reviewsTag: "Wall of feedback",
         reviewsTitle: "Feedback reali della community",
-        reviewsLead: "Archivio recensioni e testimonianze raccolte tra clienti, Discord e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.",
+        reviewsLead: "Archivio recensioni e testimonianze raccolte tra clienti, community e supporto ufficiale. Scorri manualmente i blocchi e apri il form solo se hai acquistato SapoTweak.",
         pageCounter: "1 / 2",
         pagerNote: "Le review inviate dal form finiscono prima nella inbox privata, poi vengono controllate manualmente.",
         openReviewModalBtn: "Crea review",
@@ -1001,9 +1005,9 @@
         privacyLink: "Privacy",
         supportLink: "Supporto",
         reviewModalTitle: "Invia la tua review",
-        reviewModalLead: "Per inviare una recensione devi indicare email del pagamento e license key. Le richieste senza dati ordine non vengono considerate e ogni review viene approvata manualmente prima della pubblicazione.",
-        reviewNotice: "Invio protetto: email pagamento + key richieste. Dopo l'invio, il team controlla l'acquisto e decide se rendere pubblica la review.",
-        reviewEmailLabel: "Email pagamento",
+        reviewModalLead: "Per inviare una recensione devi indicare la license key. Ogni review viene controllata manualmente prima della pubblicazione.",
+        reviewNotice: "Invio protetto: la key viene verificata e la review entra prima nella inbox privata del team.",
+        reviewEmailLabel: "",
         reviewKeyLabel: "License key",
         reviewNameLabel: "Nome pubblico",
         reviewTitleLabel: "Titolo review",
@@ -1013,7 +1017,7 @@
         reviewStatusHint: "La review viene salvata nella inbox privata e resta pending finché non la approvi manualmente.",
         closeReviewModalBtn: "Chiudi",
         submitReviewBtn: "Invia review",
-        reviewValidationError: "Compila email, key, nome, titolo e review prima di inviare.",
+        reviewValidationError: "Compila key, nome, titolo e review prima di inviare.",
         reviewOpenStatus: "Compila i campi e la review finirà nella inbox privata, non sul sito pubblico.",
         reviewSubmitted: "Review inviata alla inbox privata. Ora puoi approvarla dal pannello admin.",
         reviewSubmitError: "Invio review fallito. Riprova tra poco.",
@@ -1030,7 +1034,7 @@
         plansLink: "Plans",
         eyebrow: "Verified community feedback",
         title: "Verified reviews and <span>real feedback</span>",
-        lead: "A more professional, cleaner, and more credible review wall. Here you see selected proof, reorganized feedback, and a review flow that asks for payment email and license key before sending.",
+        lead: "A more professional, cleaner, and more credible review wall. Here you see selected proof, reorganized feedback, and a review flow that requires only the license key plus manual approval before publication.",
         stat1Value: "200+",
         stat1Text: "Feedback collected across users, support, and community proof.",
         stat2Value: "4.9 / 5",
@@ -1041,7 +1045,7 @@
         proofTitle: "Selected proof, no unnecessary clutter",
         proofLead: "Here you can manually scroll through the full archive of community proof shots, without the purple thumbnail or off-tone visuals.",
         proofCaption1: "Real screenshot archive collected from the SapoTweak community. Scroll manually to view every historical proof currently available.",
-        reviewSummaryLead: "Read what SapoTweak users have to say. The review flow requires payment email and license key, so nothing lands on the site automatically: it first reaches the team, gets checked, and only then can be published.",
+        reviewSummaryLead: "Read what SapoTweak users have to say. The review flow requires the license key, so nothing lands on the site automatically: it first reaches the team, gets checked, and only then can be published.",
         reviewFilterAll: "All reviews",
         reviewFilterPerf: "Performance",
         reviewFilterUi: "UI / Flow",
@@ -1051,7 +1055,7 @@
         reviewScoreLabelRight: "based on 200+ reviews",
         reviewsTag: "Wall of feedback",
         reviewsTitle: "Community feedback archive",
-        reviewsLead: "A cleaner archive of customer and community testimonials collected across Discord, support, and real buyers. Scroll manually through each block and open the form only if you purchased SapoTweak.",
+        reviewsLead: "A cleaner archive of customer and community testimonials collected across support, community, and real buyers. Scroll manually through each block and open the form only if you purchased SapoTweak.",
         pageCounter: "1 / 2",
         pagerNote: "Reviews sent from the form land in the private inbox first, then they are checked manually.",
         openReviewModalBtn: "Create review",
@@ -1064,9 +1068,9 @@
         privacyLink: "Privacy",
         supportLink: "Support",
         reviewModalTitle: "Submit your review",
-        reviewModalLead: "To submit a review, you must enter the payment email and license key. Requests without order details are not considered, and every review is manually approved before publication.",
-        reviewNotice: "Protected submission: payment email + key required. After submission, the team checks the purchase and decides whether to publish the review.",
-        reviewEmailLabel: "Payment email",
+        reviewModalLead: "To submit a review, you must enter the license key. Every review is manually approved before publication.",
+        reviewNotice: "Protected submission: the key is verified and the review lands in the private inbox first.",
+        reviewEmailLabel: "",
         reviewKeyLabel: "License key",
         reviewNameLabel: "Public name",
         reviewTitleLabel: "Review title",
@@ -1076,7 +1080,7 @@
         reviewStatusHint: "The review is saved in the private inbox and stays pending until you manually approve it.",
         closeReviewModalBtn: "Close",
         submitReviewBtn: "Send review",
-        reviewValidationError: "Fill payment email, key, name, title, and review before sending.",
+        reviewValidationError: "Fill the key, name, title, and review before sending.",
         reviewOpenStatus: "Fill the fields and your review will go to the private inbox, not directly to the public site.",
         reviewSubmitted: "Review sent to the private inbox. You can approve it later from the admin panel.",
         reviewSubmitError: "Review submission failed. Please try again shortly.",
@@ -1091,11 +1095,11 @@
         pageTitle: "SapoTweak - Reseñas",
         backLink: "Sitio",
         plansLink: "Planes",
-        eyebrow: "Verified community feedback",
-        title: "Reseñas verificadas y <span>feedback real</span>",
-        lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, feedback reorganizado y un flujo de reseñas que pide email de pago y license key antes del envío.",
+        eyebrow: "Opiniones verificadas de la comunidad",
+        title: "Reseñas verificadas y <span>opiniones reales</span>",
+        lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, opiniones reorganizadas y un flujo de reseñas que pide solo la clave de licencia y una aprobación manual antes de publicarse.",
         stat1Value: "200+",
-        stat1Text: "Feedback recogido entre usuarios, soporte y pruebas de la comunidad.",
+        stat1Text: "Opiniones recogidas entre usuarios, soporte y pruebas de la comunidad.",
         stat2Value: "4.9 / 5",
         stat2Text: "Muchos comentarios hablan de más fluidez, menos stutter y un sistema más reactivo.",
         stat3Value: "Solo canales oficiales",
@@ -1104,14 +1108,14 @@
         proofTitle: "Pruebas seleccionadas, sin caos innecesario",
         proofLead: "Aquí puedes recorrer manualmente todo el archivo histórico de pruebas de la comunidad, sin la miniatura violeta ni visuales fuera de tono.",
         proofCaption1: "Archivo real de capturas recogidas de la comunidad SapoTweak. Desliza manualmente para ver todas las pruebas históricas disponibles.",
-        reviewsTag: "Muro de feedback",
-        reviewsTitle: "Archivo de feedback de la comunidad",
-        reviewsLead: "Un archivo más limpio de testimonios de clientes y comunidad recogidos entre Discord, soporte y compradores reales. Recorre los bloques manualmente y abre el formulario solo si compraste SapoTweak.",
+        reviewsTag: "Muro de opiniones",
+        reviewsTitle: "Archivo de opiniones de la comunidad",
+        reviewsLead: "Un archivo más limpio de testimonios de clientes y comunidad recogidos entre soporte, comunidad y compradores reales. Recorre los bloques manualmente y abre el formulario solo si compraste SapoTweak.",
         pageCounter: "1 / 2",
         pagerNote: "Las reseñas enviadas desde el formulario llegan primero a la bandeja privada y luego se revisan manualmente.",
         openReviewModalBtn: "Crear reseña",
-        ctaTitle: "¿Quieres pasar al checkout oficial?",
-        ctaText: "Si el tono de esta página te convence, puedes ir directo a los planes oficiales o volver a la home para ver toda la experiencia premium.",
+        ctaTitle: "¿Quieres pasar a la compra oficial?",
+        ctaText: "Si el tono de esta página te convence, puedes ir directo a los planes oficiales o volver al inicio para ver toda la experiencia premium.",
         ctaPrimary: "Abrir planes",
         ctaSecondary: "Volver a la home",
         footerText: "SapoTweak - Distribuye solo builds oficiales.",
@@ -1119,10 +1123,10 @@
         privacyLink: "Privacidad",
         supportLink: "Soporte",
         reviewModalTitle: "Envía tu reseña",
-        reviewModalLead: "Para enviar una reseña debes indicar el email del pago y la license key. Las solicitudes sin datos de compra no se tienen en cuenta y cada reseña se aprueba manualmente antes de publicarse.",
-        reviewNotice: "Envío protegido: email del pago + key obligatorios. Después del envío, el equipo comprueba la compra y decide si publica la reseña.",
-        reviewEmailLabel: "Email del pago",
-        reviewKeyLabel: "License key",
+        reviewModalLead: "Para enviar una reseña debes indicar la clave de licencia. Cada reseña se aprueba manualmente antes de publicarse.",
+        reviewNotice: "Envío protegido: la clave se verifica y la reseña entra primero en la bandeja privada del equipo.",
+        reviewEmailLabel: "",
+        reviewKeyLabel: "Clave de licencia",
         reviewNameLabel: "Nombre público",
         reviewTitleLabel: "Título de la reseña",
         reviewRatingLabel: "Valoración",
@@ -1131,15 +1135,15 @@
         reviewStatusHint: "La reseña se guarda en la bandeja privada y queda pendiente hasta la aprobación manual.",
         closeReviewModalBtn: "Cerrar",
         submitReviewBtn: "Enviar reseña",
-        reviewValidationError: "Completa email, key, nombre, título y reseña antes de enviar.",
+        reviewValidationError: "Completa clave, nombre, título y reseña antes de enviar.",
         reviewOpenStatus: "Completa los campos y la reseña irá a la bandeja privada, no al sitio público.",
         reviewSubmitted: "Reseña enviada a la bandeja privada. Luego podrás aprobarla desde el panel admin.",
         reviewSubmitError: "El envío de la reseña falló. Vuelve a intentarlo en breve.",
-        reviewCategoryOverall: "Overall",
-        reviewCategoryPerformance: "Performance",
-        reviewCategoryUi: "UI / Flow",
+        reviewCategoryOverall: "General",
+        reviewCategoryPerformance: "Rendimiento",
+        reviewCategoryUi: "Interfaz / Flujo",
         reviewCategorySupport: "Soporte",
-        reviewCategoryDelivery: "Checkout / Delivery",
+        reviewCategoryDelivery: "Compra / Entrega",
         reviewTextPlaceholder: "Escribe aquí tu experiencia con SapoTweak."
       }
     };
@@ -1155,7 +1159,6 @@
     const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
     const submitReviewBtn = document.getElementById("submitReviewBtn");
     const reviewModalStatus = document.getElementById("reviewModalStatus");
-    const reviewEmail = document.getElementById("reviewEmail");
     const reviewKey = document.getElementById("reviewKey");
     const reviewName = document.getElementById("reviewName");
     const reviewTitleInput = document.getElementById("reviewTitleInput");
@@ -1169,11 +1172,11 @@
     const nextProofBtn = document.getElementById("nextProofBtn");
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
     let reviewPage = 0;
+    let currentProofIndex = 0;
     const pageSize = 6;
     const reviewsApiBase = "https://license.salvocan05.workers.dev";
     let publicReviewsByLanguage = { it: [], en: [], es: [] };
     const proofSlides = [
-      { src: "reviews/Review.png" },
       ...Array.from({ length: 16 }, (_, index) => ({
         src: `reviews/${index + 1}.png`
       }))
@@ -1207,6 +1210,7 @@
 
     function normalizeReviewBody(body) {
       return String(body || "")
+        .replace(/@[A-Za-z0-9_.-]+/g, " ")
         .replace(/\s+/g, " ")
         .replace(/[❤❤️🥰🚀✅]/g, "")
         .trim();
@@ -1270,6 +1274,20 @@
         </article>
       `).join("");
       proofCaption1.textContent = t("proofCaption1");
+      currentProofIndex = 0;
+      requestAnimationFrame(() => scrollToProof(0, "auto"));
+    }
+
+    function updateProofArrows() {
+      prevProofBtn.disabled = currentProofIndex <= 0;
+      nextProofBtn.disabled = currentProofIndex >= proofSlides.length - 1;
+    }
+
+    function scrollToProof(index, behavior = "smooth") {
+      currentProofIndex = Math.max(0, Math.min(index, proofSlides.length - 1));
+      const step = proofTrack.clientWidth || proofViewport.clientWidth || 1;
+      proofTrack.scrollTo({ left: currentProofIndex * step, behavior });
+      updateProofArrows();
     }
 
     function starString(count) {
@@ -1363,7 +1381,6 @@
       setText("reviewModalTitle", t("reviewModalTitle"));
       setText("reviewModalLead", t("reviewModalLead"));
       setText("reviewNotice", t("reviewNotice"));
-      setText("reviewEmailLabel", t("reviewEmailLabel"));
       setText("reviewKeyLabel", t("reviewKeyLabel"));
       setText("reviewNameLabel", t("reviewNameLabel"));
       setText("reviewTitleLabel", t("reviewTitleLabel"));
@@ -1394,12 +1411,16 @@
     }
 
     async function submitReview() {
+      const normalizedLicenseKey = reviewKey.value.trim();
+      const normalizedPublicName = reviewName.value.trim();
+      const normalizedReviewTitle = reviewTitleInput.value.trim();
+      const normalizedReviewBody = reviewText.value.trim();
+
       if (
-        !reviewEmail.value.trim() ||
-        !reviewKey.value.trim() ||
-        !reviewName.value.trim() ||
-        !reviewTitleInput.value.trim() ||
-        !reviewText.value.trim()
+        !normalizedLicenseKey ||
+        !normalizedPublicName ||
+        !normalizedReviewTitle ||
+        !normalizedReviewBody
       ) {
         reviewModalStatus.textContent = t("reviewValidationError");
         return;
@@ -1412,13 +1433,21 @@
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
-            email: reviewEmail.value.trim(),
-            licenseKey: reviewKey.value.trim(),
-            publicName: reviewName.value.trim(),
-            reviewTitle: reviewTitleInput.value.trim(),
-            reviewBody: reviewText.value.trim(),
+            email: "",
+            licenseKey: normalizedLicenseKey,
+            license: normalizedLicenseKey,
+            key: normalizedLicenseKey,
+            publicName: normalizedPublicName,
+            name: normalizedPublicName,
+            reviewTitle: normalizedReviewTitle,
+            title: normalizedReviewTitle,
+            reviewBody: normalizedReviewBody,
+            body: normalizedReviewBody,
+            reviewText: normalizedReviewBody,
             reviewCategory: reviewCategory.value,
+            category: reviewCategory.value,
             reviewLanguage: currentLanguage,
+            language: currentLanguage,
             rating: Number(reviewRating.value || 5)
           })
         });
@@ -1530,12 +1559,17 @@
     });
 
     prevProofBtn.addEventListener("click", () => {
-      proofViewport.scrollBy({ left: -Math.max(320, proofViewport.clientWidth * 0.92), behavior: "smooth" });
+      scrollToProof(currentProofIndex - 1);
     });
 
     nextProofBtn.addEventListener("click", () => {
-      proofViewport.scrollBy({ left: Math.max(320, proofViewport.clientWidth * 0.92), behavior: "smooth" });
+      scrollToProof(currentProofIndex + 1);
     });
+    proofTrack.addEventListener("scroll", () => {
+      const step = proofTrack.clientWidth || proofViewport.clientWidth || 1;
+      currentProofIndex = Math.max(0, Math.min(proofSlides.length - 1, Math.round(proofTrack.scrollLeft / step)));
+      updateProofArrows();
+    }, { passive: true });
     openReviewModalBtn.addEventListener("click", openReviewModal);
     if (openReviewModalBtnTop) openReviewModalBtnTop.addEventListener("click", openReviewModal);
     closeReviewModalBtn.addEventListener("click", closeReviewModal);
