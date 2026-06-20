@@ -608,6 +608,16 @@
       border-color: rgba(222, 198, 255, 0.42);
       box-shadow: 0 24px 52px rgba(109, 55, 246, 0.34);
     }
+    .manual-pay-link.is-disabled,
+    .manual-pay-link[aria-disabled="true"] {
+      background: linear-gradient(180deg, rgba(88, 88, 102, 0.42), rgba(54, 54, 66, 0.68));
+      border-color: rgba(160, 160, 176, 0.22);
+      color: rgba(242, 242, 248, 0.56);
+      box-shadow: none;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
+    }
     .faq-shell {
       margin-top: 20px;
       padding: 24px;
@@ -828,7 +838,7 @@
         <li data-step="4" id="paypalStep4">Attendi la verifica manuale: poi ricevi key + download ufficiale.</li>
       </ol>
       <div class="manual-pay-actions">
-        <a class="manual-pay-link" id="paypalButton" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer">Apri Discord per PayPal</a>
+        <a class="manual-pay-link is-disabled" id="paypalButton" data-href="https://discord.com/channels/1242031506029805651/1245172693989457930" href="#" aria-disabled="true" tabindex="-1" target="_blank" rel="noopener noreferrer">Apri Discord per PayPal</a>
         <span class="manual-pay-note" id="paypalNote">Metodo manuale consigliato solo se vuoi evitare Stripe o se il checkout automatico non ti conviene.</span>
       </div>
     </section>
@@ -1032,6 +1042,7 @@
     const betaConsentCheck = document.getElementById("betaConsentCheck");
     const monthlyPlan = document.getElementById("monthlyPlan");
     const quarterlyPlan = document.getElementById("quarterlyPlan");
+    const paypalButton = document.getElementById("paypalButton");
     const saved = localStorage.getItem("sapotweak_site_lang") || "it";
     const params = new URLSearchParams(window.location.search);
 
@@ -1112,6 +1123,12 @@
         plan.setAttribute("aria-disabled", enabled ? "false" : "true");
         plan.href = enabled ? plan.dataset.href : "#";
       });
+      if (paypalButton) {
+        paypalButton.classList.toggle("is-disabled", !enabled);
+        paypalButton.setAttribute("aria-disabled", enabled ? "false" : "true");
+        paypalButton.setAttribute("tabindex", enabled ? "0" : "-1");
+        paypalButton.href = enabled ? paypalButton.dataset.href : "#";
+      }
     }
 
     function initMeshBackground() {
