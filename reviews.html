@@ -1259,7 +1259,8 @@
     function currentReviews() {
       const live = (publicReviewsByLanguage[currentLanguage] || []).map(normalizeApprovedReview);
       const curated = (reviewSets[currentLanguage] || reviewSets.it).map(normalizeStaticReview);
-      return dedupeReviews([...live, ...curated]);
+      const imported = importedReviewArchive.map(normalizeStaticReview);
+      return dedupeReviews([...live, ...curated, ...imported]);
     }
 
     function totalPages() {
