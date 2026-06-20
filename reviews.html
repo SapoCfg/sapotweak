@@ -1259,8 +1259,7 @@
     function currentReviews() {
       const live = (publicReviewsByLanguage[currentLanguage] || []).map(normalizeApprovedReview);
       const curated = (reviewSets[currentLanguage] || reviewSets.it).map(normalizeStaticReview);
-      const imported = importedReviewArchive.map(normalizeStaticReview);
-      return dedupeReviews([...live, ...curated, ...imported]);
+      return dedupeReviews([...live, ...curated]);
     }
 
     function totalPages() {
@@ -1411,16 +1410,11 @@
     }
 
     async function submitReview() {
-      const normalizedLicenseKey = reviewKey.value.trim();
-      const normalizedPublicName = reviewName.value.trim();
-      const normalizedReviewTitle = reviewTitleInput.value.trim();
-      const normalizedReviewBody = reviewText.value.trim();
-
       if (
-        !normalizedLicenseKey ||
-        !normalizedPublicName ||
-        !normalizedReviewTitle ||
-        !normalizedReviewBody
+        !reviewKey.value.trim() ||
+        !reviewName.value.trim() ||
+        !reviewTitleInput.value.trim() ||
+        !reviewText.value.trim()
       ) {
         reviewModalStatus.textContent = t("reviewValidationError");
         return;
@@ -1433,21 +1427,12 @@
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
-            email: "",
-            licenseKey: normalizedLicenseKey,
-            license: normalizedLicenseKey,
-            key: normalizedLicenseKey,
-            publicName: normalizedPublicName,
-            name: normalizedPublicName,
-            reviewTitle: normalizedReviewTitle,
-            title: normalizedReviewTitle,
-            reviewBody: normalizedReviewBody,
-            body: normalizedReviewBody,
-            reviewText: normalizedReviewBody,
+            licenseKey: reviewKey.value.trim(),
+            publicName: reviewName.value.trim(),
+            reviewTitle: reviewTitleInput.value.trim(),
+            reviewBody: reviewText.value.trim(),
             reviewCategory: reviewCategory.value,
-            category: reviewCategory.value,
             reviewLanguage: currentLanguage,
-            language: currentLanguage,
             rating: Number(reviewRating.value || 5)
           })
         });
