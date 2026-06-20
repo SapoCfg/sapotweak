@@ -689,7 +689,7 @@
           <span id="stat1Text">Feedback raccolti tra utenti, supporto e prove community.</span>
         </article>
         <article class="stat">
-          <strong id="stat2Value">4.9 / 5</strong>
+        <strong id="stat2Value">4.7 / 5</strong>
           <span id="stat2Text">Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.</span>
         </article>
         <article class="stat">
@@ -974,7 +974,7 @@
         lead: "Una parete recensioni più professionale, pulita e credibile. Qui vedi prove visive selezionate, feedback riorganizzati e un flusso review che richiede solo license key e approvazione manuale prima della pubblicazione.",
         stat1Value: "200+",
         stat1Text: "Feedback raccolti tra utenti, supporto e prove community.",
-        stat2Value: "4.9 / 5",
+        stat2Value: "4.7 / 5",
         stat2Text: "Molti feedback parlano di più fluidità, meno stutter e sistema più reattivo.",
         stat3Value: "Solo canali ufficiali",
         stat3Text: "Acquisto, attivazione, review e supporto passano solo dai canali ufficiali SapoTweak.",
@@ -1037,7 +1037,7 @@
         lead: "A more professional, cleaner, and more credible review wall. Here you see selected proof, reorganized feedback, and a review flow that requires only the license key plus manual approval before publication.",
         stat1Value: "200+",
         stat1Text: "Feedback collected across users, support, and community proof.",
-        stat2Value: "4.9 / 5",
+        stat2Value: "4.7 / 5",
         stat2Text: "Many comments mention smoother gameplay, less stutter, and a more responsive system.",
         stat3Value: "Official channels only",
         stat3Text: "Purchase, activation, reviews, and support move only through official SapoTweak channels.",
@@ -1100,7 +1100,7 @@
         lead: "Un muro de reseñas más profesional, limpio y creíble. Aquí ves pruebas seleccionadas, opiniones reorganizadas y un flujo de reseñas que pide solo la clave de licencia y una aprobación manual antes de publicarse.",
         stat1Value: "200+",
         stat1Text: "Opiniones recogidas entre usuarios, soporte y pruebas de la comunidad.",
-        stat2Value: "4.9 / 5",
+        stat2Value: "4.7 / 5",
         stat2Text: "Muchos comentarios hablan de más fluidez, menos stutter y un sistema más reactivo.",
         stat3Value: "Solo canales oficiales",
         stat3Text: "Compra, activación, reseñas y soporte pasan solo por los canales oficiales de SapoTweak.",
@@ -1177,8 +1177,8 @@
     const reviewsApiBase = "https://license.salvocan05.workers.dev";
     let publicReviewsByLanguage = { it: [], en: [], es: [] };
     const proofSlides = [
-      ...Array.from({ length: 16 }, (_, index) => ({
-        src: `reviews/${index + 1}.png`
+      ...["1", "2", "3", "4", "5", "6", "7", "8", "17", "9", "10", "11", "12", "13", "14", "15", "16"].map(file => ({
+        src: `reviews/${file}.png`
       }))
     ];
 
