@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -1438,9 +1438,15 @@
           })
         });
 
-        const payload = await response.json().catch(() => ({}));
+        const responseText = await response.text();
+        let payload = {};
+        try {
+          payload = responseText ? JSON.parse(responseText) : {};
+        } catch {
+          payload = {};
+        }
         if (!response.ok || !payload.ok) {
-          reviewModalStatus.textContent = payload.error || t("reviewSubmitError");
+          reviewModalStatus.textContent = payload.error || payload.message || responseText || t("reviewSubmitError");
           return;
         }
 
