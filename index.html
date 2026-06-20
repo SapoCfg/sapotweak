@@ -206,6 +206,7 @@
     }
     .showcase-main img {
       transform: scale(1.02);
+      filter: brightness(.66) contrast(1.08) saturate(.86);
     }
     .showcase-orb {
       position: absolute;
@@ -422,7 +423,6 @@
       stroke-width: 5;
       opacity: .86;
       stroke-dasharray: 12 14;
-      animation: graphPulse 8.2s linear infinite;
       filter: drop-shadow(0 0 20px rgba(143,124,255,.45));
     }
     .graph-dot {
@@ -431,6 +431,7 @@
       filter: drop-shadow(0 0 22px rgba(195,187,255,.88));
       animation: graphDotPulse 2.6s ease-in-out infinite;
       transform-origin: center;
+      display: none;
     }
     .graph-caption {
       position: absolute;
@@ -565,6 +566,7 @@
     }
     .mini-chart .graph-dot {
       animation-duration: 3s;
+      display: none;
     }
     .mini-metrics {
       display: flex;
@@ -612,12 +614,28 @@
       padding: 22px;
       border-radius: 24px;
       border: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    .preset-card.safe-tone {
+      border-color: rgba(74,222,128,.30);
+      box-shadow: 0 0 34px rgba(22, 163, 74, .12);
+      background:
+        radial-gradient(circle at top left, rgba(74,222,128,.18), transparent 44%),
+        linear-gradient(180deg, rgba(24, 56, 38, .34), rgba(10, 12, 18, .82));
     }
     .preset-card.featured {
       border-color: rgba(167,139,250,.42);
       box-shadow: 0 0 34px rgba(124,58,237,.14);
-      transform: translateY(-8px);
+      background:
+        radial-gradient(circle at top left, rgba(167,139,250,.18), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    .preset-card.extreme-tone {
+      border-color: rgba(248,113,113,.30);
+      box-shadow: 0 0 34px rgba(220, 38, 38, .12);
+      background:
+        radial-gradient(circle at top left, rgba(248,113,113,.18), transparent 44%),
+        linear-gradient(180deg, rgba(64, 28, 34, .34), rgba(10, 12, 18, .82));
     }
     .preset-badge {
       display: inline-flex;
@@ -1742,6 +1760,12 @@
         linear-gradient(180deg, rgba(26, 16, 42, .92), rgba(8, 8, 15, .96)),
         radial-gradient(circle at top, rgba(179, 133, 255, .18), transparent 42%);
     }
+    .hero-preview img {
+      display: block;
+      width: 100%;
+      border-radius: 22px;
+      filter: brightness(.48) contrast(1.14) saturate(.72);
+    }
     .showcase {
       position: relative;
       overflow: hidden;
@@ -2086,8 +2110,7 @@
           <div class="graph-card">
             <svg viewBox="0 0 620 300" aria-hidden="true">
               <polyline class="graph-line-before" points="8,194 42,212 78,170 112,226 148,174 184,238 220,164 256,226 292,188 326,242 360,176 394,220 428,182 462,232 496,168 530,214 566,176 604,198"></polyline>
-              <polyline class="graph-line-after" points="8,122 42,132 78,104 112,126 148,96 184,140 220,84 256,126 292,102 326,142 360,96 394,122 428,86 462,134 496,92 530,118 566,96 604,108"></polyline>
-              <circle class="graph-dot" cx="604" cy="108" r="7"></circle>
+              <polyline class="graph-line-after" points="8,116 42,116 78,114 112,115 148,113 184,117 220,112 256,114 292,113 326,116 360,112 394,114 428,111 462,115 496,112 530,114 566,112 604,113"></polyline>
             </svg>
             <span class="graph-caption" data-i18n="perfChartCaption">Frame pacing stability</span>
           </div>
@@ -2103,14 +2126,14 @@
             <div class="dot-track before">
               <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
-            <strong>84 ms</strong>
+            <strong>65 ms</strong>
           </div>
           <div class="dot-lane">
             <span data-i18n="perf2AfterLabel">Con SapoTweak</span>
             <div class="dot-track after">
               <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
-            <strong>3 ms</strong>
+            <strong>19 ms</strong>
           </div>
           <span class="grade-mark">A+</span>
         </div>
@@ -2129,7 +2152,6 @@
             <path class="graph-fill-after" d="M0,142 L42,142 L88,142 L132,126 L176,126 L220,114 L264,114 L308,114 L352,132 L396,132 L440,142 L484,142 L528,152 L560,154 L560,170 L0,170 Z"></path>
             <polyline class="graph-line-before" points="0,116 42,138 88,104 132,78 176,96 220,74 264,130 308,80 352,48 396,66 440,44 484,70 528,46 560,36"></polyline>
             <polyline class="graph-line-after" points="0,142 42,142 88,142 132,126 176,126 220,114 264,114 308,114 352,132 396,132 440,142 484,142 528,152 560,154"></polyline>
-            <circle class="graph-dot" cx="528" cy="152" r="6"></circle>
           </svg>
         </div>
       </article>
@@ -2142,7 +2164,7 @@
         <p data-i18n="presetLead">Il sito adesso racconta subito che non esiste un solo bottone magico: esistono livelli diversi, in base a quanto vuoi spingere il sistema.</p>
       </div>
       <div class="preset-grid">
-        <article class="preset-card">
+        <article class="preset-card safe-tone">
           <span class="preset-badge safe" data-i18n="presetSafeBadge">Safe</span>
           <h3 data-i18n="presetSafeTitle">Partenza conservativa</h3>
           <p data-i18n="presetSafeText">Pensato per chi vuole un sistema più pulito e gaming-focused senza toccare aree troppo aggressive.</p>
@@ -2152,7 +2174,7 @@
           <h3 data-i18n="presetAdvancedTitle">Bilanciato e competitivo</h3>
           <p data-i18n="presetAdvancedText">Il preset centrale per chi vuole più spinta su latenza, processi e comportamento generale del PC.</p>
         </article>
-        <article class="preset-card">
+        <article class="preset-card extreme-tone">
           <span class="preset-badge extreme" data-i18n="presetExtremeBadge">Extreme</span>
           <h3 data-i18n="presetExtremeTitle">Massima spinta</h3>
           <p data-i18n="presetExtremeText">Per utenti avanzati che vogliono spremere il sistema e sanno leggere avvisi e conseguenze prima di applicare.</p>
@@ -2230,7 +2252,7 @@
         <div class="offer-copy">
           <span class="section-tag" data-i18n="paymentTag">Checkout finale</span>
           <h2 data-i18n="paymentTitle">Arriva al pagamento solo quando hai già capito il prodotto</h2>
-          <p data-i18n="paymentLead">Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma.</p>
+          <p data-i18n="paymentLead">Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma. In alternativa puoi richiedere anche PayPal manuale dal checkout.</p>
           <div class="offer-metrics">
             <div class="offer-metric" data-rise>
               <strong data-i18n="metric1Value">3 preset</strong>
@@ -2255,7 +2277,7 @@
           </div>
           <a class="checkout-chip large" href="checkout.html" data-i18n="paymentButton">Apri il checkout</a>
           <p class="payment-note" data-i18n="paymentNote">Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.</p>
-          <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.</p>
+          <p class="payment-warning" data-i18n="paymentWarning">Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Se scegli PayPal manuale, invii lo screen su Discord e ricevi key + download dopo verifica. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.</p>
         </div>
       </div>
     </section>
@@ -2431,10 +2453,10 @@
         rail6Title: 'Interfaccia pulita', rail6Text: 'Mostra solo le azioni utili, evitando impostazioni fuori contesto.',
         paymentTag: 'Checkout finale',
         paymentTitle: 'Arriva al pagamento solo quando hai già capito il prodotto',
-        paymentLead: 'Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma.',
+        paymentLead: 'Abbonamento mensile o trimestrale su Stripe. Paghi, ricevi subito key e download ufficiale nella pagina di conferma. In alternativa puoi richiedere anche PayPal manuale dal checkout.',
         paymentButton: 'Apri il checkout',
         paymentNote: "Puoi scegliere mensile o trimestrale. Le tasse non sono incluse nel prezzo e vengono aggiunte in base al paese del cliente. Prima del checkout viene chiesta conferma esplicita per la beta e per la fornitura digitale immediata.",
-        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.",
+        paymentWarning: "Dopo il pagamento la key compare subito nella pagina di conferma insieme al download ufficiale dell'app. Se scegli PayPal manuale, invii lo screen su Discord e ricevi key + download dopo verifica. Durante la beta alcune aree possono ricevere fix rapidi o cambiare più spesso.",
         termsLink: 'Termini',
         privacyLink: 'Privacy',
         supportLink: 'Supporto',
@@ -2573,10 +2595,10 @@
         rail6Title: 'Clean interface', rail6Text: 'Only useful actions are shown, avoiding out-of-context settings.',
         paymentTag: 'Final checkout',
         paymentTitle: 'Reach payment only after you already understand the product',
-        paymentLead: 'Monthly or quarterly subscription through Stripe. Pay once and receive the key plus the official download right on the confirmation page.',
+        paymentLead: 'Monthly or quarterly subscription through Stripe. Pay once and receive the key plus the official download right on the confirmation page. As an alternative, you can also request manual PayPal from the checkout page.',
         paymentButton: 'Open checkout page',
         paymentNote: 'Customers can choose monthly or quarterly. Taxes are excluded from the listed price and are added based on the customer country. Before checkout there is an explicit confirmation for beta access and immediate digital supply.',
-        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. During beta some areas may receive fast fixes or change more often.',
+        paymentWarning: 'After payment the key is shown immediately on the confirmation page together with the official app download. If you choose manual PayPal, send the screenshot on Discord and receive the key + download after verification. During beta some areas may receive fast fixes or change more often.',
         termsLink: 'Terms',
         privacyLink: 'Privacy',
         supportLink: 'Support',
@@ -2612,27 +2634,27 @@
         versionLabel: 'Versión',
         reviewsLink: 'Reseñas',
         headlineMain: 'Licencia',
-        heroEyebrow: 'Suite de optimización gaming para Windows',
-        heroText: 'SapoTweak se desbloquea mediante una licencia personal. En esta fase de beta de pago eliges el plan, completas el pago y recibes la key y la descarga oficial en la página de confirmación.',
+        heroEyebrow: 'Suite de optimización para juegos en Windows',
+        heroText: 'SapoTweak se desbloquea mediante una licencia personal. En esta fase de beta de pago eliges el plan, completas el pago y recibes la clave y la descarga oficial en la página de confirmación.',
         downloadBtn: 'Elegir plan',
         introVideoBtn: 'Vídeo introductorio',
         showcaseTag: 'Rendimiento real',
         showcaseTitle: 'Una suite pensada para FPS, latencia y limpieza del sistema',
-        showcaseLead: 'SapoTweak une tweaks gaming, control de servicios, red y restauración en un solo flujo. No tienes que perderte en Windows: abres la app, eliges el preset y trabajas por bloques claros.',
+        showcaseLead: 'SapoTweak une ajustes para juegos, control de servicios, red y restauración en un solo flujo. No tienes que perderte en Windows: abres la aplicación, eliges el perfil y trabajas por bloques claros.',
         showcaseP1Title: 'Más FPS y menos stutter',
         showcaseP1Text: 'Presets y optimizaciones centradas en aligerar el sistema mientras juegas.',
         showcaseP2Title: 'Input y red más reactivos',
         showcaseP2Text: 'Enfoque real sobre latencia, carga en segundo plano y prioridad de recursos.',
         showcaseP3Title: 'Siempre reversible',
-        showcaseP3Text: 'Restauración, notas claras y controles dentro de la app para no perder el control del PC.',
-        floating1Label: 'Gaming stack',
+        showcaseP3Text: 'Restauración, notas claras y controles dentro de la aplicación para no perder el control del PC.',
+        floating1Label: 'Entorno gaming',
         floating1Value: 'Preset + limpieza + red',
         floating2Label: 'Licencia',
         floating2Value: 'Activación personal',
         floating3Label: 'Soporte',
         floating3Value: 'Discord y Gmail',
-        proof1Text: 'El flujo está pensado para llegar rápido a los tweaks útiles sin caos innecesario.',
-        proof2Text: 'Checkout, confirmación y soporte viven dentro de un recorrido mucho más ordenado.',
+        proof1Text: 'El flujo está pensado para llegar rápido a los ajustes útiles sin caos innecesario.',
+        proof2Text: 'Compra, confirmación y soporte viven dentro de un recorrido mucho más ordenado.',
         proof3Text: 'Popup dedicado, texto listo para copiar y canales oficiales mucho más claros.',
         perfTag: 'Laboratorio de rendimiento',
         perf1Title: 'Mejora FPS, estabiliza el frame pacing y elimina ruido inútil',
@@ -2641,13 +2663,13 @@
         perfLegendBefore: 'Antes',
         perfButton: 'Ver planes',
         perfChartCaption: 'Estabilidad del frame pacing',
-        perf2Eyebrow: 'Sensación de red',
+        perf2Eyebrow: 'Respuesta de red',
         perf2Title: 'Ping más limpio y bufferbloat bajo control',
         perf2Text: 'Cuando el PC deja de arrastrar servicios y procesos inútiles, también la red se siente más limpia. No es magia: es menos ruido donde no hace falta.',
         perf2BeforeLabel: 'Sin tweak',
         perf2AfterLabel: 'Con SapoTweak',
-        perf3Eyebrow: 'Respuesta de input',
-        perf3Title: 'Menos input lag y latencia del sistema más estable',
+        perf3Eyebrow: 'Respuesta de entrada',
+        perf3Title: 'Menos retraso de entrada y latencia del sistema más estable',
         perf3Text: 'La meta no es solo ver un número más alto, sino sentir un PC más listo. Menos picos en los peores momentos y más continuidad entre ratón, teclado y juego.',
         perf3MetricBefore: 'Antes 11 ms',
         perf3MetricAfter: 'Después 2 ms',
@@ -2656,7 +2678,7 @@
         presetLead: 'La web ahora deja claro que no existe un único botón mágico. Hay niveles diferentes según cuánto quieras empujar el sistema.',
         presetSafeBadge: 'Safe',
         presetSafeTitle: 'Inicio conservador',
-        presetSafeText: 'Pensado para quien quiere un sistema más limpio y gaming-focused sin tocar zonas demasiado agresivas.',
+        presetSafeText: 'Pensado para quien quiere un sistema más limpio y enfocado en jugar sin tocar zonas demasiado agresivas.',
         presetAdvancedBadge: 'Advanced',
         presetAdvancedTitle: 'Equilibrado y competitivo',
         presetAdvancedText: 'El preset central para quien quiere más empuje en latencia, procesos y comportamiento general del PC.',
@@ -2664,55 +2686,55 @@
         presetExtremeTitle: 'Máximo empuje',
         presetExtremeText: 'Para usuarios avanzados que quieren exprimir el sistema y saben leer avisos y consecuencias antes de aplicar.',
         flowTag: 'Ruta clara',
-        flowTitle: 'Entiende lo que compras antes de llegar al checkout',
-        flowLead: 'La home ahora guía al usuario en orden: qué hace SapoTweak, cómo funciona dentro de la app, qué esperar de la licencia y solo al final el pago.',
+        flowTitle: 'Entiende lo que compras antes de llegar al proceso de pago',
+        flowLead: 'La página principal ahora guía al usuario en orden: qué hace SapoTweak, cómo funciona dentro de la aplicación, qué esperar de la licencia y solo al final el pago.',
         step1Title: 'Elige el nivel',
         step1Text: 'Los presets Safe, Advanced y Extreme están separados por impacto y riesgo para no entrar a ciegas.',
         step2Title: 'Aplica con guía',
-        step2Text: 'Cada sección explica el tweak, muestra avisos reales y deja espacio para restaurar si quieres volver atrás.',
+        step2Text: 'Cada sección explica el ajuste, muestra avisos reales y deja espacio para restaurar si quieres volver atrás.',
         step3Title: 'Comprueba los resultados',
-        step3Text: 'Prueba FPS, 1% lows, input y estabilidad en tu propio setup en lugar de confiar en promesas vagas.',
-        step4Title: 'Gestiona soporte y updates',
+        step3Text: 'Prueba FPS, mínimos del 1 %, respuesta de entrada y estabilidad en tu propio equipo en lugar de confiar en promesas vagas.',
+        step4Title: 'Gestiona soporte y actualizaciones',
         step4Text: 'Descarga oficial, actualizaciones integradas y soporte directo por Gmail o ticket de Discord en pocos clics.',
-        appTag: 'Dentro de la app',
+        appTag: 'Dentro de la aplicación',
         appTitle: 'Interfaz guiada, menos caos, más contexto',
-        appLead: 'SapoTweak no muestra cien switches aleatorios. Filtra las acciones útiles, resalta avisos importantes y separa los cambios por categoría.',
+        appLead: 'SapoTweak no muestra cien interruptores aleatorios. Filtra las acciones útiles, resalta avisos importantes y separa los cambios por categoría.',
         metric1Value: '3 presets',
         metric1Label: 'Safe, Advanced y Extreme para niveles distintos.',
         metric2Value: 'Soporte directo',
         metric2Label: 'Popup rápido con Gmail, Discord y texto listo para copiar.',
-        metric3Value: 'Updates en app',
-        metric3Label: 'Control de versión y descarga guiada sin buscar builds por fuera.',
+        metric3Value: 'Actualizaciones en la app',
+        metric3Label: 'Control de versión y descarga guiada sin buscar compilaciones por fuera.',
         offerMonthlyLabel: 'Mensual',
         offerMonthlyValue: '9,99 EUR',
-        offerMonthlyNote: 'Acceso recurrente con updates y soporte.',
+        offerMonthlyNote: 'Acceso recurrente con actualizaciones y soporte.',
         offerQuarterlyLabel: 'Trimestral',
         offerQuarterlyValue: '19,99 EUR',
-        offerQuarterlyNote: 'La opción más conveniente si vas a usar de verdad el tweak.',
+        offerQuarterlyNote: 'La opción más conveniente si vas a usar SapoTweak de verdad.',
         featureTag: 'Por qué SapoTweak',
         featureTitle: 'Una página más clara, enfocada en confianza y decisión',
         featureLead: 'Separamos valor, funcionamiento y compra para que el producto se entienda mejor y no se vea todo amontonado.',
         card1Title: 'Presets gaming',
         card1Text: 'Perfiles Safe, Advanced y Extreme para aligerar Windows sin tocar servicios críticos.',
         card2Title: 'Licencia protegida',
-        card2Text: 'Activación vinculada al PC con control automático al iniciar la app.',
+        card2Text: 'Activación vinculada al PC con control automático al iniciar la aplicación.',
         card3Title: 'Actualizaciones integradas',
         detailsTitle: 'Notas claras',
-        card3Text: 'La app comprueba nuevas versiones y guía al usuario durante la descarga del instalador.',
+        card3Text: 'La aplicación comprueba nuevas versiones y guía al usuario durante la descarga del instalador.',
         detailsText: 'SapoTweak requiere inicio como administrador para aplicar cambios del sistema. Los presets están separados por nivel de riesgo e incluyen notas claras sobre lo que se modifica, para que el usuario pueda elegir con autonomía.',
-        footerText: 'SapoTweak - Distribuye solo builds oficiales.',
+        footerText: 'SapoTweak - Distribuye solo compilaciones oficiales.',
         rail1Title: 'Presets guiados', rail1Text: 'Safe, Advanced y Extreme con niveles separados para usuarios distintos.',
         rail2Title: 'Restauración', rail2Text: 'Backup y regreso a valores conservadores si un preset no convence.',
-        rail3Title: 'Enfoque gaming', rail3Text: 'Optimizaciones enfocadas en latencia, servicios, input y limpieza Windows.',
-        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la app.',
-        rail5Title: 'PC detectado', rail5Text: 'La app filtra tweaks según RAM, GPU, CPU y versión de Windows.',
+        rail3Title: 'Enfoque gaming', rail3Text: 'Optimizaciones enfocadas en latencia, servicios, respuesta de entrada y limpieza de Windows.',
+        rail4Title: 'Actualizaciones integradas', rail4Text: 'Control de versión y descarga guiada directamente dentro de la aplicación.',
+        rail5Title: 'PC detectado', rail5Text: 'La aplicación filtra ajustes según RAM, GPU, CPU y versión de Windows.',
         rail6Title: 'Interfaz limpia', rail6Text: 'Muestra solo acciones útiles, evitando ajustes fuera de contexto.',
-        paymentTag: 'Checkout final',
+        paymentTag: 'Compra final',
         paymentTitle: 'Llega al pago solo cuando ya entiendes el producto',
-        paymentLead: 'Suscripción mensual o trimestral con Stripe. Pagas y recibes la key junto con la descarga oficial en la página de confirmación.',
-        paymentButton: 'Abrir página de checkout',
-        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país. Antes del checkout se pide una confirmación explícita para la beta y el suministro digital inmediato.',
-        paymentWarning: 'Después del pago la key aparece inmediatamente en la página de confirmación junto con la descarga oficial. Durante la beta algunas áreas pueden recibir correcciones rápidas o cambiar con más frecuencia.',
+        paymentLead: 'Suscripción mensual o trimestral con Stripe. Pagas y recibes la clave junto con la descarga oficial en la página de confirmación. Como alternativa, también puedes solicitar PayPal manual desde el checkout.',
+        paymentButton: 'Abrir compra',
+        paymentNote: 'El cliente puede elegir mensual o trimestral. Los impuestos no están incluidos en el precio y se añaden según el país. Antes de la compra se pide una confirmación explícita para la beta y el suministro digital inmediato.',
+        paymentWarning: 'Después del pago la clave aparece inmediatamente en la página de confirmación junto con la descarga oficial. Si eliges PayPal manual, envías la captura en Discord y recibes la clave + descarga tras la verificación. Durante la beta algunas áreas pueden recibir correcciones rápidas o cambiar con más frecuencia.',
         termsLink: 'Términos',
         privacyLink: 'Privacidad',
         supportLink: 'Soporte',
@@ -2725,7 +2747,7 @@
         supportTemplateTitle: 'Texto para copiar',
         supportTemplateLead: 'Completa esta lista y pégala en Gmail o Discord para acelerar el soporte.',
         supportCopyBtn: 'Copiar texto',
-        supportCopyHint: 'Agrega también captura, error y versión de la app si los tienes.',
+        supportCopyHint: 'Agrega también captura, error y versión de la aplicación si los tienes.',
         supportCopyDone: 'Texto copiado. Ahora abre Gmail o Discord.',
         tosTitle: 'Términos de uso',
         tosText: 'Condiciones breves para usar el software.',
@@ -2733,14 +2755,14 @@
         tosAcceptLabel: 'He leído y acepto las condiciones.',
         tosAcceptBtn: 'Aceptar',
         tosIntro: 'Al usar o activar SapoTweak aceptas estas condiciones esenciales:',
-        tosItem1: 'Los resultados de reviews, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no serán necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeración del PC, salud y espacio libre de los discos, versión y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, apps en segundo plano, antivirus, overlays y parches de los juegos.',
-        tosItem2: 'Las capturas, vídeos, reviews y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
-        tosItem3: 'Se recomienda crear un punto de restauración o una copia de seguridad antes del uso para evitar conflictos con tweaks, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
+        tosItem1: 'Los resultados de reseñas, benchmarks, FPS, cantidad de procesos, latencia y estabilidad no serán necesariamente iguales a los tuyos. El rendimiento depende del hardware, limpieza y refrigeración del PC, salud y espacio libre de los discos, versión y estado de Windows, drivers, BIOS, monitor, software instalado, servicios, aplicaciones en segundo plano, antivirus, overlays y parches de los juegos.',
+        tosItem2: 'Las capturas, vídeos, reseñas y ejemplos publicados son solo ilustrativos y no garantizan el mismo resultado en todos los dispositivos o instalaciones de Windows.',
+        tosItem3: 'Se recomienda crear un punto de restauración o una copia de seguridad antes del uso para evitar conflictos con ajustes, scripts, servicios o cambios aplicados previamente por el usuario o por software de terceros.',
         tosItem4: 'Cada comando o tweak incluye una descripción específica para que cada usuario pueda decidir por sí mismo qué activar o desactivar según sus preferencias y su sistema.',
         tosItem5: 'No asumimos responsabilidad por las decisiones del usuario sobre lo que activa, desactiva o modifica mediante el software, ni por efectos derivados de configuraciones previas, uso indebido o combinaciones elegidas manualmente por el usuario.',
-        tosItem6: 'La key está pensada para seguir funcionando después de un reinicio del PC, reset de Windows, reinstalación o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activación; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
+        tosItem6: 'La clave está pensada para seguir funcionando después de un reinicio del PC, restablecimiento de Windows, reinstalación o cambio de Windows siempre que el hardware principal siga siendo el mismo. Sustituir la placa base, la CPU u otro hardware identificativo puede requerir una nueva activación; no se ofrecen reembolsos por cambios de hardware salvo cuando la ley obligatoria aplicable exija lo contrario.',
         tosItem7: 'SapoTweak es un producto digital suministrado de forma inmediata. En esta fase puede distribuirse como beta de pago con funciones todavía en evolución. Tras la activación o el inicio del suministro digital solicitado por el usuario, los reembolsos por lo general no están disponibles salvo cuando la ley obligatoria aplicable exija lo contrario.',
-        tosItem8: 'Se prohíbe el robo o extracción de datos, código o assets del programa, la ingeniería inversa no autorizada, el bypass de protecciones, compartir keys, la redistribución abusiva, la manipulación de los sistemas de licencia o updates y cualquier uso fraudulento del software.',
+        tosItem8: 'Se prohíbe el robo o extracción de datos, código o recursos del programa, la ingeniería inversa no autorizada, eludir protecciones, compartir claves, la redistribución abusiva, la manipulación de los sistemas de licencia o actualizaciones y cualquier uso fraudulento del software.',
         tosItem9: 'Las infracciones pueden implicar suspensión de acceso, revocación de la licencia y acciones civiles o penales cuando corresponda.'
       }
     };
@@ -2775,12 +2797,12 @@
       }
       if (currentLanguage === 'es') {
         return [
-          'Email del pago: ',
+          'Correo del pago: ',
           'Problema: ',
-          'Key: ',
-          'Session ID: ',
-          'Has reseteado Windows o reinstalado la app en el mismo PC?: sí/no',
-          'Versión app: ',
+          'Clave: ',
+          'ID de sesión: ',
+          '¿Has restablecido Windows o reinstalado la aplicación en el mismo PC?: sí/no',
+          'Versión de la aplicación: ',
           'Error mostrado: ',
           'Captura adjunta: sí/no',
           'Detalles extra: '
