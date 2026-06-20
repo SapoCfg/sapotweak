@@ -260,7 +260,8 @@
       width: 100%;
       display: block;
       border-radius: 22px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.42);
+      filter: brightness(.46) contrast(1.14) saturate(.72);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.48);
     }
     .consent-box {
       margin-top: 22px;
@@ -498,6 +499,115 @@
       font-size: 12px;
       line-height: 1.6;
     }
+    .manual-pay {
+      margin-top: 20px;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      border: 1px solid rgba(196, 162, 255, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(150, 92, 255, 0.16), transparent 40%),
+        linear-gradient(180deg, rgba(17, 14, 29, 0.96), rgba(9, 8, 18, 0.98));
+      box-shadow: 0 28px 90px rgba(0,0,0,0.24);
+    }
+    .manual-pay-head {
+      display: grid;
+      gap: 10px;
+    }
+    .manual-pay-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(116, 72, 214, 0.24);
+      color: #efe5ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .manual-pay h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.04em;
+    }
+    .manual-pay p {
+      margin: 0;
+      color: var(--text-1);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .manual-pay-steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .manual-pay-steps li {
+      position: relative;
+      padding: 16px 16px 16px 46px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      color: var(--text-1);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .manual-pay-steps li::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7f42ff, #d197ff);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      box-shadow: 0 0 14px rgba(190, 149, 255, 0.34);
+    }
+    .manual-pay-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .manual-pay-note {
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .manual-pay-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(194, 158, 255, 0.28);
+      background: linear-gradient(135deg, #6f37f6, #a25bff);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      box-shadow: 0 18px 44px rgba(109, 55, 246, 0.28);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .manual-pay-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(222, 198, 255, 0.42);
+      box-shadow: 0 24px 52px rgba(109, 55, 246, 0.34);
+    }
     .faq-shell {
       margin-top: 20px;
       padding: 24px;
@@ -565,15 +675,19 @@
       .hero-media,
       .consent-box,
       .trust-strip,
+      .manual-pay,
       .faq-shell,
       .legal-links { border-radius: 26px; }
       .hero-copy,
       .consent-box,
+      .manual-pay,
       .faq-shell { padding: 22px; }
       .hero-point,
       .trust-card,
+      .manual-pay-steps li,
       .faq-item,
       .plan { border-radius: 22px; }
+      .manual-pay-actions { align-items: flex-start; }
       .plan-price strong { font-size: 36px; }
       h1 { font-size: clamp(38px, 12vw, 58px); }
     }
@@ -701,6 +815,24 @@
       </article>
     </section>
 
+    <section class="manual-pay">
+      <div class="manual-pay-head">
+        <span class="manual-pay-badge" id="paypalBadge">PayPal manuale</span>
+        <h2 id="paypalTitle">Preferisci PayPal? Puoi completare tutto anche manualmente</h2>
+        <p id="paypalLead">Se non vuoi usare Stripe, puoi pagare con PayPal e ricevere comunque key + download tramite verifica manuale su Discord.</p>
+      </div>
+      <ol class="manual-pay-steps">
+        <li data-step="1" id="paypalStep1">Invia il pagamento PayPal usando solo l'opzione amici e familiari.</li>
+        <li data-step="2" id="paypalStep2">Non inserire nessuna causale, nota o messaggio nel pagamento.</li>
+        <li data-step="3" id="paypalStep3">Dopo il pagamento manda lo screen su Discord nella sezione supporto o ticket.</li>
+        <li data-step="4" id="paypalStep4">Attendi la verifica manuale: poi ricevi key + download ufficiale.</li>
+      </ol>
+      <div class="manual-pay-actions">
+        <a class="manual-pay-link" id="paypalButton" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer">Apri Discord per PayPal</a>
+        <span class="manual-pay-note" id="paypalNote">Metodo manuale consigliato solo se vuoi evitare Stripe o se il checkout automatico non ti conviene.</span>
+      </div>
+    </section>
+
     <section class="faq-shell">
       <h2 id="faqTitle">Prima di pagare</h2>
       <div class="faq-item">
@@ -727,7 +859,7 @@
   <script>
     const translations = {
       it: {
-        pageTitle: "SapoTweak - Checkout",
+        pageTitle: "SapoTweak - Compra",
         backLink: "Sito",
         reviewsLink: "Recensioni",
         eyebrow: "Paid beta access",
@@ -762,6 +894,15 @@
         trust2Text: "Key e download compaiono subito nella pagina di successo.",
         trust3Title: "Official build only",
         trust3Text: "Distribuisci e scarica solo build ufficiali SapoTweak.",
+        paypalBadge: "PayPal manuale",
+        paypalTitle: "Preferisci PayPal? Puoi completare tutto anche manualmente",
+        paypalLead: "Se non vuoi usare Stripe, puoi pagare con PayPal e ricevere comunque key + download tramite verifica manuale su Discord.",
+        paypalStep1: "Invia il pagamento PayPal usando solo l'opzione amici e familiari.",
+        paypalStep2: "Non inserire nessuna causale, nota o messaggio nel pagamento.",
+        paypalStep3: "Dopo il pagamento manda lo screen su Discord nella sezione supporto o ticket.",
+        paypalStep4: "Attendi la verifica manuale: poi ricevi key + download ufficiale.",
+        paypalButton: "Apri Discord per PayPal",
+        paypalNote: "Metodo manuale consigliato solo se vuoi evitare Stripe o se il checkout automatico non ti conviene.",
         faqTitle: "Prima di pagare",
         faq1Title: "Cosa ricevo subito?",
         faq1Text: "Dopo Stripe vieni reindirizzato alla pagina di conferma con licenza e download ufficiale pronti.",
@@ -809,6 +950,15 @@
         trust2Text: "Your key and official download appear instantly on the success page.",
         trust3Title: "Official build only",
         trust3Text: "Distribute and download official SapoTweak builds only.",
+        paypalBadge: "Manual PayPal",
+        paypalTitle: "Prefer PayPal? You can still complete everything manually",
+        paypalLead: "If you do not want to use Stripe, you can pay with PayPal and still receive the key + download through manual Discord verification.",
+        paypalStep1: "Send the PayPal payment only with the friends and family option.",
+        paypalStep2: "Do not add any note, reason, or message to the payment.",
+        paypalStep3: "After payment, send the screenshot on Discord in the support or ticket section.",
+        paypalStep4: "Wait for the manual check: then you receive the key + official download.",
+        paypalButton: "Open Discord for PayPal",
+        paypalNote: "This manual method is best if you want to avoid Stripe or if automatic checkout is not convenient for you.",
         faqTitle: "Before you pay",
         faq1Title: "What do I receive immediately?",
         faq1Text: "After Stripe you are redirected to the confirmation page with your license and official download ready.",
@@ -821,48 +971,57 @@
         supportLink: "Support"
       },
       es: {
-        pageTitle: "SapoTweak - Checkout",
+        pageTitle: "SapoTweak - Compra",
         backLink: "Sitio",
         reviewsLink: "Reseñas",
         eyebrow: "Acceso beta de pago",
         title: "Elige tu <span>plan SapoTweak</span>",
-        heroText: "SapoTweak desbloquea presets gaming, optimizaciones de FPS y latencia, soporte directo y descargas oficiales dentro de un flujo premium y limpio. Pagas con Stripe y recibes la licencia al instante.",
+        heroText: "SapoTweak desbloquea perfiles para juegos, optimizaciones de FPS y latencia, soporte directo y descargas oficiales dentro de un flujo premium y limpio. Pagas con Stripe y recibes la licencia al instante.",
         point1Title: "Acceso inmediato",
-        point1Text: "Después del pago, la key y la descarga aparecen enseguida en la página de confirmación.",
-        point2Title: "Presets guiados",
-        point2Text: "Niveles Safe, Advanced y Extreme para estilos de uso diferentes.",
+        point1Text: "Después del pago, la clave y la descarga aparecen enseguida en la página de confirmación.",
+        point2Title: "Perfiles guiados",
+        point2Text: "Niveles Safe, Advanced y Extreme para estilos de uso distintos.",
         point3Title: "Soporte oficial",
         point3Text: "Discord y Gmail con texto listo para acelerar la asistencia.",
         consentTitle: "Confirmar beta y entrega digital inmediata",
         consentHelp: "Antes de abrir Stripe debes confirmar que compras una licencia beta con entrega digital inmediata después del pago.",
-        consentLabel: "Confirmo que SapoTweak es una beta de pago, que algunas partes pueden cambiar o recibir fixes rápidos, y que deseo que la entrega digital comience inmediatamente después del pago.",
+        consentLabel: "Confirmo que SapoTweak es una beta de pago, que algunas partes pueden cambiar o recibir correcciones rápidas, y que deseo que la entrega digital comience inmediatamente después del pago.",
         monthlyBadge: "Más popular",
         monthlyTitle: "Mensual",
-        monthlyText: "Ideal para entrar rápido al tweak con updates continuos y soporte oficial.",
+        monthlyText: "Ideal para entrar rápido en SapoTweak con actualizaciones continuas y soporte oficial.",
         monthlyPeriod: "al mes",
         monthlyF1: "Acceso inmediato a la beta de SapoTweak",
         monthlyF2: "Descarga oficial y actualizaciones",
         monthlyF3: "Soporte por Discord o Gmail",
         quarterlyBadge: "Mejor valor",
         quarterlyTitle: "Trimestral",
-        quarterlyText: "Pensado para quien quiere usar de verdad el tweak con ventajas extra en soporte y ritmo de updates.",
+        quarterlyText: "Pensado para quien quiere usar de verdad SapoTweak con ventajas extra en soporte y ritmo de actualizaciones.",
         quarterlyPeriod: "cada 3 meses",
         quarterlyF1: "Mejor valor que el mensual",
         quarterlyF2: "Cola de soporte prioritaria en Gmail y Discord",
-        quarterlyF3: "Prioridad en resets, activaciones y soporte de updates",
-        trust1Title: "Stripe checkout",
+        quarterlyF3: "Prioridad en restablecimientos, activaciones y soporte de actualizaciones",
+        trust1Title: "Pago con Stripe",
         trust1Text: "Pago seguro, impuestos calculados por país y confirmación inmediata.",
         trust2Title: "Entrega digital",
-        trust2Text: "La key y la descarga oficial aparecen al instante en la página de confirmación.",
-        trust3Title: "Solo build oficial",
-        trust3Text: "Distribuye y descarga solo builds oficiales de SapoTweak.",
+        trust2Text: "La clave y la descarga oficial aparecen al instante en la página de confirmación.",
+        trust3Title: "Solo compilación oficial",
+        trust3Text: "Distribuye y descarga solo compilaciones oficiales de SapoTweak.",
+        paypalBadge: "PayPal manual",
+        paypalTitle: "¿Prefieres PayPal? También puedes completar todo manualmente",
+        paypalLead: "Si no quieres usar Stripe, puedes pagar con PayPal y recibir igualmente la clave + descarga mediante verificación manual en Discord.",
+        paypalStep1: "Envía el pago de PayPal usando solo la opción amigos y familiares.",
+        paypalStep2: "No pongas ninguna nota, motivo ni mensaje en el pago.",
+        paypalStep3: "Después del pago envía la captura en Discord dentro de soporte o ticket.",
+        paypalStep4: "Espera la verificación manual: luego recibes la clave + descarga oficial.",
+        paypalButton: "Abrir Discord para PayPal",
+        paypalNote: "Este método manual es útil si quieres evitar Stripe o si el checkout automático no te conviene.",
         faqTitle: "Antes de pagar",
         faq1Title: "¿Qué recibo de inmediato?",
         faq1Text: "Después de Stripe se abre la página de confirmación con tu licencia y la descarga oficial listas.",
         faq2Title: "¿El precio incluye impuestos?",
-        faq2Text: "No. Stripe agrega los impuestos aplicables según el país del cliente y las reglas del checkout.",
-        faq3Title: "¿Debo esperar fixes y cambios?",
-        faq3Text: "Sí. Durante la beta el producto puede recibir fixes frecuentes, optimizaciones y pequeños cambios de experiencia.",
+        faq2Text: "No. Stripe agrega los impuestos aplicables según el país del cliente y las reglas de la compra.",
+        faq3Title: "¿Debo esperar correcciones y cambios?",
+        faq3Text: "Sí. Durante la beta el producto puede recibir correcciones frecuentes, optimizaciones y pequeños cambios de experiencia.",
         termsLink: "Términos",
         privacyLink: "Privacidad",
         supportLink: "Soporte"
@@ -925,6 +1084,15 @@
       setText("trust2Text", t.trust2Text);
       setText("trust3Title", t.trust3Title);
       setText("trust3Text", t.trust3Text);
+      setText("paypalBadge", t.paypalBadge);
+      setText("paypalTitle", t.paypalTitle);
+      setText("paypalLead", t.paypalLead);
+      setText("paypalStep1", t.paypalStep1);
+      setText("paypalStep2", t.paypalStep2);
+      setText("paypalStep3", t.paypalStep3);
+      setText("paypalStep4", t.paypalStep4);
+      setText("paypalButton", t.paypalButton);
+      setText("paypalNote", t.paypalNote);
       setText("faqTitle", t.faqTitle);
       setText("faq1Title", t.faq1Title);
       setText("faq1Text", t.faq1Text);
