@@ -2341,7 +2341,7 @@
       platform: 'Windows x64',
       checkoutPageUrl: 'checkout.html',
       downloadUrl: 'https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe',
-      introVideoUrl: 'https://www.youtube.com/@sxp0z'
+      introVideoUrl: 'intro-coming-soon.png'
     };
 
     const translations = {
@@ -2920,6 +2920,8 @@
       document.getElementById('downloadBtn').href = siteConfig.checkoutPageUrl || fallback.checkoutPageUrl;
       const intro = document.getElementById('introVideoBtn');
       intro.href = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? siteConfig.introVideoUrl : '#intro-video';
+      intro.target = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? '_blank' : '';
+      intro.rel = siteConfig.introVideoUrl && siteConfig.introVideoUrl !== '#' ? 'noopener noreferrer' : '';
     }
 
     function initRevealSections() {
