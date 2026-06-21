@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Review Admin</title>
   <style>
@@ -307,11 +308,19 @@
     let currentStatus = "pending";
 
     function getToken() {
-      return localStorage.getItem("sapotweak_review_admin_token") || "";
+      const sessionToken = sessionStorage.getItem("sapotweak_review_admin_token") || "";
+      if (sessionToken) return sessionToken;
+      const legacyToken = localStorage.getItem("sapotweak_review_admin_token") || "";
+      if (legacyToken) {
+        sessionStorage.setItem("sapotweak_review_admin_token", legacyToken);
+        localStorage.removeItem("sapotweak_review_admin_token");
+      }
+      return legacyToken;
     }
 
     function setToken(token) {
-      localStorage.setItem("sapotweak_review_admin_token", token);
+      sessionStorage.setItem("sapotweak_review_admin_token", token);
+      localStorage.removeItem("sapotweak_review_admin_token");
     }
 
     function authHeaders() {
@@ -325,6 +334,15 @@
       return "★".repeat(Math.max(1, Number(count || 5)));
     }
 
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     function setActiveTab(status) {
       currentStatus = status;
       tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.status === status));
@@ -334,37 +352,37 @@
       reviewsAdminGrid.innerHTML = reviews.map(review => `
         <article class="card">
           <div class="card-top">
-            <h2>${review.reviewTitle}</h2>
-            <span class="badge ${review.status}">${review.status}</span>
+            <h2>${escapeHtml(review.reviewTitle)}</h2>
+            <span class="badge ${escapeHtml(review.status)}">${escapeHtml(review.status)}</span>
           </div>
-          <p>${review.reviewBody}</p>
+          <p>${escapeHtml(review.reviewBody)}</p>
           <div class="card-meta">
-            <span class="badge">${reviewStars(review.rating)} / ${review.reviewCategory}</span>
-            <span class="badge">${review.reviewLanguage}</span>
-            <span class="badge">${review.publicName}</span>
+            <span class="badge">${reviewStars(review.rating)} / ${escapeHtml(review.reviewCategory)}</span>
+            <span class="badge">${escapeHtml(review.reviewLanguage)}</span>
+            <span class="badge">${escapeHtml(review.publicName)}</span>
           </div>
           <div class="meta-list">
             <div class="meta-item">
               <strong>Email</strong>
-              <span>${review.customerEmail}</span>
+              <span>${escapeHtml(review.customerEmail)}</span>
             </div>
             <div class="meta-item">
               <strong>Key</strong>
-              <span>${review.licenseKey}</span>
+              <span>${escapeHtml(review.licenseKey)}</span>
             </div>
             <div class="meta-item">
               <strong>Creata</strong>
-              <span>${review.createdAt || "-"}</span>
+              <span>${escapeHtml(review.createdAt || "-")}</span>
             </div>
             <div class="meta-item">
               <strong>Pubblicata</strong>
-              <span>${review.publishedAt || "-"}</span>
+              <span>${escapeHtml(review.publishedAt || "-")}</span>
             </div>
           </div>
-          <textarea class="admin-note" data-id="${review.id}" placeholder="Nota admin opzionale">${review.adminNote || ""}</textarea>
+          <textarea class="admin-note" data-id="${escapeHtml(review.id)}" placeholder="Nota admin opzionale">${escapeHtml(review.adminNote || "")}</textarea>
           <div class="card-actions">
-            <button class="btn good" data-action="approve" data-id="${review.id}" type="button">Approva e pubblica</button>
-            <button class="btn warn" data-action="archive" data-id="${review.id}" type="button">Sposta in archivio</button>
+            <button class="btn good" data-action="approve" data-id="${escapeHtml(review.id)}" type="button">Approva e pubblica</button>
+            <button class="btn warn" data-action="archive" data-id="${escapeHtml(review.id)}" type="button">Sposta in archivio</button>
           </div>
         </article>
       `).join("");
