@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SapoTweak - Recensioni</title>
   <style>
@@ -1196,6 +1197,36 @@
       return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.it[key] || key;
     }
 
+    function normalizeLicenseKeyInput(value) {
+      return String(value || "")
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9-]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function localizedReviewSubmitError(payload, responseText) {
+      const rawMessage = String(payload?.error || payload?.message || responseText || "").trim();
+      const rawDetail = String(payload?.detail || "").trim();
+      const combined = [rawMessage, rawDetail].filter(Boolean).join(" ");
+      const normalized = combined.toLowerCase();
+
+      if (normalized.includes("license not found") || normalized.includes("licenza non trovata")) {
+        if (currentLanguage === "en") return "License key not found. Check that it is copied correctly and try again.";
+        if (currentLanguage === "es") return "Clave no encontrada. Comprueba que esté copiada correctamente e inténtalo de nuevo.";
+        return "Licenza non trovata. Controlla di aver copiato la key corretta e riprova.";
+      }
+
+      if (normalized.includes("storage") || normalized.includes("no such table")) {
+        if (currentLanguage === "en") return "Review storage is temporarily unavailable. Please try again shortly.";
+        if (currentLanguage === "es") return "El archivado de reseñas no está disponible temporalmente. Vuelve a intentarlo en breve.";
+        return "Archivio review temporaneamente non disponibile. Riprova tra poco.";
+      }
+
+      return rawMessage || t("reviewSubmitError");
+    }
+
     function localizedVerifiedBadge() {
       return currentLanguage === "it" ? "Verificata" : currentLanguage === "es" ? "Verificada" : "Verified";
     }
@@ -1294,6 +1325,15 @@
       return "★".repeat(count) + "☆".repeat(Math.max(0, 5 - count));
     }
 
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     function renderReviews() {
       const reviews = currentReviews();
       const start = reviewPage * pageSize;
@@ -1301,14 +1341,14 @@
       reviewsGrid.innerHTML = pageItems.map(item => `
         <article class="review-card">
           <div class="review-stars">${starString(item.stars)}</div>
-          ${item.title ? `<h3 class="review-title">${item.title}</h3>` : ""}
-          <p class="review-body">${item.body}</p>
+          ${item.title ? `<h3 class="review-title">${escapeHtml(item.title)}</h3>` : ""}
+          <p class="review-body">${escapeHtml(item.body)}</p>
           <div class="review-footer">
             <div class="review-user">
-              <strong>${item.name}</strong>
-              <span>${item.meta}</span>
+              <strong>${escapeHtml(item.name)}</strong>
+              <span>${escapeHtml(item.meta)}</span>
             </div>
-            <span class="review-badge">${item.badge}</span>
+            <span class="review-badge">${escapeHtml(item.badge)}</span>
           </div>
         </article>
       `).join("");
@@ -1411,16 +1451,22 @@
     }
 
     async function submitReview() {
+      const normalizedLicenseKey = normalizeLicenseKeyInput(reviewKey.value);
+      const normalizedPublicName = reviewName.value.trim();
+      const normalizedReviewTitle = reviewTitleInput.value.trim();
+      const normalizedReviewBody = reviewText.value.trim();
+
       if (
-        !reviewKey.value.trim() ||
-        !reviewName.value.trim() ||
-        !reviewTitleInput.value.trim() ||
-        !reviewText.value.trim()
+        !normalizedLicenseKey ||
+        !normalizedPublicName ||
+        !normalizedReviewTitle ||
+        !normalizedReviewBody
       ) {
         reviewModalStatus.textContent = t("reviewValidationError");
         return;
       }
 
+      reviewKey.value = normalizedLicenseKey;
       reviewModalStatus.textContent = "Verifica acquisto e salvataggio in corso...";
 
       try {
@@ -1428,12 +1474,21 @@
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
-            licenseKey: reviewKey.value.trim(),
-            publicName: reviewName.value.trim(),
-            reviewTitle: reviewTitleInput.value.trim(),
-            reviewBody: reviewText.value.trim(),
+            email: "",
+            licenseKey: normalizedLicenseKey,
+            license: normalizedLicenseKey,
+            key: normalizedLicenseKey,
+            publicName: normalizedPublicName,
+            name: normalizedPublicName,
+            reviewTitle: normalizedReviewTitle,
+            title: normalizedReviewTitle,
+            reviewBody: normalizedReviewBody,
+            body: normalizedReviewBody,
+            reviewText: normalizedReviewBody,
             reviewCategory: reviewCategory.value,
+            category: reviewCategory.value,
             reviewLanguage: currentLanguage,
+            language: currentLanguage,
             rating: Number(reviewRating.value || 5)
           })
         });
@@ -1446,7 +1501,7 @@
           payload = {};
         }
         if (!response.ok || !payload.ok) {
-          reviewModalStatus.textContent = payload.error || payload.message || responseText || t("reviewSubmitError");
+          reviewModalStatus.textContent = localizedReviewSubmitError(payload, responseText);
           return;
         }
 
