@@ -184,7 +184,6 @@
     }
     .cards,
     .support-shell,
-    .reset-shell,
     .support-modal {
       border: 1px solid var(--line-soft);
       background: linear-gradient(180deg, rgba(17, 13, 30, 0.84), rgba(9, 8, 16, 0.90));
@@ -217,8 +216,7 @@
       font-size: 14px;
       line-height: 1.75;
     }
-    .support-shell,
-    .reset-shell {
+    .support-shell {
       margin-top: 22px;
       padding: 28px;
     }
@@ -326,52 +324,6 @@
       line-height: 1.6;
       text-align: center;
     }
-    .reset-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-    .field label {
-      color: #f4efff;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .field input {
-      width: 100%;
-      min-height: 50px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-      padding: 0 16px;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-    }
-    .reset-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-    .reset-status {
-      margin-top: 14px;
-      color: var(--text-2);
-      font-size: 13px;
-      line-height: 1.7;
-      text-align: center;
-      min-height: 24px;
-    }
-    .reset-status.error { color: #ffc0c0; }
-    .reset-status.success { color: #d8c1ff; }
     .footer {
       padding: 36px 0 12px;
       color: var(--text-2);
@@ -465,7 +417,6 @@
     }
     @media (max-width: 960px) {
       .cards,
-      .reset-grid,
       .support-choice-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 720px) {
@@ -479,11 +430,9 @@
       .nav-right { justify-content: center; width: 100%; }
       .cards,
       .support-shell,
-      .reset-shell,
       .support-modal { border-radius: 24px; }
       .cards,
       .support-shell,
-      .reset-shell,
       .support-modal { padding: 22px; }
       .hero { padding-top: 42px; }
       .card h2 { font-size: 22px; }
@@ -542,28 +491,6 @@
         <h2 id="card4Title">4. Download o update non vanno</h2>
         <p id="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p>
       </article>
-    </section>
-
-    <section class="reset-shell">
-      <div class="section-head">
-        <span class="section-tag" id="resetTag">Reset self-service</span>
-        <h2 id="resetTitle">Reset attivazione sullo stesso PC</h2>
-        <p id="resetLead">Usa questo modulo solo se hai reinstallato Windows o SapoTweak sullo stesso computer. Inserisci email pagamento e key: il sistema verifica la licenza e libera l'attivazione precedente quando possibile.</p>
-      </div>
-      <div class="reset-grid">
-        <label>
-          <span id="resetEmailLabel">Email pagamento</span>
-          <input id="resetEmail" type="email" autocomplete="email" placeholder="email@example.com">
-        </label>
-        <label>
-          <span id="resetKeyLabel">License key</span>
-          <input id="resetKey" type="text" autocomplete="off" placeholder="XXXXX-XXXXX-XXXXX-XXXXX">
-        </label>
-      </div>
-      <div class="reset-actions">
-        <button class="btn primary" id="submitResetBtn" type="button">Reset attivazione</button>
-        <span class="reset-status" id="resetStatus">Disponibile solo per licenze valide e stesso account email.</span>
-      </div>
     </section>
 
     <section class="support-shell">
@@ -643,17 +570,6 @@
         templateLead: "Compila questo elenco e incollalo su Gmail o Discord per velocizzare il supporto.",
         templateStatus: "Aggiungi anche screenshot, errore e versione app se li hai.",
         templateCopied: "Testo copiato. Ora apri Gmail o Discord.",
-        resetTag: "Reset self-service",
-        resetTitle: "Reset attivazione sullo stesso PC",
-        resetLead: "Usa questo modulo solo se hai reinstallato Windows o SapoTweak sullo stesso computer. Inserisci email pagamento e key: il sistema verifica la licenza e libera l'attivazione precedente quando possibile.",
-        resetEmailLabel: "Email pagamento",
-        resetKeyLabel: "License key",
-        submitResetBtn: "Reset attivazione",
-        resetStatus: "Disponibile solo per licenze valide e stesso account email.",
-        resetWorking: "Verifica licenza e reset in corso...",
-        resetValidation: "Inserisci email pagamento e license key.",
-        resetSuccess: "Reset completato. Riapri SapoTweak e reinserisci la key sullo stesso PC.",
-        resetError: "Reset non riuscito. Controlla email/key o contatta il supporto.",
         footerText: "SapoTweak - Distribuisci solo build ufficiali.",
         termsLink: "Termini",
         privacyLink: "Privacy",
@@ -692,17 +608,6 @@
         templateLead: "Fill out this list and paste it into Gmail or Discord to speed up support.",
         templateStatus: "Add screenshot, error, and app version too if you have them.",
         templateCopied: "Text copied. Now open Gmail or Discord.",
-        resetTag: "Self-service reset",
-        resetTitle: "Activation reset on the same PC",
-        resetLead: "Use this form only if you reinstalled Windows or SapoTweak on the same computer. Enter purchase email and key: the system verifies the license and clears the previous activation when possible.",
-        resetEmailLabel: "Purchase email",
-        resetKeyLabel: "License key",
-        submitResetBtn: "Reset activation",
-        resetStatus: "Available only for valid licenses and the same email account.",
-        resetWorking: "Checking license and resetting activation...",
-        resetValidation: "Enter purchase email and license key.",
-        resetSuccess: "Reset completed. Reopen SapoTweak and enter the key again on the same PC.",
-        resetError: "Reset failed. Check email/key or contact support.",
         footerText: "SapoTweak - Distribute official builds only.",
         termsLink: "Terms",
         privacyLink: "Privacy",
@@ -741,17 +646,6 @@
         templateLead: "Completa esta lista y pégala en Gmail o Discord para acelerar el soporte.",
         templateStatus: "Agrega también captura, error y versión de la aplicación si los tienes.",
         templateCopied: "Texto copiado. Ahora abre Gmail o Discord.",
-        resetTag: "Reset autoservicio",
-        resetTitle: "Restablecer activación en el mismo PC",
-        resetLead: "Usa este formulario solo si reinstalaste Windows o SapoTweak en el mismo equipo. Introduce el correo de pago y la clave: el sistema verifica la licencia y libera la activación anterior cuando sea posible.",
-        resetEmailLabel: "Correo del pago",
-        resetKeyLabel: "Clave de licencia",
-        submitResetBtn: "Restablecer activación",
-        resetStatus: "Disponible solo para licencias válidas y el mismo correo.",
-        resetWorking: "Verificando licencia y restableciendo activación...",
-        resetValidation: "Introduce correo del pago y clave de licencia.",
-        resetSuccess: "Reset completado. Reabre SapoTweak e introduce la clave otra vez en el mismo PC.",
-        resetError: "No se pudo restablecer. Comprueba correo/clave o contacta soporte.",
         footerText: "SapoTweak - Distribuye solo builds oficiales.",
         termsLink: "Términos",
         privacyLink: "Privacidad",
@@ -775,11 +669,6 @@
     const openSupportModalBtn = document.getElementById("openSupportModalBtn");
     const closeSupportModalBtn = document.getElementById("closeSupportModalBtn");
     const copySupportTemplateBtn = document.getElementById("copySupportTemplateBtn");
-    const resetEmail = document.getElementById("resetEmail");
-    const resetKey = document.getElementById("resetKey");
-    const resetStatus = document.getElementById("resetStatus");
-    const submitResetBtn = document.getElementById("submitResetBtn");
-    const licenseApiBase = "https://license.salvocan05.workers.dev";
     let currentLanguage = localStorage.getItem("sapotweak_site_lang") || "it";
 
     function t(key) {
@@ -842,76 +731,6 @@
         "&body=" + encodeURIComponent(template);
     }
 
-    function normalizeLicenseKeyInput(value) {
-      return String(value || "")
-        .trim()
-        .toUpperCase()
-        .replace(/[^A-Z0-9-]/g, "")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "");
-    }
-
-    function resetErrorMessage(payload, responseText) {
-      const raw = String(payload?.error || payload?.message || responseText || "").trim();
-      if (!raw) return t("resetError");
-      if (raw.toLowerCase().includes("email mismatch")) {
-        if (currentLanguage === "en") return "Email does not match the license purchase.";
-        if (currentLanguage === "es") return "El correo no coincide con la compra de la licencia.";
-        return "L'email non coincide con l'acquisto della licenza.";
-      }
-      if (raw.toLowerCase().includes("license not found") || raw.toLowerCase().includes("licenza non trovata")) {
-        if (currentLanguage === "en") return "License not found. Check that the key is copied correctly.";
-        if (currentLanguage === "es") return "Licencia no encontrada. Comprueba que la clave esté copiada correctamente.";
-        return "Licenza non trovata. Controlla di aver copiato la key corretta.";
-      }
-      return raw;
-    }
-
-    async function submitReset() {
-      const email = String(resetEmail.value || "").trim().toLowerCase();
-      const licenseKey = normalizeLicenseKeyInput(resetKey.value);
-      resetKey.value = licenseKey;
-
-      if (!email || !licenseKey) {
-        resetStatus.className = "reset-status error";
-        resetStatus.textContent = t("resetValidation");
-        return;
-      }
-
-      resetStatus.className = "reset-status";
-      resetStatus.textContent = t("resetWorking");
-      submitResetBtn.disabled = true;
-
-      try {
-        const response = await fetch(`${licenseApiBase}/license/reset`, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ email, licenseKey })
-        });
-        const responseText = await response.text();
-        let payload = {};
-        try {
-          payload = responseText ? JSON.parse(responseText) : {};
-        } catch {
-          payload = {};
-        }
-
-        if (!response.ok || !payload.ok) {
-          resetStatus.className = "reset-status error";
-          resetStatus.textContent = resetErrorMessage(payload, responseText);
-          return;
-        }
-
-        resetStatus.className = "reset-status success";
-        resetStatus.textContent = payload.message || t("resetSuccess");
-      } catch {
-        resetStatus.className = "reset-status error";
-        resetStatus.textContent = t("resetError");
-      } finally {
-        submitResetBtn.disabled = false;
-      }
-    }
-
     function applyLanguage(lang) {
       currentLanguage = ["it", "en", "es"].includes(lang) ? lang : "it";
       localStorage.setItem("sapotweak_site_lang", currentLanguage);
@@ -941,15 +760,6 @@
       setText("templateTitle", text.templateTitle);
       setText("templateLead", text.templateLead);
       setText("templateStatus", text.templateStatus);
-      setText("resetTag", text.resetTag);
-      setText("resetTitle", text.resetTitle);
-      setText("resetLead", text.resetLead);
-      setText("resetEmailLabel", text.resetEmailLabel);
-      setText("resetKeyLabel", text.resetKeyLabel);
-      setText("submitResetBtn", text.submitResetBtn);
-      if (!resetStatus.classList.contains("error") && !resetStatus.classList.contains("success")) {
-        setText("resetStatus", text.resetStatus);
-      }
       setText("footerText", text.footerText);
       setText("termsLink", text.termsLink);
       setText("privacyLink", text.privacyLink);
@@ -1064,7 +874,6 @@
       if (event.target === supportModal) supportModal.classList.remove("show");
     });
     copySupportTemplateBtn.addEventListener("click", copyTemplate);
-    submitResetBtn.addEventListener("click", submitReset);
     applyLanguage(currentLanguage);
     initMeshBackground();
   </script>
