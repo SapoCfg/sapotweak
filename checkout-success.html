@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SapoTweak - Licenza</title>
-  <style>
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SapoTweak - Licenza</title><style>
     :root {
       color-scheme: dark;
       --bg: #090814;
@@ -78,6 +71,33 @@
       overflow-wrap: anywhere;
       user-select: all;
     }
+    .email-gate {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 14px;
+    }
+    .email-gate label {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .email-gate input {
+      min-height: 52px;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 16px;
+      padding: 0 16px;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      font: inherit;
+      outline: none;
+    }
+    .email-gate input:focus {
+      border-color: rgba(139,92,246,.62);
+      box-shadow: 0 0 0 4px rgba(139,92,246,.14);
+    }
     .actions {
       display: grid;
       gap: 12px;
@@ -125,36 +145,7 @@
       font-size: 13px;
       line-height: 1.6;
     }
-  </style>
-</head>
-<body>
-  <main class="shell">
-    <a class="brand" href="index.html">
-      <img src="sapotweak.png" alt="SapoTweak">
-      <span>SapoTweak</span>
-    </a>
-    <h1 id="successTitle">Pagamento completato</h1>
-    <p id="successLead">La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finché compare la key, poi scarica l'app e attivala al primo avvio.</p>
-
-    <div id="keyBox" class="key-box"></div>
-
-    <div class="actions">
-      <button id="copyBtn" class="btn" type="button" style="display:none;">Copia key</button>
-      <a id="downloadBtn" class="btn secondary" href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe">Scarica SapoTweak per Windows</a>
-      <a id="supportBtn" class="btn ghost" href="support.html">Supporto e recupero key</a>
-    </div>
-
-    <div id="status" class="status">Recupero della licenza in corso...</div>
-
-    <div class="meta">
-      <span id="metaLine1">Durante la beta alcune parti dell'app possono ricevere fix rapidi.</span>
-      <span id="metaLine2">Se la key non compare entro un minuto, scrivi a</span>
-      <a href="mailto:sapotweak@gmail.com" style="color:#d6c8ff;">sapotweak@gmail.com</a>
-      <span id="metaLine3">indicando l'email usata nel pagamento.</span>
-    </div>
-  </main>
-
-  <script>
+  </style></head><body><main class="shell"><a class="brand" href="index.html"><img src="sapotweak.png" alt="SapoTweak"><span>SapoTweak</span></a><h1 id="successTitle">Pagamento completato</h1><p id="successLead">La tua licenza beta viene preparata automaticamente. Inserisci l'email usata nel pagamento per mostrare la key, poi scarica l'app e attivala al primo avvio.</p><div id="keyBox" class="key-box"></div><div id="emailGate" class="email-gate"><label id="emailLabel" for="paymentEmail">Email pagamento</label><input id="paymentEmail" type="email" autocomplete="email" inputmode="email" placeholder="email@example.com"><button id="lookupBtn" class="btn" type="button">Mostra key</button></div><div class="actions"><button id="copyBtn" class="btn" type="button" style="display:none;">Copia key</button><a id="downloadBtn" class="btn secondary" href="https://sapotweak.org/download/latest/SapoTweak-Setup.exe">Scarica SapoTweak per Windows</a><a id="supportBtn" class="btn ghost" href="support.html">Supporto e recupero key</a></div><div id="status" class="status">Inserisci l'email del pagamento per recuperare la licenza.</div><div class="meta"><span id="metaLine1">Durante la beta alcune parti dell'app possono ricevere fix rapidi.</span><span id="metaLine2">Se la key non compare entro un minuto, scrivi a</span><a href="mailto:sapotweak@gmail.com" style="color:#d6c8ff;">sapotweak@gmail.com</a><span id="metaLine3">indicando l'email usata nel pagamento.</span></div></main><script>
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get("session_id") || "";
     const workerBase = "https://license.salvocan05.workers.dev";
@@ -162,12 +153,17 @@
       it: {
         pageTitle: "SapoTweak - Licenza",
         successTitle: "Pagamento completato",
-        successLead: "La tua licenza beta viene preparata automaticamente. Tieni aperta questa pagina finché compare la key, poi scarica l'app e attivala al primo avvio.",
+        successLead: "La tua licenza beta viene preparata automaticamente. Inserisci l'email usata nel pagamento per mostrare la key, poi scarica l'app e attivala al primo avvio.",
+        emailLabel: "Email pagamento",
+        lookupBtn: "Mostra key",
         copyBtn: "Copia key",
         copiedBtn: "Key copiata",
         downloadBtn: "Scarica SapoTweak per Windows",
         supportBtn: "Supporto e recupero key",
+        emailStatus: "Inserisci l'email del pagamento per recuperare la licenza.",
         loadingStatus: "Recupero della licenza in corso...",
+        missingEmail: "Inserisci l'email usata nel pagamento.",
+        emailMismatch: "Email non corrispondente al pagamento. Controlla e riprova.",
         missingSession: "Sessione di pagamento non trovata. Torna al sito e riprova il checkout.",
         readyStatus: "Key beta pronta. Copiala, scarica l'app e inseriscila al primo avvio.",
         preparingStatus: "Licenza in preparazione...",
@@ -181,12 +177,17 @@
       en: {
         pageTitle: "SapoTweak - License",
         successTitle: "Payment completed",
-        successLead: "Your beta license is prepared automatically. Keep this page open until the key appears, then download the app and activate it on first launch.",
+        successLead: "Your beta license is prepared automatically. Enter the payment email to show the key, then download the app and activate it on first launch.",
+        emailLabel: "Payment email",
+        lookupBtn: "Show key",
         copyBtn: "Copy key",
         copiedBtn: "Key copied",
         downloadBtn: "Download SapoTweak for Windows",
         supportBtn: "Support and key recovery",
+        emailStatus: "Enter the payment email to retrieve your license.",
         loadingStatus: "Retrieving your license...",
+        missingEmail: "Enter the email used for payment.",
+        emailMismatch: "Email does not match the payment. Check it and try again.",
         missingSession: "Payment session not found. Go back to the site and try checkout again.",
         readyStatus: "Beta key ready. Copy it, download the app and enter it on first launch.",
         preparingStatus: "License is being prepared...",
@@ -200,12 +201,17 @@
       es: {
         pageTitle: "SapoTweak - Licencia",
         successTitle: "Pago completado",
-        successLead: "Tu licencia beta se prepara automáticamente. Mantén esta página abierta hasta que aparezca la clave; después descarga la aplicación y actívala en el primer inicio.",
+        successLead: "Tu licencia beta se prepara automáticamente. Introduce el correo usado en el pago para mostrar la clave; después descarga la aplicación y actívala en el primer inicio.",
+        emailLabel: "Email de pago",
+        lookupBtn: "Mostrar clave",
         copyBtn: "Copiar clave",
         copiedBtn: "Clave copiada",
         downloadBtn: "Descargar SapoTweak para Windows",
         supportBtn: "Soporte y recuperación de clave",
+        emailStatus: "Introduce el email de pago para recuperar la licencia.",
         loadingStatus: "Recuperando la licencia...",
+        missingEmail: "Introduce el email usado en el pago.",
+        emailMismatch: "El email no coincide con el pago. Compruébalo e inténtalo de nuevo.",
         missingSession: "No se encontró la sesión de pago. Vuelve al sitio e intenta la compra de nuevo.",
         readyStatus: "Clave beta lista. Cópiala, descarga la aplicación e introdúcela en el primer inicio.",
         preparingStatus: "Licencia en preparación...",
@@ -221,6 +227,9 @@
       ? localStorage.getItem("sapotweak_site_lang")
       : "it";
     const keyBox = document.getElementById("keyBox");
+    const emailGate = document.getElementById("emailGate");
+    const emailInput = document.getElementById("paymentEmail");
+    const lookupBtn = document.getElementById("lookupBtn");
     const copyBtn = document.getElementById("copyBtn");
     const downloadBtn = document.getElementById("downloadBtn");
     const supportBtn = document.getElementById("supportBtn");
@@ -236,10 +245,12 @@
       document.title = t("pageTitle");
       document.getElementById("successTitle").textContent = t("successTitle");
       document.getElementById("successLead").textContent = t("successLead");
+      document.getElementById("emailLabel").textContent = t("emailLabel");
+      lookupBtn.textContent = t("lookupBtn");
       copyBtn.textContent = t("copyBtn");
       downloadBtn.textContent = t("downloadBtn");
       supportBtn.textContent = t("supportBtn");
-      statusEl.textContent = t("loadingStatus");
+      statusEl.textContent = t("emailStatus");
       document.getElementById("metaLine1").textContent = t("metaLine1");
       document.getElementById("metaLine2").textContent = t("metaLine2");
       document.getElementById("metaLine3").textContent = t("metaLine3");
@@ -248,29 +259,46 @@
     applyLanguage();
 
     if (!sessionId) {
+      emailGate.style.display = "none";
       statusEl.textContent = t("missingSession");
       statusEl.classList.add("error");
-    } else {
-      loadLicense();
     }
 
     async function loadLicense() {
+      const email = emailInput.value.trim();
+      if (!email) {
+        statusEl.textContent = t("missingEmail");
+        statusEl.classList.add("error");
+        return;
+      }
+
       attempts += 1;
+      statusEl.classList.remove("error");
+      statusEl.textContent = t("loadingStatus");
+
       try {
-        const response = await fetch(workerBase + "/license/session?session_id=" + encodeURIComponent(sessionId), {
-          cache: "no-store"
-        });
+        const response = await fetch(
+          workerBase + "/license/session?session_id=" + encodeURIComponent(sessionId) +
+          "&email=" + encodeURIComponent(email),
+          { cache: "no-store" }
+        );
         const data = await response.json();
         if (data && data.license && data.license.licenseKey) {
           keyBox.textContent = data.license.licenseKey;
           keyBox.style.display = "block";
+          emailGate.style.display = "none";
           copyBtn.style.display = "inline-flex";
           downloadBtn.style.display = "inline-flex";
           supportBtn.href =
             "support.html?session_id=" + encodeURIComponent(sessionId) +
             "&licenseKey=" + encodeURIComponent(data.license.licenseKey) +
-            "&email=" + encodeURIComponent(data.license.customerEmail || "");
+            "&email=" + encodeURIComponent(data.license.customerEmail || email);
           statusEl.textContent = t("readyStatus");
+          return;
+        }
+        if (response.status === 403 || (data && data.requiresEmail)) {
+          statusEl.textContent = t("emailMismatch");
+          statusEl.classList.add("error");
           return;
         }
         if (attempts < 30) {
@@ -291,10 +319,20 @@
       }
     }
 
+    lookupBtn.addEventListener("click", () => {
+      attempts = 0;
+      loadLicense();
+    });
+
+    emailInput.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        attempts = 0;
+        loadLicense();
+      }
+    });
+
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(keyBox.textContent);
       copyBtn.textContent = t("copiedBtn");
     });
-  </script>
-</body>
-</html>
+  </script></body></html>
