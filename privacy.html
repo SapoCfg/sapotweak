@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SapoTweak - Privacy</title>
-  <style>
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>SapoTweak - Privacy</title><style>
     :root {
       color-scheme: dark;
       --bg: #050507;
@@ -222,91 +215,7 @@
       .hero { margin-bottom: 18px; }
       .hero-copy { padding-top: 18px; }
     }
-  </style>
-</head>
-<body>
-  <div class="bg"></div>
-  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
-  <div class="grid"></div>
-  <main class="wrap">
-    <nav class="nav">
-      <a class="brand" href="index.html">
-        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
-        <span>SAPOTWEAK</span>
-      </a>
-      <div class="nav-actions">
-        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
-        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
-        <a class="nav-link" href="support.html" data-i18n="support">Supporto</a>
-        <select class="lang-select" id="languageSelect" aria-label="Language">
-          <option value="it">Italiano</option>
-          <option value="en">English</option>
-          <option value="es">Español</option>
-        </select>
-      </div>
-    </nav>
-
-    <div class="hero">
-      <div class="hero-copy">
-        <span class="kicker" data-i18n="kicker">Privacy ufficiale</span>
-        <h1 data-i18n-html="title">Privacy <span>SapoTweak</span></h1>
-        <p class="lead" data-i18n="lead">Questa pagina riassume in modo pratico quali dati passano tra sito, app, Stripe, Worker licenze e supporto.</p>
-      </div>
-    </div>
-
-    <div class="policy-shell">
-      <div class="policy-card">
-        <section>
-          <h2 data-i18n="whoTitle">1. Chi tratta cosa</h2>
-          <p data-i18n="whoText1">SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, GitHub Releases per il download dell'installer e un Worker Cloudflare per la validazione della licenza.</p>
-        <p data-i18n="whoText2">Il supporto viene gestito via email all'indirizzo sapotweak@gmail.com.</p>
-        </section>
-
-        <section>
-          <h2 data-i18n="dataTitle">2. Dati che possono essere trattati</h2>
-          <ul>
-            <li data-i18n="dataItem1">email usata nel pagamento</li>
-            <li data-i18n="dataItem2">identificativi di sessione checkout e abbonamento</li>
-            <li data-i18n="dataItem3">chiave licenza e stato del piano</li>
-            <li data-i18n="dataItem4">fingerprint macchina usato per l'attivazione sul PC</li>
-            <li data-i18n="dataItem5">log tecnici e richieste reset inviati volontariamente al supporto o tramite lo strumento self-service</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 data-i18n="appTitle">3. Dati locali nell'app</h2>
-          <p data-i18n="appText1">L'app salva localmente file di licenza e device per mantenere l'attivazione e controllare la validita' del piano. Questi file restano sul PC dell'utente e non vengono pubblicati sul sito.</p>
-          <p data-i18n="appText2">Se l'utente contatta il supporto o usa il reset self-service, puo' inviare errori, screenshot, email pagamento, key o log tecnici necessari a risolvere problemi di attivazione, update o installazione.</p>
-        </section>
-
-        <section>
-          <h2 data-i18n="useTitle">4. Perche' vengono usati</h2>
-          <ul>
-            <li data-i18n="useItem1">consegnare la key dopo il pagamento</li>
-            <li data-i18n="useItem2">attivare e ri-validare la licenza sul PC corretto</li>
-            <li data-i18n="useItem3">gestire rinnovi, scadenze, pagamenti falliti e revoche</li>
-            <li data-i18n="useItem4">fornire supporto su recupero key, reset sullo stesso PC e download</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 data-i18n="shareTitle">5. Condivisione con terzi</h2>
-          <p data-i18n="shareText1">I pagamenti sono gestiti da Stripe. Il download dell'installer puo' passare da GitHub Releases. Validazione licenza e reset sullo stesso PC passano dal Worker Cloudflare configurato per SapoTweak.</p>
-          <p data-i18n="shareText2">SapoTweak non vende i dati personali come prodotto separato.</p>
-        </section>
-
-        <section>
-          <h2 data-i18n="rightsTitle">6. Supporto e richieste</h2>
-        <p data-i18n="rightsText1">Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a sapotweak@gmail.com.</p>
-          <p data-i18n="rightsText2">Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e ogni dettaglio utile sul problema di attivazione, installazione o download.</p>
-        </section>
-      </div>
-    </div>
-
-    <footer class="footer" data-i18n="footer">SapoTweak - Privacy aggiornata al 13 giugno 2026.</footer>
-  </main>
-
-  <script>
+  </style></head><body><div class="bg"></div><canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas><div class="grid"></div><main class="wrap"><nav class="nav"><a class="brand" href="index.html"><img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';"><span>SAPOTWEAK</span></a><div class="nav-actions"><a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a><a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a><a class="nav-link" href="support.html" data-i18n="support">Supporto</a><select class="lang-select" id="languageSelect" aria-label="Language"><option value="it">Italiano</option><option value="en">English</option><option value="es">Español</option></select></div></nav><div class="hero"><div class="hero-copy"><span class="kicker" data-i18n="kicker">Privacy ufficiale</span><h1 data-i18n-html="title">Privacy <span>SapoTweak</span></h1><p class="lead" data-i18n="lead">Questa pagina riassume in modo pratico quali dati passano tra sito, app, Stripe, Worker licenze e supporto.</p></div></div><div class="policy-shell"><div class="policy-card"><section><h2 data-i18n="whoTitle">1. Chi tratta cosa</h2><p data-i18n="whoText1">SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, endpoint ufficiale SapoTweak per il download dell'installer e un Worker Cloudflare per la validazione della licenza.</p><p data-i18n="whoText2">Il supporto viene gestito via email all'indirizzo sapotweak@gmail.com.</p></section><section><h2 data-i18n="dataTitle">2. Dati che possono essere trattati</h2><ul><li data-i18n="dataItem1">email usata nel pagamento</li><li data-i18n="dataItem2">identificativi di sessione checkout e abbonamento</li><li data-i18n="dataItem3">chiave licenza e stato del piano</li><li data-i18n="dataItem4">fingerprint macchina usato per l'attivazione sul PC</li><li data-i18n="dataItem5">log tecnici e richieste reset inviati volontariamente al supporto o tramite lo strumento self-service</li><li data-i18n="dataItem6">profilo tecnico antifrode: nome dispositivo, CPU, GPU, RAM, modello scheda madre senza seriale, versione Windows e versione dell'app</li></ul></section><section><h2 data-i18n="appTitle">3. Dati locali nell'app</h2><p data-i18n="appText1">L'app salva localmente file di licenza e device e invia al servizio licenze il fingerprint e un profilo hardware limitato per attivazione, sicurezza e prevenzione della condivisione fraudolenta delle key. Non vengono raccolti file personali, password o seriali hardware grezzi.</p><p data-i18n="appText2">Se l'utente contatta il supporto o usa il reset self-service, puo' inviare errori, screenshot, email pagamento, key o log tecnici necessari a risolvere problemi di attivazione, update o installazione.</p></section><section><h2 data-i18n="useTitle">4. Perche' vengono usati</h2><ul><li data-i18n="useItem1">consegnare la key dopo il pagamento</li><li data-i18n="useItem2">attivare e ri-validare la licenza sul PC corretto</li><li data-i18n="useItem3">gestire rinnovi, scadenze, pagamenti falliti e revoche</li><li data-i18n="useItem4">fornire supporto su recupero key, reset sullo stesso PC e download</li></ul></section><section><h2 data-i18n="shareTitle">5. Condivisione con terzi</h2><p data-i18n="shareText1">I pagamenti sono gestiti da Stripe. Il download dell'installer passa dall'endpoint ufficiale SapoTweak. Validazione licenza e reset sullo stesso PC passano dal Worker Cloudflare configurato per SapoTweak.</p><p data-i18n="shareText2">SapoTweak non vende i dati personali come prodotto separato.</p></section><section><h2 data-i18n="rightsTitle">6. Supporto e richieste</h2><p data-i18n="rightsText1">Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a sapotweak@gmail.com.</p><p data-i18n="rightsText2">Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e ogni dettaglio utile sul problema di attivazione, installazione o download.</p></section></div></div><footer class="footer" data-i18n="footer">SapoTweak - Privacy aggiornata al 2 luglio 2026.</footer></main><script>
     const translations = {
       it: {
         pageTitle: "SapoTweak - Privacy",
@@ -317,7 +226,7 @@
         title: "Privacy <span>SapoTweak</span>",
         lead: "Questa pagina riassume in modo pratico quali dati passano tra sito, app, Stripe, Worker licenze e supporto.",
         whoTitle: "1. Chi tratta cosa",
-        whoText1: "SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, GitHub Releases per il download dell'installer e un Worker Cloudflare per la validazione della licenza.",
+        whoText1: "SapoTweak usa componenti separati per vendita, download e attivazione: sito pubblico, Stripe per i pagamenti, endpoint ufficiale SapoTweak per il download dell'installer e un Worker Cloudflare per la validazione della licenza.",
         whoText2: "Il supporto viene gestito via email all'indirizzo sapotweak@gmail.com.",
         dataTitle: "2. Dati che possono essere trattati",
         dataItem1: "email usata nel pagamento",
@@ -325,8 +234,9 @@
         dataItem3: "chiave licenza e stato del piano",
         dataItem4: "fingerprint macchina usato per l'attivazione sul PC",
         dataItem5: "log tecnici e richieste reset inviati volontariamente al supporto o tramite lo strumento self-service",
+        dataItem6: "profilo tecnico antifrode: nome dispositivo, CPU, GPU, RAM, modello scheda madre senza seriale, versione Windows e versione dell'app",
         appTitle: "3. Dati locali nell'app",
-        appText1: "L'app salva localmente file di licenza e device per mantenere l'attivazione e controllare la validita' del piano. Questi file restano sul PC dell'utente e non vengono pubblicati sul sito.",
+        appText1: "L'app salva localmente file di licenza e device e invia al servizio licenze il fingerprint e un profilo hardware limitato per attivazione, sicurezza e prevenzione della condivisione fraudolenta delle key. Non vengono raccolti file personali, password o seriali hardware grezzi.",
         appText2: "Se l'utente contatta il supporto o usa il reset self-service, puo' inviare errori, screenshot, email pagamento, key o log tecnici necessari a risolvere problemi di attivazione, update o installazione.",
         useTitle: "4. Perche' vengono usati",
         useItem1: "consegnare la key dopo il pagamento",
@@ -334,12 +244,12 @@
         useItem3: "gestire rinnovi, scadenze, pagamenti falliti e revoche",
         useItem4: "fornire supporto su recupero key, reset sullo stesso PC e download",
         shareTitle: "5. Condivisione con terzi",
-        shareText1: "I pagamenti sono gestiti da Stripe. Il download dell'installer puo' passare da GitHub Releases. Validazione licenza e reset sullo stesso PC passano dal Worker Cloudflare configurato per SapoTweak.",
+        shareText1: "I pagamenti sono gestiti da Stripe. Il download dell'installer passa dall'endpoint ufficiale SapoTweak. Validazione licenza e reset sullo stesso PC passano dal Worker Cloudflare configurato per SapoTweak.",
         shareText2: "SapoTweak non vende i dati personali come prodotto separato.",
         rightsTitle: "6. Supporto e richieste",
         rightsText1: "Per correzioni, recupero key, problemi di attivazione o richieste sui dati legati all'acquisto, scrivi a sapotweak@gmail.com.",
         rightsText2: "Per velocizzare il supporto conviene includere email usata nel pagamento, key se presente, errore mostrato e ogni dettaglio utile sul problema di attivazione, installazione o download.",
-        footer: "SapoTweak - Privacy aggiornata al 13 giugno 2026."
+        footer: "SapoTweak - Privacy aggiornata al 2 luglio 2026."
       },
       en: {
         pageTitle: "SapoTweak - Privacy",
@@ -350,7 +260,7 @@
         title: "Privacy <span>SapoTweak</span>",
         lead: "This page summarizes in a practical way which data flows across the site, app, Stripe, the licensing Worker and support.",
         whoTitle: "1. Who handles what",
-        whoText1: "SapoTweak uses separate components for sales, download and activation: the public site, Stripe for payments, GitHub Releases for installer delivery and a Cloudflare Worker for license validation.",
+        whoText1: "SapoTweak uses separate components for sales, download and activation: the public site, Stripe for payments, the official SapoTweak download endpoint for installer delivery and a Cloudflare Worker for license validation.",
         whoText2: "Support is handled by email at sapotweak@gmail.com.",
         dataTitle: "2. Data that may be processed",
         dataItem1: "email used for payment",
@@ -358,8 +268,9 @@
         dataItem3: "license key and plan status",
         dataItem4: "machine fingerprint used for PC activation",
         dataItem5: "technical logs and reset requests voluntarily sent to support or through the self-service tool",
+        dataItem6: "anti-fraud technical profile: device name, CPU, GPU, RAM, motherboard model without serial number, Windows version and app version",
         appTitle: "3. Local app data",
-        appText1: "The app stores local license and device files to keep activation and check plan validity. These files stay on the user's PC and are not published on the site.",
+        appText1: "The app stores local license and device files and sends the fingerprint and a limited hardware profile to the licensing service for activation, security and prevention of fraudulent key sharing. Personal files, passwords and raw hardware serial numbers are not collected.",
         appText2: "If the user contacts support or uses the self-service reset, they may send errors, screenshots, payment email, key or technical logs needed to resolve activation, update or installation issues.",
         useTitle: "4. Why data is used",
         useItem1: "deliver the key after payment",
@@ -367,12 +278,12 @@
         useItem3: "handle renewals, expirations, failed payments and revocations",
         useItem4: "provide support for key recovery, same-PC reset and downloads",
         shareTitle: "5. Sharing with third parties",
-        shareText1: "Payments are handled by Stripe. Installer delivery may use GitHub Releases. License validation and same-PC reset pass through the Cloudflare Worker configured for SapoTweak.",
+        shareText1: "Payments are handled by Stripe. Installer delivery uses the official SapoTweak download endpoint. License validation and same-PC reset pass through the Cloudflare Worker configured for SapoTweak.",
         shareText2: "SapoTweak does not sell personal data as a separate product.",
         rightsTitle: "6. Support and requests",
         rightsText1: "For corrections, key recovery, activation issues or requests about purchase-related data, write to sapotweak@gmail.com.",
         rightsText2: "To speed up support, include the payment email, the key if available, the shown error, and any useful detail about the activation, installation, or download issue.",
-        footer: "SapoTweak - Privacy updated on June 13, 2026."
+        footer: "SapoTweak - Privacy updated on July 2, 2026."
       },
       es: {
         pageTitle: "SapoTweak - Privacidad",
@@ -383,7 +294,7 @@
         title: "Privacidad <span>SapoTweak</span>",
         lead: "Esta página resume de forma práctica qué datos pasan entre el sitio, la aplicación, Stripe, el Worker de licencias y el soporte.",
         whoTitle: "1. Quién trata qué",
-        whoText1: "SapoTweak usa componentes separados para venta, descarga y activación: sitio público, Stripe para pagos, GitHub Releases para la descarga del instalador y un Worker de Cloudflare para la validación de licencias.",
+        whoText1: "SapoTweak usa componentes separados para venta, descarga y activación: sitio público, Stripe para pagos, endpoint oficial de descarga SapoTweak para entregar el instalador y un Worker de Cloudflare para la validación de licencias.",
         whoText2: "El soporte se gestiona por correo en sapotweak@gmail.com.",
         dataTitle: "2. Datos que pueden tratarse",
         dataItem1: "correo usado en el pago",
@@ -391,8 +302,9 @@
         dataItem3: "clave de licencia y estado del plan",
         dataItem4: "huella del equipo usada para la activación en el PC",
         dataItem5: "registros técnicos y solicitudes de restablecimiento enviadas voluntariamente al soporte o mediante la herramienta de autoservicio",
+        dataItem6: "perfil técnico antifraude: nombre del dispositivo, CPU, GPU, RAM, modelo de placa base sin número de serie, versión de Windows y versión de la aplicación",
         appTitle: "3. Datos locales de la aplicación",
-        appText1: "La aplicación guarda archivos locales de licencia y dispositivo para mantener la activación y comprobar la validez del plan. Estos archivos permanecen en el PC del usuario y no se publican en el sitio.",
+        appText1: "La aplicación guarda archivos locales de licencia y dispositivo y envía al servicio de licencias la huella y un perfil de hardware limitado para activación, seguridad y prevención del uso fraudulento de claves. No se recopilan archivos personales, contraseñas ni números de serie de hardware sin procesar.",
         appText2: "Si el usuario contacta al soporte o usa el restablecimiento de autoservicio, puede enviar errores, capturas, correo de pago, clave o registros técnicos necesarios para resolver problemas de activación, actualización o instalación.",
         useTitle: "4. Por qué se usan",
         useItem1: "entregar la clave después del pago",
@@ -400,12 +312,12 @@
         useItem3: "gestionar renovaciones, vencimientos, pagos fallidos y revocaciones",
         useItem4: "dar soporte para recuperar la clave, restablecer en el mismo PC y gestionar descargas",
         shareTitle: "5. Compartición con terceros",
-        shareText1: "Los pagos se gestionan con Stripe. La descarga del instalador puede pasar por GitHub Releases. La validación de licencia y el restablecimiento en el mismo PC pasan por el Worker de Cloudflare configurado para SapoTweak.",
+        shareText1: "Los pagos se gestionan con Stripe. La descarga del instalador usa el endpoint ufficiale di download SapoTweak. La validación de licencia y el restablecimiento en el mismo PC pasan por el Worker de Cloudflare configurado para SapoTweak.",
         shareText2: "SapoTweak no vende datos personales como producto separado.",
         rightsTitle: "6. Soporte y solicitudes",
         rightsText1: "Para correcciones, recuperación de clave, problemas de activación o solicitudes sobre datos vinculados a la compra, escribe a sapotweak@gmail.com.",
         rightsText2: "Para acelerar el soporte conviene incluir el correo del pago, la clave si existe, el error mostrado y cualquier detalle útil sobre el problema de activación, instalación o descarga.",
-        footer: "SapoTweak - Privacidad actualizada el 13 de junio de 2026."
+        footer: "SapoTweak - Privacidad actualizada el 2 de julio de 2026."
       }
     };
 
@@ -509,6 +421,4 @@
     languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
     applyLanguage(currentLanguage);
     initMeshBackground();
-  </script>
-</body>
-</html>
+  </script></body></html>
