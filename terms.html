@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SapoTweak - Termini di utilizzo</title>
-  <style>
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>SapoTweak - Termini di utilizzo</title><style>
     :root {
       color-scheme: dark;
       --bg: #050507;
@@ -335,114 +328,7 @@
       .hero { margin-bottom: 18px; }
       .hero-copy { padding-top: 18px; }
     }
-  </style>
-</head>
-<body>
-  <div class="bg"></div>
-  <canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas>
-  <div class="grid"></div>
-  <main class="wrap">
-    <nav class="nav">
-      <a class="brand" href="index.html">
-        <img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';">
-        <span>SAPOTWEAK</span>
-      </a>
-      <div class="nav-actions">
-        <a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a>
-        <a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a>
-        <select class="lang-select" id="languageSelect" aria-label="Language">
-          <option value="it">Italiano</option>
-          <option value="en">English</option>
-          <option value="es">Español</option>
-        </select>
-      </div>
-    </nav>
-
-    <div class="hero">
-      <div class="hero-copy">
-        <span class="kicker" data-i18n="kicker">Termini ufficiali</span>
-        <h1 data-i18n-html="title">Termini di utilizzo <span>SapoTweak</span></h1>
-        <p class="lead" data-i18n="lead">Questa pagina riassume le condizioni essenziali per acquistare, attivare e usare SapoTweak durante la fase beta a pagamento.</p>
-      </div>
-    </div>
-
-    <div class="terms-shell">
-      <div class="terms-card">
-        <section id="scope">
-          <h2 data-i18n="scopeTitle">1. Prodotto</h2>
-          <p data-i18n="scopeText1">SapoTweak è un software Windows per ottimizzazione locale, pensato per utenti gaming che vogliono preset guidati, pulizia del sistema, impostazioni di performance e accesso tramite licenza.</p>
-          <p data-i18n="scopeText2">SapoTweak non include cheat, exploit, bypass anti-cheat, spyware, malware, strumenti di accesso remoto o funzioni progettate per aggirare sistemi di sicurezza di giochi o software terzi.</p>
-        </section>
-
-        <section id="beta">
-          <h2 data-i18n="betaTitle">2. Beta a pagamento e fornitura digitale</h2>
-          <p data-i18n="betaText1">In questa fase SapoTweak può essere distribuito come beta a pagamento. Il nucleo dell'app è funzionante, ma alcune funzioni possono cambiare, ricevere fix rapidi o avere bug residui.</p>
-          <p data-i18n="betaText2">Acquistando accetti l'accesso anticipato e richiedi la fornitura digitale immediata della key e del download dopo il pagamento, con consegna nella pagina di conferma.</p>
-        </section>
-
-        <section id="performance">
-          <h2 data-i18n="performanceTitle">3. Risultati e prestazioni</h2>
-          <p data-i18n="performanceText">FPS, latenza, processi, benchmark, stabilità e reattività possono variare. I risultati dipendono da hardware, temperature, driver, BIOS, versione e stato di Windows, software installato, antivirus, overlay, patch dei giochi e modifiche già presenti sul PC.</p>
-          <ul>
-            <li data-i18n="performanceItem1">Screenshot, video, review ed esempi pubblicati sono illustrativi e non garantiscono risultati identici.</li>
-            <li data-i18n="performanceItem2">Prima dell'uso consigliamo un punto di ripristino o backup.</li>
-            <li data-i18n="performanceItem3">Ogni tweak va scelto dall'utente in base al proprio sistema e alle proprie preferenze.</li>
-          </ul>
-        </section>
-
-        <section id="license">
-          <h2 data-i18n="licenseTitle">4. Licenza e attivazione</h2>
-          <p data-i18n="licenseText1">L'accesso a SapoTweak avviene tramite key personale. La licenza può essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.</p>
-          <p data-i18n="licenseText2">La key è personale e resta legata alle regole del piano acquistato. Reset o reinstallazione possono richiedere una nuova validazione. Cambi hardware, modifiche importanti al sistema o perdita di compatibilita' non costituiscono motivo automatico di rimborso, nuova licenza o assistenza straordinaria, salvo diritti obbligatori previsti dalla legge applicabile.</p>
-        </section>
-
-        <section id="payments">
-          <h2 data-i18n="paymentsTitle">5. Pagamenti, abbonamenti e rimborsi</h2>
-          <p data-i18n="paymentsText1">Il checkout è gestito da Stripe. Le imposte possono essere calcolate separatamente in base al paese del cliente.</p>
-          <p data-i18n="paymentsText2">Se acquisti un abbonamento, l'accesso resta disponibile finché il piano è attivo e pagato. Se il pagamento fallisce, scade o viene annullato, l'accesso può essere sospeso secondo le regole del piano e del processore di pagamento.</p>
-          <p data-i18n="paymentsText3">Dopo il pagamento la key e il download vengono forniti subito come contenuto digitale. Per questo, una volta iniziata la fornitura digitale, recesso o rimborsi possono essere esclusi o limitati nei limiti consentiti dalla legge applicabile. Restano salvi i diritti inderogabili del consumatore previsti dalla legge.</p>
-        </section>
-
-        <section id="prohibited">
-          <h2 data-i18n="prohibitedTitle">6. Azioni vietate</h2>
-          <p data-i18n="prohibitedText">Sono vietati copia abusiva, redistribuzione, rivendita non autorizzata, condivisione di key, modifica dei sistemi di licenza o update, bypass delle protezioni, estrazione di codice o asset, reverse engineering non autorizzato e qualsiasi uso fraudolento, illegale o abusivo del software.</p>
-        </section>
-
-        <section id="liability">
-          <h2 data-i18n="liabilityTitle">7. Responsabilità</h2>
-          <p data-i18n="liabilityText">SapoTweak viene fornito nello stato in cui si trova. Non siamo responsabili per scelte manuali dell'utente, uso improprio, conflitti con software terzi, problemi preesistenti del sistema, update Windows, driver, patch dei giochi o configurazioni già modificate in precedenza.</p>
-        </section>
-
-        <section id="contact">
-          <h2 data-i18n="contactTitle">8. Contatto</h2>
-      <p><span data-i18n="contactText">Per supporto o domande sui termini:</span> <a href="mailto:sapotweak@gmail.com" style="color:#cdbdff;">sapotweak@gmail.com</a></p>
-          <p><a href="support.html" style="color:#cdbdff;">Apri la pagina supporto licenza</a></p>
-        </section>
-
-        <div class="accept-panel">
-          <label class="accept-row">
-            <input id="acceptCheck" type="checkbox">
-            <span class="checkmark" aria-hidden="true"></span>
-            <span data-i18n="acceptLabel">Ho letto e accetto i termini di utilizzo di SapoTweak.</span>
-          </label>
-          <div class="accept-actions">
-            <a class="btn is-disabled" id="continueBtn" href="checkout.html" aria-disabled="true" data-i18n="continueBtn">Continua al checkout</a>
-            <a class="btn secondary" href="index.html" data-i18n="homeBtn">Torna al sito</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="footer">
-      <div data-i18n="footer">SapoTweak - Termini aggiornati al 14 giugno 2026.</div>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy</a>
-        <a href="support.html">Supporto</a>
-      </div>
-    </footer>
-  </main>
-
-  <script>
+  </style></head><body><div class="bg"></div><canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas><div class="grid"></div><main class="wrap"><nav class="nav"><a class="brand" href="index.html"><img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';"><span>SAPOTWEAK</span></a><div class="nav-actions"><a class="nav-link" href="index.html" data-i18n="back">Torna al sito</a><a class="nav-link" href="checkout.html" data-i18n="plans">Piani</a><select class="lang-select" id="languageSelect" aria-label="Language"><option value="it">Italiano</option><option value="en">English</option><option value="es">Español</option></select></div></nav><div class="hero"><div class="hero-copy"><span class="kicker" data-i18n="kicker">Termini ufficiali</span><h1 data-i18n-html="title">Termini di utilizzo <span>SapoTweak</span></h1><p class="lead" data-i18n="lead">Questa pagina riassume le condizioni essenziali per acquistare, attivare e usare SapoTweak durante la fase beta a pagamento.</p></div></div><div class="terms-shell"><div class="terms-card"><section id="scope"><h2 data-i18n="scopeTitle">1. Prodotto</h2><p data-i18n="scopeText1">SapoTweak è un software Windows per ottimizzazione locale, pensato per utenti gaming che vogliono preset guidati, pulizia del sistema, impostazioni di performance e accesso tramite licenza.</p><p data-i18n="scopeText2">SapoTweak non include cheat, exploit, bypass anti-cheat, spyware, malware, strumenti di accesso remoto o funzioni progettate per aggirare sistemi di sicurezza di giochi o software terzi.</p></section><section id="beta"><h2 data-i18n="betaTitle">2. Beta a pagamento e fornitura digitale</h2><p data-i18n="betaText1">In questa fase SapoTweak può essere distribuito come beta a pagamento. Il nucleo dell'app è funzionante, ma alcune funzioni possono cambiare, ricevere fix rapidi o avere bug residui.</p><p data-i18n="betaText2">Acquistando accetti l'accesso anticipato e richiedi la fornitura digitale immediata della key e del download dopo il pagamento, con consegna nella pagina di conferma.</p></section><section id="performance"><h2 data-i18n="performanceTitle">3. Risultati e prestazioni</h2><p data-i18n="performanceText">FPS, latenza, processi, benchmark, stabilità e reattività possono variare. I risultati dipendono da hardware, temperature, driver, BIOS, versione e stato di Windows, software installato, antivirus, overlay, patch dei giochi e modifiche già presenti sul PC.</p><ul><li data-i18n="performanceItem1">Screenshot, video, review ed esempi pubblicati sono illustrativi e non garantiscono risultati identici.</li><li data-i18n="performanceItem2">Prima dell'uso consigliamo un punto di ripristino o backup.</li><li data-i18n="performanceItem3">Ogni tweak va scelto dall'utente in base al proprio sistema e alle proprie preferenze.</li></ul></section><section id="license"><h2 data-i18n="licenseTitle">4. Licenza e attivazione</h2><p data-i18n="licenseText1">L'accesso a SapoTweak avviene tramite key personale. La licenza può essere limitata a uno specifico dispositivo, numero di attivazioni o piano acquistato.</p><p data-i18n="licenseText2">La key è personale e resta legata alle regole del piano acquistato. Reset o reinstallazione possono richiedere una nuova validazione. Cambi hardware, modifiche importanti al sistema o perdita di compatibilita' non costituiscono motivo automatico di rimborso, nuova licenza o assistenza straordinaria, salvo diritti obbligatori previsti dalla legge applicabile.</p></section><section id="payments"><h2 data-i18n="paymentsTitle">5. Pagamenti, abbonamenti e rimborsi</h2><p data-i18n="paymentsText1">Il checkout è gestito da Stripe. Le imposte possono essere calcolate separatamente in base al paese del cliente.</p><p data-i18n="paymentsText2">Se acquisti un abbonamento, l'accesso resta disponibile finché il piano è attivo e pagato. Se il pagamento fallisce, scade o viene annullato, l'accesso può essere sospeso secondo le regole del piano e del processore di pagamento.</p><p data-i18n="paymentsText3">Dopo il pagamento la key e il download vengono forniti subito come contenuto digitale. Per questo, una volta iniziata la fornitura digitale, recesso o rimborsi possono essere esclusi o limitati nei limiti consentiti dalla legge applicabile. Restano salvi i diritti inderogabili del consumatore previsti dalla legge.</p></section><section id="prohibited"><h2 data-i18n="prohibitedTitle">6. Azioni vietate</h2><p data-i18n="prohibitedText">Sono vietati copia abusiva, redistribuzione, rivendita non autorizzata, condivisione di key, modifica dei sistemi di licenza o update, bypass delle protezioni, estrazione di codice o asset, reverse engineering non autorizzato e qualsiasi uso fraudolento, illegale o abusivo del software.</p></section><section id="liability"><h2 data-i18n="liabilityTitle">7. Responsabilità</h2><p data-i18n="liabilityText">SapoTweak viene fornito nello stato in cui si trova. Non siamo responsabili per scelte manuali dell'utente, uso improprio, conflitti con software terzi, problemi preesistenti del sistema, update Windows, driver, patch dei giochi o configurazioni già modificate in precedenza.</p></section><section id="contact"><h2 data-i18n="contactTitle">8. Contatto</h2><p><span data-i18n="contactText">Per supporto o domande sui termini:</span><a href="mailto:sapotweak@gmail.com" style="color:#cdbdff;">sapotweak@gmail.com</a></p><p><a href="support.html" style="color:#cdbdff;">Apri la pagina supporto licenza</a></p></section><div class="accept-panel"><label class="accept-row"><input id="acceptCheck" type="checkbox"><span class="checkmark" aria-hidden="true"></span><span data-i18n="acceptLabel">Ho letto e accetto i termini di utilizzo di SapoTweak.</span></label><div class="accept-actions"><a class="btn is-disabled" id="continueBtn" href="checkout.html" aria-disabled="true" data-i18n="continueBtn">Continua al checkout</a><a class="btn secondary" href="index.html" data-i18n="homeBtn">Torna al sito</a></div></div></div></div><footer class="footer"><div data-i18n="footer">SapoTweak - Termini aggiornati al 14 giugno 2026.</div><div class="footer-links"><a href="privacy.html">Privacy</a><a href="support.html">Supporto</a></div></footer></main><script>
     const translations = {
       it: {
         pageTitle: "SapoTweak - Termini di utilizzo",
@@ -711,6 +597,4 @@
     applyLanguage(currentLanguage);
     syncAcceptance();
     initMeshBackground();
-  </script>
-</body>
-</html>
+  </script></body></html>
