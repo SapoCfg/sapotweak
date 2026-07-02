@@ -1,6 +1,1 @@
-{
-  "version": "1.2.26",
-  "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v1.2.26/SapoTweak-Setup.exe",
-  "introVideoUrl": "intro-coming-soon.png"
-}
+{"version":"1.2.28","platform":"Windows x64","downloadUrl":"https://github.com/SapoCfg/sapotweak/releases/download/v1.2.28/SapoTweak-Setup.exe","latestDownloadUrl":"https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe","manifestUrl":"https://github.com/SapoCfg/sapotweak/releases/download/v1.2.28/release-manifest.json","checksumUrl":"https://github.com/SapoCfg/sapotweak/releases/download/v1.2.28/SHA256SUMS.txt","introVideoUrl":"intro-coming-soon.png","installerSha256":"c3a660cd9dcbe5aad6cd3a65743aca242784b033295794e3bbd533332d6e6a8d","installerBytes":72712856,"installerSigned":false}
