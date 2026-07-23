@@ -436,7 +436,393 @@
         transition: none !important;
       }
     }
-  </style></head><body><div class="bg"></div><canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas><div class="grid"></div><main class="wrap"><nav class="nav"><a class="brand" href="index.html"><img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';"><span>SAPOTWEAK</span></a><div class="nav-right"><a class="nav-link" href="index.html" id="backLink">Sito</a><a class="nav-link" href="checkout.html" id="plansLink">Piani</a><a class="nav-link" href="reviews.html" id="reviewsLink">Recensioni</a><select class="lang-select" id="languageSelect" aria-label="Language"><option value="it">Italiano</option><option value="en">English</option><option value="es">Español</option></select></div></nav><section class="hero"><span class="eyebrow" id="eyebrow">Supporto ufficiale</span><h1 id="title">Supporto <span>SapoTweak</span></h1><p id="lead">Questa pagina serve per recupero key, problemi di download e invio dati al supporto. Tutto è centrato nello stesso stile premium della home.</p></section><section class="cards"><article class="card"><h2 id="card1Title">1. Ho pagato ma non vedo la key</h2><p id="card1Text">Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, invia email pagamento e session ID checkout se disponibile.</p></article><article class="card"><h2 id="card2Title">2. La key non si attiva</h2><p id="card2Text">Se la key viene rifiutata o resta bloccata, invia email usata nel pagamento, key, errore mostrato e screenshot.</p></article><article class="card"><h2 id="card3Title">3. La key non si attiva</h2><p id="card3Text">Se la key viene rifiutata o resta bloccata, invia email usata, key, errore mostrato e screenshot.</p></article><article class="card"><h2 id="card4Title">4. Download o update non vanno</h2><p id="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p></article></section><section class="support-shell"><div class="section-head"><span class="section-tag" id="supportTag">Support flow</span><h2 id="supportTitle">Apri Gmail o Discord con testo già pronto</h2><p id="supportLead">Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con destinatario `sapotweak@gmail.com` già inserito.</p></div><div class="support-actions"><button class="btn primary" id="openSupportModalBtn" type="button">Apri supporto</button><button class="btn" id="copySupportTemplateBtn" type="button">Copia testo</button></div><div class="support-template-shell"><h3 id="templateTitle">Testo pronto da copiare</h3><p id="templateLead">Compila questo elenco e incollalo su Gmail o Discord per velocizzare il supporto.</p><textarea id="supportTemplate" readonly></textarea><div class="template-actions"><span class="template-status" id="templateStatus">Aggiungi anche screenshot, errore e versione app se li hai.</span></div></div></section><footer class="footer"><span id="footerText">SapoTweak - Distribuisci solo build ufficiali.</span><div class="footer-links"><a href="terms.html" id="termsLink">Termini</a><a href="privacy.html" id="privacyLink">Privacy</a><a href="reviews.html" id="reviewsFooterLink">Recensioni</a></div></footer></main><div class="modal-backdrop" id="supportModal"><div class="support-modal" role="dialog" aria-modal="true" aria-labelledby="supportModalTitle"><h3 id="supportModalTitle">Supporto SapoTweak</h3><p id="supportModalLead">Scegli dove aprire il supporto e sotto trovi il testo pronto da copiare nella lingua selezionata.</p><div class="support-choice-grid"><a id="gmailSupportLink" class="support-choice" href="https://mail.google.com/mail/?view=cm&fs=1&to=sapotweak@gmail.com" target="_blank" rel="noopener noreferrer"><strong id="gmailTitle">Gmail</strong><span id="gmailText">Apre Gmail web con destinatario `sapotweak@gmail.com`, oggetto e corpo già pronti.</span></a><a class="support-choice" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer"><strong id="discordTitle">Discord</strong><span id="discordText">Apre direttamente la sezione ticket Discord ufficiale di SapoTweak.</span></a></div><div class="modal-actions"><button class="btn" id="closeSupportModalBtn" type="button">Chiudi</button></div></div></div><script>
+  </style><style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    /* Support page aligned with the current SapoTweak design system. */
+    :root {
+      --bg-0: #0c0a11;
+      --bg-1: #14111a;
+      --surface-0: rgba(21, 17, 27, .88);
+      --surface-1: rgba(24, 19, 31, .94);
+      --line-soft: rgba(190, 174, 205, .16);
+      --line-strong: rgba(151, 119, 181, .40);
+      --text-0: #f4f1f6;
+      --text-1: #d2cad7;
+      --text-2: #9b92a2;
+      --accent-0: #73558e;
+      --accent-1: #aa8bc3;
+      --accent-2: #e4d9eb;
+    }
+    body {
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at 75% -5%, rgba(121, 84, 151, .20), transparent 30%),
+        radial-gradient(circle at 8% 42%, rgba(137, 105, 159, .09), transparent 25%),
+        var(--bg-0);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 0 44%, rgba(143, 108, 171, .045) 44% 44.1%, transparent 44.1% 100%);
+    }
+    .bg {
+      background:
+        radial-gradient(circle at 18% 16%, rgba(121, 84, 151, .18), transparent 0 25%),
+        radial-gradient(circle at 82% 20%, rgba(105, 73, 130, .12), transparent 0 27%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+    }
+    .mesh-canvas { display: none; }
+    .grid {
+      opacity: .72;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, #000, transparent 88%);
+    }
+    .wrap {
+      width: min(1420px, calc(100% - 40px));
+      padding: 16px 0 64px;
+    }
+    .nav {
+      min-height: 68px;
+      top: 16px;
+      padding: 10px 12px 10px 18px;
+      border-color: var(--line-strong);
+      border-radius: 20px;
+      background: rgba(12, 9, 16, .84);
+      box-shadow: 0 18px 60px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.04);
+      backdrop-filter: blur(20px) saturate(140%);
+    }
+    .brand {
+      gap: 11px;
+      font: 800 19px/1 "Barlow Condensed", sans-serif;
+      letter-spacing: .08em;
+    }
+    .brand img {
+      width: 30px;
+      height: 30px;
+      filter: drop-shadow(0 0 14px rgba(128, 89, 158, .5));
+    }
+    .nav-right { gap: clamp(12px, 2vw, 28px); }
+    .nav-link {
+      position: relative;
+      min-height: auto;
+      padding: 12px 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #aeb7c8;
+      font-size: 12px;
+      letter-spacing: .12em;
+      transition: color .2s ease;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 3px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-0), var(--accent-1));
+      transition: right .25s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { right: 0; }
+    .language-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      background: #120e17;
+    }
+    .language-switch button {
+      min-width: 34px;
+      height: 36px;
+      padding: 0 8px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #8f8796;
+      font: 800 10px/1 "Manrope", sans-serif;
+      letter-spacing: .08em;
+      cursor: pointer;
+    }
+    .language-switch button[aria-pressed="true"] {
+      background: #604875;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(127, 91, 155, .2);
+    }
+    .lang-select { display: none !important; }
+    .hero {
+      width: 100%;
+      min-height: 610px;
+      margin: 0;
+      padding: 88px 0 64px;
+      grid-template-columns: minmax(0, .78fr) minmax(560px, 1.22fr);
+      gap: clamp(44px, 6vw, 84px);
+      align-items: center;
+      justify-items: stretch;
+      text-align: left;
+    }
+    .hero-copy {
+      display: grid;
+      gap: 22px;
+      align-content: center;
+    }
+    .eyebrow {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: var(--accent-1);
+      font: 700 12px/1 "Manrope", sans-serif;
+      letter-spacing: .23em;
+    }
+    .eyebrow::before {
+      width: 34px;
+      height: 1px;
+      border-radius: 0;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+    }
+    h1 {
+      max-width: 720px;
+      font: 900 clamp(68px, 7vw, 108px)/.82 "Barlow Condensed", sans-serif;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    h1 span {
+      background: none;
+      color: var(--accent-1);
+      -webkit-text-fill-color: currentColor;
+      text-shadow: 0 0 34px rgba(135, 99, 162, .30);
+    }
+    .hero p {
+      max-width: 650px;
+      color: #aaa2b2;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .support-actions {
+      justify-content: flex-start;
+      margin: 4px 0 0;
+    }
+    .btn {
+      min-height: 46px;
+      padding: 0 22px;
+      border-color: var(--line-strong);
+      border-radius: 12px;
+      background: rgba(255,255,255,.03);
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      box-shadow: none;
+    }
+    .btn.primary {
+      border-color: rgba(159, 123, 188, .55);
+      background: linear-gradient(135deg, #5a416f, #80619c);
+      box-shadow: 0 10px 32px rgba(92, 62, 114, .28), inset 0 1px rgba(255,255,255,.2);
+    }
+    .btn:hover {
+      border-color: rgba(170,139,195,.68);
+      box-shadow: 0 16px 38px rgba(103, 73, 125, .26);
+    }
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    .card {
+      position: relative;
+      min-height: 192px;
+      padding: 27px;
+      overflow: hidden;
+      border-color: var(--line-soft);
+      border-radius: 18px;
+      background: rgba(21, 17, 27, .86);
+      box-shadow: 0 24px 60px rgba(0,0,0,.20), inset 0 1px rgba(255,255,255,.025);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 27px;
+      top: 0;
+      width: 48px;
+      height: 2px;
+      background: var(--accent-1);
+      box-shadow: 0 0 18px rgba(170,139,195,.42);
+    }
+    .card h2 {
+      margin-bottom: 13px;
+      font: 800 27px/1 "Barlow Condensed", sans-serif;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+    }
+    .card p {
+      color: #aaa2b2;
+      font-size: 13px;
+      line-height: 1.72;
+    }
+    .support-shell {
+      display: grid;
+      grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr);
+      gap: clamp(34px, 5vw, 74px);
+      align-items: start;
+      margin-top: 22px;
+      padding: 38px;
+      border-color: var(--line-strong);
+      border-radius: 20px;
+      background: rgba(21, 17, 27, .88);
+      box-shadow: 0 28px 72px rgba(0,0,0,.24);
+    }
+    .section-head {
+      justify-items: start;
+      align-content: start;
+      text-align: left;
+      margin: 0;
+    }
+    .section-tag {
+      gap: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: var(--accent-1);
+      font-size: 11px;
+      letter-spacing: .20em;
+    }
+    .section-tag::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
+    .section-head h2 {
+      margin-top: 13px;
+      font: 900 clamp(42px, 4.8vw, 68px)/.88 "Barlow Condensed", sans-serif;
+      letter-spacing: -.025em;
+      text-transform: uppercase;
+    }
+    .section-head p {
+      margin-top: 8px;
+      color: #aaa2b2;
+      font-size: 14px;
+      line-height: 1.75;
+      text-align: left;
+    }
+    .support-template-shell { gap: 13px; }
+    .support-template-shell h3 {
+      font: 800 26px/1 "Barlow Condensed", sans-serif;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+    }
+    .support-template-shell p {
+      color: #aaa2b2;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .support-template-shell textarea {
+      min-height: 260px;
+      border-color: var(--line-soft);
+      border-radius: 14px;
+      background: #0c0910;
+      color: #eee7f2;
+      box-shadow: inset 0 1px rgba(255,255,255,.025);
+    }
+    .template-actions { justify-content: flex-start; }
+    .template-status { color: var(--text-2); text-align: left; }
+    .footer {
+      padding: 36px 2px 6px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+    }
+    .footer-links a { color: var(--text-2); }
+    .footer-links a:hover { color: var(--accent-2); }
+    .modal-backdrop { background: rgba(4,3,7,.84); }
+    .support-modal {
+      border-color: var(--line-strong);
+      border-radius: 20px;
+      background: rgba(21,17,27,.97);
+      box-shadow: 0 34px 100px rgba(0,0,0,.48);
+    }
+    .support-modal h3 {
+      font: 900 clamp(36px, 5vw, 56px)/.9 "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+    }
+    .support-choice {
+      border-color: var(--line-soft);
+      border-radius: 15px;
+      background: rgba(255,255,255,.025);
+    }
+    .support-choice:hover {
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,.04);
+    }
+    .support-choice strong {
+      font: 800 26px/1 "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+    }
+    @media (max-width: 1080px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-copy { max-width: 760px; }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 24px, 1420px); padding-top: 12px; }
+      .nav {
+        position: static;
+        align-items: center;
+        border-radius: 16px;
+      }
+      .nav-right { gap: 10px; }
+      .nav-link { font-size: 10px; }
+      .hero { padding: 58px 0 38px; gap: 38px; }
+      h1 { font-size: clamp(58px, 18vw, 84px); }
+      .cards,
+      .support-choice-grid { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .support-shell {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        border-radius: 16px;
+      }
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    @media (max-width: 560px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .language-switch { order: -1; }
+      .support-actions { width: 100%; }
+      .support-actions .btn { flex: 1; }
+    }
+  </style></head><body><div class="bg"></div><canvas class="mesh-canvas" id="meshCanvas" aria-hidden="true"></canvas><div class="grid"></div><main class="wrap"><nav class="nav"><a class="brand" href="index.html"><img src="sapotweakpng.png" alt="SapoTweak" onerror="this.onerror=null;this.src='sapotweak.png';"><span>SAPOTWEAK</span></a><div class="nav-right"><a class="nav-link" href="index.html" id="backLink">Sito</a><a class="nav-link" href="checkout.html" id="plansLink">Piani</a><a class="nav-link" href="reviews.html" id="reviewsLink">Recensioni</a><div class="language-switch" role="group" aria-label="Lingua"><button type="button" data-language="it" aria-pressed="true">IT</button><button type="button" data-language="en" aria-pressed="false">EN</button><button type="button" data-language="es" aria-pressed="false">ES</button></div><select class="lang-select" id="languageSelect" aria-label="Language" hidden tabindex="-1" aria-hidden="true"><option value="it">Italiano</option><option value="en">English</option><option value="es">Español</option></select></div></nav><section class="hero"><div class="hero-copy"><span class="eyebrow" id="eyebrow">Supporto ufficiale</span><h1 id="title">Supporto <span>SapoTweak</span></h1><p id="lead">Recupera la key, risolvi problemi di attivazione o download e invia subito al supporto tutte le informazioni utili.</p><div class="support-actions"><button class="btn primary" id="openSupportModalBtn" type="button">Apri supporto</button><button class="btn" id="copySupportTemplateBtn" type="button">Copia testo</button></div></div><div class="cards"><article class="card"><h2 id="card1Title">1. Ho pagato ma non vedo la key</h2><p id="card1Text">Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, invia email pagamento e session ID checkout se disponibile.</p></article><article class="card"><h2 id="card2Title">2. La key non si attiva</h2><p id="card2Text">Se la key viene rifiutata o resta bloccata, invia email usata nel pagamento, key, errore mostrato e screenshot.</p></article><article class="card"><h2 id="card3Title">3. Ho reinstallato Windows</h2><p id="card3Text">Se hai reinstallato sullo stesso PC, invia email del pagamento, key ed eventuale errore per verificare l'attivazione.</p></article><article class="card"><h2 id="card4Title">4. Download o update non vanno</h2><p id="card4Text">Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.</p></article></div></section><section class="support-shell"><div class="section-head"><span class="section-tag" id="supportTag">Support flow</span><h2 id="supportTitle">Apri Gmail o Discord con testo già pronto</h2><p id="supportLead">Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con destinatario `sapotweak@gmail.com` già inserito.</p></div><div class="support-template-shell"><h3 id="templateTitle">Testo pronto da copiare</h3><p id="templateLead">Compila questo elenco e incollalo su Gmail o Discord per velocizzare il supporto.</p><textarea id="supportTemplate" readonly></textarea><div class="template-actions"><span class="template-status" id="templateStatus">Aggiungi anche screenshot, errore e versione app se li hai.</span></div></div></section><footer class="footer"><span id="footerText">SapoTweak - Distribuisci solo build ufficiali.</span><div class="footer-links"><a href="terms.html" id="termsLink">Termini</a><a href="privacy.html" id="privacyLink">Privacy</a><a href="reviews.html" id="reviewsFooterLink">Recensioni</a></div></footer></main><div class="modal-backdrop" id="supportModal"><div class="support-modal" role="dialog" aria-modal="true" aria-labelledby="supportModalTitle"><h3 id="supportModalTitle">Supporto SapoTweak</h3><p id="supportModalLead">Scegli dove aprire il supporto e sotto trovi il testo pronto da copiare nella lingua selezionata.</p><div class="support-choice-grid"><a id="gmailSupportLink" class="support-choice" href="https://mail.google.com/mail/?view=cm&fs=1&to=sapotweak@gmail.com" target="_blank" rel="noopener noreferrer"><strong id="gmailTitle">Gmail</strong><span id="gmailText">Apre Gmail web con destinatario `sapotweak@gmail.com`, oggetto e corpo già pronti.</span></a><a class="support-choice" href="https://discord.com/channels/1242031506029805651/1245172693989457930" target="_blank" rel="noopener noreferrer"><strong id="discordTitle">Discord</strong><span id="discordText">Apre direttamente la sezione ticket Discord ufficiale di SapoTweak.</span></a></div><div class="modal-actions"><button class="btn" id="closeSupportModalBtn" type="button">Chiudi</button></div></div></div><script>
     const translations = {
       it: {
         pageTitle: "SapoTweak - Supporto",
@@ -444,19 +830,19 @@
         plansLink: "Piani",
         reviewsLink: "Recensioni",
         eyebrow: "Supporto ufficiale",
-        title: "Supporto <span>SapoTweak</span>",
-        lead: "Questa pagina serve per recupero key, problemi di download e invio dati al supporto. Tutto è centrato nello stesso stile premium della home.",
+        title: "Supporto<br><span>SapoTweak</span>",
+        lead: "Recupera la key, risolvi problemi di attivazione o download e invia subito al supporto tutte le informazioni utili.",
         card1Title: "1. Ho pagato ma non vedo la key",
         card1Text: "Aspetta circa un minuto nella pagina di conferma. Se la key non arriva, invia email pagamento e session ID checkout se disponibile.",
         card2Title: "2. La key non si attiva",
         card2Text: "Se la key viene rifiutata o resta bloccata, invia email usata nel pagamento, key, errore mostrato e screenshot.",
-        card3Title: "3. La key non si attiva",
-        card3Text: "Se la key viene rifiutata o resta bloccata, invia email usata, key, errore mostrato e screenshot.",
+        card3Title: "3. Ho reinstallato Windows",
+        card3Text: "Se hai reinstallato sullo stesso PC, invia email del pagamento, key ed eventuale errore per verificare l'attivazione.",
         card4Title: "4. Download o update non vanno",
         card4Text: "Se il download dal sito o dall'app fallisce, allega screenshot dell'errore e la versione che stai usando.",
-        supportTag: "Support flow",
-        supportTitle: "Apri Gmail o Discord con testo già pronto",
-        supportLead: "Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con destinatario `sapotweak@gmail.com` già inserito.",
+        supportTag: "Apri un ticket",
+        supportTitle: "Gmail o Discord, con tutto già pronto",
+        supportLead: "Il testo da copiare cambia con la lingua selezionata. Gmail apre la composizione web con sapotweak@gmail.com già inserito.",
         openSupportModalBtn: "Apri supporto",
         copySupportTemplateBtn: "Copia testo",
         templateTitle: "Testo pronto da copiare",
@@ -470,7 +856,7 @@
         supportModalTitle: "Supporto SapoTweak",
         supportModalLead: "Scegli dove aprire il supporto e sotto trovi il testo pronto da copiare nella lingua selezionata.",
         gmailTitle: "Gmail",
-        gmailText: "Apre Gmail web con destinatario `sapotweak@gmail.com`, oggetto e corpo già pronti.",
+        gmailText: "Apre Gmail web con destinatario sapotweak@gmail.com, oggetto e corpo già pronti.",
         discordTitle: "Discord",
         discordText: "Apre direttamente la sezione ticket Discord ufficiale di SapoTweak.",
         closeSupportModalBtn: "Chiudi",
@@ -482,8 +868,8 @@
         plansLink: "Plans",
         reviewsLink: "Reviews",
         eyebrow: "Official support",
-        title: "Support <span>SapoTweak</span>",
-        lead: "This page is for key recovery, download issues, and sending the right details to support. Everything stays centered in the same premium style as the homepage.",
+        title: "Support<br><span>SapoTweak</span>",
+        lead: "Recover your key, solve activation or download issues, and send support all the useful information right away.",
         card1Title: "1. I paid but do not see the key",
         card1Text: "Wait about one minute on the confirmation page. If the key does not arrive, send the payment email and checkout session ID if available.",
         card2Title: "2. The key does not activate",
@@ -492,9 +878,9 @@
         card3Text: "If you reset Windows or reinstalled the app on the same machine, send your payment email, key, and any shown error so support can verify the activation.",
         card4Title: "4. Download or update is failing",
         card4Text: "If site or in-app download fails, attach the error screenshot and the version you are using.",
-        supportTag: "Support flow",
-        supportTitle: "Open Gmail or Discord with ready text",
-        supportLead: "The copy template changes with the selected language. Gmail opens the web compose page with `sapotweak@gmail.com` already filled in.",
+        supportTag: "Open a ticket",
+        supportTitle: "Gmail or Discord, with everything ready",
+        supportLead: "The copy template changes with the selected language. Gmail opens the web compose page with sapotweak@gmail.com already filled in.",
         openSupportModalBtn: "Open support",
         copySupportTemplateBtn: "Copy text",
         templateTitle: "Ready-to-copy text",
@@ -508,7 +894,7 @@
         supportModalTitle: "SapoTweak Support",
         supportModalLead: "Choose where to open support and below you will find a ready-to-copy message in the selected language.",
         gmailTitle: "Gmail",
-        gmailText: "Opens Gmail web with `sapotweak@gmail.com`, ready subject, and prefilled body.",
+        gmailText: "Opens Gmail web with sapotweak@gmail.com, ready subject, and prefilled body.",
         discordTitle: "Discord",
         discordText: "Opens the official SapoTweak Discord ticket section directly.",
         closeSupportModalBtn: "Close",
@@ -520,8 +906,8 @@
         plansLink: "Planes",
         reviewsLink: "Reseñas",
         eyebrow: "Soporte oficial",
-        title: "Soporte <span>SapoTweak</span>",
-        lead: "Esta página sirve para recuperar claves, resolver descargas y enviar al soporte los datos correctos. Todo sigue el mismo estilo premium de la página principal.",
+        title: "Soporte<br><span>SapoTweak</span>",
+        lead: "Recupera tu clave, resuelve problemas de activación o descarga y envía al soporte toda la información útil.",
         card1Title: "1. He pagado pero no veo la clave",
         card1Text: "Espera alrededor de un minuto en la página de confirmación. Si la clave no llega, envía el correo del pago y el ID de sesión de la compra si existe.",
         card2Title: "2. La clave no se activa",
@@ -530,9 +916,9 @@
         card3Text: "Si has restablecido Windows o reinstalado la aplicación en la misma máquina, envía el correo del pago, la clave y cualquier error mostrado para verificar la activación.",
         card4Title: "4. La descarga o la actualización fallan",
         card4Text: "Si la descarga desde el sitio o la aplicación falla, adjunta una captura del error y la versión que estás usando.",
-        supportTag: "Flujo de soporte",
-        supportTitle: "Abre Gmail o Discord con texto listo",
-        supportLead: "El texto para copiar cambia con el idioma seleccionado. Gmail abre la composición web con `sapotweak@gmail.com` ya insertado.",
+        supportTag: "Abre un ticket",
+        supportTitle: "Gmail o Discord, con todo preparado",
+        supportLead: "El texto para copiar cambia con el idioma seleccionado. Gmail abre la composición web con sapotweak@gmail.com ya insertado.",
         openSupportModalBtn: "Abrir soporte",
         copySupportTemplateBtn: "Copiar texto",
         templateTitle: "Texto listo para copiar",
@@ -546,7 +932,7 @@
         supportModalTitle: "Soporte SapoTweak",
         supportModalLead: "Elige dónde abrir el soporte y abajo tienes un texto listo para copiar en el idioma seleccionado.",
         gmailTitle: "Gmail",
-        gmailText: "Abre Gmail web con `sapotweak@gmail.com`, asunto listo y cuerpo ya preparado.",
+        gmailText: "Abre Gmail web con sapotweak@gmail.com, asunto listo y cuerpo ya preparado.",
         discordTitle: "Discord",
         discordText: "Abre directamente la sección oficial de tickets de SapoTweak en Discord.",
         closeSupportModalBtn: "Cerrar",
@@ -555,6 +941,7 @@
     };
 
     const languageSelect = document.getElementById("languageSelect");
+    const languageButtons = Array.from(document.querySelectorAll("[data-language]"));
     const supportTemplate = document.getElementById("supportTemplate");
     const templateStatus = document.getElementById("templateStatus");
     const gmailSupportLink = document.getElementById("gmailSupportLink");
@@ -631,6 +1018,9 @@
       document.documentElement.lang = currentLanguage;
       document.title = text.pageTitle;
       languageSelect.value = currentLanguage;
+      languageButtons.forEach(button => {
+        button.setAttribute("aria-pressed", button.dataset.language === currentLanguage ? "true" : "false");
+      });
       setText("backLink", text.backLink);
       setText("plansLink", text.plansLink);
       setText("reviewsLink", text.reviewsLink);
@@ -757,6 +1147,9 @@
     }
 
     languageSelect.addEventListener("change", event => applyLanguage(event.target.value));
+    languageButtons.forEach(button => {
+      button.addEventListener("click", () => applyLanguage(button.dataset.language));
+    });
     openSupportModalBtn.addEventListener("click", () => {
       templateStatus.textContent = t("templateStatus");
       refreshTemplate();
