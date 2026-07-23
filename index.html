@@ -831,6 +831,10 @@
         .replace(/'/g, '&#39;');
     }
 
+    function localizedLatestBadge() {
+      return currentLanguage === 'it' ? 'Novità' : currentLanguage === 'es' ? 'Novedad' : 'Latest';
+    }
+
     function normalizeReview(row) {
       const rawName = String(row.publicName || row.name || 'Anonimo').trim();
       const normalizedName = /^(deleted user|account eliminato)$/i.test(rawName) || /n[i1]gg/i.test(rawName) ? 'Anonimo' : rawName;
@@ -839,6 +843,7 @@
         body: String(row.reviewBody || row.body || '').replace(/@[A-Za-z0-9_.-]+/g, ' ').replace(/\bnices?\s+ass\b/gi, 'nice support').replace(/\s+/g, ' ').trim(),
         name: normalizedName || 'Anonimo',
         meta: String(row.reviewCategory || row.meta || 'Community / Discord').trim(),
+        latest: Boolean(row.latest),
         stars: Math.max(1, Math.min(5, Number(row.rating || row.stars || 5)))
       };
     }
@@ -846,7 +851,7 @@
     function currentReviews() {
       const curated = reviewsSource.reviewSets[currentLanguage] || reviewsSource.reviewSets.it || [];
       const archive = reviewsSource.importedReviewArchive || [];
-      const rows = [...approvedReviews[currentLanguage], ...curated, ...archive].map(normalizeReview);
+      const rows = [...archive, ...approvedReviews[currentLanguage], ...curated].map(normalizeReview);
       const seen = new Set();
       const uniqueReviews = rows.filter((review) => {
         if (!review.body) return false;
@@ -906,7 +911,7 @@
       reviewsTrack.innerHTML = reviews.map((review) => {
         const avatarClass = `avatar default-avatar avatar-${reviewAvatarIndex(review)}`;
         return `
-          <article class="review-card" tabindex="0"><div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div><blockquote>${review.title ? `<strong>${escapeHtml(review.title)}</strong>` : ''}${review.title ? '<br>' : ''}“${escapeHtml(review.body)}”</blockquote><div class="review-author"><span class="${avatarClass}">${escapeHtml(review.name.slice(0, 2).toUpperCase())}</span><div><strong>${escapeHtml(review.name)}</strong><span>${escapeHtml(review.meta)}</span></div></div></article>
+          <article class="review-card" tabindex="0"><div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div><blockquote>${review.title ? `<strong>${escapeHtml(review.title)}</strong>` : ''}${review.title ? '<br>' : ''}“${escapeHtml(review.body)}”</blockquote><div class="review-author"><span class="${avatarClass}">${escapeHtml(review.name.slice(0, 2).toUpperCase())}</span><div><strong>${escapeHtml(review.name)}</strong><span>${review.latest ? `${escapeHtml(localizedLatestBadge())} · ` : ''}${escapeHtml(review.meta)}</span></div></div></article>
         `;
       }).join('');
       const labels = { it: 'recensioni caricate', en: 'reviews loaded', es: 'reseñas cargadas' };
