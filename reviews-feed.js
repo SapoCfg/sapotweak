@@ -297,6 +297,55 @@ window.SAPOTWEAK_REVIEWS = {
   },
   "importedReviewArchive": [
     {
+      "body": "godly tweak +90 fps su fivem",
+      "name": "Cliente Discord",
+      "meta": "FiveM / PC Opti",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "+rep god tweak",
+      "name": "Cliente Discord",
+      "meta": "PC Opti / Discord",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "Non è male, meglio di Zenky non scherzo",
+      "name": "Veja ByNight",
+      "meta": "PC Opti / Discord",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "Tweak promettente e organizzato bene. Con più trasparenza sulle modifiche e un ripristino sicuro sarebbe ancora migliore.",
+      "name": "Cliente Discord",
+      "meta": "PC Opti / Discord",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "+rep tweak gdly mov + fps - delay il sito è clean e ti spiega tutto lui",
+      "name": "Cliente Discord",
+      "meta": "PC Opti / Discord",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "0 input lag, +500 fps on fivem and +700/800 on fortnite, low price for crazy experience thk",
+      "name": "xeed",
+      "meta": "PC Opti / Performance",
+      "latest": true,
+      "stars": 5
+    },
+    {
+      "body": "He notado una diferencia abismal, el input lag, todo en general del pc va mucho mejor y ha incrementado los fps, agradezco a sapo y a tyghasss por la ayuda y por todo, 5/5 🔥🔥",
+      "name": "white",
+      "meta": "PC / Performance",
+      "latest": true,
+      "stars": 5
+    },
+    {
       "body": "+rep for SapoTweak",
       "name": "kasaltier1",
       "meta": "Discord / Community",
