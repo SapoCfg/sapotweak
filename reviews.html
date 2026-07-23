@@ -695,6 +695,13 @@
     };
 
     const importedReviewArchive = [
+      { body: "godly tweak +90 fps su fivem", name: "Cliente Discord", meta: "FiveM / PC Opti", latest: true, stars: 5 },
+      { body: "+rep god tweak", name: "Cliente Discord", meta: "PC Opti / Discord", latest: true, stars: 5 },
+      { body: "Non è male, meglio di Zenky non scherzo", name: "Veja ByNight", meta: "PC Opti / Discord", latest: true, stars: 5 },
+      { body: "Tweak promettente e organizzato bene. Con più trasparenza sulle modifiche e un ripristino sicuro sarebbe ancora migliore.", name: "Cliente Discord", meta: "PC Opti / Discord", latest: true, stars: 5 },
+      { body: "+rep tweak gdly mov + fps - delay il sito è clean e ti spiega tutto lui", name: "Cliente Discord", meta: "PC Opti / Discord", latest: true, stars: 5 },
+      { body: "0 input lag, +500 fps on fivem and +700/800 on fortnite, low price for crazy experience thk", name: "xeed", meta: "PC Opti / Performance", latest: true, stars: 5 },
+      { body: "He notado una diferencia abismal, el input lag, todo en general del pc va mucho mejor y ha incrementado los fps, agradezco a sapo y a tyghasss por la ayuda y por todo, 5/5 🔥🔥", name: "white", meta: "PC / Performance", latest: true, stars: 5 },
       { body: "+rep for SapoTweak", name: "kasaltier1", meta: "Discord / Community", stars: 5 },
       { body: "+rep for SapoTweak", name: "nicucz", meta: "Discord / Community", stars: 5 },
       { body: "+rep for SapoTweak", name: "Kjass", meta: "Discord / Community", stars: 5 },
@@ -1070,6 +1077,10 @@
       return currentLanguage === "it" ? "Verificata" : currentLanguage === "es" ? "Verificada" : "Verified";
     }
 
+    function localizedLatestBadge() {
+      return currentLanguage === "it" ? "Novità" : currentLanguage === "es" ? "Novedad" : "Latest";
+    }
+
     function sanitizeReviewName(name) {
       const value = String(name || "").trim();
       if (!value) return "Anonimo";
@@ -1092,7 +1103,7 @@
         body: normalizeReviewBody(row.body),
         name: sanitizeReviewName(row.name),
         meta: row.meta || "Discord / Community",
-        badge: row.badge || localizedVerifiedBadge(),
+        badge: row.latest ? localizedLatestBadge() : (row.badge || localizedVerifiedBadge()),
         stars: Number(row.stars || 5)
       };
     }
@@ -1127,10 +1138,10 @@
     }
 
     function currentReviews() {
+      const imported = importedReviewArchive.map(normalizeStaticReview);
       const live = (publicReviewsByLanguage[currentLanguage] || []).map(normalizeApprovedReview);
       const curated = (reviewSets[currentLanguage] || reviewSets.it).map(normalizeStaticReview);
-      const imported = importedReviewArchive.map(normalizeStaticReview);
-      return dedupeReviews([...live, ...curated, ...imported]);
+      return dedupeReviews([...imported, ...live, ...curated]);
     }
 
     function totalPages() {
