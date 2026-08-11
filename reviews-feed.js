@@ -297,6 +297,13 @@ window.SAPOTWEAK_REVIEWS = {
   },
   "importedReviewArchive": [
     {
+      "body": "Dopo aver risolto un problema con la key ho aperto l'app e applicato i tweak: il PC è diventato molto più fluido e su FiveM ho visto un forte aumento degli FPS. Consiglio questo tweak.",
+      "name": "Cliente Discord",
+      "meta": "FiveM / Supporto",
+      "latest": true,
+      "stars": 5
+    },
+    {
       "body": "godly tweak +90 fps su fivem",
       "name": "Cliente Discord",
       "meta": "FiveM / PC Opti",
