@@ -304,6 +304,13 @@ window.SAPOTWEAK_REVIEWS = {
       "stars": 5
     },
     {
+      "body": "mouse molto piu fluido fps alzati meno input delay lo consiglio per chi vuole comprarlo",
+      "name": "Cliente Discord",
+      "meta": "PC Opti / Performance",
+      "latest": true,
+      "stars": 5
+    },
+    {
       "body": "godly tweak +90 fps su fivem",
       "name": "Cliente Discord",
       "meta": "FiveM / PC Opti",
