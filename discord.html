@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="it"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://license.salvocan05.workers.dev https://cloudflareinsights.com; frame-src 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SapoTweak | Ruolo Discord</title>
+<meta name="description" content="Collega la tua licenza SapoTweak a Discord e ricevi il ruolo Customer nel server ufficiale.">
+<link rel="icon" href="sapotweakpng.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+  :root { color-scheme: dark; --text: #faf7ff; --muted: #aba3c3; --line: rgba(167,139,250,.28); --accent: #8b5cf6; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; font-family: "Sora", "Segoe UI", sans-serif; color: var(--text);
+    background: radial-gradient(circle at 50% -10%, #2a1550 0, #0a0614 55%, #040308 100%); }
+  .card { width: 100%; max-width: 480px; padding: 34px 28px 28px; border-radius: 26px; background: rgba(16,11,30,.82); border: 1px solid var(--line);
+    box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 80px rgba(139,92,246,.15); text-align: center; }
+  .logo { width: 64px; height: 64px; margin: 0 auto 16px; display: block; filter: drop-shadow(0 0 18px rgba(168,85,247,.6)); }
+  .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #c084fc; }
+  h1 { margin: 10px 0 10px; font-size: 26px; line-height: 1.15; }
+  p { margin: 0 0 22px; color: var(--muted); line-height: 1.6; font-size: 14px; }
+  label { display: block; text-align: left; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 7px; }
+  input { width: 100%; height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line); background: rgba(5,3,12,.75); color: var(--text);
+    font: 600 14px/1 Consolas, "Cascadia Mono", monospace; letter-spacing: .03em; outline: none; transition: border-color .2s, box-shadow .2s; }
+  input:focus { border-color: #a855f7; box-shadow: 0 0 0 4px rgba(139,92,246,.22); }
+  button { width: 100%; height: 52px; margin-top: 14px; border: 0; border-radius: 14px; cursor: pointer; color: #fff; font: 800 14px "Sora", sans-serif; letter-spacing: .04em;
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6 45%, #c026d3); box-shadow: 0 14px 40px -12px rgba(168,85,247,.8); transition: transform .2s, filter .2s; }
+  button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  button:disabled { opacity: .7; cursor: progress; transform: none; }
+  .msg { min-height: 22px; margin-top: 14px; font-size: 13px; }
+  .msg.err { color: #fda4af; } .msg.ok { color: #86efac; }
+  .steps { margin: 24px 0 0; padding: 16px 18px; border-radius: 16px; background: rgba(139,92,246,.07); border: 1px solid rgba(167,139,250,.14); text-align: left; }
+  .steps li { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 4px 0; }
+  .lang { margin-top: 18px; font-size: 12px; } .lang button { all: unset; cursor: pointer; color: var(--muted); margin: 0 6px; } .lang button.on { color: #fff; font-weight: 700; }
+  .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 12px; text-decoration: none; }
+</style></head>
+<body>
+  <main class="card">
+    <img class="logo" src="sapotweakpng.png" alt="SapoTweak">
+    <div class="kicker" data-t="kicker">Discord</div>
+    <h1 data-t="title">Ottieni il ruolo Customer</h1>
+    <p data-t="lead">Inserisci la tua key SapoTweak e accedi con Discord: entrerai nel server ufficiale con il ruolo riservato ai clienti.</p>
+    <form id="form" autocomplete="off">
+      <label for="key" data-t="label">La tua key</label>
+      <input id="key" spellcheck="false" maxlength="128" placeholder="XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-V3">
+      <button id="go" type="submit" data-t="button">Collega Discord</button>
+      <div class="msg" id="msg" role="status"></div>
+    </form>
+    <ol class="steps">
+      <li data-t="s1">Il ruolo resta finché la licenza è attiva e si aggiorna da solo ogni giorno.</li>
+      <li data-t="s2">Ogni key si collega a un solo account Discord.</li>
+      <li data-t="s3">La key serve solo per la verifica: non viene mostrata a nessuno.</li>
+    </ol>
+    <div class="lang"><button data-lang="it">IT</button>·<button data-lang="en">EN</button>·<button data-lang="es">ES</button></div>
+    <a class="back" href="./" data-t="back">← Torna a sapotweak.org</a>
+  </main>
+<script>
+  const API = 'https://license.salvocan05.workers.dev/discord/start';
+  const T = {
+    it: { kicker: 'Discord', title: 'Ottieni il ruolo Customer', lead: 'Inserisci la tua key SapoTweak e accedi con Discord: entrerai nel server ufficiale con il ruolo riservato ai clienti.', label: 'La tua key', button: 'Collega Discord', s1: 'Il ruolo resta finché la licenza è attiva e si aggiorna da solo ogni giorno.', s2: 'Ogni key si collega a un solo account Discord.', s3: 'La key serve solo per la verifica: non viene mostrata a nessuno.', back: '← Torna a sapotweak.org', empty: 'Inserisci la tua key.', wait: 'Verifica della key…', redirect: 'Key valida: ti porto su Discord…', net: 'Connessione non riuscita, riprova.' },
+    en: { kicker: 'Discord', title: 'Get the Customer role', lead: 'Enter your SapoTweak key and sign in with Discord: you will join the official server with the customers-only role.', label: 'Your key', button: 'Connect Discord', s1: 'The role stays while your license is active and updates by itself every day.', s2: 'Each key links to one Discord account only.', s3: 'The key is only used for the check: it is never shown to anyone.', back: '← Back to sapotweak.org', empty: 'Enter your key.', wait: 'Checking your key…', redirect: 'Valid key: taking you to Discord…', net: 'Connection failed, try again.' },
+    es: { kicker: 'Discord', title: 'Consigue el rol Customer', lead: 'Introduce tu clave de SapoTweak e inicia sesión con Discord: entrarás en el servidor oficial con el rol reservado a los clientes.', label: 'Tu clave', button: 'Conectar Discord', s1: 'El rol se mantiene mientras la licencia esté activa y se actualiza solo cada día.', s2: 'Cada clave se vincula a una sola cuenta de Discord.', s3: 'La clave solo sirve para la comprobación: nunca se muestra a nadie.', back: '← Volver a sapotweak.org', empty: 'Introduce tu clave.', wait: 'Comprobando la clave…', redirect: 'Clave válida: te llevamos a Discord…', net: 'Conexión fallida, inténtalo de nuevo.' }
+  };
+  const SERVER_MSG = {
+    license_inactive: { it: 'Questa key non risulta attiva.', en: 'This key is not active.', es: 'Esta clave no está activa.' },
+    invalid_key: { it: 'Inserisci una key valida.', en: 'Enter a valid key.', es: 'Introduce una clave válida.' },
+    keygen_unavailable: { it: 'Verifica licenza non disponibile, riprova tra poco.', en: 'License check unavailable, try again shortly.', es: 'Comprobación de licencia no disponible, inténtalo en un momento.' },
+    discord_not_configured: { it: 'Collegamento Discord non ancora attivo.', en: 'Discord link not active yet.', es: 'Conexión con Discord aún no activa.' }
+  };
+  let lang = 'it';
+  try { lang = localStorage.getItem('sapotweak-site-language') || (navigator.language || 'it').slice(0, 2); } catch {}
+  if (!T[lang]) lang = 'it';
+  function apply() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-t]').forEach(el => { el.textContent = T[lang][el.dataset.t]; });
+    document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+  }
+  document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; try { localStorage.setItem('sapotweak-site-language', lang); } catch {} apply(); }));
+  apply();
+  const msg = document.getElementById('msg');
+  const say = (text, cls = '') => { msg.textContent = text; msg.className = 'msg ' + cls; };
+  document.getElementById('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const key = document.getElementById('key').value.trim();
+    if (!key) return say(T[lang].empty, 'err');
+    const btn = document.getElementById('go');
+    btn.disabled = true; say(T[lang].wait);
+    try {
+      const res = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ licenseKey: key }) });
+      const data = await res.json().catch(() => ({}));
+      if (data.ok && data.url) { say(T[lang].redirect, 'ok'); window.location.href = data.url; return; }
+      say((SERVER_MSG[data.error] && SERVER_MSG[data.error][lang]) || data.message || T[lang].net, 'err');
+    } catch { say(T[lang].net, 'err'); }
+    btn.disabled = false;
+  });
+</script>
+</body></html>
