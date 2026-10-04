@@ -1,16 +1,16 @@
 {
-  "version": "2.0.2",
+  "version": "2.0.3",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.2/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.2/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.2/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "922c661314848ab29d5172213ca5afddf962c646a45ef71a406ed1d16d8d9dc3",
-  "installerBytes": 86993779,
+  "installerSha256": "40ca43b11fbbd80a7c85a4bb946e7095b61f8dd1117af766d2f399ccde763ad8",
+  "installerBytes": 86939966,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "SapoTweak 2.0.2: interfaccia completa in italiano, inglese e spagnolo (dashboard, giochi, ripristino, impostazioni e tutti i messaggi); dati dei giochi aggiornati al cambio lingua.",
-  "manifestSignature": "dmdXeZ/7yFg8G4FeYw85DK5eHGRCtw5i7+wSmw6tDapw2XdJ2+AeqVPi1bPSKN7Oycqt4R12PCRWKBMPZgIRCA=="
+  "notes": "SapoTweak 2.0.3: popup per lasciare un feedback, avvio molto piu veloce (stato dei tweak in pochi secondi), Consigliati immediati con caricamento visibile, aggiornamenti automatici silenziosi senza finestre di installazione.",
+  "manifestSignature": "xsfr2plA/4jbU/nNj6S3bBnPKv7gvBa/HrpTlMGs8AI7qnadRq8aW9PErIEn/O3355xTMpONUp7nBeVrFtjdAA=="
 }
