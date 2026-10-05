@@ -1,16 +1,16 @@
 {
-  "version": "2.0.3",
+  "version": "2.0.4",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.4/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.3/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.4/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.4/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "40ca43b11fbbd80a7c85a4bb946e7095b61f8dd1117af766d2f399ccde763ad8",
-  "installerBytes": 86939966,
+  "installerSha256": "8bf9a57302bc997622924eef30d13bb48dc878f39ae56be9027ccb23b51d5c73",
+  "installerBytes": 86945289,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "SapoTweak 2.0.3: popup per lasciare un feedback, avvio molto piu veloce (stato dei tweak in pochi secondi), Consigliati immediati con caricamento visibile, aggiornamenti automatici silenziosi senza finestre di installazione.",
-  "manifestSignature": "xsfr2plA/4jbU/nNj6S3bBnPKv7gvBa/HrpTlMGs8AI7qnadRq8aW9PErIEn/O3355xTMpONUp7nBeVrFtjdAA=="
+  "notes": "SapoTweak 2.0.4: la licenza acquistata con la 1.3.9 viene recuperata in automatico, senza reinserire la key; pulsante di aggiornamento disponibile anche dalla schermata di attivazione.",
+  "manifestSignature": "Au33ZjBT3zuk9aB63PGSzEsVjRVZWQOvpRSbgaiccMK7Ztp6KQJj4Z0a2HmOSmWXsyk4weFr5zgNqK+jAXw2Bg=="
 }
