@@ -27,6 +27,15 @@
   .msg.err { color: #fda4af; } .msg.ok { color: #86efac; }
   .steps { margin: 24px 0 0; padding: 16px 18px; border-radius: 16px; background: rgba(139,92,246,.07); border: 1px solid rgba(167,139,250,.14); text-align: left; }
   .steps li { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 4px 0; }
+  .perks { margin: 24px 0 0; padding: 20px 18px 16px; border-radius: 18px; text-align: left;
+    background: linear-gradient(145deg, rgba(139,92,246,.16), rgba(192,38,211,.07)); border: 1px solid rgba(192,132,252,.32); }
+  .perks h2 { margin: 0 0 12px; font-size: 15px; letter-spacing: .01em; }
+  .perks ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .perks li { display: flex; gap: 12px; align-items: flex-start; }
+  .perks .ic { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: rgba(8,5,18,.6); border: 1px solid rgba(167,139,250,.25); font-size: 16px; }
+  .perks b { display: block; font-size: 13.5px; margin-bottom: 2px; }
+  .perks li span:not(.ic) { display: block; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+  .perks-note { margin: 12px 0 0; font-size: 11.5px; color: var(--muted); }
   .lang { margin-top: 18px; font-size: 12px; } .lang button { all: unset; cursor: pointer; color: var(--muted); margin: 0 6px; } .lang button.on { color: #fff; font-weight: 700; }
   .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 12px; text-decoration: none; }
 </style></head>
@@ -42,6 +51,16 @@
       <button id="go" type="submit" data-t="button">Collega Discord</button>
       <div class="msg" id="msg" role="status"></div>
     </form>
+    <section class="perks" aria-labelledby="perksTitle">
+      <h2 id="perksTitle" data-t="perksTitle">Cosa ottieni collegando Discord</h2>
+      <ul>
+        <li><span class="ic">💬</span><div><b data-t="p1t">Stanza riservata ai clienti</b><span data-t="p1d">Un canale esclusivo con noi e con tutti quelli che hanno acquistato SapoTweak.</span></div></li>
+        <li><span class="ic">⚡</span><div><b data-t="p2t">Contatto diretto con il team</b><span data-t="p2d">Parli direttamente con chi sviluppa SapoTweak: domande, consigli e configurazioni, senza passare dai canali pubblici.</span></div></li>
+        <li><span class="ic">🚀</span><div><b data-t="p4t">Accesso alle stanze boost Discord Nitro</b><span data-t="p4d">Entri nei canali boost del server dedicati a Discord Nitro, riservati a chi collega una key attiva.</span></div></li>
+        <li><span class="ic">🏷️</span><div><b data-t="p3t">Ruolo Customer</b><span data-t="p3d">Il tuo profilo nel server mostra che sei un cliente verificato.</span></div></li>
+      </ul>
+      <p class="perks-note" data-t="perksNote">Facoltativo: collega Discord solo se vuoi. Serve una key attiva.</p>
+    </section>
     <ol class="steps">
       <li data-t="s1">Il ruolo resta finché la licenza è attiva e si aggiorna da solo ogni giorno.</li>
       <li data-t="s2">Ogni key si collega a un solo account Discord.</li>
@@ -53,9 +72,9 @@
 <script>
   const API = 'https://license.salvocan05.workers.dev/discord/start';
   const T = {
-    it: { kicker: 'Discord', title: 'Ottieni il ruolo Customer', lead: 'Inserisci la tua key SapoTweak e accedi con Discord: entrerai nel server ufficiale con il ruolo riservato ai clienti.', label: 'La tua key', button: 'Collega Discord', s1: 'Il ruolo resta finché la licenza è attiva e si aggiorna da solo ogni giorno.', s2: 'Ogni key si collega a un solo account Discord.', s3: 'La key serve solo per la verifica: non viene mostrata a nessuno.', back: '← Torna a sapotweak.org', empty: 'Inserisci la tua key.', wait: 'Verifica della key…', redirect: 'Key valida: ti porto su Discord…', net: 'Connessione non riuscita, riprova.' },
-    en: { kicker: 'Discord', title: 'Get the Customer role', lead: 'Enter your SapoTweak key and sign in with Discord: you will join the official server with the customers-only role.', label: 'Your key', button: 'Connect Discord', s1: 'The role stays while your license is active and updates by itself every day.', s2: 'Each key links to one Discord account only.', s3: 'The key is only used for the check: it is never shown to anyone.', back: '← Back to sapotweak.org', empty: 'Enter your key.', wait: 'Checking your key…', redirect: 'Valid key: taking you to Discord…', net: 'Connection failed, try again.' },
-    es: { kicker: 'Discord', title: 'Consigue el rol Customer', lead: 'Introduce tu clave de SapoTweak e inicia sesión con Discord: entrarás en el servidor oficial con el rol reservado a los clientes.', label: 'Tu clave', button: 'Conectar Discord', s1: 'El rol se mantiene mientras la licencia esté activa y se actualiza solo cada día.', s2: 'Cada clave se vincula a una sola cuenta de Discord.', s3: 'La clave solo sirve para la comprobación: nunca se muestra a nadie.', back: '← Volver a sapotweak.org', empty: 'Introduce tu clave.', wait: 'Comprobando la clave…', redirect: 'Clave válida: te llevamos a Discord…', net: 'Conexión fallida, inténtalo de nuevo.' }
+    it: { p4t: 'Accesso alle stanze boost Discord Nitro', p4d: 'Entri nei canali boost del server dedicati a Discord Nitro, riservati a chi collega una key attiva.', perksTitle: 'Cosa ottieni collegando Discord', p1t: 'Stanza riservata ai clienti', p1d: 'Un canale esclusivo con noi e con tutti quelli che hanno acquistato SapoTweak.', p2t: 'Contatto diretto con il team', p2d: 'Parli direttamente con chi sviluppa SapoTweak: domande, consigli e configurazioni, senza passare dai canali pubblici.', p3t: 'Ruolo Customer', p3d: 'Il tuo profilo nel server mostra che sei un cliente verificato.', perksNote: 'Facoltativo: collega Discord solo se vuoi. Serve una key attiva.', kicker: 'Discord', title: 'Ottieni il ruolo Customer', lead: 'Inserisci la tua key SapoTweak e accedi con Discord: entrerai nel server ufficiale con il ruolo riservato ai clienti.', label: 'La tua key', button: 'Collega Discord', s1: 'Il ruolo resta finché la licenza è attiva e si aggiorna da solo ogni giorno.', s2: 'Ogni key si collega a un solo account Discord.', s3: 'La key serve solo per la verifica: non viene mostrata a nessuno.', back: '← Torna a sapotweak.org', empty: 'Inserisci la tua key.', wait: 'Verifica della key…', redirect: 'Key valida: ti porto su Discord…', net: 'Connessione non riuscita, riprova.' },
+    en: { p4t: 'Access to the Discord Nitro boost rooms', p4d: 'Join the server boost channels dedicated to Discord Nitro, reserved for members with an active key.', perksTitle: 'What you get by connecting Discord', p1t: 'Customers-only room', p1d: 'An exclusive channel with us and everyone who bought SapoTweak.', p2t: 'Direct contact with the team', p2d: 'Talk directly with the people who build SapoTweak: questions, tips and configurations, away from the public channels.', p3t: 'Customer role', p3d: 'Your profile in the server shows you are a verified customer.', perksNote: 'Optional: connect Discord only if you want. An active key is required.', kicker: 'Discord', title: 'Get the Customer role', lead: 'Enter your SapoTweak key and sign in with Discord: you will join the official server with the customers-only role.', label: 'Your key', button: 'Connect Discord', s1: 'The role stays while your license is active and updates by itself every day.', s2: 'Each key links to one Discord account only.', s3: 'The key is only used for the check: it is never shown to anyone.', back: '← Back to sapotweak.org', empty: 'Enter your key.', wait: 'Checking your key…', redirect: 'Valid key: taking you to Discord…', net: 'Connection failed, try again.' },
+    es: { p4t: 'Acceso a las salas boost de Discord Nitro', p4d: 'Entras en los canales boost del servidor dedicados a Discord Nitro, reservados a quien vincula una clave activa.', perksTitle: 'Qué obtienes al conectar Discord', p1t: 'Sala reservada a los clientes', p1d: 'Un canal exclusivo con nosotros y con todos los que han comprado SapoTweak.', p2t: 'Contacto directo con el equipo', p2d: 'Hablas directamente con quienes desarrollan SapoTweak: dudas, consejos y configuraciones, fuera de los canales públicos.', p3t: 'Rol Customer', p3d: 'Tu perfil en el servidor muestra que eres un cliente verificado.', perksNote: 'Opcional: conecta Discord solo si quieres. Se necesita una clave activa.', kicker: 'Discord', title: 'Consigue el rol Customer', lead: 'Introduce tu clave de SapoTweak e inicia sesión con Discord: entrarás en el servidor oficial con el rol reservado a los clientes.', label: 'Tu clave', button: 'Conectar Discord', s1: 'El rol se mantiene mientras la licencia esté activa y se actualiza solo cada día.', s2: 'Cada clave se vincula a una sola cuenta de Discord.', s3: 'La clave solo sirve para la comprobación: nunca se muestra a nadie.', back: '← Volver a sapotweak.org', empty: 'Introduce tu clave.', wait: 'Comprobando la clave…', redirect: 'Clave válida: te llevamos a Discord…', net: 'Conexión fallida, inténtalo de nuevo.' }
   };
   const SERVER_MSG = {
     license_inactive: { it: 'Questa key non risulta attiva.', en: 'This key is not active.', es: 'Esta clave no está activa.' },
