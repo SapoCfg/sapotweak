@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /checkout-success.html
+
+Sitemap: https://sapotweak.org/sitemap.xml
