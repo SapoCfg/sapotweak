@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Come aumentare gli FPS su Valorant (PC) - Guida 2026 | SapoTweak</title>
+  <meta name="description" content="Guida pratica per aumentare gli FPS e ridurre l'input lag su Valorant: impostazioni video consigliate, Windows, CPU e hardware. Spiegata passo passo.">
+  <link rel="canonical" href="https://sapotweak.org/fps-valorant.html">
+  <meta name="theme-color" content="#8b3dff">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SapoTweak">
+  <meta property="og:url" content="https://sapotweak.org/fps-valorant.html">
+  <meta property="og:title" content="Come aumentare gli FPS su Valorant (PC) - Guida 2026">
+  <meta property="og:description" content="Impostazioni video, Windows, CPU e hardware: tutto quello che serve per più FPS e meno input lag su Valorant.">
+  <meta property="og:image" content="https://sapotweak.org/benchmarks/valorant.jpg">
+  <link rel="icon" href="sapotweakpng.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Come aumentare gli FPS su Valorant (PC) - Guida 2026",
+        "inLanguage": "it",
+        "datePublished": "2026-10-07",
+        "dateModified": "2026-10-07",
+        "image": "https://sapotweak.org/benchmarks/valorant.jpg",
+        "author": { "@type": "Organization", "name": "SapoTweak", "url": "https://sapotweak.org/" },
+        "publisher": { "@type": "Organization", "name": "SapoTweak", "url": "https://sapotweak.org/" },
+        "mainEntityOfPage": "https://sapotweak.org/fps-valorant.html"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Perché Valorant usa così tanto la CPU?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Valorant è un gioco leggero per la scheda video ma molto sensibile al processore: per questo programmi in background e impostazioni di Windows pesano più che in altri giochi. Liberare la CPU è il modo più efficace per alzare gli FPS e l'1% low." }
+          },
+          {
+            "@type": "Question",
+            "name": "Conviene limitare gli FPS su Valorant?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Se il PC tiene FPS molto più alti degli Hz del monitor, un limite poco sopra il doppio degli Hz riduce calore e cali improvvisi. Su PC che faticano, meglio lasciare gli FPS senza limite." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ottimizzare il PC può dare problemi con Vanguard?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Cambiare le impostazioni di Windows o il file delle impostazioni del gioco non è un cheat. SapoTweak non tocca Vanguard, i file del gioco o le mod: modifica le impostazioni solo a gioco chiuso e salva sempre un backup." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ho tanti FPS ma sento il mouse in ritardo: perché?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Di solito dipende da V-Sync attivo, modalità finestra invece di schermo intero o monitor impostato a 60 Hz in Windows. Controlla questi tre punti prima di tutto il resto." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090814;
+      --panel: rgba(22, 20, 40, 0.9);
+      --panel-2: rgba(139,108,255,.08);
+      --border: rgba(255,255,255,.08);
+      --text: #f5f1ff;
+      --muted: #c7c2d8;
+      --accent: #8b6cff;
+      --accent-2: #5b3df5;
+      --game: #ff4f5e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139,108,255,.18), transparent 30%),
+        linear-gradient(180deg, #0b0917 0%, #090814 100%);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { width: min(920px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+    .brand { font-weight: 900; font-size: 24px; text-decoration: none; color: var(--text); }
+    .brand span { color: var(--accent); }
+    .btn {
+      display: inline-block; text-decoration: none; color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 999px; padding: 11px 18px; font-weight: 800; font-size: 14px;
+    }
+    .btn.ghost { background: transparent; border: 1px solid var(--border); }
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 28px;
+      padding: 34px 28px; box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    }
+    .kicker { color: var(--game); font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 6px 0 12px; font-size: clamp(28px, 4.2vw, 44px); line-height: 1.15; }
+    h2 { margin: 36px 0 10px; font-size: 22px; color: #efe9ff; }
+    p, li { color: var(--muted); font-size: 16px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); }
+    .meta { color: #a79fc3; font-size: 14px; }
+    .hero-img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--border); margin: 18px 0 6px; display: block; }
+    .caption { font-size: 13px; color: #a79fc3; margin: 0 0 8px; }
+    .toc { background: var(--panel-2); border: 1px solid var(--border); border-radius: 18px; padding: 16px 20px; margin: 22px 0; }
+    .toc ol { margin: 6px 0 0; padding-left: 20px; }
+    .toc a { color: #cbbdff; text-decoration: none; }
+    .table-wrap { overflow-x: auto; margin: 12px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 460px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--text); background: rgba(255,255,255,.03); }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    .tip { border-left: 3px solid var(--game); background: rgba(255,79,94,.07); padding: 12px 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+    .tip p { margin: 0; }
+    .cta {
+      margin-top: 40px; padding: 26px 24px; border-radius: 22px; text-align: center;
+      background: linear-gradient(135deg, rgba(139,108,255,.2), rgba(255,79,94,.1));
+      border: 1px solid rgba(139,108,255,.35);
+    }
+    .cta h2 { margin-top: 0; }
+    .cta .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+    details { border-bottom: 1px solid var(--border); padding: 12px 0; }
+    summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    details p { margin: 8px 0 0; }
+    .related { margin-top: 26px; }
+    .related a { color: #cbbdff; }
+    footer { margin-top: 28px; text-align: center; font-size: 14px; }
+    footer a { color: #a79fc3; margin: 0 8px; }
+    @media (max-width: 560px) { .card { padding: 26px 18px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">Sapo<span>Tweak</span></a>
+      <a class="btn" href="index.html">Scopri SapoTweak</a>
+    </div>
+
+    <article class="card">
+      <span class="kicker">Guida Valorant · PC</span>
+      <h1>Come aumentare gli FPS su Valorant (PC): guida 2026</h1>
+      <p class="meta">Aggiornata il 7 ottobre 2026 · Lettura: 6 minuti</p>
+      <img class="hero-img" src="benchmarks/valorant.jpg" alt="Confronto FPS su Valorant prima e dopo l'ottimizzazione con SapoTweak" width="1280" height="720">
+      <p class="caption">Stessa scena del poligono, prima (a sinistra) e dopo (a destra) l'ottimizzazione con SapoTweak.</p>
+
+      <p>Su Valorant ogni millisecondo conta: più FPS significa mira più fluida e meno ritardo tra il tuo clic e lo sparo. La buona notizia è che Valorant è un gioco leggero, quindi con le impostazioni giuste quasi ogni PC può migliorare. In questa guida trovi tutto quello che puoi fare <strong>gratis</strong>, in ordine di importanza.</p>
+
+      <nav class="toc" aria-label="Indice">
+        <strong>In questa guida</strong>
+        <ol>
+          <li><a href="#cpu">Perché su Valorant conta soprattutto la CPU</a></li>
+          <li><a href="#impostazioni">Impostazioni video di Valorant consigliate</a></li>
+          <li><a href="#windows">Windows: le 6 cose da controllare</a></li>
+          <li><a href="#hardware">Hardware: errori comuni che costano FPS</a></li>
+          <li><a href="#sapotweak">Fare tutto con un clic</a></li>
+          <li><a href="#faq">Domande frequenti</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="cpu">1. Perché su Valorant conta soprattutto la CPU</h2>
+      <p>A differenza di molti giochi, Valorant chiede poco alla scheda video e molto al <strong>processore</strong>. Ecco perché due PC con la stessa scheda video possono fare FPS molto diversi.</p>
+      <ul>
+        <li><strong>FPS medi</strong>: quanti fotogrammi al secondo fai in media.</li>
+        <li><strong>1% low</strong>: gli FPS nei momenti peggiori, per esempio quando esplodono le abilità. È quello che senti come "scatto" e su Valorant dipende quasi tutto dalla CPU.</li>
+        <li><strong>Input lag</strong>: il ritardo tra il clic e lo sparo sullo schermo.</li>
+      </ul>
+      <div class="tip"><p><strong>Come misurarli:</strong> in Valorant vai su Impostazioni → Video → Statistiche e attiva "FPS client" come testo. Fai le prove sempre nel poligono, nella stessa posizione, prima e dopo ogni modifica.</p></div>
+
+      <h2 id="impostazioni">2. Impostazioni video di Valorant consigliate</h2>
+      <p>Le trovi in Impostazioni → Video, nelle schede Generale e Qualità grafica.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Impostazione</th><th>Consiglio</th><th>Perché</th></tr></thead>
+          <tbody>
+            <tr><td>Modalità schermo</td><td>Schermo intero</td><td>Meno input lag rispetto a finestra o finestra senza bordi.</td></tr>
+            <tr><td>Risoluzione</td><td>Quella nativa del monitor</td><td>Immagine nitida; Valorant è leggero e raramente serve abbassarla.</td></tr>
+            <tr><td>Limite FPS</td><td>Senza limite, oppure poco sopra il doppio degli Hz</td><td>Più FPS riducono l'input lag; il limite aiuta solo se il PC si scalda.</td></tr>
+            <tr><td>NVIDIA Reflex</td><td>Attivo + Boost (solo NVIDIA)</td><td>Riduce l'input lag in modo visibile.</td></tr>
+            <tr><td>Qualità materiali, texture, dettagli, UI</td><td>Bassa</td><td>Su Valorant la differenza visiva è minima, quella di FPS no.</td></tr>
+            <tr><td>Vignettatura</td><td>Disattivata</td><td>Scurisce i bordi e non serve.</td></tr>
+            <tr><td>V-Sync</td><td>Disattivato</td><td>Aggiunge input lag.</td></tr>
+            <tr><td>Anti-aliasing</td><td>Nessuno o MSAA 2x</td><td>2x leviga i bordi costando poco; su PC deboli lascialo spento.</td></tr>
+            <tr><td>Filtro anisotropico</td><td>1x - 4x</td><td>Valori alti pesano senza aiutare a giocare.</td></tr>
+            <tr><td>Bloom, distorsione, ombre proiettate</td><td>Disattivati</td><td>Effetti che pesano e possono coprire i nemici.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><p><strong>Attenzione:</strong> dopo le patch più grandi Valorant può reimpostare alcune voci. Ricontrolla le impostazioni a ogni nuovo episodio.</p></div>
+
+      <h2 id="windows">3. Windows: le 6 cose da controllare</h2>
+      <ol>
+        <li><strong>Programmi in background</strong>: su Valorant è la cosa più importante. Chiudi browser, launcher, programmi RGB e overlay che non usi mentre giochi.</li>
+        <li><strong>Frequenza del monitor</strong>: in Impostazioni → Schermo → Schermo avanzato controlla che il monitor sia davvero a 144, 165 o 240 Hz e non a 60 Hz.</li>
+        <li><strong>Driver della scheda video aggiornati</strong>: scaricali dal sito NVIDIA, AMD o Intel.</li>
+        <li><strong>Modalità gioco</strong>: in Impostazioni → Giochi → Modalità gioco, tienila attiva.</li>
+        <li><strong>Registrazione in background</strong>: se non la usi, disattiva le acquisizioni in background della Xbox Game Bar.</li>
+        <li><strong>Risparmio energia</strong>: sui portatili gioca con l'alimentatore collegato e la modalità "Prestazioni migliori".</li>
+      </ol>
+
+      <h2 id="hardware">4. Hardware: errori comuni che costano FPS</h2>
+      <ul>
+        <li><strong>RAM in single channel</strong>: su Valorant pesa più che altrove, perché il gioco dipende dalla CPU. Usa due banchi negli slot giusti e attiva il profilo XMP/EXPO nel BIOS.</li>
+        <li><strong>Temperature alte del processore</strong>: se la CPU si scalda troppo rallenta da sola. Controlla le ventole e pulisci la polvere.</li>
+        <li><strong>Cavo del monitor nella scheda madre</strong> invece che nella scheda video: sui PC fissi è un errore classico.</li>
+        <li><strong>Mouse con polling rate basso</strong>: se il tuo mouse lo permette, impostalo a 1000 Hz dal suo programma.</li>
+      </ul>
+
+      <h2 id="sapotweak">5. Fare tutto con un clic</h2>
+      <p>Seguire questa guida richiede tempo, e alcune ottimizzazioni di Windows sono difficili da fare a mano senza rischi. <strong>SapoTweak</strong> è un programma per Windows che lo fa per te:</p>
+      <ul>
+        <li><strong>Profilo Valorant con un clic</strong>: legge le impostazioni attuali e il tuo hardware (scheda video, memoria, monitor) e ti mostra cosa cambierà <em>prima</em> di applicarlo.</li>
+        <li><strong>Oltre 150 ottimizzazioni di Windows</strong> pensate per il gaming, con <strong>backup automatico</strong> e ripristino in qualsiasi momento.</li>
+        <li><strong>Sicuro</strong>: non tocca Vanguard né i file del gioco, e modifica le impostazioni solo a gioco chiuso.</li>
+        <li><strong>Supporto su Discord</strong> per qualsiasi dubbio.</li>
+      </ul>
+      <p>Sulla home puoi vedere il <a href="index.html" style="color:#cbbdff;">confronto video prima/dopo su Valorant</a>, con FPS medi e 1% low.</p>
+
+      <div class="cta">
+        <h2>Vuoi più FPS senza perdere tempo?</h2>
+        <p>Prova SapoTweak: 9,99 € al mese, disdici quando vuoi.</p>
+        <div class="actions">
+          <a class="btn" href="checkout.html">Prendi SapoTweak</a>
+          <a class="btn ghost" href="reviews.html">Leggi le recensioni</a>
+        </div>
+      </div>
+
+      <h2 id="faq">6. Domande frequenti</h2>
+      <details>
+        <summary>Perché Valorant usa così tanto la CPU?</summary>
+        <p>Valorant è un gioco leggero per la scheda video ma molto sensibile al processore: per questo programmi in background e impostazioni di Windows pesano più che in altri giochi. Liberare la CPU è il modo più efficace per alzare gli FPS e l'1% low.</p>
+      </details>
+      <details>
+        <summary>Conviene limitare gli FPS su Valorant?</summary>
+        <p>Se il PC tiene FPS molto più alti degli Hz del monitor, un limite poco sopra il doppio degli Hz riduce calore e cali improvvisi. Su PC che faticano, meglio lasciare gli FPS senza limite.</p>
+      </details>
+      <details>
+        <summary>Ottimizzare il PC può dare problemi con Vanguard?</summary>
+        <p>Cambiare le impostazioni di Windows o il file delle impostazioni del gioco non è un cheat. SapoTweak non tocca Vanguard, i file del gioco o le mod: modifica le impostazioni solo a gioco chiuso e salva sempre un backup.</p>
+      </details>
+      <details>
+        <summary>Ho tanti FPS ma sento il mouse in ritardo: perché?</summary>
+        <p>Di solito dipende da V-Sync attivo, modalità finestra invece di schermo intero o monitor impostato a 60 Hz in Windows. Controlla questi tre punti prima di tutto il resto.</p>
+      </details>
+
+      <p class="related">Giochi anche a Fortnite? Leggi la <a href="fps-fortnite.html">guida per aumentare gli FPS su Fortnite</a>.</p>
+    </article>
+
+    <footer>
+      <a href="index.html">Home</a>
+      <a href="fps-fortnite.html">Guida Fortnite</a>
+      <a href="reviews.html">Recensioni</a>
+      <a href="support.html">Supporto</a>
+      <a href="discord.html">Discord</a>
+      <a href="terms.html">Termini</a>
+      <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>
