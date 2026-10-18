@@ -1,16 +1,16 @@
 {
-  "version": "2.0.5",
+  "version": "2.0.6",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.5/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.5/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.5/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "45cf9abdb40ad68c4133218e6012110a4c3d855c3f175397d0315b6884f026f5",
-  "installerBytes": 86945312,
+  "installerSha256": "e44540e1478872974005c85cbcea7943bd0138d605eabb6aacf2cd7088dcdd14",
+  "installerBytes": 86962991,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "SapoTweak 2.0.5: nuovo pulsante 'Ottieni il ruolo Discord' (Impostazioni > Supporto) per entrare nella stanza riservata ai clienti con il ruolo Customer, collegato alla tua licenza.",
-  "manifestSignature": "QoXf7t5pdnFoHPkoY3pvjdjVY6qTW7RMIuOQSi5XB1aJCH32hinerQibupEFgEk1Io/9Ar67RI7BiundR6JkAw=="
+  "notes": "Nuovo: categoria Applica tutto con tutte le avvertenze; barra di caricamento che blocca l'app durante ogni comando; pulsante Riavvia come amministratore; recupero automatico della licenza sullo stesso PC. Corretti: rilevamento amministratore dopo il tweak Processi minimi; tweak GPU prestazioni elevate e profilo NVIDIA che cancellavano le impostazioni grafiche di Windows; profilo RSS su schede non compatibili.",
+  "manifestSignature": "mmEKL8/6dTL3Sqi9ZTQHXzJ1qwtjPMLwuw3rR/yaIAXyxF7DuneEfmpxqeTqMvsrskP9kZzkTpHQ/Eb4Ym0ZBA=="
 }
