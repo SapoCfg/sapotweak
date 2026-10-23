@@ -1,16 +1,16 @@
 {
-  "version": "2.0.6",
+  "version": "2.0.7",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.6/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "e44540e1478872974005c85cbcea7943bd0138d605eabb6aacf2cd7088dcdd14",
-  "installerBytes": 86962991,
+  "installerSha256": "850d43415c665aea87c82ac85df58f98745381453467b70979420287228932ac",
+  "installerBytes": 86972943,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "Nuovo: categoria Applica tutto con tutte le avvertenze; barra di caricamento che blocca l'app durante ogni comando; pulsante Riavvia come amministratore; recupero automatico della licenza sullo stesso PC. Corretti: rilevamento amministratore dopo il tweak Processi minimi; tweak GPU prestazioni elevate e profilo NVIDIA che cancellavano le impostazioni grafiche di Windows; profilo RSS su schede non compatibili.",
-  "manifestSignature": "mmEKL8/6dTL3Sqi9ZTQHXzJ1qwtjPMLwuw3rR/yaIAXyxF7DuneEfmpxqeTqMvsrskP9kZzkTpHQ/Eb4Ym0ZBA=="
+  "notes": "Ogni tweak si può sempre spegnere: se SapoTweak non ha un backup (tweak attivato da un'altra versione, da un altro programma o a mano), lo spegnimento riporta le impostazioni predefinite di Windows invece di mostrare 'Nessun backup da ripristinare'. Vale per registro, servizi, energia, DNS, scheda di rete, avvio delle app e impostazioni grafiche.",
+  "manifestSignature": "2u9B3t9e8xCn0BjfLpw4hUK4UbSyCGS/bWH9LoezuoylZPF3J4iOjAV4eNS3v3bmnClXHQu9G5tiGZcrlJhuCQ=="
 }
