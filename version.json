@@ -1,16 +1,16 @@
 {
-  "version": "2.0.7",
+  "version": "2.0.8",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.8/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.7/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.8/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.8/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "850d43415c665aea87c82ac85df58f98745381453467b70979420287228932ac",
-  "installerBytes": 86972943,
+  "installerSha256": "c82c9c95ce8609fbd8ae43b6711d253fe8f83e10c87cf13251344bed2eb0c146",
+  "installerBytes": 86987271,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "Ogni tweak si può sempre spegnere: se SapoTweak non ha un backup (tweak attivato da un'altra versione, da un altro programma o a mano), lo spegnimento riporta le impostazioni predefinite di Windows invece di mostrare 'Nessun backup da ripristinare'. Vale per registro, servizi, energia, DNS, scheda di rete, avvio delle app e impostazioni grafiche.",
-  "manifestSignature": "2u9B3t9e8xCn0BjfLpw4hUK4UbSyCGS/bWH9LoezuoylZPF3J4iOjAV4eNS3v3bmnClXHQu9G5tiGZcrlJhuCQ=="
+  "notes": "Applica tutto ancora piu leggero: nuove opzioni App Microsoft fuori dall'avvio (OneDrive, Edge, Teams, Copilot, Collegamento al telefono, Xbox), Rimuovi l'app Copilot, Servizi extra spenti (stampa, fax, hotspot, posizione, segnalazione errori) e Discord Gaming (accelerazione hardware e avvio con Windows spenti), tutte annullabili. A fine Applica tutto compare Riavvia ora. Giochi: limite FPS 60/120/144/165/180/240/360/420, illimitato o personalizzato; texture, distanza visiva e dettagli al minimo, scala di rendering 90%.",
+  "manifestSignature": "vzV15sGRGfwMUzoih3lKyaXHqn2+/j+2edVw4mCAbT7L/a3WUiAAjLnjRhqdrCE6rXc3p9cevadqGbrZnsriCA=="
 }
