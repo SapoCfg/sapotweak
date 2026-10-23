@@ -1,16 +1,16 @@
 {
-  "version": "2.0.9",
+  "version": "2.0.10",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.9/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.9/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.9/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "0a07b2835195bdbca32d134ce32b27b5779bdad6b744704dd86e5f39268f77c0",
-  "installerBytes": 86996278,
+  "installerSha256": "6fed44536a0af509effbd179910ca269ac4e98a0e88ff830c09c2730470671f4",
+  "installerBytes": 86999029,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "Opti Discord aggiornato alla guida ZenkyTweaks: widget overlay spenti, privacy attivita (anche streaming), notifiche avanzate e /tts spenti, modalita streamer automatica spenta, anteprime stream e log di debug spenti, avvio automatico spento. Etichette verificate sul Discord attuale (italiano e inglese), menu a tendina nuovi, attesa della finestra principale.",
-  "manifestSignature": "1qIwRvC3OUFBMj6OlFEvti92aVGD8rn+jDr+t7QirKM3IFKvV5jN9p3JK9ZAW0DfMNHc5sUO8Arui6eiqGNUAg=="
+  "notes": "Opti Discord: impostazioni di Discord scritte correttamente (prima Discord le azzerava), chiusura pulita di Discord cosi le impostazioni restano salvate, Logging di debug spento con conferma del riavvio, nuovo tentativo automatico se Discord ricarica la pagina.",
+  "manifestSignature": "Nbvwyvjh9kanztn66r+Cz3Hhwpw+Wv3LmlC3zroL6SBdU6IDYkkd51E9cVyTKUOX8MFxcmKJNuXxD2XFZJZ0Dg=="
 }
