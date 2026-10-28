@@ -41,7 +41,7 @@
     if (!link) return;
     if (link.matches("a[href^='checkout.html']")) {
       const url = new URL(link.href, window.location.href);
-      const plan = ["monthly", "quarterly"].includes(url.searchParams.get("plan"))
+      const plan = ["monthly", "quarterly", "semiannual"].includes(url.searchParams.get("plan"))
         ? url.searchParams.get("plan") : "none";
       track("plans_opened", plan);
       return;
@@ -50,6 +50,8 @@
       track("checkout_opened", "monthly");
     } else if (link.id === "quarterlyPlan" && link.getAttribute("aria-disabled") === "false") {
       track("checkout_opened", "quarterly");
+    } else if (link.id === "semiannualPlan" && link.getAttribute("aria-disabled") === "false") {
+      track("checkout_opened", "semiannual");
     }
   }, { capture: true });
 })();
