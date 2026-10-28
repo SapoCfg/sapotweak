@@ -1,0 +1,166 @@
+/* Tema Halloween stagionale: attivo solo quando halloween.js aggiunge le classi a <html>. */
+
+/* ---------- barra promo SAPOWEEN ---------- */
+.sw-promo {
+  position: relative;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  padding: 9px 44px 9px 16px;
+  font: 600 13.5px/1.35 "Manrope", "Segoe UI", sans-serif;
+  color: #fff4ea;
+  text-align: center;
+  background:
+    radial-gradient(420px 60px at 50% 0%, rgba(255, 154, 77, .28), transparent 70%),
+    linear-gradient(90deg, #1b0f22 0%, #2c1430 45%, #3a1a24 100%);
+  border-bottom: 1px solid rgba(255, 154, 77, .35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
+}
+.sw-promo b { color: #ffb36b; font-weight: 800; }
+.sw-promo .sw-code {
+  font: 800 13px/1 "Manrope", "Segoe UI", sans-serif;
+  letter-spacing: .12em;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 179, 107, .85);
+  background: rgba(255, 138, 61, .14);
+  cursor: pointer;
+}
+.sw-promo .sw-code:hover { background: rgba(255, 138, 61, .26); }
+.sw-promo a.sw-cta {
+  color: #1b0d05;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffb36b, #ff8a3d);
+  box-shadow: 0 0 18px rgba(255, 138, 61, .45);
+}
+.sw-promo a.sw-cta:hover { filter: brightness(1.07); }
+.sw-promo .sw-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 244, 234, .7);
+  font: 600 18px/1 "Manrope", sans-serif;
+  cursor: pointer;
+}
+.sw-promo .sw-close:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.sw-promo .sw-short { display: none; }
+@media (max-width: 640px) {
+  .sw-promo { gap: 8px; font-size: 12.5px; padding: 7px 38px 7px 10px; flex-wrap: nowrap; }
+  .sw-promo .sw-long, .sw-promo a.sw-cta { display: none; }
+  .sw-promo .sw-short { display: inline; }
+  .sw-promo .sw-code { padding: 5px 8px; font-size: 12px; }
+}
+
+/* ---------- colori: accenti zucca sui titoli ---------- */
+html.sw-halloween {
+  --blue-bright: #ffa45c;
+  --accent-1: #ffa45c;
+}
+
+/* ---------- cielo dietro i contenuti ---------- */
+html.sw-halloween .sw-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 380px at 50% 112%, rgba(255, 122, 46, .16), transparent 70%),
+    radial-gradient(700px 420px at 88% 8%, rgba(255, 170, 90, .07), transparent 70%);
+}
+html.sw-halloween .sw-moon {
+  position: absolute;
+  right: 6vw;
+  top: 120px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #fff3df 0%, #ffd29a 48%, #e9853d 100%);
+  box-shadow: 0 0 70px 18px rgba(255, 154, 77, .28), 0 0 180px 60px rgba(255, 154, 77, .10);
+  opacity: .5;
+}
+html.sw-halloween .sw-fog {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 160px;
+  bottom: -40px;
+  background:
+    radial-gradient(40% 60% at 20% 60%, rgba(214, 190, 255, .10), transparent 70%),
+    radial-gradient(35% 55% at 55% 70%, rgba(214, 190, 255, .08), transparent 70%),
+    radial-gradient(40% 60% at 85% 60%, rgba(214, 190, 255, .10), transparent 70%);
+  animation: sw-fog 60s linear infinite;
+  will-change: transform;
+}
+html.sw-halloween .sw-fog.b { bottom: -70px; opacity: .7; animation-duration: 90s; animation-direction: reverse; }
+@keyframes sw-fog { from { transform: translateX(0); } to { transform: translateX(25%); } }
+
+/* ---------- livello animazioni (sopra i contenuti, mai cliccabile) ---------- */
+html.sw-halloween .sw-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* pipistrelli */
+.sw-bat { position: absolute; left: 0; top: 0; width: 46px; opacity: 0; will-change: transform, opacity; }
+.sw-bat .sw-bob { display: block; animation: sw-bob 2.4s ease-in-out infinite; }
+.sw-bat svg { display: block; width: 100%; height: auto; fill: #120a18; filter: drop-shadow(0 0 6px rgba(255, 154, 77, .35)); transform-origin: 50% 40%; animation: sw-flap .22s ease-in-out infinite alternate; }
+.sw-bat.b1 { top: 16vh; animation: sw-fly-r 22s linear 2s infinite; }
+.sw-bat.b2 { top: 34vh; width: 34px; animation: sw-fly-l 28s linear 9s infinite; }
+.sw-bat.b3 { top: 9vh; width: 28px; animation: sw-fly-r 34s linear 17s infinite; }
+@keyframes sw-flap { from { transform: scaleY(1); } to { transform: scaleY(.45); } }
+@keyframes sw-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+@keyframes sw-fly-r {
+  0% { transform: translate(-8vw, 0) rotate(4deg); opacity: 0; }
+  4% { opacity: .9; }
+  45% { transform: translate(48vw, 6vh) rotate(-3deg); }
+  92% { opacity: .9; }
+  100% { transform: translate(108vw, -4vh) rotate(5deg); opacity: 0; }
+}
+@keyframes sw-fly-l {
+  0% { transform: translate(108vw, 0) scaleX(-1); opacity: 0; }
+  4% { opacity: .85; }
+  50% { transform: translate(50vw, -5vh) scaleX(-1); }
+  92% { opacity: .85; }
+  100% { transform: translate(-8vw, 3vh) scaleX(-1); opacity: 0; }
+}
+
+/* fantasmi */
+.sw-ghost { position: absolute; width: 54px; opacity: 0; will-change: transform, opacity; }
+.sw-ghost svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 0 14px rgba(196, 160, 255, .55)); }
+.sw-ghost.g1 { left: 2.5vw; bottom: 14vh; animation: sw-ghost 9s ease-in-out 1s infinite; }
+.sw-ghost.g2 { right: 3vw; bottom: 38vh; width: 42px; animation: sw-ghost 11s ease-in-out 5s infinite; }
+@keyframes sw-ghost {
+  0% { transform: translate(0, 12px) rotate(-4deg); opacity: 0; }
+  15% { opacity: .42; }
+  50% { transform: translate(10px, -16px) rotate(4deg); opacity: .5; }
+  85% { opacity: .42; }
+  100% { transform: translate(0, 12px) rotate(-4deg); opacity: 0; }
+}
+
+@media (max-width: 760px) {
+  .sw-bat.b3, .sw-ghost.g2 { display: none; }
+  html.sw-halloween .sw-moon { width: 90px; height: 90px; top: 90px; opacity: .35; }
+  .sw-ghost.g1 { width: 38px; bottom: 10vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.sw-halloween .sw-fx { display: none; }
+  html.sw-halloween .sw-fog { animation: none; }
+}
