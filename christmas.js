@@ -10,9 +10,9 @@
   const promoOn = now < promoEnd;
 
   const copy = {
-    it: { lead: "<b>TWEAKMAS</b>: -15% sul primo pagamento con il codice", short: "<b>-15%</b> con il codice", until: "fino al 25 dicembre", untilShort: "fino al 25/12", cta: "Scegli il piano →", copied: "Copiato!", close: "Chiudi" },
-    en: { lead: "<b>TWEAKMAS</b>: 15% off your first payment with code", short: "<b>15% off</b> with code", until: "until December 25", untilShort: "until Dec 25", cta: "Choose a plan →", copied: "Copied!", close: "Close" },
-    es: { lead: "<b>TWEAKMAS</b>: -15% en tu primer pago con el código", short: "<b>-15%</b> con el código", until: "hasta el 25 de diciembre", untilShort: "hasta el 25/12", cta: "Elegir plan →", copied: "¡Copiado!", close: "Cerrar" },
+    it: { lead: "<b>TWEAKMAS</b>: -15% sul primo pagamento con il codice", short: "<b>-15%</b> con il codice", until: "valido fino al 25 dicembre alle 23:59", untilShort: "fino al 25/12 ore 23:59", cta: "Scegli il piano →", copied: "Copiato!", close: "Chiudi" },
+    en: { lead: "<b>TWEAKMAS</b>: 15% off your first payment with code", short: "<b>15% off</b> with code", until: "valid until December 25, 11:59 PM CET", untilShort: "until Dec 25, 11:59 PM", cta: "Choose a plan →", copied: "Copied!", close: "Close" },
+    es: { lead: "<b>TWEAKMAS</b>: -15% en tu primer pago con el código", short: "<b>-15%</b> con el código", until: "válido hasta el 25 de diciembre a las 23:59", untilShort: "hasta el 25/12, 23:59", cta: "Elegir plan →", copied: "¡Copiado!", close: "Cerrar" },
   };
   const lang = () => {
     let saved = "";
