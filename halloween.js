@@ -4,10 +4,11 @@
   const now = new Date();
   const themeStart = new Date("2026-10-20T00:00:00+02:00");
   const themeEnd = new Date("2026-11-02T00:00:00+01:00");
-  const promoEnd = new Date("2026-11-08T00:00:00+01:00");
+  // SAPOWEEN disattivato il 3 novembre (sostituito da TWEAKMAS in christmas.js).
+  const promoEnd = new Date("2026-11-03T00:00:00+01:00");
   const force = new URLSearchParams(location.search).get("theme") === "halloween";
   const themeOn = force || (now >= themeStart && now < themeEnd);
-  const promoOn = force || now < promoEnd;
+  const promoOn = now < promoEnd;
   if (!themeOn && !promoOn) return;
 
   const copy = {

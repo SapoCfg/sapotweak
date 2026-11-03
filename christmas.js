@@ -4,8 +4,63 @@
   const now = new Date();
   const start = new Date("2026-11-03T00:00:00+01:00");
   const end = new Date("2027-01-07T00:00:00+01:00");
+  const promoEnd = new Date("2026-12-26T00:00:00+01:00");
   const force = new URLSearchParams(location.search).get("theme") === "christmas";
   if (!force && (now < start || now >= end)) return;
+  const promoOn = now < promoEnd;
+
+  const copy = {
+    it: { lead: "<b>TWEAKMAS</b>: -15% sul primo pagamento con il codice", short: "<b>-15%</b> con il codice", until: "fino al 25 dicembre", untilShort: "fino al 25/12", cta: "Scegli il piano →", copied: "Copiato!", close: "Chiudi" },
+    en: { lead: "<b>TWEAKMAS</b>: 15% off your first payment with code", short: "<b>15% off</b> with code", until: "until December 25", untilShort: "until Dec 25", cta: "Choose a plan →", copied: "Copied!", close: "Close" },
+    es: { lead: "<b>TWEAKMAS</b>: -15% en tu primer pago con el código", short: "<b>-15%</b> con el código", until: "hasta el 25 de diciembre", untilShort: "hasta el 25/12", cta: "Elegir plan →", copied: "¡Copiado!", close: "Cerrar" },
+  };
+  const lang = () => {
+    let saved = "";
+    try { saved = localStorage.getItem("sapotweak_site_lang") || ""; } catch { /* storage bloccato */ }
+    const value = (saved || document.documentElement.lang || "it").slice(0, 2).toLowerCase();
+    return copy[value] ? value : "it";
+  };
+  const closedKey = "sapotweak_tweakmas_bar_closed";
+  const isClosed = () => { try { return sessionStorage.getItem(closedKey) === "1"; } catch { return false; } };
+
+  // Barra promo TWEAKMAS (stile in halloween.css, colori natalizi in christmas.css).
+  function renderBar(bar) {
+    const t = copy[lang()];
+    const onCheckout = /checkout\.html$/.test(location.pathname);
+    bar.innerHTML =
+      `<span>🎄 <span class="sw-long">${t.lead}</span><span class="sw-short">${t.short}</span></span>` +
+      `<button type="button" class="sw-code" title="${t.copied}">TWEAKMAS</button>` +
+      `<span class="sw-sep">·</span><span class="sw-long">${t.until}</span><span class="sw-short">${t.untilShort}</span>` +
+      (onCheckout ? "" : `<a class="sw-cta" href="checkout.html">${t.cta}</a>`) +
+      `<button type="button" class="sw-close" aria-label="${t.close}">×</button>`;
+    bar.querySelector(".sw-code").addEventListener("click", event => {
+      const button = event.currentTarget;
+      const done = () => { button.textContent = t.copied; setTimeout(() => { button.textContent = "TWEAKMAS"; }, 1400); };
+      if (navigator.clipboard) navigator.clipboard.writeText("TWEAKMAS").then(done, done); else done();
+    });
+    bar.querySelector(".sw-close").addEventListener("click", () => {
+      try { sessionStorage.setItem(closedKey, "1"); } catch { /* storage bloccato */ }
+      bar.remove();
+    });
+  }
+
+  function promoBar() {
+    if (!promoOn || isClosed()) return null;
+    const bar = document.createElement("div");
+    bar.className = "sw-promo";
+    bar.setAttribute("role", "region");
+    bar.setAttribute("aria-label", "TWEAKMAS");
+    renderBar(bar);
+    document.body.prepend(bar);
+    // Le pagine cambiano lingua senza ricaricare: aggiorna il testo della barra.
+    const refresh = () => { if (bar.isConnected) renderBar(bar); };
+    new MutationObserver(refresh).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    document.addEventListener("click", event => {
+      if (event.target.closest("[data-lang], .lang-btn, .lang-switch button, [data-set-lang]")) setTimeout(refresh, 60);
+    });
+    document.addEventListener("change", event => { if (event.target.matches("select")) setTimeout(refresh, 60); });
+    return bar;
+  }
 
   function garland(width) {
     const step = 46;
@@ -35,7 +90,7 @@
     lights.className = "sw-garland";
     lights.setAttribute("aria-hidden", "true");
     lights.innerHTML = garland(Math.max(window.innerWidth, 1920));
-    const bar = document.querySelector(".sw-promo");
+    const bar = promoBar();
     if (bar) bar.after(lights); else document.body.prepend(lights);
 
     const snow = document.createElement("div");
