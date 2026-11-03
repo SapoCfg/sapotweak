@@ -1,16 +1,16 @@
 {
-  "version": "2.0.10",
+  "version": "2.0.11",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.11/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.10/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.11/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.11/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "6fed44536a0af509effbd179910ca269ac4e98a0e88ff830c09c2730470671f4",
-  "installerBytes": 86999029,
+  "installerSha256": "29ec67925de66f3bf5917945f3b172b47969771e244ebe2cf25d3e1104b03982",
+  "installerBytes": 87000564,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "Opti Discord: impostazioni di Discord scritte correttamente (prima Discord le azzerava), chiusura pulita di Discord cosi le impostazioni restano salvate, Logging di debug spento con conferma del riavvio, nuovo tentativo automatico se Discord ricarica la pagina.",
-  "manifestSignature": "Nbvwyvjh9kanztn66r+Cz3Hhwpw+Wv3LmlC3zroL6SBdU6IDYkkd51E9cVyTKUOX8MFxcmKJNuXxD2XFZJZ0Dg=="
+  "notes": "Fortnite: lo stretched ora resta (tutte le chiavi di risoluzione impostate e file bloccato in sola lettura), risoluzione 3D al 95%, tutto il resto al minimo (anche terreno e Nanite), modalita Prestazioni allineata a come la salva oggi Fortnite. Ripristina toglie anche il blocco.",
+  "manifestSignature": "iWvwwewS7okdvZ6v4hafKspgzt8ltP9oMbl1Lfjj9iQOy7hE4ulj9KgjGSt7paMAjYbvI2W0otxIzhQCBffBAA=="
 }
