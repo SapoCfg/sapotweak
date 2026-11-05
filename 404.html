@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SapoTweak - Pagina non trovata</title>
+<script>
+  // Vecchi link di download (sapotweak.org/download/...): portano all'installer dell'ultima versione su GitHub.
+  (function () {
+    var p = location.pathname.toLowerCase();
+    if (p.indexOf('/download') === 0 || /sapotweak-setup\.exe$/.test(p)) {
+      location.replace('https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe');
+    }
+  })();
+</script>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif; color: #f4f1f6;
+    background: radial-gradient(circle at 50% 0%, rgba(121,84,151,.25), transparent 45%), #0c0a11; }
+  main { max-width: 520px; text-align: center; }
+  h1 { margin: 0 0 10px; font-size: 64px; letter-spacing: 2px; }
+  p { margin: 0 0 22px; color: #aaa2b2; line-height: 1.6; }
+  a { display: inline-block; margin: 6px; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; color: #fff;
+    background: #73558e; border: 1px solid rgba(190,174,205,.3); }
+  a.ghost { background: transparent; }
+</style>
+</head>
+<body>
+<main>
+  <h1>404</h1>
+  <p>Questa pagina non esiste. Se cercavi il programma, scarica l'ultima versione qui sotto.</p>
+  <a href="https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe">Scarica SapoTweak</a>
+  <a class="ghost" href="/">Torna al sito</a>
+</main>
+</body>
+</html>
