@@ -1,16 +1,16 @@
 {
-  "version": "2.0.12",
+  "version": "2.0.13",
   "platform": "Windows x64",
-  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.12/SapoTweak-Setup.exe",
+  "downloadUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.13/SapoTweak-Setup.exe",
   "latestDownloadUrl": "https://github.com/SapoCfg/sapotweak/releases/latest/download/SapoTweak-Setup.exe",
-  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.12/release-manifest.json",
-  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.12/SHA256SUMS.txt",
+  "manifestUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.13/release-manifest.json",
+  "checksumUrl": "https://github.com/SapoCfg/sapotweak/releases/download/v2.0.13/SHA256SUMS.txt",
   "introVideoUrl": "intro-coming-soon.png",
-  "installerSha256": "9121c89f4076200a0873aad3a1532abaf345f86cb649fc1c4ed67000ccf2304c",
-  "installerBytes": 87051517,
+  "installerSha256": "377b7593845e8d4c9fd80905e2f1379519faa292dc1fc8330b151077b7e78a7c",
+  "installerBytes": 87059091,
   "installerSigned": false,
   "signatureAlgorithm": "Ed25519",
   "signatureKeyId": "sapotweak-update-2026-01",
-  "notes": "Tema di Natale: neve che cade, cappello di Babbo Natale sul logo, colori rosso e verde, ghirlanda con luci (attivo dal 1 novembre al 6 gennaio).",
-  "manifestSignature": "MPcztj5D0fuarzF//L0yWXU4MY5LoFIqaMLMWxk0USJsUku65jTJOJE1JAH6vS8C4dySE7t4Rvw0LKlm9S+3Cw=="
+  "notes": "Nuovo profilo ROB RUN: grafica al minimo, scala di rendering 100%, stretched con risoluzione di Windows (ripristinabile).",
+  "manifestSignature": "I5y6Ln+thNtpnxtQ1LfSPglLbJkDGZmZYbR4PL94k5wvc92bDoRZRdDdgrxOjsLoiIs0WTfDukm+eWxbP6e2Aw=="
 }
