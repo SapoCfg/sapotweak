@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rob Run FPS Boost: impostazioni migliori e stretched - Guida 2026 | SapoTweak</title>
+  <meta name="description" content="Come aumentare gli FPS su ROB RUN: impostazioni grafiche migliori, stretched 1440x1080, polling rate del mouse e le opzioni di avvio Steam che NON servono. Guida testata sul gioco.">
+  <link rel="canonical" href="https://sapotweak.org/fps-robrun.html">
+  <link rel="alternate" hreflang="it" href="https://sapotweak.org/fps-robrun.html">
+  <link rel="alternate" hreflang="en" href="https://sapotweak.org/fps-robrun-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://sapotweak.org/fps-robrun-en.html">
+  <meta name="theme-color" content="#8b3dff">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SapoTweak">
+  <meta property="og:url" content="https://sapotweak.org/fps-robrun.html">
+  <meta property="og:title" content="Rob Run FPS Boost: impostazioni migliori e stretched - Guida 2026">
+  <meta property="og:description" content="Impostazioni grafiche al minimo con i valori giusti, stretched, polling rate e i finti FPS fix di TikTok smontati.">
+  <meta property="og:image" content="https://sapotweak.org/benchmarks/robrun-guida.jpg">
+  <link rel="icon" href="sapotweakpng.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Rob Run FPS Boost: impostazioni migliori e stretched - Guida 2026",
+        "inLanguage": "it",
+        "datePublished": "2026-11-16",
+        "dateModified": "2026-11-16",
+        "image": "https://sapotweak.org/benchmarks/robrun-guida.jpg",
+        "author": { "@type": "Organization", "name": "SapoTweak", "url": "https://sapotweak.org/" },
+        "publisher": { "@type": "Organization", "name": "SapoTweak", "url": "https://sapotweak.org/" },
+        "mainEntityOfPage": "https://sapotweak.org/fps-robrun.html"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Le opzioni di avvio Steam aumentano gli FPS su Rob Run?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Comandi come -nojoy, -nohltv o -particles sono di CS2 e Rob Run (motore Unity) li ignora. -force-d3d11 non serve perché il gioco usa già DirectX 11, e -window-mode exclusive nel nostro test non ha cambiato né FPS né modalità di presentazione." }
+          },
+          {
+            "@type": "Question",
+            "name": "Come si mette lo stretched su Rob Run?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Rob Run a schermo intero usa la risoluzione di Windows: imposta la stessa risoluzione (per esempio 1440x1080) sia in Windows sia nel gioco, e nel pannello NVIDIA o AMD imposta il ridimensionamento a schermo intero per evitare le bande nere." }
+          },
+          {
+            "@type": "Question",
+            "name": "Perché il mouse fa scattare Rob Run?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Con polling rate oltre 1000 Hz (2000, 4000, 8000 Hz) Rob Run perde fotogrammi quando muovi il mouse. Imposta 1000 Hz dal programma del mouse." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ottimizzare il PC può causare un ban su Rob Run?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Cambiare le impostazioni grafiche del gioco o di Windows non è un cheat. SapoTweak non tocca anti-cheat né file del gioco: modifica solo il file delle impostazioni, a gioco chiuso, e salva sempre un backup." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090814;
+      --panel: rgba(22, 20, 40, 0.9);
+      --panel-2: rgba(139,108,255,.08);
+      --border: rgba(255,255,255,.08);
+      --text: #f5f1ff;
+      --muted: #c7c2d8;
+      --accent: #8b6cff;
+      --accent-2: #5b3df5;
+      --game: #c8f53a;
+      --bad: #ff5a6e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139,108,255,.18), transparent 30%),
+        linear-gradient(180deg, #0b0917 0%, #090814 100%);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { width: min(920px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+    .brand { font-weight: 900; font-size: 24px; text-decoration: none; color: var(--text); }
+    .brand span { color: var(--accent); }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    .lang { color: #a79fc3; text-decoration: none; font-weight: 700; font-size: 14px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px; }
+    .btn {
+      display: inline-block; text-decoration: none; color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 999px; padding: 11px 18px; font-weight: 800; font-size: 14px;
+    }
+    .btn.ghost { background: transparent; border: 1px solid var(--border); }
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 28px;
+      padding: 34px 28px; box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    }
+    .kicker { color: var(--game); font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 6px 0 12px; font-size: clamp(28px, 4.2vw, 44px); line-height: 1.15; }
+    h2 { margin: 36px 0 10px; font-size: 22px; color: #efe9ff; }
+    p, li { color: var(--muted); font-size: 16px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); }
+    code { background: rgba(255,255,255,.07); padding: 1px 6px; border-radius: 6px; font-size: 14px; color: var(--text); word-break: break-all; }
+    .meta { color: #a79fc3; font-size: 14px; }
+    .hero-img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--border); margin: 18px 0 6px; display: block; }
+    .caption { font-size: 13px; color: #a79fc3; margin: 0 0 8px; }
+    .toc { background: var(--panel-2); border: 1px solid var(--border); border-radius: 18px; padding: 16px 20px; margin: 22px 0; }
+    .toc ol { margin: 6px 0 0; padding-left: 20px; }
+    .toc a { color: #cbbdff; text-decoration: none; }
+    .table-wrap { overflow-x: auto; margin: 12px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 460px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--text); background: rgba(255,255,255,.03); }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    td.no { color: var(--bad); font-weight: 700; }
+    td.ok { color: var(--game); font-weight: 700; }
+    .tip { border-left: 3px solid var(--game); background: rgba(200,245,58,.07); padding: 12px 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+    .tip.warn { border-left-color: var(--bad); background: rgba(255,90,110,.07); }
+    .tip p { margin: 0; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+    .stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 16px; padding: 14px; text-align: center; }
+    .stat b { display: block; font-size: 24px; color: var(--game); }
+    .stat span { font-size: 13px; color: #a79fc3; }
+    .cta {
+      margin-top: 40px; padding: 26px 24px; border-radius: 22px; text-align: center;
+      background: linear-gradient(135deg, rgba(139,108,255,.2), rgba(200,245,58,.1));
+      border: 1px solid rgba(139,108,255,.35);
+    }
+    .cta h2 { margin-top: 0; }
+    .cta .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+    details { border-bottom: 1px solid var(--border); padding: 12px 0; }
+    summary { cursor: pointer; font-weight: 700; color: var(--text); }
+    details p { margin: 8px 0 0; }
+    .related { margin-top: 26px; }
+    .related a { color: #cbbdff; }
+    footer { margin-top: 28px; text-align: center; font-size: 14px; }
+    footer a { color: #a79fc3; margin: 0 8px; }
+    @media (max-width: 560px) { .card { padding: 26px 18px; } .stats { grid-template-columns: 1fr; } }
+  </style>
+<link rel="stylesheet" href="halloween.css"><script src="halloween.js" defer></script><link rel="stylesheet" href="christmas.css"><script src="christmas.js" defer></script></head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="index.html">Sapo<span>Tweak</span></a>
+      <div class="top-actions">
+        <a class="lang" href="fps-robrun-en.html" hreflang="en">EN</a>
+        <a class="btn" href="index.html">Scopri SapoTweak</a>
+      </div>
+    </div>
+
+    <article class="card">
+      <span class="kicker">Guida Rob Run · FPS boost</span>
+      <h1>Rob Run FPS boost: impostazioni migliori, stretched e finti "FPS fix"</h1>
+      <p class="meta">Aggiornata il 16 novembre 2026 · Testata sulla build 0.7 del gioco · Lettura: 6 minuti</p>
+      <img class="hero-img" src="benchmarks/robrun-guida.jpg" alt="SapoTweak x Rob Run: profilo FPS con grafica al minimo, stretched 1440x1080 e scala di rendering al 100%" width="1280" height="720">
+      <p class="caption">Il profilo Rob Run di SapoTweak: tutto al minimo, stretched in un clic e immagine nitida.</p>
+
+      <p>Rob Run è in <strong>accesso anticipato</strong> e su molti PC scatta proprio nei momenti che contano: una rapina con la polizia addosso o una sparatoria in città. Su TikTok girano tanti "FPS fix", ma la maggior parte <strong>non fa niente</strong>. In questa guida trovi solo quello che abbiamo <strong>controllato davvero sul gioco</strong>.</p>
+
+      <nav class="toc" aria-label="Indice">
+        <strong>In questa guida</strong>
+        <ol>
+          <li><a href="#impostazioni">Impostazioni grafiche migliori</a></li>
+          <li><a href="#stretched">Stretched su Rob Run (1440x1080)</a></li>
+          <li><a href="#mouse">Polling rate del mouse: massimo 1000 Hz</a></li>
+          <li><a href="#avvio">Opzioni di avvio Steam: cosa serve davvero</a></li>
+          <li><a href="#windows">Windows: le cose da controllare</a></li>
+          <li><a href="#sapotweak">Fare tutto con un clic</a></li>
+          <li><a href="#faq">Domande frequenti</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="impostazioni">1. Impostazioni grafiche migliori</h2>
+      <p>Le trovi in <strong>Settings → Graphics</strong>. Sono i valori più bassi che il gioco accetta, tranne la scala di rendering, che va lasciata a 1,0 per non vedere l'immagine sgranata.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Impostazione</th><th>Consiglio</th><th>Perché</th></tr></thead>
+          <tbody>
+            <tr><td>Fullscreen</td><td>Attivo</td><td>Il gioco usa tutto lo schermo e Windows gli lascia la strada più veloce verso il monitor.</td></tr>
+            <tr><td>Render Resolution</td><td>1,0 (mai sotto 0,9)</td><td>Più in basso l'immagine diventa sfocata e i nemici lontani si vedono peggio.</td></tr>
+            <tr><td>VSync</td><td>Spento</td><td>Aggiunge ritardo all'input.</td></tr>
+            <tr><td>Frame Rate</td><td>Uguale agli Hz del monitor (o più)</td><td>Un limite stabile dà frametime più regolari.</td></tr>
+            <tr><td>Anti-aliasing</td><td>Disabled</td><td>Pesa sulla scheda video e ammorbidisce l'immagine.</td></tr>
+            <tr><td>Post-processing</td><td>Spento</td><td>Spegne anche sfocature, profondità di campo ed effetti di luce.</td></tr>
+            <tr><td>Additional Light</td><td>Spento</td><td>Le luci extra pesano molto in città e di notte.</td></tr>
+            <tr><td>Shadows</td><td>Disabled</td><td>È la voce più pesante; "Minimum Quality" non è il minimo vero.</td></tr>
+            <tr><td>Texture Quality</td><td>Low</td><td>Meno memoria video occupata e meno scatti nei caricamenti.</td></tr>
+            <tr><td>Level of Detail</td><td>0,4 (minimo)</td><td>Meno dettagli sugli oggetti lontani.</td></tr>
+            <tr><td>LOD Crossfade</td><td>Spento</td><td>Evita il lavoro extra nelle transizioni tra dettagli.</td></tr>
+            <tr><td>Object Visibility Distance</td><td>Low</td><td>Meno oggetti da disegnare in lontananza.</td></tr>
+            <tr><td>Water</td><td>Minimum Quality</td><td>"Low Quality" non è il minimo: scorri ancora a sinistra.</td></tr>
+            <tr><td>Grass / Grass Draw Distance</td><td>Minimum Quality / Low</td><td>L'erba nel deserto pesa più di quanto sembri.</td></tr>
+            <tr><td>Interface Window Blur</td><td>Spento</td><td>Toglie la sfocatura dietro i menu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><p><strong>Attenzione ai nomi:</strong> per alcune voci il minimo vero ha un nome diverso. Per le ombre è "Disabled", non "Minimum Quality", e per l'acqua è "Minimum Quality", non "Low Quality". Premi la freccia a sinistra finché il valore non torna in cima alla lista.</p></div>
+
+      <h2 id="stretched">2. Stretched su Rob Run (1440x1080)</h2>
+      <p>Rob Run a schermo intero <strong>usa la risoluzione di Windows</strong>, non solo quella del gioco. Per lo stretched servono tre passi:</p>
+      <ol>
+        <li>In Windows: <strong>Impostazioni → Schermo → Risoluzione</strong> e scegli per esempio <strong>1440x1080</strong>.</li>
+        <li>Nel gioco: <strong>Screen Resolution</strong> alla stessa risoluzione.</li>
+        <li>Nel pannello NVIDIA (o AMD): <strong>Regola dimensioni e posizione desktop → Schermo intero</strong>, "esegui ridimensionamento su: GPU". Senza questo passo vedi le bande nere ai lati.</li>
+      </ol>
+      <p>Quando hai finito di giocare, ricordati di rimettere la risoluzione nativa in Windows.</p>
+
+      <h2 id="mouse">3. Polling rate del mouse: massimo 1000 Hz</h2>
+      <p>Con il polling rate oltre <strong>1000 Hz</strong> (2000, 4000, 8000 Hz) Rob Run inizia a <strong>perdere fotogrammi quando muovi il mouse</strong>: è uno degli scatti più fastidiosi e molti pensano sia colpa del PC.</p>
+      <ol>
+        <li>Apri il programma del mouse (Logitech G Hub, Razer Synapse, WLMOUSE e simili).</li>
+        <li>Cerca <strong>Polling Rate</strong> o <strong>Report Rate</strong>.</li>
+        <li>Imposta <strong>1000 Hz</strong> e salva.</li>
+      </ol>
+
+      <h2 id="avvio">4. Opzioni di avvio Steam: cosa serve davvero</h2>
+      <img class="hero-img" src="benchmarks/robrun-opzioni-avvio.jpg" alt="Opzioni di avvio Steam per Rob Run che girano su TikTok: sono finte e non aumentano gli FPS" width="1280" height="720" loading="lazy">
+      <p class="caption">Le opzioni di avvio "FPS fix" che girano sui social.</p>
+      <p>Sui social girano liste di comandi da incollare in <strong>Steam → Rob Run → Proprietà → Opzioni di avvio</strong>. Le abbiamo controllate sul gioco:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Comando</th><th>Funziona?</th><th>Perché</th></tr></thead>
+          <tbody>
+            <tr><td><code>-nojoy -nohltv -particles 1 -softparticlesdefaultoff</code></td><td class="no">No</td><td>Sono comandi di <strong>CS2</strong> (motore Source). Rob Run usa <strong>Unity</strong> e li ignora.</td></tr>
+            <tr><td><code>-force-d3d11</code></td><td class="no">No</td><td>Rob Run usa <strong>già DirectX 11</strong> da solo: lo dice il suo file di log.</td></tr>
+            <tr><td><code>exclusive</code>, <code>-dx11</code></td><td class="no">No</td><td>Non esistono: sono scritti male e non fanno niente.</td></tr>
+            <tr><td><code>-window-mode exclusive</code></td><td class="no">No</td><td>Nel nostro test non ha cambiato né gli FPS né il modo in cui il gioco manda i frame allo schermo.</td></tr>
+            <tr><td><code>-nolog</code></td><td>Quasi nulla</td><td>Spegne solo il file di log. Effetto minimo e, se il gioco crasha, non resta traccia dell'errore.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Abbiamo misurato Rob Run con PresentMon (lo strumento usato da CapFrameX) su un PC con RTX 5070. Con il gioco in primo piano e <strong>senza nessuna opzione di avvio</strong> va già nel modo più veloce possibile:</p>
+      <div class="stats">
+        <div class="stat"><b>Independent Flip</b><span>frame inviati direttamente allo schermo</span></div>
+        <div class="stat"><b>~1 ms</b><span>dal frame pronto allo schermo</span></div>
+        <div class="stat"><b>DirectX 11</b><span>già attivo di default</span></div>
+      </div>
+      <div class="tip warn"><p><strong>In breve:</strong> lascia vuote le opzioni di avvio. Gli FPS si guadagnano con le impostazioni del gioco e di Windows, non con comandi copiati da altri giochi.</p></div>
+
+      <h2 id="windows">5. Windows: le cose da controllare</h2>
+      <ol>
+        <li><strong>Driver della scheda video aggiornati</strong> dal sito NVIDIA, AMD o Intel.</li>
+        <li><strong>Frequenza del monitor</strong>: in Impostazioni → Schermo → Schermo avanzato controlla che non sia rimasta a 60 Hz.</li>
+        <li><strong>Niente finestre sopra il gioco</strong>: un programma sempre in primo piano sopra Rob Run costringe Windows a ricomporre l'immagine e aggiunge ritardo.</li>
+        <li><strong>Modalità gioco</strong> attiva in Impostazioni → Giochi.</li>
+        <li><strong>Programmi in background</strong>: chiudi browser e launcher che non usi mentre giochi.</li>
+        <li><strong>Portatili</strong>: alimentatore collegato e modalità "Prestazioni migliori".</li>
+      </ol>
+
+      <h2 id="sapotweak">6. Fare tutto con un clic</h2>
+      <p>Mettere a mano ogni voce, cambiare risoluzione e ricordarsi di rimetterla richiede tempo. <strong>SapoTweak</strong> è un programma per Windows che lo fa per te:</p>
+      <ul>
+        <li><strong>Profilo Rob Run con un clic</strong>: imposta tutte le voci grafiche al minimo con i valori giusti del gioco e lascia la scala di rendering al 100%.</li>
+        <li><strong>Stretched in un clic</strong>: imposta la risoluzione sia nel gioco sia in Windows. Con <strong>Ripristina</strong> torna tutto com'era, risoluzione di Windows compresa.</li>
+        <li><strong>Oltre 150 ottimizzazioni di Windows</strong> per FPS stabili e meno input lag, con <strong>backup automatico</strong> di ogni modifica.</li>
+        <li><strong>Sicuro</strong>: non tocca anti-cheat né file del gioco e modifica le impostazioni solo a gioco chiuso.</li>
+        <li><strong>Supporto su Discord</strong>, con una guida completa a Rob Run (rapine, casa, soldi, polizia).</li>
+      </ul>
+
+      <div class="cta">
+        <h2>Vuoi Rob Run ottimizzato senza perdere tempo?</h2>
+        <p>Prova SapoTweak: da 9,99 € al mese, disdici quando vuoi.</p>
+        <div class="actions">
+          <a class="btn" href="checkout.html">Prendi SapoTweak</a>
+          <a class="btn ghost" href="discord.html">Entra nel Discord</a>
+        </div>
+      </div>
+
+      <h2 id="faq">7. Domande frequenti</h2>
+      <details>
+        <summary>Le opzioni di avvio Steam aumentano gli FPS su Rob Run?</summary>
+        <p>No. Comandi come -nojoy, -nohltv o -particles sono di CS2 e Rob Run (motore Unity) li ignora. -force-d3d11 non serve perché il gioco usa già DirectX 11, e -window-mode exclusive nel nostro test non ha cambiato né FPS né modalità di presentazione.</p>
+      </details>
+      <details>
+        <summary>Come si mette lo stretched su Rob Run?</summary>
+        <p>Rob Run a schermo intero usa la risoluzione di Windows: imposta la stessa risoluzione (per esempio 1440x1080) sia in Windows sia nel gioco, e nel pannello NVIDIA o AMD imposta il ridimensionamento a schermo intero per evitare le bande nere.</p>
+      </details>
+      <details>
+        <summary>Perché il mouse fa scattare Rob Run?</summary>
+        <p>Con polling rate oltre 1000 Hz (2000, 4000, 8000 Hz) Rob Run perde fotogrammi quando muovi il mouse. Imposta 1000 Hz dal programma del mouse.</p>
+      </details>
+      <details>
+        <summary>Ottimizzare il PC può causare un ban su Rob Run?</summary>
+        <p>Cambiare le impostazioni grafiche del gioco o di Windows non è un cheat. SapoTweak non tocca anti-cheat né file del gioco: modifica solo il file delle impostazioni, a gioco chiuso, e salva sempre un backup.</p>
+      </details>
+
+      <p class="related">Altre guide: <a href="fps-fortnite.html">FPS su Fortnite</a> · <a href="fps-valorant.html">FPS su Valorant</a> · <a href="fps-r6.html">FPS su Rainbow Six Siege</a> · <a href="fps-fivem.html">FPS su FiveM</a></p>
+    </article>
+
+    <footer>
+      <a href="index.html">Home</a>
+      <a href="fps-fortnite.html">Guida Fortnite</a>
+      <a href="fps-valorant.html">Guida Valorant</a>
+      <a href="fps-r6.html">Guida R6</a>
+      <a href="fps-fivem.html">Guida FiveM</a>
+      <a href="reviews.html">Recensioni</a>
+      <a href="support.html">Supporto</a>
+      <a href="discord.html">Discord</a>
+      <a href="terms.html">Termini</a>
+      <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>
